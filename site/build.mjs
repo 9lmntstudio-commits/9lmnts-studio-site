@@ -265,6 +265,87 @@ const homeHtml = layout({
     </div>
   </div></section>
 
+  <!-- Wedding & Reception OS (Romeo & Juliet Guest Experience) -->
+  <section class="section border-top" style="position:relative;background:linear-gradient(180deg, #090B0F 0%, #12141C 100%)">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="kicker">Category 02 / Hospitality &amp; Private Events · Wedding OS</span>
+          <h2>Wedding Day Guest Portal &amp; Cash Registry</h2>
+        </div>
+        <p>A turn-key digital guest companion engineered for boutique weddings and luxury receptions. Features live speech voting, digital drink gifting, honeymoon getaway raffles, and Apple Pay cash registries.</p>
+      </div>
+
+      <div class="grid g3">
+        <!-- Screen 1: Wedding OS Home & Raffle -->
+        <div class="phone-frame-card reveal">
+          <div class="phone-notch-bar">
+            <span>R&amp;J WEDDING OS</span>
+            <div class="phone-notch-pill"></div>
+            <span style="color:#FFD700">JULY 24</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/mobile-wedding-rj-home-raffle.jpg" alt="Romeo &amp; Juliet Wedding OS Home and Raffle Entry" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>$750 RAFFLE</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Guest Portal · Home &amp; Timeline</span>
+            <h4>Interactive Reception Companion</h4>
+            <p>One-stop mobile guest dashboard with schedule timeline, speeches, live games, and a $10 honeymoon getaway raffle entry.</p>
+            <div class="phone-metric-pill">💍 100% Mobile Guest Adoption</div>
+          </div>
+        </div>
+
+        <!-- Screen 2: Speech Showcase Voting & Drink Buy -->
+        <div class="phone-frame-card reveal">
+          <div class="phone-notch-bar">
+            <span>SPEECH SHOWCASE</span>
+            <div class="phone-notch-pill"></div>
+            <span class="accent">VOTE LIVE</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/mobile-wedding-speech-showcase.jpg" alt="Speech Showcase: Best Man Mercutio vs Maid of Honor Nurse" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>$5 DRINK RAIL</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Crowd Interaction · Speech Battle</span>
+            <h4>Live Speech Voting &amp; Drink Gifting</h4>
+            <p>Guests vote on Best Man vs. Maid of Honor speeches in real time, or send them a $5 drink straight to their table from their phones.</p>
+            <div class="phone-metric-pill">🥂 Real-Time Table Delivery</div>
+          </div>
+        </div>
+
+        <!-- Screen 3: Future Fund Cash Registry -->
+        <div class="phone-frame-card reveal">
+          <div class="phone-notch-bar">
+            <span>FUTURE FUND</span>
+            <div class="phone-notch-pill"></div>
+            <span class="ok">SECURE</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/mobile-wedding-future-fund.jpg" alt="Future Fund Honeymoon Cash Registry Modal" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>APPLE PAY / VISA</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Frictionless Gifting · Zero Envelopes</span>
+            <h4>Future Fund &amp; Honeymoon Registry</h4>
+            <p>Direct cash contribution rail with $50, $100, or custom amounts. Supports Apple Pay, Visa, and PayPal with zero bank delays.</p>
+            <div class="phone-metric-pill">💳 Instant Autodeposit Rail</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 4-Device Live Mobile Production Engine (clash.9lmntsstudio.com) -->
   <section class="section border-top" style="position:relative;background:linear-gradient(180deg, rgba(8,9,12,0.95) 0%, rgba(16,18,24,0.98) 100%)">
     <div class="container">
@@ -280,91 +361,91 @@ const homeHtml = layout({
       </div>
 
       <div class="mobile-phone-grid">
-        <!-- Phone 1: SoundClash OS Live Arena Entry -->
+        <!-- Phone 1: SoundClash Grand Finals Matchup -->
         <div class="phone-frame-card reveal">
           <div class="phone-notch-bar">
             <span>SOUNDCLASH OS</span>
             <div class="phone-notch-pill"></div>
-            <span class="accent">LIVE</span>
+            <span class="accent">FINALS</span>
           </div>
           <div class="phone-screen">
-            <img src="/assets/mobile-clash-hero-tickets.jpg" alt="SoundClash OS Live Arena Entry Screen" loading="lazy">
+            <img src="/assets/mobile-clash-grand-finals.jpg" alt="SoundClash OS Grand Finals DJ K-OS vs DJ VIBE" loading="lazy">
             <div class="phone-live-tag">
               <span class="pulse"></span>
-              <span>1,362 IN VENUE</span>
+              <span>1,301 IN VENUE</span>
             </div>
           </div>
           <div class="phone-info">
-            <span class="kicker">Stage 01 / Gate &amp; Ticketing</span>
-            <h4>Live Arena Entry &amp; Crowd Counter</h4>
-            <p>8 DJs. 3 rounds. Sudden death. Real-time ticket scan and rapid gate admissions for over 1,300 live fans.</p>
-            <div class="phone-metric-pill">⚡ 0.8s Check-In Velocity</div>
+            <span class="kicker">Stage 01 / Grand Finals</span>
+            <h4>Live Finals Matchup: DJ K-OS vs DJ VIBE</h4>
+            <p>Velvet Room grand finals. 1,301 club capacity, 9,664 hype level telemetry, and live countdown timer with 1-tap pass redemption.</p>
+            <div class="phone-metric-pill">⚡ 9,664 Real-Time Hype</div>
           </div>
         </div>
 
-        <!-- Phone 2: Live 8-Contender Knockout Bracket -->
+        <!-- Phone 2: Live Battle Voting Duel (Round 2) -->
         <div class="phone-frame-card reveal">
           <div class="phone-notch-bar">
-            <span>TOURNAMENT OS</span>
+            <span>THE BATTLE</span>
             <div class="phone-notch-pill"></div>
             <span class="accent">ROUND 2</span>
           </div>
           <div class="phone-screen">
-            <img src="/assets/mobile-clash-bracket-tree.jpg" alt="SoundClash OS Tournament Elimination Bracket" loading="lazy">
+            <img src="/assets/mobile-clash-round2-battle.jpg" alt="SoundClash OS Live Duel: DJ K-OS 49% vs DJ VIBE 50%" loading="lazy">
             <div class="phone-live-tag">
               <span class="pulse"></span>
-              <span>BRACKET TREE</span>
+              <span>49% VS 50%</span>
             </div>
           </div>
           <div class="phone-info">
-            <span class="kicker">Stage 02 / Knockout Ladder</span>
-            <h4>8-DJ Sudden Death Elimination</h4>
-            <p>Dynamic tournament progression tree with live set times and integrated $150 VIP Table reservation drawer.</p>
-            <div class="phone-metric-pill">🏆 Instant Bracket Advancement</div>
+            <span class="kicker">Stage 02 / Head-to-Head Duel</span>
+            <h4>Live Crowd Voting Duel &amp; Upgrades</h4>
+            <p>Neck-and-neck crowd percentage decibel meter. Fans tap "Hype This DJ" to dynamically swing the bracket vote in real time.</p>
+            <div class="phone-metric-pill">🏆 Live Audience Decibel Vote</div>
           </div>
         </div>
 
-        <!-- Phone 3: DJ K-OS Tipping & Power Hype -->
+        <!-- Phone 3: Club Upgrades & Bottle Service Checkout -->
         <div class="phone-frame-card reveal">
           <div class="phone-notch-bar">
-            <span>POWER HYPE RAIL</span>
+            <span>UPGRADES</span>
+            <div class="phone-notch-pill"></div>
+            <span class="accent">CHECKOUT</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/mobile-clash-select-upgrade.jpg" alt="Club Upgrades: $20 Cover, $10 Hype, $150 Bottle Service" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>$150 VIP TABLE</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Stage 03 / Multi-Tier Monetization</span>
+            <h4>Club Upgrades &amp; Table Checkout</h4>
+            <p>Seamless drawer checkout: $20 Cover Charge, $10 Power Hype Pack, or $150 VIP Bottle Service with reserved table lounge access.</p>
+            <div class="phone-metric-pill">🍾 Instant POS Bottle Reserve</div>
+          </div>
+        </div>
+
+        <!-- Phone 4: Power Hype Pay & Boost Modal -->
+        <div class="phone-frame-card reveal">
+          <div class="phone-notch-bar">
+            <span>POWER HYPE</span>
             <div class="phone-notch-pill"></div>
             <span class="accent">MICRO-PAY</span>
           </div>
           <div class="phone-screen">
-            <img src="/assets/mobile-clash-tipping-powerhype.jpg" alt="DJ K-OS Power Hype Micro-Tipping Modal" loading="lazy">
+            <img src="/assets/mobile-clash-show-hype-modal.jpg" alt="DJ K-OS Power Hype $2, $10, $45 Pay and Boost Modal" loading="lazy">
             <div class="phone-live-tag">
               <span class="pulse"></span>
-              <span>$500 GOAL</span>
+              <span>PAY &amp; BOOST</span>
             </div>
           </div>
           <div class="phone-info">
-            <span class="kicker">Stage 03 / Crowd Monetization</span>
+            <span class="kicker">Stage 04 / Micro-Tipping Rail</span>
             <h4>Micro-Tipping &amp; Power Hype Rail</h4>
-            <p>Fans tip contender DJs directly via 10 / 50 / 250 Hype micro-payments, boosting stage decibels and artist payouts.</p>
-            <div class="phone-metric-pill">💰 100% Direct Artist Liquidity</div>
-          </div>
-        </div>
-
-        <!-- Phone 4: Luna Vega VIP Host & Prize Pot -->
-        <div class="phone-frame-card reveal">
-          <div class="phone-notch-bar">
-            <span>PRIZE POT ENGINE</span>
-            <div class="phone-notch-pill"></div>
-            <span class="accent">VIP RAIL</span>
-          </div>
-          <div class="phone-screen">
-            <img src="/assets/mobile-clash-vip-drink-host.jpg" alt="Luna Vega VIP Host and Drink Pot Drawer" loading="lazy">
-            <div class="phone-live-tag">
-              <span class="pulse"></span>
-              <span>$10 DRINK RAIL</span>
-            </div>
-          </div>
-          <div class="phone-info">
-            <span class="kicker">Stage 04 / Live Prize Expansion</span>
-            <h4>VIP Host &amp; Live Cash Prize Pot</h4>
-            <p>Every attendee "Buy Drink $10" purchase injects instant funds directly into the live cash prize pot for the winning DJ.</p>
-            <div class="phone-metric-pill">🍸 Dynamic Cash Pot Pool</div>
+            <p>Instant micro-tips: 10 Hype ($2.00 Basic Boost), 50 Hype ($10.00 Popular Choice), or 250 Hype ($45.00 Major Influence).</p>
+            <div class="phone-metric-pill">💰 Direct Artist Liquidity Rail</div>
           </div>
         </div>
       </div>
@@ -795,6 +876,87 @@ const workHtml = layout({
     </div>
   </div></section>
 
+  <!-- Wedding & Reception OS (Romeo & Juliet Guest Experience) -->
+  <section class="section border-top" style="position:relative;background:linear-gradient(180deg, #090B0F 0%, #12141C 100%)">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="kicker">Category 02 / Hospitality &amp; Private Events · Wedding OS</span>
+          <h2>Wedding Day Guest Portal &amp; Cash Registry</h2>
+        </div>
+        <p>A turn-key digital guest companion engineered for boutique weddings and luxury receptions. Features live speech voting, digital drink gifting, honeymoon getaway raffles, and Apple Pay cash registries.</p>
+      </div>
+
+      <div class="grid g3">
+        <!-- Screen 1: Wedding OS Home & Raffle -->
+        <div class="phone-frame-card reveal">
+          <div class="phone-notch-bar">
+            <span>R&amp;J WEDDING OS</span>
+            <div class="phone-notch-pill"></div>
+            <span style="color:#FFD700">JULY 24</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/mobile-wedding-rj-home-raffle.jpg" alt="Romeo &amp; Juliet Wedding OS Home and Raffle Entry" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>$750 RAFFLE</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Guest Portal · Home &amp; Timeline</span>
+            <h4>Interactive Reception Companion</h4>
+            <p>One-stop mobile guest dashboard with schedule timeline, speeches, live games, and a $10 honeymoon getaway raffle entry.</p>
+            <div class="phone-metric-pill">💍 100% Mobile Guest Adoption</div>
+          </div>
+        </div>
+
+        <!-- Screen 2: Speech Showcase Voting & Drink Buy -->
+        <div class="phone-frame-card reveal">
+          <div class="phone-notch-bar">
+            <span>SPEECH SHOWCASE</span>
+            <div class="phone-notch-pill"></div>
+            <span class="accent">VOTE LIVE</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/mobile-wedding-speech-showcase.jpg" alt="Speech Showcase: Best Man Mercutio vs Maid of Honor Nurse" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>$5 DRINK RAIL</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Crowd Interaction · Speech Battle</span>
+            <h4>Live Speech Voting &amp; Drink Gifting</h4>
+            <p>Guests vote on Best Man vs. Maid of Honor speeches in real time, or send them a $5 drink straight to their table from their phones.</p>
+            <div class="phone-metric-pill">🥂 Real-Time Table Delivery</div>
+          </div>
+        </div>
+
+        <!-- Screen 3: Future Fund Cash Registry -->
+        <div class="phone-frame-card reveal">
+          <div class="phone-notch-bar">
+            <span>FUTURE FUND</span>
+            <div class="phone-notch-pill"></div>
+            <span class="ok">SECURE</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/mobile-wedding-future-fund.jpg" alt="Future Fund Honeymoon Cash Registry Modal" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>APPLE PAY / VISA</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Frictionless Gifting · Zero Envelopes</span>
+            <h4>Future Fund &amp; Honeymoon Registry</h4>
+            <p>Direct cash contribution rail with $50, $100, or custom amounts. Supports Apple Pay, Visa, and PayPal with zero bank delays.</p>
+            <div class="phone-metric-pill">💳 Instant Autodeposit Rail</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 4-Device Live Mobile Production Engine (clash.9lmntsstudio.com) -->
   <section class="section border-top" style="position:relative;background:linear-gradient(180deg, rgba(8,9,12,0.95) 0%, rgba(16,18,24,0.98) 100%)">
     <div class="container">
@@ -810,91 +972,91 @@ const workHtml = layout({
       </div>
 
       <div class="mobile-phone-grid">
-        <!-- Phone 1: SoundClash OS Live Arena Entry -->
+        <!-- Phone 1: SoundClash Grand Finals Matchup -->
         <div class="phone-frame-card reveal">
           <div class="phone-notch-bar">
             <span>SOUNDCLASH OS</span>
             <div class="phone-notch-pill"></div>
-            <span class="accent">LIVE</span>
+            <span class="accent">FINALS</span>
           </div>
           <div class="phone-screen">
-            <img src="/assets/mobile-clash-hero-tickets.jpg" alt="SoundClash OS Live Arena Entry Screen" loading="lazy">
+            <img src="/assets/mobile-clash-grand-finals.jpg" alt="SoundClash OS Grand Finals DJ K-OS vs DJ VIBE" loading="lazy">
             <div class="phone-live-tag">
               <span class="pulse"></span>
-              <span>1,362 IN VENUE</span>
+              <span>1,301 IN VENUE</span>
             </div>
           </div>
           <div class="phone-info">
-            <span class="kicker">Stage 01 / Gate &amp; Ticketing</span>
-            <h4>Live Arena Entry &amp; Crowd Counter</h4>
-            <p>8 DJs. 3 rounds. Sudden death. Real-time ticket scan and rapid gate admissions for over 1,300 live fans.</p>
-            <div class="phone-metric-pill">⚡ 0.8s Check-In Velocity</div>
+            <span class="kicker">Stage 01 / Grand Finals</span>
+            <h4>Live Finals Matchup: DJ K-OS vs DJ VIBE</h4>
+            <p>Velvet Room grand finals. 1,301 club capacity, 9,664 hype level telemetry, and live countdown timer with 1-tap pass redemption.</p>
+            <div class="phone-metric-pill">⚡ 9,664 Real-Time Hype</div>
           </div>
         </div>
 
-        <!-- Phone 2: Live 8-Contender Knockout Bracket -->
+        <!-- Phone 2: Live Battle Voting Duel (Round 2) -->
         <div class="phone-frame-card reveal">
           <div class="phone-notch-bar">
-            <span>TOURNAMENT OS</span>
+            <span>THE BATTLE</span>
             <div class="phone-notch-pill"></div>
             <span class="accent">ROUND 2</span>
           </div>
           <div class="phone-screen">
-            <img src="/assets/mobile-clash-bracket-tree.jpg" alt="SoundClash OS Tournament Elimination Bracket" loading="lazy">
+            <img src="/assets/mobile-clash-round2-battle.jpg" alt="SoundClash OS Live Duel: DJ K-OS 49% vs DJ VIBE 50%" loading="lazy">
             <div class="phone-live-tag">
               <span class="pulse"></span>
-              <span>BRACKET TREE</span>
+              <span>49% VS 50%</span>
             </div>
           </div>
           <div class="phone-info">
-            <span class="kicker">Stage 02 / Knockout Ladder</span>
-            <h4>8-DJ Sudden Death Elimination</h4>
-            <p>Dynamic tournament progression tree with live set times and integrated $150 VIP Table reservation drawer.</p>
-            <div class="phone-metric-pill">🏆 Instant Bracket Advancement</div>
+            <span class="kicker">Stage 02 / Head-to-Head Duel</span>
+            <h4>Live Crowd Voting Duel &amp; Upgrades</h4>
+            <p>Neck-and-neck crowd percentage decibel meter. Fans tap "Hype This DJ" to dynamically swing the bracket vote in real time.</p>
+            <div class="phone-metric-pill">🏆 Live Audience Decibel Vote</div>
           </div>
         </div>
 
-        <!-- Phone 3: DJ K-OS Tipping & Power Hype -->
+        <!-- Phone 3: Club Upgrades & Bottle Service Checkout -->
         <div class="phone-frame-card reveal">
           <div class="phone-notch-bar">
-            <span>POWER HYPE RAIL</span>
+            <span>UPGRADES</span>
+            <div class="phone-notch-pill"></div>
+            <span class="accent">CHECKOUT</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/mobile-clash-select-upgrade.jpg" alt="Club Upgrades: $20 Cover, $10 Hype, $150 Bottle Service" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>$150 VIP TABLE</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Stage 03 / Multi-Tier Monetization</span>
+            <h4>Club Upgrades &amp; Table Checkout</h4>
+            <p>Seamless drawer checkout: $20 Cover Charge, $10 Power Hype Pack, or $150 VIP Bottle Service with reserved table lounge access.</p>
+            <div class="phone-metric-pill">🍾 Instant POS Bottle Reserve</div>
+          </div>
+        </div>
+
+        <!-- Phone 4: Power Hype Pay & Boost Modal -->
+        <div class="phone-frame-card reveal">
+          <div class="phone-notch-bar">
+            <span>POWER HYPE</span>
             <div class="phone-notch-pill"></div>
             <span class="accent">MICRO-PAY</span>
           </div>
           <div class="phone-screen">
-            <img src="/assets/mobile-clash-tipping-powerhype.jpg" alt="DJ K-OS Power Hype Micro-Tipping Modal" loading="lazy">
+            <img src="/assets/mobile-clash-show-hype-modal.jpg" alt="DJ K-OS Power Hype $2, $10, $45 Pay and Boost Modal" loading="lazy">
             <div class="phone-live-tag">
               <span class="pulse"></span>
-              <span>$500 GOAL</span>
+              <span>PAY &amp; BOOST</span>
             </div>
           </div>
           <div class="phone-info">
-            <span class="kicker">Stage 03 / Crowd Monetization</span>
+            <span class="kicker">Stage 04 / Micro-Tipping Rail</span>
             <h4>Micro-Tipping &amp; Power Hype Rail</h4>
-            <p>Fans tip contender DJs directly via 10 / 50 / 250 Hype micro-payments, boosting stage decibels and artist payouts.</p>
-            <div class="phone-metric-pill">💰 100% Direct Artist Liquidity</div>
-          </div>
-        </div>
-
-        <!-- Phone 4: Luna Vega VIP Host & Prize Pot -->
-        <div class="phone-frame-card reveal">
-          <div class="phone-notch-bar">
-            <span>PRIZE POT ENGINE</span>
-            <div class="phone-notch-pill"></div>
-            <span class="accent">VIP RAIL</span>
-          </div>
-          <div class="phone-screen">
-            <img src="/assets/mobile-clash-vip-drink-host.jpg" alt="Luna Vega VIP Host and Drink Pot Drawer" loading="lazy">
-            <div class="phone-live-tag">
-              <span class="pulse"></span>
-              <span>$10 DRINK RAIL</span>
-            </div>
-          </div>
-          <div class="phone-info">
-            <span class="kicker">Stage 04 / Live Prize Expansion</span>
-            <h4>VIP Host &amp; Live Cash Prize Pot</h4>
-            <p>Every attendee "Buy Drink $10" purchase injects instant funds directly into the live cash prize pot for the winning DJ.</p>
-            <div class="phone-metric-pill">🍸 Dynamic Cash Pot Pool</div>
+            <p>Instant micro-tips: 10 Hype ($2.00 Basic Boost), 50 Hype ($10.00 Popular Choice), or 250 Hype ($45.00 Major Influence).</p>
+            <div class="phone-metric-pill">💰 Direct Artist Liquidity Rail</div>
           </div>
         </div>
       </div>
