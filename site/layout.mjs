@@ -128,8 +128,9 @@ ${body}
 </html>`;
 }
 
-export function pageHero({ kicker, title, lead, extra = '' }) {
-  return `<section class="page-hero"><div class="container">
+export function pageHero({ kicker, title, lead, extra = '', bgImage = '/assets/hero-spatial-mesh.jpg' }) {
+  const style = `style="background-image: linear-gradient(180deg, rgba(8, 9, 12, 0.30) 0%, rgba(8, 9, 12, 0.78) 75%, #08090C 100%), radial-gradient(circle at 50% 0%, rgba(255, 85, 0, 0.32), transparent 70%), url('${bgImage}'); background-size: cover; background-position: center top;"`;
+  return `<section class="page-hero" ${style}><div class="container">
   <span class="eyebrow"><span class="dot"></span> ${kicker}</span>
   <h1>${title}</h1>
   ${lead ? `<p class="lead">${lead}</p>` : ''}

@@ -103,7 +103,7 @@ const homeHtml = layout({
   </div></section>
 
   <!-- Commercial Offerings Bento Grid -->
-  <section class="section"><div class="container">
+  <section class="section section-offerings"><div class="container">
     <div class="section-head">
       <div>
         <span class="kicker">Commercial Offerings</span>
@@ -238,19 +238,19 @@ const homeHtml = layout({
 
   <!-- Official Interac Rail Banner -->
   <section class="section-tight"><div class="container">
-    <div class="card reveal" style="border-color:rgba(255,85,0,0.3);background:linear-gradient(180deg,#12141a,#0a0b0e)">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px">
+    <div class="interac-rail-card reveal">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;position:relative;z-index:2">
         <div>
           <span class="kicker">Domestic Canadian Payment Rail</span>
-          <h3 style="font-size:1.4rem;margin:4px 0 8px">Direct Interac e-Transfer with Autodeposit</h3>
-          <p style="margin:0;max-width:540px">Zero processing delays. 0% credit card fees. Standard 50% deposit protects your project sprint timeline.</p>
+          <h3 style="font-size:1.45rem;margin:4px 0 8px">Direct Interac e-Transfer with Autodeposit</h3>
+          <p style="margin:0;max-width:540px;color:#E0DDD7">Zero processing delays. 0% credit card fees. Standard 50% deposit protects your project sprint timeline.</p>
         </div>
         <div style="min-width:280px">
           <div class="copy-row">
             <span>${SITE.email}</span>
             <button data-copy="${SITE.email}">Copy</button>
           </div>
-          <span class="dim mono" style="font-size:11px;display:block;margin-top:6px">Desjardins Commercial Account · Verified Recipient</span>
+          <span class="dim mono" style="font-size:11px;display:block;margin-top:6px;color:#CBC8C2">Desjardins Commercial Account · Verified Recipient</span>
         </div>
       </div>
     </div>
@@ -269,7 +269,8 @@ const servicesHtml = layout({
   ${pageHero({
     kicker: 'Transparent Sprints',
     title: 'Engineered for Rapid Liquidity. Fixed Scopes. Zero Fluff.',
-    lead: 'No vague monthly hourly retainers. Choose the exact sprint that matches your business stage. All packages backed by Canadian Interac e-Transfer or Stripe.'
+    lead: 'No vague monthly hourly retainers. Choose the exact sprint that matches your business stage. All packages backed by Canadian Interac e-Transfer or Stripe.',
+    bgImage: '/assets/hero-spatial-mesh.jpg'
   })}
 
   <section class="section-tight"><div class="container">
@@ -349,7 +350,8 @@ const workHtml = layout({
   ${pageHero({
     kicker: 'Proof in Production',
     title: 'Code That Executes. Interfaces That Convert.',
-    lead: 'We do not deal in static Figma mockups that fail in the real world. Every project we engineer is delivered as live, responsive, high-performance web code.'
+    lead: 'We do not deal in static Figma mockups that fail in the real world. Every project we engineer is delivered as live, responsive, high-performance web code.',
+    bgImage: '/assets/trades-craft-showcase.jpg'
   })}
 
   <section class="section-tight" style="padding-top:0"><div class="container">
@@ -477,7 +479,8 @@ const embedsHtml = layout({
   ${pageHero({
     kicker: 'Modular Upgrade ($500 CAD)',
     title: 'Upgrade Your Existing Website in 5 Minutes.',
-    lead: 'Keep your current site on Squarespace, Wix, WordPress, or Shopify. Drop in our high-speed intake modal to immediately stop leaking mobile leads.'
+    lead: 'Keep your current site on Squarespace, Wix, WordPress, or Shopify. Drop in our high-speed intake modal to immediately stop leaking mobile leads.',
+    bgImage: '/assets/culinary-dish-showcase.jpg'
   })}
 
   <section class="section-tight"><div class="container">
@@ -564,7 +567,8 @@ const auditHtml = layout({
   ${pageHero({
     kicker: 'Zero-Cost Diagnostic',
     title: 'Stop Losing 40% of Your Mobile Traffic.',
-    lead: 'Most local business websites leak money because of slow load times, unreadable PDF menus, or hidden contact buttons. We’ll record a custom 60-second video showing exactly where your site is losing customers.'
+    lead: 'Most local business websites leak money because of slow load times, unreadable PDF menus, or hidden contact buttons. We’ll record a custom 60-second video showing exactly where your site is losing customers.',
+    bgImage: '/assets/hero-spatial-mesh.jpg'
   })}
 
   <section class="section-tight"><div class="container"><div class="hero-grid" style="align-items:start">
@@ -647,7 +651,8 @@ const processHtml = layout({
   ${pageHero({
     kicker: 'Clear Milestones',
     title: 'How We Ship High-Impact Websites Without the Agency Headache.',
-    lead: 'Traditional agencies take 4 months and charge for endless meetings. We run focused, high-velocity sprints where you review working code from week one.'
+    lead: 'Traditional agencies take 4 months and charge for endless meetings. We run focused, high-velocity sprints where you review working code from week one.',
+    bgImage: '/assets/trades-craft-showcase.jpg'
   })}
 
   <section class="section-tight"><div class="container">
@@ -738,7 +743,8 @@ const aboutHtml = layout({
   ${pageHero({
     kicker: 'The Manifesto',
     title: 'Where Urban Culture Meets Enterprise Digital Craft.',
-    lead: 'Pronounced “Nine Elements Studio”. We build clean, tactile digital platforms for independent operators who value speed, craftsmanship, and cash-flow efficiency.'
+    lead: 'Pronounced “Nine Elements Studio”. We build clean, tactile digital platforms for independent operators who value speed, craftsmanship, and cash-flow efficiency.',
+    bgImage: '/assets/venue-lounge-showcase.jpg'
   })}
 
   <section class="section-tight"><div class="container">
@@ -817,7 +823,8 @@ const contactHtml = layout({
   ${pageHero({
     kicker: 'Direct Channels',
     title: 'Let’s Get Your Website Booking Customers.',
-    lead: 'Have a project in mind? Fill out the brief below, or book a quick 15-minute call directly. We respond to all inquiries within 24 business hours.'
+    lead: 'Have a project in mind? Fill out the brief below, or book a quick 15-minute call directly. We respond to all inquiries within 24 business hours.',
+    bgImage: '/assets/hero-spatial-mesh.jpg'
   })}
 
   <section class="section-tight"><div class="container"><div class="hero-grid" style="align-items:start">
@@ -910,7 +917,8 @@ const startHtml = layout({
   ${pageHero({
     kicker: 'Sprint Onboarding',
     title: 'Welcome to 9LMNTS Studio. Let’s Launch Your Platform.',
-    lead: 'Follow these 3 simple steps to lock in your sprint timeline, submit your brand materials, and track your staging build.'
+    lead: 'Follow these 3 simple steps to lock in your sprint timeline, submit your brand materials, and track your staging build.',
+    bgImage: '/assets/venue-lounge-showcase.jpg'
   })}
 
   <section class="section-tight"><div class="container"><div class="hero-grid" style="align-items:start">
@@ -1007,7 +1015,8 @@ const faqHtml = layout({
   ${pageHero({
     kicker: 'Clarity First',
     title: 'Frequently Asked Questions.',
-    lead: 'Straightforward answers about how we build, how much it costs, and how payments work.'
+    lead: 'Straightforward answers about how we build, how much it costs, and how payments work.',
+    bgImage: '/assets/hero-spatial-mesh.jpg'
   })}
 
   <section class="section-tight"><div class="container" style="max-width:880px">
