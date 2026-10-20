@@ -56,7 +56,7 @@ export function layout({ path, title, description, body, noindex = false }) {
     `<li><a href="${href}"${path.startsWith(href) ? ' aria-current="page"' : ''}>${label}</a></li>`).join('');
   const schema = path === '/' ? `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org', '@type': 'ProfessionalService', name: SITE.name, alternateName: 'Nine Elements Studio',
-    url: SITE.url, email: SITE.email, image: SITE.url + '/assets/og-image.png', logo: SITE.url + '/assets/logo.png',
+    url: SITE.url, email: SITE.email, image: SITE.url + '/assets/mockup-devices.jpg', logo: SITE.url + '/assets/logo.png',
     areaServed: ['Ottawa', 'Gatineau', 'Ontario', 'Canada'], address: { '@type': 'PostalAddress', addressLocality: 'Ottawa', addressRegion: 'ON', addressCountry: 'CA' },
     founder: { '@type': 'Person', name: SITE.founder }, priceRange: '$500–$8,500+ CAD', sameAs: [SITE.instagram],
   })}</script>` : '';
@@ -75,13 +75,13 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta property="og:title" content="${esc(fullTitle)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${SITE.url}/assets/og-image.png">
+<meta property="og:image" content="${SITE.url}/assets/mockup-devices.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#08090C">
 <link rel="icon" href="/assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 ${schema}
 </head>
@@ -102,24 +102,24 @@ ${body}
   <div class="container">
     <div class="foot-grid">
       <div>
-        <img src="/assets/logo.png" alt="9LMNTS Studio" width="140" height="40" style="height:40px;width:auto;margin-bottom:16px">
-        <p style="max-width:320px">Websites that book your customers for you. Designed and built in Ottawa for local service businesses.</p>
-        <p class="mono dim" style="font-size:12px">Pronounced “Nine Elements Studio”</p>
+        <img src="/assets/logo.png" alt="9LMNTS Studio" width="140" height="40" style="height:40px;width:auto;margin-bottom:18px">
+        <p style="max-width:340px;font-size:0.95rem">Websites that book your customers for you. Engineered and built in Ottawa for local hospitality, trades, and service operators.</p>
+        <p class="mono dim" style="font-size:12px;margin-top:14px">📍 Ottawa, Ontario · Pronounced “Nine Elements Studio”</p>
       </div>
       <div><h4>Studio</h4><ul>
-        <li><a href="/services/">Services &amp; Pricing</a></li><li><a href="/work/">Work</a></li><li><a href="/process/">Process</a></li>
-        <li><a href="/embeds/">Website Add-ons</a></li><li><a href="/about/">About</a></li><li><a href="/faq/">FAQ</a></li></ul></div>
+        <li><a href="/services/">Services &amp; Pricing</a></li><li><a href="/work/">Work &amp; Prototypes</a></li><li><a href="/process/">3-Sprint Process</a></li>
+        <li><a href="/embeds/">Intake Embeds</a></li><li><a href="/about/">About &amp; Manifesto</a></li><li><a href="/faq/">FAQ</a></li></ul></div>
       <div><h4>Clients</h4><ul>
-        <li><a href="/audit/">Free Website Audit</a></li><li><a href="/contact/">Book a Call</a></li><li><a href="/start/">Client Onboarding</a></li>
-        <li><a href="mailto:${SITE.email}">${SITE.email}</a></li><li><a href="${SITE.instagram}" rel="noopener">Instagram</a></li></ul></div>
-      <div><h4>Legal</h4><ul>
+        <li><a href="/audit/">Free 60s Video Audit</a></li><li><a href="/contact/">Book a Call</a></li><li><a href="/start/">Client Onboarding</a></li>
+        <li><a href="mailto:${SITE.email}">${SITE.email}</a></li><li><a href="${SITE.instagram}" rel="noopener" target="_blank">Instagram (@9lmntsstudio)</a></li></ul></div>
+      <div><h4>Legal &amp; Trust</h4><ul>
         <li><a href="/legal/terms/">Terms of Service</a></li><li><a href="/legal/privacy/">Privacy Policy</a></li>
         <li><a href="/legal/payment-terms/">Payment &amp; Refund Terms</a></li><li><a href="/legal/cookies/">Cookie Notice</a></li>
-        <li><a href="/legal/accessibility/">Accessibility</a></li></ul></div>
+        <li><a href="/legal/accessibility/">Accessibility (WCAG AA)</a></li></ul></div>
     </div>
     <div class="foot-bottom">
       <span>© <span data-year>2026</span> 9LMNTS Studio. Registered Ontario business name. All rights reserved.</span>
-      <span>Ottawa, Canada · Prices in CAD</span>
+      <span class="mono" style="font-size:12px">Desjardins Interac Autodeposit · Canadian Currency (CAD)</span>
     </div>
   </div>
 </footer>
@@ -130,32 +130,38 @@ ${body}
 
 export function pageHero({ kicker, title, lead, extra = '' }) {
   return `<section class="page-hero"><div class="container">
-  <span class="eyebrow"><span class="dot"></span>${kicker}</span>
+  <span class="eyebrow"><span class="dot"></span> ${kicker}</span>
   <h1>${title}</h1>
   ${lead ? `<p class="lead">${lead}</p>` : ''}
   ${extra}
 </div></section>`;
 }
 
-export function ctaBand(title = 'Ready for a website that books customers?', text = 'Book a free 15-minute call. You’ll leave with a clear plan and a fixed price — whether you hire us or not.') {
+export function ctaBand(title = 'Ready for a website that books customers for you?', text = 'Book a free 15-minute diagnostic call. You’ll leave with an architectural roadmap and a fixed price — whether you hire us or not.') {
   return `<section class="section-tight"><div class="container"><div class="cta-band reveal">
-  <div><span class="kicker">Next step</span><h2>${title}</h2><p>${text}</p></div>
+  <div>
+    <span class="kicker">Accelerate Velocity</span>
+    <h2>${title}</h2>
+    <p>${text}</p>
+  </div>
   <div class="cta-actions">
     <a class="btn btn-primary" href="/contact/">Book a free call <span class="arrow">↗</span></a>
-    <a class="btn btn-ghost" href="/audit/">Get a free website audit</a>
+    <a class="btn btn-ghost" href="/audit/">Get a free 60s video audit</a>
   </div>
 </div></div></section>`;
 }
 
 export function packageCard(p, i) {
   return `<article class="card${p.featured ? ' feature' : ''} reveal">
-  <span class="num-tag">0${i + 1} / ${p.time.toUpperCase()}</span>
-  ${p.featured ? '<span class="badge" style="position:absolute;top:24px;right:24px">Most popular</span>' : ''}
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <span class="num-tag" style="margin:0">0${i + 1} / ${p.time.toUpperCase()}</span>
+    ${p.featured ? '<span class="badge">Most Popular ⭐</span>' : ''}
+  </div>
   <h3>${p.name}</h3>
   <div class="price">${p.price} <small>CAD</small></div>
-  <p style="min-height:3.2em">${p.for}</p>
+  <p style="min-height:3.2em;font-size:0.95rem">${p.for}</p>
   <div class="meta"><span class="badge neutral">${p.terms}</span></div>
   <ul class="check">${p.items.map((x) => `<li>${x}</li>`).join('')}</ul>
-  <a class="btn ${p.featured ? 'btn-primary' : 'btn-ghost'}" href="/contact/?package=${p.id}">Start with ${p.name}</a>
+  <a class="btn ${p.featured ? 'btn-primary' : 'btn-ghost'}" href="/contact/?package=${p.id}">Start with ${p.name} <span class="arrow">↗</span></a>
 </article>`;
 }

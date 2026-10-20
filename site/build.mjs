@@ -24,58 +24,61 @@ const homeHtml = layout({
   title: 'Websites That Book Your Customers For You',
   description: '9LMNTS Studio designs and builds high-converting websites and booking systems for Ottawa restaurants, trades, and service businesses. Fixed pricing. Live in 2–4 weeks.',
   body: `
-  <section class="hero"><div class="container"><div class="hero-grid">
-    <div>
-      <span class="eyebrow"><span class="dot"></span> Digital Architecture &amp; Systems</span>
-      <h1>We Build Systems <span class="soft">That</span><br><span class="accent">Generate Cash.</span></h1>
-      <p class="lead">We architect high-converting digital platforms and zero-friction client acquisition systems for Ottawa service businesses. Rapid turnaround. Enterprise execution.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="/services/">Claim A System <span class="arrow">↗</span></a>
-        <a class="btn btn-ghost" href="/work/">View Live Work <span class="arrow">↗</span></a>
-      </div>
-      <div class="hero-note">
-        <span class="mono">📍 Ottawa, ON · Founder-Led · Built for Operators</span>
-      </div>
-    </div>
-    <div>
-      <!-- Live Workbench Preview Card (Matches Replit reference visual) -->
-      <div class="workbench">
-        <div class="wb-head">
-          <span><span class="accent">9</span> STUDIO WORKBENCH</span>
-          <span>LOCAL / ARCHITECTURE VIEW 01-03</span>
+  <section class="hero">
+    <div class="hero-bg-mesh"></div>
+    <div class="container"><div class="hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> Digital Architecture &amp; Client Acquisition</span>
+        <h1>We Build Systems <span class="soft">That</span><br><span class="accent">Generate Cash.</span></h1>
+        <p class="lead">We architect high-converting digital platforms and zero-friction client acquisition systems for Ottawa service businesses. Rapid 2–4 week turnaround. Enterprise execution.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="/services/">Claim A System <span class="arrow">↗</span></a>
+          <a class="btn btn-ghost" href="/work/">View Live Work <span class="arrow">↗</span></a>
         </div>
-        <div class="wb-body">
-          <div class="mono dim" style="font-size:11px">WORKSPACE / OTTAWA</div>
-          <div class="wb-title">Built around the next move.</div>
-          <div class="wb-row">
-            <div class="wb-cell">
-              <div>LEAD FLOW / 01</div>
-              <div class="big accent">01 <span style="font-size:14px;color:var(--text)">INTAKE</span></div>
-              <p class="dim" style="margin:4px 0 0;font-size:10px">Capture → Qualify → Route</p>
+        <div class="hero-note">
+          <span class="mono">📍 Ottawa, ON · Founder-Led · Desjardins Interac Rail</span>
+        </div>
+      </div>
+      <div>
+        <!-- Live Studio Workbench Preview Card -->
+        <div class="workbench">
+          <div class="wb-head">
+            <span><span class="accent">9</span> STUDIO WORKBENCH</span>
+            <span>OTTAWA / ARCHITECTURE VIEW 01-03</span>
+          </div>
+          <div class="wb-body">
+            <div class="mono dim" style="font-size:11px">WORKSPACE / ACTIVE AIRSPACE</div>
+            <div class="wb-title">Built around the customer conversion handoff.</div>
+            <div class="wb-row">
+              <div class="wb-cell">
+                <div>LEAD FLOW / 01</div>
+                <div class="big accent">01 <span style="font-size:14px;color:var(--text)">INTAKE</span></div>
+                <p class="dim" style="margin:4px 0 0;font-size:10px">Capture → Qualify → Route</p>
+              </div>
+              <div class="wb-cell">
+                <div>MOBILE CONVERSION</div>
+                <div class="bar"><span></span></div>
+                <p class="dim" style="margin:0;font-size:10px">ZERO FRICTION DROP-OFF</p>
+              </div>
             </div>
-            <div class="wb-cell">
-              <div>CONVERSION FRICTION</div>
-              <div class="bar"><span></span></div>
-              <p class="dim" style="margin:0;font-size:10px">ZERO BOTTLENECKS</p>
+            <div class="wb-list">
+              <div><span>01 CONVERSION-FIRST PAGES</span><span class="ok">OPTIMIZED</span></div>
+              <div><span>02 CLIENT INTAKE &amp; BOOKING MODAL</span><span class="ok">LIVE MODAL</span></div>
+              <div><span>03 CONNECTED BUSINESS RAILS</span><span class="ok">DESJARDINS + STRIPE</span></div>
             </div>
           </div>
-          <div class="wb-list">
-            <div><span>01 CONVERSION-FIRST PAGES</span><span class="ok">OPTIMIZED</span></div>
-            <div><span>02 CLIENT INTAKE &amp; BOOKING</span><span class="ok">LIVE MODAL</span></div>
-            <div><span>03 CONNECTED BUSINESS TOOLS</span><span class="ok">SUPABASE RAIL</span></div>
+          <div class="wb-foot">
+            <span>9LMNTS / SYSTEM TELEMETRY</span>
+            <span class="ok">● 100% OPERATIONAL</span>
+          </div>
+          <div class="wb-float">
+            <span class="accent">↘</span> <b>Friction, mapped.</b>
+            <span class="dim">Engineered for immediate cash flow.</span>
           </div>
         </div>
-        <div class="wb-foot">
-          <span>9LMNTS / SYSTEM PREVIEW</span>
-          <span class="ok">● 100% OPERATIONAL</span>
-        </div>
-        <div class="wb-float">
-          <span class="accent">↘</span> <b>Friction, mapped.</b>
-          <span class="dim">Designed around the handoff.</span>
-        </div>
       </div>
-    </div>
-  </div></div></section>
+    </div></div>
+  </section>
 
   <!-- Telemetry Strip -->
   <div class="container"><div class="stats">
@@ -92,10 +95,14 @@ const homeHtml = layout({
         <span class="dot"></span>
         <span>TURNKEY OPERATING SYSTEMS · MULTI-SURFACE DEPLOYMENT</span>
       </div>
+      <div class="mockup-chips desktop">
+        <span class="badge green">● Sub-Second Load Speed</span>
+        <span class="badge neutral">Mobile-First Thumb Ergonomics</span>
+      </div>
     </div>
   </div></section>
 
-  <!-- Offerings Grid -->
+  <!-- Commercial Offerings Bento Grid -->
   <section class="section"><div class="container">
     <div class="section-head">
       <div>
@@ -109,7 +116,7 @@ const homeHtml = layout({
     </div>
   </div></section>
 
-  <!-- Live Concept Demos -->
+  <!-- Live Vertical Showcases (Rich Cinematic Photography) -->
   <section class="section border-top"><div class="container">
     <div class="section-head">
       <div>
@@ -119,31 +126,69 @@ const homeHtml = layout({
       <a class="btn btn-ghost" href="/work/">Explore All Prototypes <span class="arrow">↗</span></a>
     </div>
     <div class="grid g3">
-      <article class="card work-card reveal">
-        <div class="work-thumb"><iframe src="/demo-client.html?preview=1" loading="lazy" title="Chef OS"></iframe></div>
-        <div class="work-body">
-          <span class="badge" style="width:fit-content;margin-bottom:12px">Culinary &amp; Catering</span>
+      <!-- Showcase 1: Chef OS -->
+      <article class="showcase-card reveal">
+        <div class="showcase-media">
+          <img src="/assets/culinary-dish-showcase.jpg" alt="Chef OS Catering Showcase" loading="lazy">
+          <div class="showcase-overlay"></div>
+          <span class="showcase-tag">Culinary &amp; Catering</span>
+          <span class="showcase-score">● 99/100 SPEED</span>
+        </div>
+        <div class="showcase-body">
           <h3>Chef OS &amp; Universal Catering Engine</h3>
-          <p>Instant headcount calculator, menu customizer, and 50% deposit checkout for Ottawa caterers &amp; restaurants.</p>
-          <a class="btn btn-ghost" href="/demo-client.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+          <p>Instant dynamic headcount calculator, menu customizer, and 50% deposit checkout for Ottawa caterers &amp; private chefs.</p>
+          <ul class="showcase-features">
+            <li>Dynamic $35–$65/plate pricing slider</li>
+            <li>Instant email + SMS lead notifications</li>
+            <li>Direct Interac &amp; Stripe payment rail</li>
+          </ul>
+          <div class="showcase-actions">
+            <a class="btn btn-primary" href="/demo-client.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+          </div>
         </div>
       </article>
-      <article class="card work-card reveal">
-        <div class="work-thumb"><iframe src="/handyman.html?preview=1" loading="lazy" title="Trades OS"></iframe></div>
-        <div class="work-body">
-          <span class="badge" style="width:fit-content;margin-bottom:12px">Trades &amp; Contractors</span>
-          <h3>Contractor Dispatch &amp; Quote OS</h3>
-          <p>Click-to-dispatch sticky mobile bar, job scope selector, and photo upload for local contractors and handymen.</p>
-          <a class="btn btn-ghost" href="/handyman.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+
+      <!-- Showcase 2: Trades OS -->
+      <article class="showcase-card reveal">
+        <div class="showcase-media">
+          <img src="/assets/trades-craft-showcase.jpg" alt="Contractor Dispatch Trades Showcase" loading="lazy">
+          <div class="showcase-overlay"></div>
+          <span class="showcase-tag">Trades &amp; Home Services</span>
+          <span class="showcase-score">● 100/100 SPEED</span>
+        </div>
+        <div class="showcase-body">
+          <h3>Contractor Dispatch &amp; Fast Quote OS</h3>
+          <p>Click-to-dispatch sticky mobile bar, job scope selector, and photo upload for Ottawa plumbers, electricians, and contractors.</p>
+          <ul class="showcase-features">
+            <li>1-Tap thumb call action for emergency jobs</li>
+            <li>Multi-category scope selector &amp; photo upload</li>
+            <li>Direct technician phone alert routing</li>
+          </ul>
+          <div class="showcase-actions">
+            <a class="btn btn-primary" href="/handyman.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+          </div>
         </div>
       </article>
-      <article class="card work-card reveal">
-        <div class="work-thumb"><iframe src="/reception.html?preview=1" loading="lazy" title="Events OS"></iframe></div>
-        <div class="work-body">
-          <span class="badge" style="width:fit-content;margin-bottom:12px">Venues &amp; Private Events</span>
+
+      <!-- Showcase 3: Reception OS -->
+      <article class="showcase-card reveal">
+        <div class="showcase-media">
+          <img src="/assets/venue-lounge-showcase.jpg" alt="Private Dining Reception Showcase" loading="lazy">
+          <div class="showcase-overlay"></div>
+          <span class="showcase-tag">Venues &amp; Hospitality</span>
+          <span class="showcase-score">● 98/100 SPEED</span>
+        </div>
+        <div class="showcase-body">
           <h3>Private Dining &amp; Reception Intake</h3>
-          <p>Multi-step date reservation, dietary requirement intake, and automatic confirmation routing.</p>
-          <a class="btn btn-ghost" href="/reception.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+          <p>Multi-step date reservation, dietary requirement intake, and automatic confirmation routing for boutique Ottawa venues.</p>
+          <ul class="showcase-features">
+            <li>Interactive date reservation calendar</li>
+            <li>Bar package &amp; A/V tier selection</li>
+            <li>Zero double-booking calendar validation</li>
+          </ul>
+          <div class="showcase-actions">
+            <a class="btn btn-primary" href="/reception.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+          </div>
         </div>
       </article>
     </div>
@@ -319,57 +364,72 @@ const workHtml = layout({
 
   <section class="section-tight"><div class="container">
     <div class="grid g3">
-      <article class="card work-card reveal">
-        <div class="work-thumb"><iframe src="/demo-client.html" title="Chef OS"></iframe></div>
-        <div class="work-body">
-          <div style="display:flex;justify-content:space-between;margin-bottom:12px">
-            <span class="badge">Culinary Vertical</span>
-            <span class="mono ok" style="font-size:12px">Score: 99/100</span>
-          </div>
+      <!-- Showcase 1: Chef OS -->
+      <article class="showcase-card reveal">
+        <div class="showcase-media">
+          <img src="/assets/culinary-dish-showcase.jpg" alt="Chef OS Catering Showcase" loading="lazy">
+          <div class="showcase-overlay"></div>
+          <span class="showcase-tag">Culinary Vertical</span>
+          <span class="showcase-score">● 99/100 SPEED</span>
+        </div>
+        <div class="showcase-body">
           <h3>Chef OS — Catering &amp; Private Chef Intake</h3>
           <p>Engineered for high-ticket catering orders. Calculates headcount pricing dynamically, offers upsell packages, and secures 50% deposit via Interac or Stripe.</p>
-          <ul class="check" style="margin:12px 0 20px">
+          <ul class="showcase-features">
             <li>Dynamic $35–$65/plate pricing slider</li>
             <li>Eliminates 3-day email quote back-and-forth</li>
             <li>Instant SMS / Email notification to chef</li>
+            <li>Direct Interac e-Transfer autodeposit rail</li>
           </ul>
-          <a class="btn btn-primary" href="/demo-client.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+          <div class="showcase-actions">
+            <a class="btn btn-primary" href="/demo-client.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+          </div>
         </div>
       </article>
 
-      <article class="card work-card reveal">
-        <div class="work-thumb"><iframe src="/handyman.html" title="Trades OS"></iframe></div>
-        <div class="work-body">
-          <div style="display:flex;justify-content:space-between;margin-bottom:12px">
-            <span class="badge">Trades &amp; Home Services</span>
-            <span class="mono ok" style="font-size:12px">Score: 100/100</span>
-          </div>
+      <!-- Showcase 2: Trades OS -->
+      <article class="showcase-card reveal">
+        <div class="showcase-media">
+          <img src="/assets/trades-craft-showcase.jpg" alt="Contractor Dispatch Trades Showcase" loading="lazy">
+          <div class="showcase-overlay"></div>
+          <span class="showcase-tag">Trades &amp; Home Services</span>
+          <span class="showcase-score">● 100/100 SPEED</span>
+        </div>
+        <div class="showcase-body">
           <h3>Contractor Dispatch &amp; Fast Quote OS</h3>
           <p>Built for Ottawa plumbers, electricians, handymen, and roofers. Sticky bottom mobile bar allows 1-tap calling or instant emergency dispatch ticket creation.</p>
-          <ul class="check" style="margin:12px 0 20px">
-            <li>Multi-category service scoping</li>
-            <li>Photo upload for rapid job estimation</li>
-            <li>Lead routed directly to technician phone</li>
+          <ul class="showcase-features">
+            <li>1-Tap thumb call action for emergency jobs</li>
+            <li>Multi-category service scoping &amp; photo upload</li>
+            <li>Direct lead routing to technician phone</li>
+            <li>Zero middleman marketplace lead fees</li>
           </ul>
-          <a class="btn btn-primary" href="/handyman.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+          <div class="showcase-actions">
+            <a class="btn btn-primary" href="/handyman.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+          </div>
         </div>
       </article>
 
-      <article class="card work-card reveal">
-        <div class="work-thumb"><iframe src="/reception.html" title="Events OS"></iframe></div>
-        <div class="work-body">
-          <div style="display:flex;justify-content:space-between;margin-bottom:12px">
-            <span class="badge">Venues &amp; Hospitality</span>
-            <span class="mono ok" style="font-size:12px">Score: 98/100</span>
-          </div>
+      <!-- Showcase 3: Reception OS -->
+      <article class="showcase-card reveal">
+        <div class="showcase-media">
+          <img src="/assets/venue-lounge-showcase.jpg" alt="Private Dining Reception Showcase" loading="lazy">
+          <div class="showcase-overlay"></div>
+          <span class="showcase-tag">Venues &amp; Hospitality</span>
+          <span class="showcase-score">● 98/100 SPEED</span>
+        </div>
+        <div class="showcase-body">
           <h3>Reception &amp; Private Venue Booking Hub</h3>
           <p>Created for boutique wedding venues, lounge private rooms, and corporate event spaces needing seamless calendar intake without double-booking.</p>
-          <ul class="check" style="margin:12px 0 20px">
+          <ul class="showcase-features">
             <li>Interactive date reservation calendar</li>
-            <li>Bar package &amp; A/V tier selection</li>
+            <li>Bar package &amp; A/V tier customizer</li>
             <li>Integrated terms of service &amp; deposit rail</li>
+            <li>Direct calendar sync &amp; guest alerts</li>
           </ul>
-          <a class="btn btn-primary" href="/reception.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+          <div class="showcase-actions">
+            <a class="btn btn-primary" href="/reception.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+          </div>
         </div>
       </article>
     </div>
@@ -683,8 +743,15 @@ const aboutHtml = layout({
 
   <section class="section-tight"><div class="container">
     <div class="founder">
-      <div class="founder-photo">
-        <img src="/assets/founder-reference.jpg" alt="Darnley Sanon - Founder of 9LMNTS Studio" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">
+      <div class="founder-card reveal">
+        <div class="founder-photo">
+          <img src="/assets/founder-reference.jpg" alt="Darnley Sanon - Founder & Lead Digital Architect, 9LMNTS Studio">
+        </div>
+        <div class="founder-badge">
+          <div class="name">Darnley Sanon</div>
+          <div class="role">FOUNDER &amp; LEAD ARCHITECT · OTTAWA, ON</div>
+          <div class="mono dim" style="font-size:10px;margin-top:4px">45.4215° N, 75.6972° W · HYBRID TECH/URBAN LAB</div>
+        </div>
       </div>
       <div>
         <span class="kicker">Founder's Note</span>
