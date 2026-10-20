@@ -84,6 +84,17 @@ const homeHtml = layout({
     <div class="stat"><span class="num accent">50%</span><span class="lbl">Interac Deposit<br>Project Protection Rail</span></div>
   </div></div>
 
+  <!-- 3D Hardware Device Mockup Showcase -->
+  <section class="section-tight" style="padding-top:16px"><div class="container">
+    <div class="mockup-showcase reveal">
+      <img src="/assets/mockup-devices.jpg" alt="9LMNTS Studio Turnkey Operating Systems on MacBook Pro and iPhone" loading="lazy">
+      <div class="mockup-badge">
+        <span class="dot"></span>
+        <span>TURNKEY OPERATING SYSTEMS · MULTI-SURFACE DEPLOYMENT</span>
+      </div>
+    </div>
+  </div></section>
+
   <!-- Offerings Grid -->
   <section class="section"><div class="container">
     <div class="section-head">
@@ -295,6 +306,16 @@ const workHtml = layout({
     title: 'Code That Executes. Interfaces That Convert.',
     lead: 'We do not deal in static Figma mockups that fail in the real world. Every project we engineer is delivered as live, responsive, high-performance web code.'
   })}
+
+  <section class="section-tight" style="padding-top:0"><div class="container">
+    <div class="mockup-showcase reveal">
+      <img src="/assets/mockup-devices.jpg" alt="9LMNTS Studio Mobile and Desktop Interface Proof" loading="lazy">
+      <div class="mockup-badge">
+        <span class="dot"></span>
+        <span>100% RESPONSIVE ARCHITECTURE · VERIFIED ON HARDWARE</span>
+      </div>
+    </div>
+  </div></section>
 
   <section class="section-tight"><div class="container">
     <div class="grid g3">
@@ -663,12 +684,7 @@ const aboutHtml = layout({
   <section class="section-tight"><div class="container">
     <div class="founder">
       <div class="founder-photo">
-        <!-- High-contrast founder lockup -->
-        <div style="text-align:center;padding:24px">
-          <div class="initials">9L</div>
-          <div class="mono accent" style="font-size:13px;font-weight:700">DARNLEY SANON</div>
-          <div class="dim" style="font-size:12px">Founder &amp; Digital Architect</div>
-        </div>
+        <img src="/assets/founder-reference.jpg" alt="Darnley Sanon - Founder of 9LMNTS Studio" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">
       </div>
       <div>
         <span class="kicker">Founder's Note</span>
@@ -1488,8 +1504,10 @@ ensureDir(OUT);
 
 // Static assets
 ensureDir(path.join(OUT, 'assets'));
-if (fs.existsSync(path.join(ROOT, 'assets', 'logo.png'))) {
-  fs.copyFileSync(path.join(ROOT, 'assets', 'logo.png'), path.join(OUT, 'assets', 'logo.png'));
+if (fs.existsSync(path.join(ROOT, 'assets'))) {
+  fs.readdirSync(path.join(ROOT, 'assets')).forEach(file => {
+    fs.copyFileSync(path.join(ROOT, 'assets', file), path.join(OUT, 'assets', file));
+  });
 }
 fs.copyFileSync(path.join(ROOT, 'site', 'styles.css'), path.join(OUT, 'styles.css'));
 fs.copyFileSync(path.join(ROOT, 'site', 'main.js'), path.join(OUT, 'main.js'));
