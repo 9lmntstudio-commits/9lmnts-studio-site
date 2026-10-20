@@ -1,0 +1,18 @@
+# 9LMNTS Studio Git Ignore
+node_modules/
+.DS_Store
+*.log
+
+# Sensitive lead data & operator databases
+data/crm_leads.json
+data/*.json
+
+# Archives & old backups
+_archive/
+antigravity-backup/
+.system_generated/
+
+# Local IDE / OS
+.vscode/
+.idea/
+Thumbs.db

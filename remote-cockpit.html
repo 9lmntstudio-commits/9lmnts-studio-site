@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>9LMNTS Remote Cockpit — Gemini Mobile Brain Bridge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #08090C;
+            --bg-card: #101218;
+            --bg-elevated: #161922;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(255, 85, 0, 0.45);
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-tertiary: #64748B;
+            --brand-orange: #FF5500;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+            --font-display: 'Syne', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            padding: 20px 16px 80px 16px;
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--brand-orange);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.12);
+            color: #10B981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 4px 10px;
+            border-radius: 9999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            letter-spacing: 0.05em;
+        }
+
+        .dot-pulse {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10B981;
+            box-shadow: 0 0 8px #10B981;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-desc {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+        }
+
+        .task-input {
+            width: 100%;
+            min-height: 90px;
+            background: var(--bg-base);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 12px;
+            color: #FFFFFF;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            resize: none;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+        }
+
+        .task-input:focus {
+            border-color: var(--brand-orange);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--brand-orange);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 9999px;
+            padding: 13px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(255, 85, 0, 0.35);
+            transition: all 0.2s;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .quick-btn {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 10px 12px;
+            color: var(--text-primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+        }
+
+        .quick-btn:active {
+            border-color: var(--brand-orange);
+            background: rgba(255, 85, 0, 0.1);
+        }
+
+        .queue-item {
+            background: var(--bg-base);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+        }
+
+        .queue-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            color: var(--text-tertiary);
+            margin-bottom: 4px;
+        }
+
+        .badge-status {
+            color: var(--brand-orange);
+            font-weight: 700;
+        }
+
+        .badge-completed {
+            color: #10B981;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo"><span>9L</span>MNTS Remote</div>
+        <div class="status-pill"><span class="dot-pulse"></span>BRIDGE LIVE</div>
+    </header>
+
+    <!-- TASK INTAKE CARD -->
+    <div class="card">
+        <h2 class="card-title">⚡ Gemini Mobile Task Rail</h2>
+        <p class="card-desc">Paste prompts from Gemini Mobile App or dictate instructions directly.</p>
+
+        <textarea id="taskText" class="task-input" placeholder="e.g. Build Chef OS demo for Margo Caribbean, or run vault snapshot pre_deploy..."></textarea>
+        
+        <button class="btn-submit" onclick="dispatchTask()">Transmit to Antigravity Engine →</button>
+
+        <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; margin-top: 16px;">
+            Quick Tactical Actions
+        </div>
+
+        <div class="quick-grid">
+            <button class="quick-btn" onclick="sendQuickAction('snapshot', 'Take AQV Snapshot')">
+                🔒 Lock Pre-Flight Snapshot
+            </button>
+            <button class="quick-btn" onclick="sendQuickAction('pitch Margo Caribbean', 'Pitch Generator')">
+                📱 Generate Client Pitch
+            </button>
+            <button class="quick-btn" onclick="location.href='demo-client.html'">
+                ⚡ Preview Chef OS
+            </button>
+            <button class="quick-btn" onclick="location.href='handyman.html'">
+                🛠️ Preview Handyman OS
+            </button>
+        </div>
+    </div>
+
+    <!-- RECENT TELEMETRY -->
+    <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h3 class="card-title" style="margin-bottom: 0;">Task Queue Telemetry</h3>
+            <button onclick="fetchQueue()" style="background:none; border:none; color:var(--brand-orange); font-size:0.75rem; cursor:pointer; font-weight:600;">Refresh ⟳</button>
+        </div>
+        <div id="queueList">
+            <div style="font-size: 0.8rem; color: var(--text-tertiary);">Loading queue...</div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchQueue() {
+            try {
+                const res = await fetch('/api/tasks');
+                const tasks = await res.json();
+                const container = document.getElementById('queueList');
+                if (!tasks.length) {
+                    container.innerHTML = '<div style="font-size:0.78rem; color:var(--text-tertiary);">No pending tasks. System idle.</div>';
+                    return;
+                }
+                container.innerHTML = tasks.slice(0, 5).map(t => `
+                    <div class="queue-item">
+                        <div class="queue-header">
+                            <span>${new Date(t.createdAt).toLocaleTimeString()}</span>
+                            <span class="${t.status === 'COMPLETED' ? 'badge-completed' : 'badge-status'}">${t.status}</span>
+                        </div>
+                        <div style="color: var(--text-primary); font-weight: 600;">${escapeHtml(t.task)}</div>
+                        ${t.result ? `<div style="font-size: 0.72rem; color: #10B981; margin-top: 4px;">✓ ${escapeHtml(t.result)}</div>` : ''}
+                    </div>
+                `).join('');
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function dispatchTask() {
+            const input = document.getElementById('taskText');
+            const val = input.value.trim();
+            if (!val) return alert('Please enter a task instruction.');
+
+            try {
+                const res = await fetch('/api/task', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ task: val, source: 'Gemini Mobile Cockpit' })
+                });
+                const data = await res.json();
+                input.value = '';
+                fetchQueue();
+                alert('⚡ Task Transmitted Successfully!');
+            } catch (err) {
+                alert('Connection error: ' + err.message);
+            }
+        }
+
+        function sendQuickAction(cmd, label) {
+            document.getElementById('taskText').value = cmd;
+            dispatchTask();
+        }
+
+        function escapeHtml(s) {
+            return String(s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+        }
+
+        // Poll every 10 seconds
+        setInterval(fetchQueue, 10000);
+        fetchQueue();
+    </script>
+</body>
+</html>

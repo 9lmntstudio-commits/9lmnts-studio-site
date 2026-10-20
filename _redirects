@@ -1,0 +1,9 @@
+# 9LMNTS Studio Clean Routing Rules
+/demo            /demo-client.html    200
+/chef            /demo-client.html    200
+/handyman        /handyman.html       200
+/dispatch        /handyman.html       200
+/reception       /reception.html      200
+/wedding         /reception.html      200
+/embed.js        /embed/intake.js     200
+/intake.js       /embed/intake.js     200

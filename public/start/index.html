@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Onboarding &amp; Project Staging Hub | 9LMNTS Studio</title>
+<meta name="description" content="Welcome to 9LMNTS Studio. Complete your 3-step project onboarding, submit your brand assets, and verify your 50% sprint deposit.">
+<link rel="canonical" href="https://9lmntsstudio.com/start/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="9LMNTS Studio">
+<meta property="og:title" content="Client Onboarding &amp; Project Staging Hub | 9LMNTS Studio">
+<meta property="og:description" content="Welcome to 9LMNTS Studio. Complete your 3-step project onboarding, submit your brand assets, and verify your 50% sprint deposit.">
+<meta property="og:url" content="https://9lmntsstudio.com/start/">
+<meta property="og:image" content="https://9lmntsstudio.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08090C">
+<link rel="icon" href="/assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="nav-wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="nav-logo" href="/" aria-label="9LMNTS Studio home"><img src="/assets/logo.png" alt="9LMNTS Studio" width="120" height="34"></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links"><li><a href="/services/">Services</a></li><li><a href="/work/">Work</a></li><li><a href="/process/">Process</a></li><li><a href="/audit/">Free Audit</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li class="mobile-only"><a href="/contact/">Book a call</a></li></ul>
+    <a class="btn btn-primary btn-pill desktop" href="/contact/">Get Started <span class="arrow">↗</span></a>
+  </nav>
+</div>
+<main id="main">
+
+  <section class="page-hero"><div class="container">
+  <span class="eyebrow"><span class="dot"></span>Sprint Onboarding</span>
+  <h1>Welcome to 9LMNTS Studio. Let’s Launch Your Platform.</h1>
+  <p class="lead">Follow these 3 simple steps to lock in your sprint timeline, submit your brand materials, and track your staging build.</p>
+  
+</div></section>
+
+  <section class="section-tight"><div class="container"><div class="hero-grid" style="align-items:start">
+    <div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="n">STEP 01</div>
+          <div>
+            <h3>Lock In Deposit Rail</h3>
+            <p>Send your 50% project deposit via Canadian Interac e-Transfer to <strong class="accent">9lmntstudio@gmail.com</strong>. Autodeposit is active on our Desjardins commercial account. No password required.</p>
+            <div class="copy-row" style="margin-top:12px">
+              <span>9lmntstudio@gmail.com</span>
+              <button data-copy="9lmntstudio@gmail.com">Copy Interac Email</button>
+            </div>
+          </div>
+          <div><span class="badge neutral">Autodeposit</span></div>
+        </div>
+
+        <div class="step reveal">
+          <div class="n">STEP 02</div>
+          <div>
+            <h3>Submit Brand Assets</h3>
+            <p>Upload your high-resolution logo, color preferences, photography, menus, or service pricing docs to our shared Google Drive folder or email them directly.</p>
+            <ul class="check" style="margin-top:10px">
+              <li>Vector logo (SVG, PNG, AI)</li>
+              <li>Menu or service rate sheet</li>
+              <li>High-res venue / food / job photography</li>
+            </ul>
+          </div>
+          <div><span class="badge neutral">Checklist</span></div>
+        </div>
+
+        <div class="step reveal">
+          <div class="n">STEP 03</div>
+          <div>
+            <h3>Private Staging Review</h3>
+            <p>Within 3–7 business days, you receive your private interactive staging link to test all features on your mobile device before public deployment.</p>
+          </div>
+          <div><span class="badge neutral">Staging</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deposit Verification Form -->
+    <div class="card">
+      <span class="kicker">Step 1 Verification</span>
+      <h3>Log Your Deposit &amp; Kickoff Sprint</h3>
+      <p>Already sent your e-Transfer? Submit your confirmation number here so we can match it and trigger kickoff immediately.</p>
+
+      <form class="form" action="https://formspree.io/f/xvgowgqk" method="POST">
+        <input type="hidden" name="_subject" value="New Client Deposit Verification Logged">
+        <div class="field">
+          <label for="pName">Primary Contact Name *</label>
+          <input type="text" id="pName" name="clientName" placeholder="Your Full Name" required>
+        </div>
+        <div class="field">
+          <label for="pBiz">Business Name *</label>
+          <input type="text" id="pBiz" name="businessName" placeholder="Your Business Name" required>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="pTier">Package Selected *</label>
+            <select id="pTier" name="selectedPackage">
+              <option value="Quick Fix ($500)">Quick Fix ($500 CAD)</option>
+              <option value="Launch Page ($1,800)">Launch Page ($1,800 CAD - $900 Deposit)</option>
+              <option value="Growth Website ($4,500)">Growth Website ($4,500 CAD - $1,800 Deposit)</option>
+              <option value="Signature System ($8,500)">Signature System ($8,500+ CAD)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="pRef">Interac Reference # *</label>
+            <input type="text" id="pRef" name="interacReference" placeholder="e.g. C1A2B3D4" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="pDrive">Google Drive / Dropbox Link to Assets (Optional)</label>
+          <input type="url" id="pDrive" name="assetDriveLink" placeholder="https://drive.google.com/...">
+        </div>
+        <button class="btn btn-primary" type="submit" style="width:100%">Verify Deposit &amp; Trigger Sprint <span class="arrow">↗</span></button>
+      </form>
+    </div>
+  </div></div></section>
+  
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <img src="/assets/logo.png" alt="9LMNTS Studio" width="140" height="40" style="height:40px;width:auto;margin-bottom:16px">
+        <p style="max-width:320px">Websites that book your customers for you. Designed and built in Ottawa for local service businesses.</p>
+        <p class="mono dim" style="font-size:12px">Pronounced “Nine Elements Studio”</p>
+      </div>
+      <div><h4>Studio</h4><ul>
+        <li><a href="/services/">Services &amp; Pricing</a></li><li><a href="/work/">Work</a></li><li><a href="/process/">Process</a></li>
+        <li><a href="/embeds/">Website Add-ons</a></li><li><a href="/about/">About</a></li><li><a href="/faq/">FAQ</a></li></ul></div>
+      <div><h4>Clients</h4><ul>
+        <li><a href="/audit/">Free Website Audit</a></li><li><a href="/contact/">Book a Call</a></li><li><a href="/start/">Client Onboarding</a></li>
+        <li><a href="mailto:9lmntstudio@gmail.com">9lmntstudio@gmail.com</a></li><li><a href="https://instagram.com/9lmntsstudio" rel="noopener">Instagram</a></li></ul></div>
+      <div><h4>Legal</h4><ul>
+        <li><a href="/legal/terms/">Terms of Service</a></li><li><a href="/legal/privacy/">Privacy Policy</a></li>
+        <li><a href="/legal/payment-terms/">Payment &amp; Refund Terms</a></li><li><a href="/legal/cookies/">Cookie Notice</a></li>
+        <li><a href="/legal/accessibility/">Accessibility</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span data-year>2026</span> 9LMNTS Studio. Registered Ontario business name. All rights reserved.</span>
+      <span>Ottawa, Canada · Prices in CAD</span>
+    </div>
+  </div>
+</footer>
+<script src="/main.js" defer></script>
+</body>
+</html>

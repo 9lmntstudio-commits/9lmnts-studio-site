@@ -1,0 +1,188 @@
+{
+  "name": "9LMNTS Studio — Sovereign Intake & Deposit Engine",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "9lmnts-intake",
+        "responseMode": "onReceived",
+        "responseData": "allEntries",
+        "options": {}
+      },
+      "id": "node-webhook-intake",
+      "name": "Intake Webhook (Embed & Demos)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 9LMNTS Studio Lead Parser & Deposit Calculator\nconst item = $input.first().json;\n\nconst clientName = item.clientName || item.name || 'Anonymous Prospect';\nconst phone = item.phone || item.mobile || 'N/A';\nconst service = item.service || item.bottleneck || 'Modular Upgrade';\nconst businessName = item.businessName || item.company || 'Direct Prospect';\nconst sourceUrl = item.sourceUrl || item.url || '9lmntsstudio.com';\nconst notes = item.notes || item.headcount || 'Standard inquiry';\n\n// Determine Package & 50% Kickoff Deposit Rail\nlet packageTier = 'Modular System Upgrade';\nlet totalQuote = 500;\nlet depositDue = 250;\nlet turnaround = '24–48 Hours';\n\nif (service.toLowerCase().includes('recovery') || service.toLowerCase().includes('1500') || service.toLowerCase().includes('catering')) {\n  packageTier = 'The Revenue Recovery System';\n  totalQuote = 1500;\n  depositDue = 750;\n  turnaround = '3–5 Business Days';\n} else if (service.toLowerCase().includes('os') || service.toLowerCase().includes('3000') || service.toLowerCase().includes('handyman') || service.toLowerCase().includes('reception')) {\n  packageTier = 'The Turnkey Business OS';\n  totalQuote = 3000;\n  depositDue = 1500;\n  turnaround = '2–3 Weeks';\n} else if (service.toLowerCase().includes('enterprise') || service.toLowerCase().includes('5000')) {\n  packageTier = 'The Enterprise Sprint';\n  totalQuote = 5000;\n  depositDue = 2500;\n  turnaround = '3–4 Weeks';\n}\n\nconst interacInstructions = `Interac e-Transfer to 9lmntstudio@gmail.com (Desjardins Corporate Account, Autodeposit Active, 0% fees). Due now: $${depositDue} CAD.`;\nconst formattedAlert = `⚡ [NEW 9LMNTS SPRINT ALERT]\\nClient: ${clientName} (${businessName})\\nPhone: ${phone}\\nPackage: ${packageTier} ($${totalQuote} CAD)\\n50% Deposit: $${depositDue} CAD\\nTurnaround: ${turnaround}\\nSource: ${sourceUrl}\\nNotes: ${notes}`;\n\nreturn [{\n  json: {\n    clientName,\n    businessName,\n    phone,\n    service,\n    packageTier,\n    totalQuote,\n    depositDue,\n    turnaround,\n    interacInstructions,\n    formattedAlert,\n    notes,\n    sourceUrl,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-data-parser",
+      "name": "Parse Lead & Calculate 50% Deposit",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.totalQuote }}",
+                    "rightValue": 500,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.totalQuote }}",
+                    "rightValue": 1500,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.totalQuote }}",
+                    "rightValue": 3000,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        }
+      },
+      "id": "node-tier-router",
+      "name": "Route by Sprint Tier",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.twilio.com/2010-04-01/Accounts/YOUR_ACCOUNT_SID/Messages.json",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"From\": \"whatsapp:+14155238886\",\n  \"To\": \"whatsapp:{{ $json.phone }}\",\n  \"Body\": \"Hey {{ $json.clientName }}! 👋 Creative Director Darnley Sanon here from 9LMNTS Studio. We received your request for {{ $json.packageTier }}. Your 50% sprint kickoff deposit is ${{ $json.depositDue }} CAD via Interac to 9lmntstudio@gmail.com. We are staging your build now!\"\n}",
+        "options": {}
+      },
+      "id": "node-whatsapp-alert",
+      "name": "Send WhatsApp / SMS Kickoff",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [940, 240]
+    },
+    {
+      "parameters": {
+        "fromEmail": "notifications@9lmntsstudio.com",
+        "toEmail": "9lmntstudio@gmail.com",
+        "subject": "=⚡ New 9LMNTS Sprint Lead: {{ $json.clientName }} (${{ $json.totalQuote }} CAD)",
+        "text": "={{ $json.formattedAlert }}\n\nSettlement Instructions:\n{{ $json.interacInstructions }}",
+        "options": {}
+      },
+      "id": "node-email-alert",
+      "name": "Email Creative Director (Darnley)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [940, 420]
+    }
+  ],
+  "connections": {
+    "Intake Webhook (Embed & Demos)": {
+      "main": [
+        [
+          {
+            "node": "Parse Lead & Calculate 50% Deposit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Lead & Calculate 50% Deposit": {
+      "main": [
+        [
+          {
+            "node": "Route by Sprint Tier",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email Creative Director (Darnley)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Sprint Tier": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp / SMS Kickoff",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send WhatsApp / SMS Kickoff",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send WhatsApp / SMS Kickoff",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

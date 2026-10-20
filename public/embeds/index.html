@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modular Drop-In Widgets &amp; Embeds | 9LMNTS Studio</title>
+<meta name="description" content="Add instant booking, headcount calculators, and client intake modals to your existing website in 5 minutes with our universal 9LMNTS embed script.">
+<link rel="canonical" href="https://9lmntsstudio.com/embeds/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="9LMNTS Studio">
+<meta property="og:title" content="Modular Drop-In Widgets &amp; Embeds | 9LMNTS Studio">
+<meta property="og:description" content="Add instant booking, headcount calculators, and client intake modals to your existing website in 5 minutes with our universal 9LMNTS embed script.">
+<meta property="og:url" content="https://9lmntsstudio.com/embeds/">
+<meta property="og:image" content="https://9lmntsstudio.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08090C">
+<link rel="icon" href="/assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="nav-wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="nav-logo" href="/" aria-label="9LMNTS Studio home"><img src="/assets/logo.png" alt="9LMNTS Studio" width="120" height="34"></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links"><li><a href="/services/">Services</a></li><li><a href="/work/">Work</a></li><li><a href="/process/">Process</a></li><li><a href="/audit/">Free Audit</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li class="mobile-only"><a href="/contact/">Book a call</a></li></ul>
+    <a class="btn btn-primary btn-pill desktop" href="/contact/">Get Started <span class="arrow">↗</span></a>
+  </nav>
+</div>
+<main id="main">
+
+  <section class="page-hero"><div class="container">
+  <span class="eyebrow"><span class="dot"></span>Modular Upgrade ($500 CAD)</span>
+  <h1>Upgrade Your Existing Website in 5 Minutes.</h1>
+  <p class="lead">Keep your current site on Squarespace, Wix, WordPress, or Shopify. Drop in our high-speed intake modal to immediately stop leaking mobile leads.</p>
+  
+</div></section>
+
+  <section class="section-tight"><div class="container">
+    <div class="hero-grid" style="align-items:start">
+      <!-- Interactive Sandbox -->
+      <div class="card calc" data-calc>
+        <span class="kicker">Interactive Live Sandbox</span>
+        <h3>Catering Headcount &amp; Deposit Calculator</h3>
+        <p>Test the dynamic calculator widget right here to see how your customers experience it.</p>
+        
+        <div class="field" style="margin:20px 0">
+          <label for="pkg">Select Service Package</label>
+          <select id="pkg">
+            <option value="45">Signature Caribbean Buffet ($45 / guest)</option>
+            <option value="65" selected>Executive Plated Experience ($65 / guest)</option>
+            <option value="35">Artisan BBQ &amp; Street Bites ($35 / guest)</option>
+          </select>
+        </div>
+
+        <div class="field" style="margin:20px 0">
+          <label for="guests">Estimated Guest Count: <span id="guestsOut" class="accent mono" style="font-weight:700">45</span> guests</label>
+          <input type="range" id="guests" min="15" max="250" value="45" step="5">
+        </div>
+
+        <div style="background:#0c0d12;border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:24px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+            <span class="muted">Estimated Project Total:</span>
+            <span id="total" class="accent mono" style="font-size:1.4rem;font-weight:800">$2,925</span>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span class="muted">50% Deposit Required:</span>
+            <span id="deposit" class="ok mono" style="font-size:1.2rem;font-weight:700">$1,463</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" style="margin-top:20px;width:100%" onclick="alert('This demo triggers your custom booking modal!')">Simulate Booking Modal Launch</button>
+      </div>
+
+      <!-- Installation Guide & Code Snippet -->
+      <div>
+        <span class="kicker">Implementation</span>
+        <h2>How It Installs</h2>
+        <p>Paste this single script tag right before your website's closing <code>&lt;/body&gt;</code> tag. That's it.</p>
+
+        <pre class="code"><code>&lt;!-- 9LMNTS Studio Universal Intake Embed --&gt;
+&lt;script 
+  src="https://9lmntsstudio.com/embed/intake.js"
+  data-client="your-business-name"
+  data-color="#FF5500"
+  data-theme="dark"
+  data-email="9lmntstudio@gmail.com"
+  defer&gt;
+&lt;/script&gt;
+
+&lt;!-- Trigger with any existing button --&gt;
+&lt;button data-9lmnts-trigger&gt;Book Now&lt;/button&gt;</code></pre>
+
+        <div class="card" style="margin-top:24px">
+          <h4>What's Included in the $500 Sprint:</h4>
+          <ul class="check">
+            <li>Tailored styling matching your current branding &amp; fonts</li>
+            <li>Custom field validation (dates, dietary notes, addresses)</li>
+            <li>Instant email / SMS notification to your phone on submission</li>
+            <li>Full installation support on your CMS (we do it for you)</li>
+          </ul>
+          <a class="btn btn-primary" href="/contact/?package=quick-fix" style="margin-top:16px">Order $500 Widget Sprint <span class="arrow">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="section-tight"><div class="container"><div class="cta-band reveal">
+  <div><span class="kicker">Next step</span><h2>Ready for a website that books customers?</h2><p>Book a free 15-minute call. You’ll leave with a clear plan and a fixed price — whether you hire us or not.</p></div>
+  <div class="cta-actions">
+    <a class="btn btn-primary" href="/contact/">Book a free call <span class="arrow">↗</span></a>
+    <a class="btn btn-ghost" href="/audit/">Get a free website audit</a>
+  </div>
+</div></div></section>
+  
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <img src="/assets/logo.png" alt="9LMNTS Studio" width="140" height="40" style="height:40px;width:auto;margin-bottom:16px">
+        <p style="max-width:320px">Websites that book your customers for you. Designed and built in Ottawa for local service businesses.</p>
+        <p class="mono dim" style="font-size:12px">Pronounced “Nine Elements Studio”</p>
+      </div>
+      <div><h4>Studio</h4><ul>
+        <li><a href="/services/">Services &amp; Pricing</a></li><li><a href="/work/">Work</a></li><li><a href="/process/">Process</a></li>
+        <li><a href="/embeds/">Website Add-ons</a></li><li><a href="/about/">About</a></li><li><a href="/faq/">FAQ</a></li></ul></div>
+      <div><h4>Clients</h4><ul>
+        <li><a href="/audit/">Free Website Audit</a></li><li><a href="/contact/">Book a Call</a></li><li><a href="/start/">Client Onboarding</a></li>
+        <li><a href="mailto:9lmntstudio@gmail.com">9lmntstudio@gmail.com</a></li><li><a href="https://instagram.com/9lmntsstudio" rel="noopener">Instagram</a></li></ul></div>
+      <div><h4>Legal</h4><ul>
+        <li><a href="/legal/terms/">Terms of Service</a></li><li><a href="/legal/privacy/">Privacy Policy</a></li>
+        <li><a href="/legal/payment-terms/">Payment &amp; Refund Terms</a></li><li><a href="/legal/cookies/">Cookie Notice</a></li>
+        <li><a href="/legal/accessibility/">Accessibility</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span data-year>2026</span> 9LMNTS Studio. Registered Ontario business name. All rights reserved.</span>
+      <span>Ottawa, Canada · Prices in CAD</span>
+    </div>
+  </div>
+</footer>
+<script src="/main.js" defer></script>
+</body>
+</html>
