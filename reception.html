@@ -95,8 +95,14 @@
     </header>
 
     <!-- Hero -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-32 sm:pt-40">
-        <div class="text-center max-w-4xl mx-auto">
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-32 sm:pt-40 relative">
+        <!-- Atmospheric Venue Ambient Background -->
+        <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 pointer-events-none overflow-hidden rounded-3xl opacity-20 blur-sm">
+            <img src="/assets/venue-lounge-showcase.jpg" alt="Luxury Gala Venue" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-obsidian via-transparent to-obsidian"></div>
+        </div>
+
+        <div class="text-center max-w-4xl mx-auto relative z-10">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal hairline-border text-xs font-mono text-zinc-300">
                 <span class="w-1.5 h-1.5 rounded-full bg-flame"></span>
                 ROMEO & JULIET OS // LUXURY WEDDINGS & HIGH-TICKET GALAS
@@ -108,15 +114,15 @@
                 </span>
             </h1>
             <p class="mt-4 text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-                A two-phase operating system: <span class="text-white font-medium">V1 Pre-Wedding Vault</span> (cinematic RSVPs, allergen filters & 0% honeymoon funds) and <span class="text-white font-medium">V2 Live Reception Engine</span> (table QR seating, live ballroom photo stream, and audio voicemail guestbook).
+                A two-phase operating system: <span class="text-white font-medium">V1 Pre-Wedding Vault</span> (cinematic RSVPs, allergen filters & 0% honeymoon funds) and <span class="text-white font-medium">V2 Live Reception Engine</span> (table QR seating, live ballroom photo stream, speech showcase voting, and audio voicemail guestbook).
             </p>
         </div>
 
         <!-- 2-Phase Bento Showcase -->
-        <div class="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
             
             <!-- V1 CARD -->
-            <div id="v1-vault" class="p-8 rounded-3xl bg-charcoal hairline-border flex flex-col justify-between">
+            <div id="v1-vault" class="p-6 sm:p-8 rounded-3xl bg-charcoal hairline-border flex flex-col justify-between group">
                 <div>
                     <div class="flex items-center justify-between pb-4 border-b border-white/5">
                         <span class="text-xs font-mono text-flame font-bold">PHASE 1 // 60 DAYS OUT</span>
@@ -130,33 +136,42 @@
                         Eliminate lost RSVP postcards and 5% third-party cuts on cash registries.
                     </p>
 
-                    <!-- Feature List -->
-                    <div class="mt-6 space-y-3 text-xs font-mono text-zinc-300">
-                        <div class="p-3 rounded-xl bg-charcoal-elevated border border-white/5 flex items-center justify-between">
-                            <span>1-Tap Dietary & Allergen RSVP</span>
-                            <span class="text-flame font-bold">Auto-Syncs</span>
+                    <!-- Real Mobile Preview -->
+                    <div class="mt-6 p-4 rounded-2xl bg-charcoal-elevated border border-white/5 flex flex-col sm:flex-row items-center gap-5">
+                        <div class="w-full sm:w-44 shrink-0 rounded-xl overflow-hidden border border-white/10 shadow-2xl relative group/img">
+                            <img src="/assets/mobile-wedding-future-fund.jpg" alt="Romeo & Juliet 0% Honeymoon Fund Screen" class="w-full h-auto object-cover group-hover/img:scale-105 transition-transform duration-300">
+                            <div class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/80 font-mono text-[9px] text-emerald-400 border border-white/10">0% CUT DIRECT</div>
                         </div>
-                        <div class="p-3 rounded-xl bg-charcoal-elevated border border-white/5 flex items-center justify-between">
-                            <span>Direct 0% Honeymoon Cash Rail</span>
-                            <span class="text-emerald-400 font-bold">0% Cut (Interac)</span>
-                        </div>
-                        <div class="p-3 rounded-xl bg-charcoal-elevated border border-white/5 flex items-center justify-between">
-                            <span>Accommodations & Shuttle Hub</span>
-                            <span class="text-white">Live Maps</span>
+                        <div class="space-y-2.5 text-xs font-mono text-zinc-300 w-full">
+                            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
+                                <span>1-Tap Dietary RSVP</span>
+                                <span class="text-flame font-bold">Auto-Syncs</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
+                                <span>0% Cash Rail (Interac)</span>
+                                <span class="text-emerald-400 font-bold">$0 Honeyfund Cut</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
+                                <span>Hotel & Shuttle Hub</span>
+                                <span class="text-white">Live Maps</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-8 pt-4 border-t border-white/5 flex items-center justify-between">
-                    <span class="font-mono text-lg font-bold text-white">$1,500 CAD</span>
-                    <button onclick="openBookingModal('v1')" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-flame hover:text-white text-xs font-bold font-mono transition-all">
+                    <div>
+                        <span class="font-mono text-lg font-bold text-white">$1,500 CAD</span>
+                        <span class="block text-[10px] font-mono text-zinc-400">50% Deposit: $750 CAD</span>
+                    </div>
+                    <button onclick="openBookingModal('v1')" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-flame hover:text-white text-xs font-bold font-mono transition-all duration-150 active:scale-[0.97]">
                         Select V1 Vault →
                     </button>
                 </div>
             </div>
 
             <!-- V2 CARD -->
-            <div id="v2-live" class="p-8 rounded-3xl bg-charcoal hairline-border flex flex-col justify-between">
+            <div id="v2-live" class="p-6 sm:p-8 rounded-3xl bg-charcoal hairline-border flex flex-col justify-between group">
                 <div>
                     <div class="flex items-center justify-between pb-4 border-b border-white/5">
                         <span class="text-xs font-mono text-flame font-bold">PHASE 2 // DAY OF WEDDING</span>
@@ -167,35 +182,81 @@
                         The Live Ballroom OS
                     </h2>
                     <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
-                        Interactive table QR check-ins, live projection feeds, and digital voicemail.
+                        Interactive table QR check-ins, live speech voting with $5 drinks tipping, and live games.
                     </p>
 
-                    <!-- Feature List -->
-                    <div class="mt-6 space-y-3 text-xs font-mono text-zinc-300">
-                        <div class="p-3 rounded-xl bg-charcoal-elevated border border-white/5 flex items-center justify-between">
-                            <span>Table QR Seating Finder</span>
-                            <span class="text-flame font-bold">2-Sec Search</span>
+                    <!-- Real Mobile Preview Showcase -->
+                    <div class="mt-6 p-4 rounded-2xl bg-charcoal-elevated border border-white/5 flex flex-col sm:flex-row items-center gap-5">
+                        <div class="w-full sm:w-44 shrink-0 rounded-xl overflow-hidden border border-white/10 shadow-2xl relative group/img">
+                            <img src="/assets/mobile-wedding-speech-showcase.jpg" alt="Romeo & Juliet Speech Showcase & Drinks Tipping" class="w-full h-auto object-cover group-hover/img:scale-105 transition-transform duration-300">
+                            <div class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/80 font-mono text-[9px] text-flame border border-white/10">LIVE BALLROOM</div>
                         </div>
-                        <div class="p-3 rounded-xl bg-charcoal-elevated border border-white/5 flex items-center justify-between">
-                            <span>Live Ballroom Photo Stream</span>
-                            <span class="text-white">Projector Ready</span>
-                        </div>
-                        <div class="p-3 rounded-xl bg-charcoal-elevated border border-white/5 flex items-center justify-between">
-                            <span>Digital Audio Voicemail Guestbook</span>
-                            <span class="text-white">High-Fi Audio</span>
+                        <div class="space-y-2.5 text-xs font-mono text-zinc-300 w-full">
+                            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
+                                <span>Speech Showcase</span>
+                                <span class="text-flame font-bold">Live Voting + Tips</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
+                                <span>Shoe Game & Trivia</span>
+                                <span class="text-emerald-400 font-bold">Projector Sync</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
+                                <span>Table QR Seating</span>
+                                <span class="text-white">2-Sec Search</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-8 pt-4 border-t border-white/5 flex items-center justify-between">
-                    <span class="font-mono text-lg font-bold text-white">$1,500 CAD</span>
-                    <button onclick="openBookingModal('v2')" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-flame hover:text-white text-xs font-bold font-mono transition-all">
+                    <div>
+                        <span class="font-mono text-lg font-bold text-white">$1,500 CAD</span>
+                        <span class="block text-[10px] font-mono text-zinc-400">50% Deposit: $750 CAD</span>
+                    </div>
+                    <button onclick="openBookingModal('v2')" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-flame hover:text-white text-xs font-bold font-mono transition-all duration-150 active:scale-[0.97]">
                         Select V2 Engine →
                     </button>
                 </div>
             </div>
 
         </div>
+
+        <!-- Live Ballroom Feature Deep Dive (Raffle & Audio Guestbook) -->
+        <section class="mt-8 rounded-3xl bg-charcoal hairline-border p-6 sm:p-8">
+            <div class="flex items-center justify-between pb-4 border-b border-white/5">
+                <div>
+                    <span class="text-xs font-mono text-flame font-bold uppercase">BALLROOM INTERACTION SUITE</span>
+                    <h3 class="text-xl font-bold font-display text-white mt-1">Live Crowd Monetization & Memories</h3>
+                </div>
+                <span class="text-xs font-mono text-zinc-400">ZERO APP DOWNLOAD REQUIRED</span>
+            </div>
+            
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="p-4 rounded-2xl bg-charcoal-elevated border border-white/5">
+                    <div class="h-32 rounded-xl overflow-hidden mb-3 border border-white/5">
+                        <img src="/assets/mobile-wedding-rj-home-raffle.jpg" alt="50/50 Raffle & Ticket System" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-xs font-bold text-white block">50/50 Live Raffle Draw</span>
+                    <p class="text-[11px] text-zinc-400 mt-1">Guests purchase digital tickets via Apple Pay or Interac. Winner announced with celebration confetti on the ballroom projector.</p>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-charcoal-elevated border border-white/5">
+                    <div class="h-32 rounded-xl overflow-hidden mb-3 border border-white/5">
+                        <img src="/assets/venue-lounge-showcase.jpg" alt="Live Ballroom Projector Stream" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-xs font-bold text-white block">Live Ballroom Photo Stream</span>
+                    <p class="text-[11px] text-zinc-400 mt-1">Candid photos uploaded from guest phones appear instantly on venue screens in a moderated editorial feed.</p>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-charcoal-elevated border border-white/5">
+                    <div class="h-32 rounded-xl overflow-hidden mb-3 border border-white/5">
+                        <img src="/assets/mobile-wedding-speech-showcase.jpg" alt="Digital Audio Voicemail Guestbook" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-xs font-bold text-white block">Audio Voicemail Guestbook</span>
+                    <p class="text-[11px] text-zinc-400 mt-1">Guests tap to leave a heartfelt 60-second voice note. Mastered into a private couple audio archive alongside DJ stems.</p>
+                </div>
+            </div>
+        </section>
 
         <!-- Full Suite Commercial Block -->
         <section id="pricing" class="mt-12 rounded-3xl bg-charcoal hairline-border p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8">

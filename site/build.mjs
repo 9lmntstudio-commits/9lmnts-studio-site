@@ -166,15 +166,15 @@ const homeHtml = layout({
           <span class="showcase-score">● 100/100 SPEED</span>
         </div>
         <div class="showcase-body">
-          <h3>Contractor Dispatch &amp; Fast Quote OS</h3>
-          <p>Click-to-dispatch sticky mobile bar, job scope selector, and photo upload for Ottawa plumbers, electricians, and contractors.</p>
+          <h3>WorkerBee OS — Field Dispatch &amp; Paperless Payouts</h3>
+          <p>Click-to-dispatch mobile manifest, 5:00 AM QR &amp; PIN check-in, and automated 2:30 PM payroll auto-calc for Ottawa contractors and trades.</p>
           <ul class="showcase-features">
-            <li>1-Tap thumb call action for emergency jobs</li>
-            <li>Multi-category scope selector &amp; photo upload</li>
-            <li>Direct technician phone alert routing</li>
+            <li>5:00 AM Door QR / PIN check-in for field crews</li>
+            <li>1-Click crew van assignment &amp; SMS job tickets</li>
+            <li>Paperless 2:30 PM payroll &amp; direct Interac batching</li>
           </ul>
           <div class="showcase-actions">
-            <a class="btn btn-primary" href="/handyman.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+            <a class="btn btn-primary" href="/workerbee.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -712,16 +712,16 @@ const workHtml = layout({
           <span class="showcase-score">● 100/100 SPEED</span>
         </div>
         <div class="showcase-body">
-          <h3>Contractor Dispatch &amp; Fast Quote OS</h3>
-          <p>Built for Ottawa plumbers, electricians, handymen, and roofers. Sticky bottom mobile bar allows 1-tap calling or instant emergency dispatch ticket creation.</p>
+          <h3>WorkerBee OS — Field Dispatch &amp; Paperless Payouts</h3>
+          <p>Built for Ottawa trades, general contractors, plumbers, electricians, and blue-collar labor. 5:00 AM QR &amp; PIN worker check-in, driver drop routes, and 2:30 PM payroll reconciliation.</p>
           <ul class="showcase-features">
-            <li>1-Tap thumb call action for emergency jobs</li>
-            <li>Multi-category service scoping &amp; photo upload</li>
-            <li>Direct lead routing to technician phone</li>
-            <li>Zero middleman marketplace lead fees</li>
+            <li>5:00 AM Door QR / PIN worker check-in</li>
+            <li>Van driver mobile manifests with GPS routing</li>
+            <li>Foreman digital sign-off &amp; automatic 2:30 PM payout calculation</li>
+            <li>Zero lost paper time tickets</li>
           </ul>
           <div class="showcase-actions">
-            <a class="btn btn-primary" href="/handyman.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+            <a class="btn btn-primary" href="/workerbee.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -2075,11 +2075,11 @@ const adminHtml = `<!doctype html>
               </tr>
               <tr>
                 <td><strong>Andre Ottawa Home Repairs</strong></td>
-                <td>Handyman OS</td>
+                <td>WorkerBee OS</td>
                 <td>Launch Page ($1,800 CAD)</td>
                 <td><span class="ok">$900 CAD Paid</span></td>
                 <td><span class="badge">IN_BUILD</span></td>
-                <td><a href="/handyman.html" target="_blank" class="btn btn-ghost" style="padding:6px 12px;font-size:12px">View Dispatch ↗</a></td>
+                <td><a href="/workerbee.html" target="_blank" class="btn btn-ghost" style="padding:6px 12px;font-size:12px">View Dispatch ↗</a></td>
               </tr>
             </tbody>
           </table>
@@ -2229,9 +2229,9 @@ const adminHtml = `<!doctype html>
 <script>
 const LEADS = [
   { id: 'lead_1', clientName: 'Margo Caribbean Restaurant', vertical: 'Chef OS', phone: '613-555-0199', sprint: '$1,500 CAD', deposit: '$750 CAD', status: 'STAGED_OUTREACH' },
-  { id: 'lead_2', clientName: 'Andre Ottawa Home Repairs', vertical: 'Handyman OS', phone: '613-555-0192', sprint: '$1,800 CAD', deposit: '$900 CAD', status: 'IN_BUILD' },
+  { id: 'lead_2', clientName: 'Andre Ottawa Home Repairs', vertical: 'WorkerBee OS', phone: '613-555-0192', sprint: '$1,800 CAD', deposit: '$900 CAD', status: 'IN_BUILD' },
   { id: 'lead_3', clientName: 'ByWard Private Lounge', vertical: 'Reception OS', phone: '613-555-0144', sprint: '$4,500 CAD', deposit: '$1,800 CAD', status: 'PROPOSAL_SENT' },
-  { id: 'lead_4', clientName: 'Rideau Electrical Services', vertical: 'Handyman OS', phone: '613-555-0178', sprint: '$500 CAD', deposit: '$500 CAD', status: 'NEW_LEAD' }
+  { id: 'lead_4', clientName: 'Rideau Electrical Services', vertical: 'WorkerBee OS', phone: '613-555-0178', sprint: '$500 CAD', deposit: '$500 CAD', status: 'NEW_LEAD' }
 ];
 
 function unlock() {
@@ -2394,6 +2394,9 @@ if (fs.existsSync(path.join(ROOT, 'demos'))) {
 if (fs.existsSync(path.join(ROOT, 'demo-client.html'))) {
   fs.copyFileSync(path.join(ROOT, 'demo-client.html'), path.join(OUT, 'demo-client.html'));
 }
+if (fs.existsSync(path.join(ROOT, 'workerbee.html'))) {
+  fs.copyFileSync(path.join(ROOT, 'workerbee.html'), path.join(OUT, 'workerbee.html'));
+}
 if (fs.existsSync(path.join(ROOT, 'handyman.html'))) {
   fs.copyFileSync(path.join(ROOT, 'handyman.html'), path.join(OUT, 'handyman.html'));
 }
@@ -2440,8 +2443,9 @@ fs.writeFileSync(path.join(OUT, '_redirects'), `
 /faq             /faq/index.html      200
 /demo            /demo-client.html    200
 /chef            /demo-client.html    200
-/handyman        /handyman.html       200
-/dispatch        /handyman.html       200
+/workerbee       /workerbee.html      200
+/handyman        /workerbee.html      200
+/dispatch        /workerbee.html      200
 /reception       /reception.html      200
 /wedding         /reception.html      200
 /embed.js        /embed/intake.js     200
