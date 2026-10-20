@@ -2373,9 +2373,7 @@ ensureDir(OUT);
 // Static assets
 ensureDir(path.join(OUT, 'assets'));
 if (fs.existsSync(path.join(ROOT, 'assets'))) {
-  fs.readdirSync(path.join(ROOT, 'assets')).forEach(file => {
-    fs.copyFileSync(path.join(ROOT, 'assets', file), path.join(OUT, 'assets', file));
-  });
+  fs.cpSync(path.join(ROOT, 'assets'), path.join(OUT, 'assets'), { recursive: true });
 }
 fs.copyFileSync(path.join(ROOT, 'site', 'styles.css'), path.join(OUT, 'styles.css'));
 fs.copyFileSync(path.join(ROOT, 'site', 'main.js'), path.join(OUT, 'main.js'));
@@ -2402,6 +2400,9 @@ if (fs.existsSync(path.join(ROOT, 'handyman.html'))) {
 }
 if (fs.existsSync(path.join(ROOT, 'reception.html'))) {
   fs.copyFileSync(path.join(ROOT, 'reception.html'), path.join(OUT, 'reception.html'));
+}
+if (fs.existsSync(path.join(ROOT, 'darnley.html'))) {
+  fs.copyFileSync(path.join(ROOT, 'darnley.html'), path.join(OUT, 'darnley.html'));
 }
 
 // Public Routes
@@ -2448,6 +2449,9 @@ fs.writeFileSync(path.join(OUT, '_redirects'), `
 /dispatch        /workerbee.html      200
 /reception       /reception.html      200
 /wedding         /reception.html      200
+/darnley         /darnley.html        200
+/clothing        /darnley.html        200
+/brand           /darnley.html        200
 /embed.js        /embed/intake.js     200
 /intake.js       /embed/intake.js     200
 `, 'utf8');

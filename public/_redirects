@@ -19,5 +19,8 @@
 /dispatch        /workerbee.html      200
 /reception       /reception.html      200
 /wedding         /reception.html      200
+/darnley         /darnley.html        200
+/clothing        /darnley.html        200
+/brand           /darnley.html        200
 /embed.js        /embed/intake.js     200
 /intake.js       /embed/intake.js     200
