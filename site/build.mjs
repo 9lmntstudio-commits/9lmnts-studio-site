@@ -42,6 +42,7 @@ const homeHtml = layout({
         <div class="hero-ctas">
           <a class="btn btn-primary" href="/services/">Claim A System <span class="arrow">↗</span></a>
           <a class="btn btn-ghost" href="/work/">View Live Work <span class="arrow">↗</span></a>
+          <a class="btn btn-ghost" href="/contact/">Book A Call <span class="arrow">↗</span></a>
         </div>
         <div class="hero-note">
           <span class="mono">📍 Ottawa, ON · Founder-Led · Desjardins Interac Rail</span>
@@ -196,69 +197,6 @@ const homeHtml = layout({
           </ul>
           <div class="showcase-actions">
             <a class="btn btn-primary" href="/reception.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div></section>
-
-  <!-- Event OS Arena Series Section (Home) -->
-  <section class="section section-arena border-top"><div class="container">
-    <div class="section-head">
-      <div>
-        <span class="kicker">9LMNTS Event OS Series</span>
-        <h2>Live Tournament Arenas &amp; Crowd Engines</h2>
-      </div>
-      <a class="btn btn-ghost" href="/work/">View All 8 Arenas <span class="arrow">↗</span></a>
-    </div>
-    <div class="grid g3">
-      <!-- Arena 1: Sound Clash OS -->
-      <article class="showcase-card reveal">
-        <div class="showcase-media">
-          <img src="/assets/screenshot-sound-clash.png" alt="Sound Clash OS DJ Battle Finals" loading="lazy">
-          <div class="showcase-overlay"></div>
-          <span class="showcase-tag">Music &amp; DJ Battle</span>
-          <span class="showcase-score">● 8-DJ BRACKET</span>
-        </div>
-        <div class="showcase-body">
-          <h3>Sound Clash OS — DJ Battle Finals</h3>
-          <p>Live underground tournament platform with real-time crowd voting, stem mixing, and round locking.</p>
-          <div class="showcase-actions" style="margin-top:auto">
-            <a class="btn btn-primary" href="/demos/sound-clash-arena.html" target="_blank" rel="noopener">Launch Live Arena ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Arena 2: Venue OS -->
-      <article class="showcase-card reveal">
-        <div class="showcase-media">
-          <img src="/assets/screenshot-venue-os.png" alt="Venue OS Nuvo Lounge Platform" loading="lazy">
-          <div class="showcase-overlay"></div>
-          <span class="showcase-tag">Nightlife &amp; Venues</span>
-          <span class="showcase-score">● TABLE OS</span>
-        </div>
-        <div class="showcase-body">
-          <h3>Venue OS — Nuvo Lounge 295</h3>
-          <p>VIP floorplan reservations, bottle service checkout, digital table QR ordering, and live DJ tipping.</p>
-          <div class="showcase-actions" style="margin-top:auto">
-            <a class="btn btn-primary" href="/demos/venue-os-nuvo-lounge.html" target="_blank" rel="noopener">Launch Live Venue OS ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Arena 3: The Feast Culinary Battle -->
-      <article class="showcase-card reveal">
-        <div class="showcase-media">
-          <img src="/assets/screenshot-the-feast.png" alt="The Feast Culinary Battle Royale" loading="lazy">
-          <div class="showcase-overlay"></div>
-          <span class="showcase-tag">Culinary Arena</span>
-          <span class="showcase-score">● BATTLE ROYALE</span>
-        </div>
-        <div class="showcase-body">
-          <h3>The Feast — Culinary Battle Royale</h3>
-          <p>Multi-round chef elimination platform with live judge scorecards, timers, and tasting passport reservations.</p>
-          <div class="showcase-actions" style="margin-top:auto">
-            <a class="btn btn-primary" href="/demos/the-feast-culinary-clash.html" target="_blank" rel="noopener">Launch Live Feast OS ↗</a>
           </div>
         </div>
       </article>
@@ -807,69 +745,6 @@ const workHtml = layout({
           </ul>
           <div class="showcase-actions">
             <a class="btn btn-primary" href="/reception.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div></section>
-
-  <!-- Event OS Arena Series Section (Home) -->
-  <section class="section section-arena border-top"><div class="container">
-    <div class="section-head">
-      <div>
-        <span class="kicker">9LMNTS Event OS Series</span>
-        <h2>Live Tournament Arenas &amp; Crowd Engines</h2>
-      </div>
-      <a class="btn btn-ghost" href="/work/">View All 8 Arenas <span class="arrow">↗</span></a>
-    </div>
-    <div class="grid g3">
-      <!-- Arena 1: Sound Clash OS -->
-      <article class="showcase-card reveal">
-        <div class="showcase-media">
-          <img src="/assets/screenshot-sound-clash.png" alt="Sound Clash OS DJ Battle Finals" loading="lazy">
-          <div class="showcase-overlay"></div>
-          <span class="showcase-tag">Music &amp; DJ Battle</span>
-          <span class="showcase-score">● 8-DJ BRACKET</span>
-        </div>
-        <div class="showcase-body">
-          <h3>Sound Clash OS — DJ Battle Finals</h3>
-          <p>Live underground tournament platform with real-time crowd voting, stem mixing, and round locking.</p>
-          <div class="showcase-actions" style="margin-top:auto">
-            <a class="btn btn-primary" href="/demos/sound-clash-arena.html" target="_blank" rel="noopener">Launch Live Arena ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Arena 2: Venue OS -->
-      <article class="showcase-card reveal">
-        <div class="showcase-media">
-          <img src="/assets/screenshot-venue-os.png" alt="Venue OS Nuvo Lounge Platform" loading="lazy">
-          <div class="showcase-overlay"></div>
-          <span class="showcase-tag">Nightlife &amp; Venues</span>
-          <span class="showcase-score">● TABLE OS</span>
-        </div>
-        <div class="showcase-body">
-          <h3>Venue OS — Nuvo Lounge 295</h3>
-          <p>VIP floorplan reservations, bottle service checkout, digital table QR ordering, and live DJ tipping.</p>
-          <div class="showcase-actions" style="margin-top:auto">
-            <a class="btn btn-primary" href="/demos/venue-os-nuvo-lounge.html" target="_blank" rel="noopener">Launch Live Venue OS ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Arena 3: The Feast Culinary Battle -->
-      <article class="showcase-card reveal">
-        <div class="showcase-media">
-          <img src="/assets/screenshot-the-feast.png" alt="The Feast Culinary Battle Royale" loading="lazy">
-          <div class="showcase-overlay"></div>
-          <span class="showcase-tag">Culinary Arena</span>
-          <span class="showcase-score">● BATTLE ROYALE</span>
-        </div>
-        <div class="showcase-body">
-          <h3>The Feast — Culinary Battle Royale</h3>
-          <p>Multi-round chef elimination platform with live judge scorecards, timers, and tasting passport reservations.</p>
-          <div class="showcase-actions" style="margin-top:auto">
-            <a class="btn btn-primary" href="/demos/the-feast-culinary-clash.html" target="_blank" rel="noopener">Launch Live Feast OS ↗</a>
           </div>
         </div>
       </article>

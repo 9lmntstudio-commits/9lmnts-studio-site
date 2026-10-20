@@ -42,7 +42,6 @@ const NAV = [
   ['/services/', 'Services'],
   ['/work/', 'Work'],
   ['/process/', 'Process'],
-  ['/audit/', 'Free Audit'],
   ['/about/', 'About'],
   ['/contact/', 'Contact'],
 ];
@@ -91,8 +90,8 @@ ${schema}
   <nav class="nav" aria-label="Main">
     <a class="nav-logo" href="/" aria-label="9LMNTS Studio home"><img src="/assets/logo.png" alt="9LMNTS Studio" width="120" height="34"></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <ul class="nav-links" id="nav-links">${nav}<li class="mobile-only"><a href="/contact/">Book a call</a></li></ul>
-    <a class="btn btn-primary btn-pill desktop" href="/contact/">Get Started <span class="arrow">↗</span></a>
+    <ul class="nav-links" id="nav-links">${nav}</ul>
+    <a class="btn btn-primary btn-pill desktop" href="/contact/">Start a Sprint <span class="arrow">↗</span></a>
   </nav>
 </div>
 <main id="main">
