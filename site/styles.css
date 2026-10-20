@@ -636,6 +636,66 @@ pre.code {
 }
 .callout p { margin: 0; color: var(--text); font-weight: 500; }
 
+/* Video Reel & High-Tech Storyboard Showcases */
+.video-reel-frame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(255, 85, 0, 0.35);
+  background: #000;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.85), 0 0 50px rgba(255, 85, 0, 0.2);
+  margin-top: 36px;
+}
+.video-reel-frame video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.storyboard-showcase {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(255, 85, 0, 0.4);
+  background: #060709;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.85);
+  margin-top: 32px;
+}
+.storyboard-showcase img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.storyboard-showcase:hover img {
+  transform: scale(1.02);
+}
+
+/* Section Background Themes */
+.section-arena {
+  background-image:
+    linear-gradient(180deg, #08090C 0%, rgba(8, 9, 12, 0.80) 50%, #08090C 100%),
+    url('/assets/event-os-arena.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.section-stage {
+  background-image:
+    linear-gradient(180deg, #08090C 0%, rgba(8, 9, 12, 0.80) 50%, #08090C 100%),
+    url('/assets/event-os-stage.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.section-cockpit {
+  background-image:
+    linear-gradient(180deg, #08090C 0%, rgba(8, 9, 12, 0.80) 50%, #08090C 100%),
+    url('/assets/event-os-cockpit.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 /* Founder Section (About Page) */
 .founder {
   display: grid; grid-template-columns: 380px 1fr; gap: 52px; align-items: start;

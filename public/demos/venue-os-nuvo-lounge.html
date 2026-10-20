@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VENUE OS | Smart Venue Management Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,600;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+        :root {
+            --bg: #07050a; --card: #120e1a; --gold: #d4af37; --neon-purple: #b537f2;
+            --white: #ffffff; --sub: #8a8496; --border: rgba(212, 175, 55, 0.2);
+            --font-head: 'Playfair Display', serif; --font-body: 'Inter', sans-serif;
+            --font-mono: 'Space Mono', monospace; --radius: 8px; --radius-lg: 16px;
+        }
+        body{font-family:var(--font-body);padding-bottom:90px;overflow-x:hidden;min-height:100vh;background:var(--bg);color:var(--white);background-image:radial-gradient(circle at 50% -20%, rgba(181,55,242,0.1) 0%, rgba(7,5,10,1) 60%);}
+        .app-container{max-width:500px;margin:0 auto;min-height:100vh;background:transparent;position:relative;display:flex;flex-direction:column;box-shadow:0 0 50px rgba(181,55,242,0.05)}
+        .top-bar{background:rgba(7,5,10,0.9);backdrop-filter:blur(12px);padding:14px 20px;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+        .logo{font-family:var(--font-head);font-size:1.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);}
+        .table-badge{background:rgba(212,175,55,0.1);border:1px solid var(--gold);color:var(--gold);font-size:0.7rem;font-weight:900;padding:5px 12px;border-radius:20px;letter-spacing:1px;font-family:var(--font-mono);}
+        .nav-tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);overflow-x:auto;position:sticky;top:61px;z-index:90;scrollbar-width:none;}
+        .tab{padding:14px 10px;color:var(--sub);font-weight:700;font-size:0.65rem;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;flex:1;text-align:center;text-transform:uppercase;letter-spacing:1px;transition:0.2s}
+        .tab.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(212,175,55,0.05)}
+        .view{display:none;padding:20px;animation:fadeIn 0.3s ease}
+        .view.active{display:block}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .section-header{font-family:var(--font-head);font-size:1.4rem;color:var(--gold);margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:8px;display:flex;justify-content:space-between;align-items:flex-end;}
+        .btn-primary{background:var(--gold);color:#000;border:none;padding:15px;width:100%;font-weight:900;border-radius:var(--radius);cursor:pointer;text-transform:uppercase;font-size:0.85rem;letter-spacing:1px;transition:0.2s;}
+        .btn-primary:active{transform:scale(0.98);}
+        .btn-secondary{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:15px;width:100%;font-weight:900;border-radius:var(--radius);cursor:pointer;text-transform:uppercase;font-size:0.85rem;letter-spacing:1px;}
+        .input-field{width:100%;padding:14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:#fff;font-size:0.85rem;margin-bottom:12px;font-family:var(--font-body);}
+        .menu-category{font-weight:900;color:var(--neon-purple);text-transform:uppercase;letter-spacing:2px;font-size:0.75rem;margin:24px 0 10px;}
+        .menu-item{background:var(--card);border:1px solid var(--border);padding:14px;border-radius:var(--radius-lg);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+        .m-name{font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;}
+        .m-desc{font-size:0.7rem;color:var(--sub);line-height:1.3;}
+        .m-price{color:var(--gold);font-family:var(--font-mono);font-weight:900;font-size:1rem;}
+        .add-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);width:36px;height:36px;border-radius:50%;display:flex;justify-content:center;align-items:center;cursor:pointer;transition:0.2s;flex-shrink:0;}
+        .cart-float{position:fixed;bottom:85px;right:20px;background:var(--neon-purple);color:#fff;width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:1.4rem;box-shadow:0 5px 25px rgba(181,55,242,0.5);z-index:95;cursor:pointer;}
+        .cart-badge{position:absolute;top:0;right:0;background:#fff;color:#000;font-size:0.75rem;font-weight:900;width:24px;height:24px;border-radius:50%;display:flex;justify-content:center;align-items:center;}
+        .vip-hero { background: linear-gradient(135deg, #1a1423 0%, #000 100%); border: 1px solid var(--gold); padding: 24px 20px; border-radius: var(--radius-lg); margin-bottom: 20px; text-align: center; position: relative; overflow: hidden; }
+        .vip-title { font-family: var(--font-head); font-size: 1.8rem; color: var(--gold); margin-bottom: 8px; }
+        .action-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+        .action-card{background:var(--card);border:1px solid var(--border);padding:20px 14px;border-radius:var(--radius-lg);text-align:center;cursor:pointer;transition:0.2s;}
+        .action-card:active{transform:scale(0.97);}
+        .action-card i{font-size:2rem;color:var(--gold);margin-bottom:12px;display:block;}
+        .bottom-nav{position:fixed;bottom:0;width:100%;max-width:500px;background:rgba(7,5,10,0.95);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:12px 0;z-index:100;}
+        .nav-item{text-align:center;color:var(--sub);font-size:0.55rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:700;text-transform:uppercase;flex:1;}
+        .nav-item.active{color:var(--gold);}
+        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);backdrop-filter:blur(8px);z-index:200;justify-content:center;align-items:center}
+        .modal-box{width:95%;max-width:420px;max-height:90vh;overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);animation:slideUp 0.3s;display:flex;flex-direction:column;}
+        .m-head{padding:18px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);display:flex;justify-content:space-between;align-items:center;}
+        .m-title{font-size:1.1rem;color:var(--gold);text-transform:uppercase;font-family:var(--font-head);}
+        .m-close{font-size:1.4rem;color:var(--sub);cursor:pointer;background:none;border:none;}
+        .m-body{padding:20px;}
+        .step-indicator { display: flex; justify-content: space-between; margin-bottom: 20px; position: relative; }
+        .step-indicator::before { content: ''; position: absolute; top: 12px; left: 0; right: 0; height: 2px; background: var(--border); z-index: 1; }
+        .step-dot { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); border: 2px solid var(--border); color: var(--sub); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 900; z-index: 2; position: relative; }
+        .step-dot.active { background: var(--gold); border-color: var(--gold); color: #000; }
+        .step-dot.completed { background: var(--neon-purple); border-color: var(--neon-purple); color: #fff; }
+        .select-card { border: 2px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; cursor: pointer; background: var(--bg); }
+        .select-card.selected { border-color: var(--gold); background: rgba(212,175,55,0.05); }
+        .bottle-qty-control { display: flex; align-items: center; gap: 12px; background: var(--bg); padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border); width: fit-content; }
+        .qty-btn { background: transparent; border: none; color: var(--gold); font-size: 1.2rem; cursor: pointer; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+        .chat-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);height:380px;display:flex;flex-direction:column;overflow:hidden;margin-top:12px;}
+        .chat-history{flex:1;padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;}
+        .msg{padding:10px 14px;border-radius:var(--radius);font-size:0.85rem;max-width:85%;line-height:1.4;}
+        .msg.bot{background:rgba(181,55,242,0.1);border:1px solid rgba(181,55,242,0.3);align-self:flex-start;}
+        .msg.user{background:var(--gold);color:#000;font-weight:600;align-self:flex-end;}
+        .coat-ticket{background:#fff;color:#000;padding:30px 20px;border-radius:var(--radius-lg);text-align:center;margin:20px 0;position:relative;}
+        .ticket-num{font-family:var(--font-mono);font-size:3.5rem;font-weight:900;line-height:1;}
+        .toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:var(--gold);color:#000;padding:12px 24px;border-radius:30px;font-weight:900;z-index:1000;font-size:0.8rem;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
+        select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23d4af37%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 14px top 50%; background-size: 12px auto; }
+        @keyframes slideUp{from{transform:translateY(28px);opacity:0}to{transform:translateY(0);opacity:1}}
+        
+        /* Gratuity selector styling */
+        .tip-group { display: flex; gap: 12px; margin: 16px 0; justify-content: space-between; }
+        .tip-btn { flex: 1; background: var(--bg); border: 1px solid var(--border); text-align: center; padding: 12px 0; border-radius: var(--radius); cursor: pointer; font-weight: 700; transition: 0.2s; color: var(--white); }
+        .tip-btn.active { background: rgba(212, 175, 55, 0.15); border-color: var(--gold); color: var(--gold); }
+        .cart-item-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.9rem; padding: 6px 0; border-bottom: 1px dashed var(--border); }
+        .cart-total-line { display: flex; justify-content: space-between; margin: 12px 0; font-weight: bold; }
+        .cart-grandtotal { font-size: 1.2rem; border-top: 2px solid var(--border); padding-top: 12px; margin-top: 8px; }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="top-bar">
+        <div class="logo">VENUE OS</div>
+        <div class="table-badge" id="globalTableNum">TABLE 01</div>
+    </div>
+    <div class="nav-tabs">
+        <div class="tab active" onclick="switchTab('order',this)">🍸 DRINKS</div>
+        <div class="tab" onclick="switchTab('vip',this)">⭐ VIP</div>
+        <div class="tab" onclick="switchTab('host',this)">📝 HOST</div>
+        <div class="tab" onclick="switchTab('dj',this)">🎧 DJ</div>
+        <div class="tab" onclick="switchTab('coat',this)">🧥 COAT</div>
+        <div class="tab" onclick="switchTab('ai',this)">🤖 AI</div>
+    </div>
+
+    <!-- ORDER TAB -->
+    <div id="order" class="view active">
+        <div class="section-header"><span>Bar Menu</span><i class="fas fa-search" style="font-size:1rem; color:var(--sub);"></i></div>
+        <div class="menu-category">Premium Spirits</div>
+        <div class="menu-item"><div><div class="m-name">Clase Azul Reposado</div><div class="m-desc">Aged tequila, 750ml</div><div class="m-price">$650</div></div><div class="add-btn" onclick="addToCart('Clase Azul Reposado', 650)"><i class="fas fa-plus"></i></div></div>
+        <div class="menu-item"><div><div class="m-name">Dom Perignon Vintage</div><div class="m-desc">Champagne Luminous</div><div class="m-price">$550</div></div><div class="add-btn" onclick="addToCart('Dom Perignon', 550)"><i class="fas fa-plus"></i></div></div>
+        <div class="menu-category">Signature Cocktails</div>
+        <div class="menu-item"><div><div class="m-name">House Mule</div><div class="m-desc">Vodka, ginger, lime</div><div class="m-price">$18</div></div><div class="add-btn" onclick="addToCart('House Mule', 18)"><i class="fas fa-plus"></i></div></div>
+        <div class="menu-item"><div><div class="m-name">Spritz Infusion</div><div class="m-desc">Hibiscus, prosecco</div><div class="m-price">$20</div></div><div class="add-btn" onclick="addToCart('Spritz Infusion', 20)"><i class="fas fa-plus"></i></div></div>
+        <div class="menu-category">Craft Beers</div>
+        <div class="menu-item"><div><div class="m-name">Local IPA</div><div class="m-desc">16oz draft</div><div class="m-price">$9</div></div><div class="add-btn" onclick="addToCart('Local IPA', 9)"><i class="fas fa-plus"></i></div></div>
+    </div>
+
+    <!-- VIP TAB -->
+    <div id="vip" class="view">
+        <div class="vip-hero"><div class="vip-title">Reserve Experience</div><div style="font-size:0.8rem;color:var(--sub);margin-bottom:16px;">Elevate your night with bottle presentations & dedicated host</div><button class="btn-primary" onclick="startVipWorkflow()">ORDER BOTTLE SHOW</button></div>
+        <div class="section-header">Table Management</div>
+        <div class="action-grid">
+            <div class="action-card" onclick="triggerHostAction('Paging your Host...', 'A host will arrive at your table shortly.')"><i class="fas fa-concierge-bell"></i><div class="action-card-title">Page Host</div><div style="font-size:0.65rem;color:var(--sub);">Request service</div></div>
+            <div class="action-card" onclick="triggerHostAction('Security Alert', 'Security team notified.')"><i class="fas fa-shield-alt"></i><div class="action-card-title">Security</div><div style="font-size:0.65rem;color:var(--sub);">Assistance</div></div>
+            <div class="action-card" onclick="openModal('guestModal')"><i class="fas fa-users"></i><div class="action-card-title">Add Guests</div><div style="font-size:0.65rem;color:var(--sub);">VIP list</div></div>
+            <div class="action-card" onclick="triggerHostAction('Closing Tab', 'Your tab summary sent to host.')"><i class="fas fa-file-invoice-dollar"></i><div class="action-card-title">Close Tab</div><div style="font-size:0.65rem;color:var(--sub);">Settle bill</div></div>
+        </div>
+        <div style="background:rgba(212,175,55,0.05); border:1px solid var(--border); border-radius:var(--radius-lg); padding:16px; margin-top:12px;"><div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--sub);"><span>⭐ Gold Member</span><span>YTD Spend: $2,450</span></div><div class="spend-bar" style="width:100%; height:6px; background:#333; border-radius:3px; margin:8px 0;"><div style="width:45%; height:100%; background:var(--gold); border-radius:3px;"></div></div><div style="font-size:0.7rem; color:var(--sub);">$550 away from Platinum Tier</div></div>
+    </div>
+
+    <!-- HOST TAB (Event Architect) -->
+    <div id="host" class="view">
+        <div class="vip-hero" style="border-color:var(--neon-purple);"><div class="vip-title" style="color:var(--neon-purple);">Event Architect</div><div style="font-size:0.8rem;color:var(--sub);margin-bottom:16px;">Manage venue rental, door pricing, AV & promo assets</div><button class="btn-primary" style="background:var(--neon-purple);color:#fff;" onclick="openModal('blueprintModal')">CONFIGURE EVENT</button></div>
+        <div class="section-header">Planner Tools</div>
+        <div class="action-grid">
+            <div class="action-card" onclick="triggerHostAction('Venue Manager', 'Manager has been alerted.')"><i class="fas fa-user-tie" style="color:var(--neon-purple);"></i><div>Venue Mgr</div></div>
+            <div class="action-card" onclick="openModal('promoModal')"><i class="fas fa-paint-brush" style="color:var(--neon-purple);"></i><div>Promo Assets</div></div>
+            <div class="action-card" onclick="triggerHostAction('Door List', 'Guestlist synced with front entrance.')"><i class="fas fa-clipboard-check" style="color:var(--neon-purple);"></i><div>Door List</div></div>
+            <div class="action-card" onclick="triggerHostAction('A/V Tech', 'Technician notified.')"><i class="fas fa-sliders-h" style="color:var(--neon-purple);"></i><div>A/V Tech</div></div>
+        </div>
+        <div style="background:rgba(181,55,242,0.1); border:1px solid var(--neon-purple); border-radius:var(--radius-lg); padding:16px;"><div style="display:flex; justify-content:space-between;"><span style="color:var(--neon-purple); font-weight:900;">Run of Show</span><span style="background:#2ecc71; padding:2px 8px; border-radius:20px; font-size:0.7rem;">LIVE</span></div><div style="margin-top:12px;"><div>Door Price: <span id="dashDoorPrice" style="font-family:var(--font-mono);">$25.00</span></div><div>Capacity: <span>340 / 500</span></div><div>A/V: <span id="dashAV">In-House DJ</span></div></div></div>
+    </div>
+
+    <!-- DJ TAB -->
+    <div id="dj" class="view">
+        <div class="section-header">Live DJ Booth</div>
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); text-align:center; padding:20px; margin-bottom:16px;"><div style="width:80px;height:80px;border-radius:50%;background:url('https://images.unsplash.com/photo-1516280440502-124b89dc1d57?w=200&q=80') center/cover;margin:0 auto 12px;border:2px solid var(--neon-purple);"></div><div style="font-weight:900; font-size:1.2rem;">DJ RESIDENT</div><div style="color:var(--neon-purple); font-size:0.7rem;">LIVE TONIGHT</div></div>
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px; margin-bottom:16px;"><div style="font-weight:800; margin-bottom:12px; color:var(--gold);">📣 Shoutout ($5)</div><input class="input-field" id="djText" placeholder="Celebrate someone!"><button class="btn-primary" onclick="payDJFlow('shoutout')">SEND TO SCREEN</button></div>
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px;"><div style="font-weight:800; margin-bottom:12px; color:var(--gold);">💸 Tip the DJ</div><div style="display:flex; gap:10px; margin-bottom:12px;"><div class="action-card" style="flex:1; padding:10px;" onclick="selectDjTip(10, this)">$10</div><div class="action-card" style="flex:1; padding:10px;" onclick="selectDjTip(20, this)">$20</div><div class="action-card" style="flex:1; padding:10px;" onclick="selectDjTip(50, this)">$50</div></div><button class="btn-primary" style="background:#fff;" onclick="payDJFlow('tip')">SEND TIP</button></div>
+    </div>
+
+    <!-- COAT TAB -->
+    <div id="coat" class="view">
+        <div class="section-header">Digital Coat Check</div>
+        <div id="coatActiveState" style="display:none;"><div class="coat-ticket"><div style="font-size:0.7rem; letter-spacing:2px;">VENUE OS TICKET</div><div class="ticket-num">#042</div><div style="font-size:0.75rem; margin-top:10px;">Checked at front desk</div></div><button class="btn-primary" onclick="openModal('coatConfirmModal')">REQUEST COAT FOR EXIT</button></div>
+        <div id="coatEmptyState" style="text-align:center; padding:40px 0;"><i class="fas fa-tags" style="font-size:3rem; color:var(--sub);"></i><h3 style="margin:16px 0 8px;">No Coat Checked</h3><p style="color:var(--sub); font-size:0.8rem;">Check your coat at the front desk & scan the QR code to link your ticket.</p><button class="btn-secondary" onclick="simulateCoatDrop()">SIMULATE DROP-OFF</button></div>
+    </div>
+
+    <!-- AI CONCIERGE TAB -->
+    <div id="ai" class="view">
+        <div class="section-header">AI Concierge</div>
+        <p style="font-size:0.75rem; color:var(--sub); margin-bottom:12px;">Ask about venue hours, menu, restrooms, or coat check.</p>
+        <div class="chat-box"><div class="chat-history" id="chatHistory"><div class="msg bot">Welcome to Venue OS. I'm your virtual concierge. How can I assist you tonight?</div></div><div class="chat-input-area" style="padding:12px; border-top:1px solid var(--border); display:flex; gap:8px;"><input type="text" class="input-field" id="aiInput" placeholder="Message AI..." style="margin-bottom:0;"><button class="btn-primary" style="width:auto; padding:12px 20px;" onclick="sendAI()"><i class="fas fa-paper-plane"></i></button></div></div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('order',this)"><i class="fas fa-glass-martini-alt"></i>DRINKS</div>
+        <div class="nav-item" onclick="switchTab('vip',this)"><i class="fas fa-star"></i>VIP</div>
+        <div class="nav-item" onclick="switchTab('host',this)"><i class="fas fa-clipboard-list"></i>HOST</div>
+        <div class="nav-item" onclick="switchTab('dj',this)"><i class="fas fa-headphones"></i>DJ</div>
+        <div class="nav-item" onclick="switchTab('coat',this)"><i class="fas fa-tags"></i>COAT</div>
+        <div class="nav-item" onclick="switchTab('ai',this)"><i class="fas fa-robot"></i>AI</div>
+    </div>
+    <div class="cart-float" id="cartFloat" style="display:none;" onclick="openCartModal()"><i class="fas fa-shopping-cart"></i><div class="cart-badge" id="cartCount">0</div></div>
+</div>
+
+<!-- MODALS: Cart, Host, Bottle workflow, Guest, Promo, Blueprint, Coat Confirm, DJ Pay, Generic Host -->
+<div id="cartModal" class="modal"><div class="modal-box"><div class="m-head"><h2 class="m-title">YOUR TAB</h2><button class="m-close" onclick="closeModal('cartModal')">&times;</button></div><div class="m-body"><div id="cartItemsList"></div><div class="cart-total-line"><span>Subtotal</span><span id="cartSubtotal" style="color:var(--gold);">$0.00</span></div><div style="margin: 8px 0 4px; font-weight:600;">Select Gratuity</div><div class="tip-group"><div class="tip-btn" data-tip="15" onclick="selectTip(15, this)">15%</div><div class="tip-btn active" data-tip="18" onclick="selectTip(18, this)">18%</div><div class="tip-btn" data-tip="20" onclick="selectTip(20, this)">20%</div></div><div class="cart-total-line cart-grandtotal"><span>Total</span><span id="cartGrandTotal" style="color:var(--gold);">$0.00</span></div><button class="btn-primary" onclick="processCheckout()">PLACE ORDER</button></div></div></div>
+
+<div id="vipWorkflowModal" class="modal"><div class="modal-box"><div class="m-head"><h2 class="m-title">BOTTLE EXPERIENCE</h2><button class="m-close" onclick="closeModal('vipWorkflowModal')">&times;</button></div><div class="m-body"><div class="step-indicator"><div class="step-dot active" id="dot1">1</div><div class="step-dot" id="dot2">2</div><div class="step-dot" id="dot3">3</div></div><div id="step1"><h3>Select Presentation</h3><div class="select-card selected" onclick="selectPres(this, 'Sparkler Show', 0)"><span style="float:right;">Included</span><div class="select-card-title">Classic Sparkler</div><div style="font-size:0.75rem;">Standard bottle delivery with sparklers</div></div><div class="select-card" onclick="selectPres(this, 'LED Parade', 50)"><span style="float:right;">+$50</span><div class="select-card-title">LED Parade</div><div style="font-size:0.75rem;">Light show + host escort</div></div><div class="select-card" onclick="selectPres(this, 'Crown Effect', 150)"><span style="float:right;">+$150</span><div class="select-card-title">Crown Effect</div><div style="font-size:0.75rem;">Confetti, custom message, blackout</div></div><button class="btn-primary" style="margin-top:16px;" onclick="goToStep2()">Next: Select Bottles</button></div><div id="step2" style="display:none;"><h3>Select Bottles</h3><div style="margin-bottom:12px;"><div style="display:flex; justify-content:space-between;"><span>Casamigos Blanco</span><span>$350</span></div><div class="bottle-qty-control"><button class="qty-btn" onclick="updateQty('casa',-1)">-</button><span id="qty-casa">1</span><button class="qty-btn" onclick="updateQty('casa',1)">+</button></div></div><div style="margin-bottom:12px;"><div style="display:flex; justify-content:space-between;"><span>Hennessy VSOP</span><span>$400</span></div><div class="bottle-qty-control"><button class="qty-btn" onclick="updateQty('henny',-1)">-</button><span id="qty-henny">0</span><button class="qty-btn" onclick="updateQty('henny',1)">+</button></div></div><div><div style="display:flex; justify-content:space-between;"><span>Dom Perignon</span><span>$550</span></div><div class="bottle-qty-control"><button class="qty-btn" onclick="updateQty('dom',-1)">-</button><span id="qty-dom">0</span><button class="qty-btn" onclick="updateQty('dom',1)">+</button></div></div><div style="display:flex; gap:10px; margin-top:20px;"><button class="btn-secondary" onclick="backToStep1()">BACK</button><button class="btn-primary" onclick="goToStep3()">REVIEW</button></div></div><div id="step3" style="display:none;"><h3>Review Order</h3><div id="reviewSummary"></div><div style="display:flex; gap:10px; margin-top:20px;"><button class="btn-secondary" onclick="backToStep2()">BACK</button><button class="btn-primary" id="confirmBottleBtn" onclick="submitBottleOrder()">CONFIRM & SEND</button></div></div><div id="stepSuccess" style="display:none; text-align:center;"><i class="fas fa-check-circle" style="font-size:3rem; color:#2ecc71;"></i><h3>Order Sent</h3><p>Your host has been notified.</p><button class="btn-secondary" onclick="closeModal('vipWorkflowModal')">CLOSE</button></div></div></div></div>
+
+<div id="guestModal" class="modal"><div class="modal-box"><div class="m-head"><h2 class="m-title">Add Guest</h2><button class="m-close" onclick="closeModal('guestModal')">&times;</button></div><div class="m-body"><input class="input-field" id="guestNameInput" placeholder="Full name"><button class="btn-primary" onclick="processGuest()">ADD TO DOOR LIST</button></div></div></div>
+<div id="promoModal" class="modal"><div class="modal-box"><div class="m-head"><h2 class="m-title">Promo Generator</h2><button class="m-close" onclick="closeModal('promoModal')">&times;</button></div><div class="m-body" id="promoBody"><input class="input-field" placeholder="Event headline"><input class="input-field" placeholder="Special guest / DJ"><button class="btn-primary" onclick="generatePromo()">GENERATE FLYER</button></div></div></div>
+<div id="blueprintModal" class="modal"><div class="modal-box"><div class="m-head"><h2 class="m-title">Event Config</h2><button class="m-close" onclick="closeModal('blueprintModal')">&times;</button></div><div class="m-body"><select class="input-field" id="bpType"><option>Club Night</option><option>Birthday</option><option>Corporate</option></select><input class="input-field" id="bpPrice" placeholder="Door price" value="25"><select class="input-field" id="bpAV"><option>In-House DJ</option><option>Bringing Own DJ</option><option>Live Band</option></select><button class="btn-primary" id="bpBtn" onclick="processBlueprint()">SAVE & SYNC</button></div></div></div>
+<div id="coatConfirmModal" class="modal"><div class="modal-box"><div class="m-head"><h2 class="m-title">Retrieve Coat</h2><button class="m-close" onclick="closeModal('coatConfirmModal')">&times;</button></div><div class="m-body" id="coatConfirmBody"><i class="fas fa-walking" style="font-size:2rem;"></i><p style="margin:12px 0;">Alert attendant to pull ticket #042?</p><button class="btn-primary" onclick="processCoat()">YES, PULL COAT</button><button class="btn-secondary" onclick="closeModal('coatConfirmModal')">CANCEL</button></div></div></div>
+<div id="djPayModal" class="modal"><div class="modal-box"><div class="m-head"><h2 id="djModalTitle" class="m-title">Confirm</h2><button class="m-close" onclick="closeModal('djPayModal')">&times;</button></div><div class="m-body"><div id="djReviewContent" style="background:var(--bg); padding:12px; border-radius:var(--radius); margin-bottom:16px;"></div><div id="djBtnContainer"><button class="btn-primary" onclick="processDJ()">AUTHORIZE</button></div></div></div></div>
+<div id="genericHostModal" class="modal"><div class="modal-box"><div class="m-head"><h2 class="m-title">Host System</h2><button class="m-close" onclick="closeModal('genericHostModal')">&times;</button></div><div class="m-body" id="hostModalMsg"></div></div></div>
+
+<script>
+    let cart = [], cartTotal = 0, currentTipPct = 18, pendingDjAmt = 0;
+    let orderState = { presentation: 'Sparkler Show', presFee: 0, bottles: { casa: { name: 'Casamigos Blanco', price: 350, qty: 1 }, henny: { name: 'Hennessy VSOP', price: 400, qty: 0 }, dom: { name: 'Dom Perignon', price: 550, qty: 0 } } };
+    
+    function toast(msg){ let t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300)},2000);}
+    function switchTab(id,el){ document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active')); document.getElementById(id).classList.add('active'); if(el){ el.classList.add('active'); let idx=Array.from(document.querySelectorAll('.tab')).indexOf(el); if(idx!==-1) document.querySelectorAll('.nav-item')[idx].classList.add('active'); } }
+    function openModal(id){document.getElementById(id).style.display='flex';} function closeModal(id){document.getElementById(id).style.display='none';}
+    
+    function addToCart(name,price){ cart.push({name,price}); cartTotal+=price; document.getElementById('cartFloat').style.display='flex'; document.getElementById('cartCount').textContent=cart.length; toast(`Added ${name}`); }
+    
+    function selectTip(pct, element) {
+        currentTipPct = pct;
+        // Update UI active state
+        document.querySelectorAll('.tip-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.style.background = 'var(--bg)';
+            btn.style.borderColor = 'var(--border)';
+            btn.style.color = '#fff';
+        });
+        element.classList.add('active');
+        element.style.background = 'rgba(212,175,55,0.15)';
+        element.style.borderColor = 'var(--gold)';
+        element.style.color = 'var(--gold)';
+        // Recalculate totals if cart modal is open
+        updateCartTotals();
+    }
+    
+    function updateCartTotals(){
+        let subtotal = cartTotal;
+        let tip = subtotal * (currentTipPct / 100);
+        let grand = subtotal + tip;
+        document.getElementById('cartSubtotal').textContent = '$' + subtotal.toFixed(2);
+        document.getElementById('cartGrandTotal').textContent = '$' + grand.toFixed(2);
+    }
+    
+    function openCartModal(){
+        if(cart.length === 0) return toast("Your tab is empty");
+        let html = '';
+        cart.forEach(item => { html += `<div class="cart-item-row"><span>${item.name}</span><span>$${item.price.toFixed(2)}</span></div>`; });
+        document.getElementById('cartItemsList').innerHTML = html;
+        updateCartTotals();
+        // ensure the active tip button reflects currentTipPct
+        document.querySelectorAll('.tip-btn').forEach(btn => {
+            if(parseInt(btn.getAttribute('data-tip')) === currentTipPct) {
+                btn.classList.add('active');
+                btn.style.background = 'rgba(212,175,55,0.15)';
+                btn.style.borderColor = 'var(--gold)';
+                btn.style.color = 'var(--gold)';
+            } else {
+                btn.classList.remove('active');
+                btn.style.background = 'var(--bg)';
+                btn.style.borderColor = 'var(--border)';
+                btn.style.color = '#fff';
+            }
+        });
+        openModal('cartModal');
+    }
+    
+    function processCheckout(){
+        let btn = document.querySelector('#cartModal .btn-primary');
+        let originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ROUTING...';
+        setTimeout(()=>{
+            toast("Order placed! Drinks on the way.");
+            closeModal('cartModal');
+            cart = [];
+            cartTotal = 0;
+            document.getElementById('cartFloat').style.display = 'none';
+            btn.innerHTML = originalText;
+        }, 1200);
+    }
+    
+    function triggerHostAction(title,msg){ document.getElementById('hostModalMsg').innerHTML=`<h3 style="color:var(--gold);">${title}</h3><p style="margin-top:8px;">${msg}</p><button class="btn-secondary" style="margin-top:16px;" onclick="closeModal('genericHostModal')">OK</button>`; openModal('genericHostModal'); }
+    function startVipWorkflow(){ document.getElementById('step1').style.display='block'; document.getElementById('step2').style.display='none'; document.getElementById('step3').style.display='none'; document.getElementById('stepSuccess').style.display='none'; document.getElementById('dot1').className='step-dot active'; document.getElementById('dot2').className='step-dot'; document.getElementById('dot3').className='step-dot'; openModal('vipWorkflowModal'); }
+    function selectPres(el,name,fee){ document.querySelectorAll('.select-card').forEach(c=>c.classList.remove('selected')); el.classList.add('selected'); orderState.presentation=name; orderState.presFee=fee; }
+    function goToStep2(){ document.getElementById('step1').style.display='none'; document.getElementById('step2').style.display='block'; document.getElementById('dot1').className='step-dot completed'; document.getElementById('dot2').className='step-dot active'; }
+    function backToStep1(){ document.getElementById('step2').style.display='none'; document.getElementById('step1').style.display='block'; document.getElementById('dot2').className='step-dot'; document.getElementById('dot1').className='step-dot active'; }
+    function updateQty(bottle,change){ let newQty=orderState.bottles[bottle].qty+change; if(newQty>=0){ orderState.bottles[bottle].qty=newQty; document.getElementById(`qty-${bottle}`).textContent=newQty; } }
+    function goToStep3(){ let totalBottles=Object.values(orderState.bottles).reduce((s,b)=>s+b.qty,0); if(totalBottles===0){ toast("Select at least one bottle"); return; } let html=''; let bottleSum=0; for(let b of Object.values(orderState.bottles)){ if(b.qty>0){ let row=b.qty*b.price; bottleSum+=row; html+=`<div>${b.qty}x ${b.name} - $${row}</div>`; } } html+=`<hr><div><strong>Total: $${orderState.presFee+bottleSum}</strong></div>`; document.getElementById('reviewSummary').innerHTML=`<div><strong>Presentation:</strong> ${orderState.presentation} (+$${orderState.presFee})</div>${html}`; document.getElementById('step2').style.display='none'; document.getElementById('step3').style.display='block'; document.getElementById('dot2').className='step-dot completed'; document.getElementById('dot3').className='step-dot active'; }
+    function backToStep2(){ document.getElementById('step3').style.display='none'; document.getElementById('step2').style.display='block'; document.getElementById('dot3').className='step-dot'; document.getElementById('dot2').className='step-dot active'; }
+    function submitBottleOrder(){ let btn=document.getElementById('confirmBottleBtn'); btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> SENDING...'; setTimeout(()=>{ document.querySelector('.step-indicator').style.display='none'; document.getElementById('step3').style.display='none'; document.getElementById('stepSuccess').style.display='block'; btn.innerHTML='CONFIRM & SEND'; },1200); }
+    function processGuest(){ let name=document.getElementById('guestNameInput').value.trim(); if(!name)return; toast(`Added ${name} to door list`); closeModal('guestModal'); document.getElementById('guestNameInput').value=''; }
+    function generatePromo(){ let body=document.getElementById('promoBody'); body.innerHTML='<div style="text-align:center;"><i class="fas fa-spinner fa-spin"></i> Generating assets...</div>'; setTimeout(()=>{ body.innerHTML='<i class="fas fa-check-circle" style="color:#2ecc71;"></i><p>Flyer ready! Download link sent.</p><button class="btn-secondary" onclick="closeModal(\'promoModal\')">CLOSE</button>'; },1500); }
+    function processBlueprint(){ let price=document.getElementById('bpPrice').value; let av=document.getElementById('bpAV').value; document.getElementById('dashDoorPrice').textContent='$'+parseFloat(price).toFixed(2); document.getElementById('dashAV').textContent=av; toast('Event config synced'); closeModal('blueprintModal'); }
+    function simulateCoatDrop(){ document.getElementById('coatEmptyState').style.display='none'; document.getElementById('coatActiveState').style.display='block'; toast('Coat checked! Ticket #042 linked'); }
+    function processCoat(){ let body=document.getElementById('coatConfirmBody'); body.innerHTML='<i class="fas fa-spinner fa-spin"></i> Alerting attendant...'; setTimeout(()=>{ body.innerHTML='<i class="fas fa-check-circle" style="color:#2ecc71;"></i><p>Coat ready at front desk.</p><button class="btn-secondary" onclick="closeModal(\'coatConfirmModal\'); document.getElementById(\'coatActiveState\').style.display=\'none\'; document.getElementById(\'coatEmptyState\').style.display=\'block\';">CLOSE</button>'; },1500); }
+    function selectDjTip(amt,el){ let parent=el.parentNode.children; for(let c of parent)c.style.borderColor='var(--border)'; el.style.borderColor='var(--neon-purple)'; pendingDjAmt=amt; }
+    function payDJFlow(type){ if(type==='shoutout' && !document.getElementById('djText').value.trim()){ toast('Enter a shoutout'); return; } let content=type==='shoutout'?`"${document.getElementById('djText').value}" <br><span style="color:var(--gold);">$5.00</span>`:`Tip $${pendingDjAmt}`; document.getElementById('djReviewContent').innerHTML=content; document.getElementById('djModalTitle').textContent=type==='shoutout'?'Shoutout Confirmation':'Tip DJ'; openModal('djPayModal'); }
+    function processDJ(){ let btnContainer=document.getElementById('djBtnContainer'); btnContainer.innerHTML='<button class="btn-primary" disabled><i class="fas fa-spinner fa-spin"></i> PROCESSING</button>'; setTimeout(()=>{ closeModal('djPayModal'); toast('Completed!'); document.getElementById('djText').value=''; btnContainer.innerHTML='<button class="btn-primary" onclick="processDJ()">AUTHORIZE</button>'; },1200); }
+    function sendAI(){ let input=document.getElementById('aiInput'); let txt=input.value.trim(); if(!txt)return; let hist=document.getElementById('chatHistory'); let uMsg=document.createElement('div'); uMsg.className='msg user'; uMsg.textContent=txt; hist.appendChild(uMsg); input.value=''; hist.scrollTop=hist.scrollHeight; setTimeout(()=>{ let bMsg=document.createElement('div'); bMsg.className='msg bot'; let lower=txt.toLowerCase(); if(lower.includes('kitchen')||lower.includes('food')) bMsg.textContent='Kitchen open until 1 AM, you can order from the DRINKS tab for late-night bites.'; else if(lower.includes('restroom')||lower.includes('bathroom')) bMsg.textContent='Restrooms located near the main bar area, past the VIP section.'; else if(lower.includes('coat')) bMsg.textContent='Your digital coat check is in the COAT tab. Drop off at front desk and we’ll store it securely.'; else bMsg.textContent='I’ll have a host come to your table to assist with that request.'; hist.appendChild(bMsg); hist.scrollTop=hist.scrollHeight; },700); }
+</script>
+</body>
+</html>
