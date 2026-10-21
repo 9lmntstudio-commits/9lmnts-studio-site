@@ -16,3 +16,4 @@ antigravity-backup/
 .vscode/
 .idea/
 Thumbs.db
+.netlify/
