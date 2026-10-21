@@ -1,4 +1,17 @@
-# 9LMNTS Studio Clean Routing Rules
+
+# 9LMNTS Studio Clean URL Redirects
+/admin           /admin/index.html    200
+/admin/          /admin/index.html    200
+/services        /services/index.html 200
+/work            /work/index.html     200
+/embeds          /embeds/index.html   200
+/audit           /audit/index.html    200
+/process         /process/index.html  200
+/about           /about/index.html    200
+/contact         /contact/index.html  200
+/start           /start/index.html    200
+/portal          /start/index.html    200
+/faq             /faq/index.html      200
 /demo            /demo-client.html    200
 /chef            /demo-client.html    200
 /workerbee       /workerbee.html      200

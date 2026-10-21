@@ -2452,6 +2452,8 @@ fs.writeFileSync(path.join(OUT, '_redirects'), `
 /darnley         /darnley.html        200
 /clothing        /darnley.html        200
 /brand           /darnley.html        200
+/runway          /04_Runway_OS_Fashion_Battle.html 200
+/fashion         /04_Runway_OS_Fashion_Battle.html 200
 /embed.js        /embed/intake.js     200
 /intake.js       /embed/intake.js     200
 `, 'utf8');
