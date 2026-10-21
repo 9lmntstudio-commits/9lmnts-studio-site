@@ -40,10 +40,22 @@ export const CARE = [
 
 const NAV = [
   ['/services/', 'Services'],
-  ['/work/', 'Work'],
+  ['/work/', 'Work & OS'],
   ['/process/', 'Process'],
   ['/about/', 'About'],
   ['/contact/', 'Contact'],
+];
+
+const STATIONS = [
+  { num: '01', title: 'Project LOA Universe', tag: 'UE 5.7 · Anime Action RPG', desc: '3026 Neo-Ottawa cyber-industrial dystopia. Damian Kane mastering Blink-Strike mechanics against corrupted AI entity LOA.', href: '/darnley.html' },
+  { num: '02', title: 'Original Audio Vault', tag: 'Lossless Multitrack Stems', desc: 'High-fidelity audio deck with real-time waveform visualizers, Suno original productions, and stem sync licensing.', href: '/demos/sound-clash-arena.html' },
+  { num: '03', title: 'Productized Agency Sprints', tag: '7-Day Turnkey MVP', desc: 'Websites that book customers for you. Launch Page ($1,800), Growth Website ($4,500 ⭐), Signature System ($8,500).', href: '/services/' },
+  { num: '04', title: 'AI Voice & ManyChat CRM', tag: 'Gemini Live · Zero Latency', desc: 'Autonomous bidirectional voice receptionist trained on 9LMNTS services, instant quote dispatch, and SMS/DM keyword funnels.', href: '/demos/event-revenue-dashboard.html' },
+  { num: '05', title: 'Event OS Universal Showcase', tag: 'Dual-Telemetry Engine', desc: 'Full-stack tournament infrastructure syncing Mobile Spectator Arena with Organizer Jumbotron Sync via WebSockets.', href: '/demos/sound-clash-arena.html' },
+  { num: '06', title: 'The Helm / Darnley Sanon', tag: 'Creative Director Dossier', desc: 'Decade-long design standard combining Hip-Hop culture with AI automation. Access to protected /admin operator portal.', href: '/admin/' },
+  { num: '07', title: 'Sound Clash OS Arena', tag: '8-Contender Live Bracket', desc: 'Head-to-head live DJ battle engine with dynamic crowd vote meters, QR tipping jars, and automated 70/30 pot surges.', href: '/demos/sound-clash-arena.html' },
+  { num: '08', title: 'January 2027 Double-Header', tag: 'Lansdowne & 70 Bongard', desc: 'Night 1: DARNLEY Runway OS (500 seated). Night 2: Corporate Clash / Pitch OS (250 investors). Powered by Worker Bee OS.', href: '/darnley.html' },
+  { num: '09', title: 'Artist OS Creator HQ', tag: 'Commission-Free Platform', desc: '24/7 sovereign digital platform for recording artists, WAV stem licensing, direct fan tipping, and automated yield ledgers.', href: '/workerbee.html' },
 ];
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -53,6 +65,17 @@ export function layout({ path, title, description, body, noindex = false }) {
   const canonical = SITE.url + path;
   const nav = NAV.map(([href, label]) =>
     `<li><a href="${href}"${path.startsWith(href) ? ' aria-current="page"' : ''}>${label}</a></li>`).join('');
+  const stationsList = STATIONS.map(s => `
+    <a class="station-card" href="${s.href}">
+      <div class="station-top">
+        <span class="station-num">${s.num}</span>
+        <span class="station-tag">${esc(s.tag)}</span>
+      </div>
+      <h4>${esc(s.title)}</h4>
+      <p>${esc(s.desc)}</p>
+      <span class="station-cta">Explore Station <span class="arrow">↗</span></span>
+    </a>
+  `).join('');
   const schema = path === '/' ? `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org', '@type': 'ProfessionalService', name: SITE.name, alternateName: 'Nine Elements Studio',
     url: SITE.url, email: SITE.email, image: SITE.url + '/assets/mockup-devices.jpg', logo: SITE.url + '/assets/logo.png',
@@ -91,12 +114,34 @@ ${schema}
     <a class="nav-logo" href="/" aria-label="9LMNTS Studio home"><img src="/assets/logo.png" alt="9LMNTS Studio" width="120" height="34"></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <ul class="nav-links" id="nav-links">${nav}</ul>
-    <a class="btn btn-primary btn-pill desktop" href="/contact/">Start a Sprint <span class="arrow">↗</span></a>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-stations" id="stationsToggle" aria-haspopup="dialog" aria-expanded="false"><span class="pulse-dot"></span> <span class="desktop-inline">Stations</span> 01–09</button>
+      <a class="btn btn-primary btn-pill desktop" href="/contact/">Start a Sprint <span class="arrow">↗</span></a>
+    </div>
   </nav>
 </div>
 <main id="main">
 ${body}
 </main>
+<div class="drawer-backdrop" id="stationsBackdrop" aria-hidden="true"></div>
+<aside class="stations-drawer" id="stationsDrawer" role="dialog" aria-modal="true" aria-label="9LMNTS Studio Hotspot Stations">
+  <div class="drawer-header">
+    <div>
+      <span class="eyebrow" style="margin:0"><span class="dot"></span> NotebookLM Master Architecture</span>
+      <h3>9 Hotspot Stations</h3>
+    </div>
+    <button class="drawer-close" id="stationsClose" aria-label="Close stations drawer">✕</button>
+  </div>
+  <div class="drawer-body">
+    ${stationsList}
+  </div>
+  <div class="drawer-footer">
+    <div class="drawer-meta">
+      <span class="mono" style="font-size:11px">📍 Ottawa, ON · Desjardins Rail</span>
+      <a class="btn btn-primary btn-sm" href="/contact/">Book Diagnostic Call <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</aside>
 <footer class="site-footer">
   <div class="container">
     <div class="foot-grid">

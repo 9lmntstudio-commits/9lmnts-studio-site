@@ -4,6 +4,10 @@
 /admin/          /admin/index.html    200
 /services        /services/index.html 200
 /work            /work/index.html     200
+/os              /work/index.html     200
+/portfolio       /work/index.html     200
+/lab             /work/index.html     200
+/reverse         /work/index.html     200
 /embeds          /embeds/index.html   200
 /audit           /audit/index.html    200
 /process         /process/index.html  200

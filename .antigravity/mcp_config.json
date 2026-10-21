@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "stitch": {
+      "command": "npx",
+      "args": ["-y", "@google/stitch-mcp"],
+      "env": {
+        "STITCH_API_KEY": "${STITCH_API_KEY}"
+      }
+    },
+    "notebooklm": {
+      "command": "npx",
+      "args": ["-y", "@google/notebooklm-mcp"],
+      "env": {
+        "NOTEBOOKLM_API_KEY": "${NOTEBOOKLM_API_KEY}"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    }
+  }
+}

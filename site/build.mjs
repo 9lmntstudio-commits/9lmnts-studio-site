@@ -203,6 +203,105 @@ const homeHtml = layout({
     </div>
   </div></section>
 
+  <!-- ⚡ REVERSE-ENGINEER ANYTHING & AI LAB -->
+  <section class="section border-top" id="reverse-lab" style="position:relative;background:radial-gradient(ellipse at 50% 0%, rgba(255,85,0,0.15), transparent 70%), #08090C">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Autonomous Software Cloning &amp; AI Integration</span>
+          <h2>Reverse-Engineer Anything.<br><span class="accent">From GitHub Repo &amp; Hugging Face to Live System in 7 Days.</span></h2>
+        </div>
+        <p>You find an open-source model on Hugging Face, a complex GitHub repository, or a competitor site. We deconstruct the architecture, extract the design tokens, and build a sovereign, zero-bloat web platform tailored to your brand.</p>
+      </div>
+
+      <!-- 3-Pillar Reverse Engineering Bento Grid -->
+      <div class="grid g3">
+        <!-- Pillar 1: GitHub Repo Cloning & Deconstruction -->
+        <article class="card reveal" style="border-color:rgba(255,85,0,0.25)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <span class="num-tag">01 / GITHUB REPOS</span>
+            <span class="badge">Architecture Cloning</span>
+          </div>
+          <h3>Full-Stack Repo Deconstruction</h3>
+          <p>Shallow-clone open-source repositories, analyze AST, isolate data schemas, and strip bloat into lightweight Supabase Edge Functions and clean frontend Bento cards.</p>
+          <ul class="check">
+            <li>Prisma / Drizzle → PostgreSQL schemas</li>
+            <li>Complex Next.js → Zero-bloat static compilation</li>
+            <li>API handlers → Serverless webhooks &amp; Deno edge</li>
+          </ul>
+          <div class="meta" style="margin-top:16px"><span class="badge green">● Automated Ingestion Pipeline</span></div>
+        </article>
+
+        <!-- Pillar 2: Hugging Face Spaces & Models Extraction -->
+        <article class="card reveal" style="border-color:rgba(0,240,255,0.25)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <span class="num-tag">02 / HUGGING FACE</span>
+            <span class="badge neutral" style="color:#00F0FF;border-color:rgba(0,240,255,0.3)">AI Pipeline Extraction</span>
+          </div>
+          <h3>Hugging Face Model &amp; Space Adapters</h3>
+          <p>Translate Gradio/Streamlit apps and raw PyTorch inference pipelines into instant client-facing web widgets with sub-second response times.</p>
+          <ul class="check">
+            <li>Whisper &amp; Kokoro TTS speech streaming</li>
+            <li>RMBG background removal &amp; computer vision</li>
+            <li>Diffusers &amp; FLUX image synthesis pipelines</li>
+          </ul>
+          <div class="meta" style="margin-top:16px"><span class="badge neutral">● Serverless Edge Webhooks</span></div>
+        </article>
+
+        <!-- Pillar 3: Web Scraper & DESIGN.md Synthesis -->
+        <article class="card reveal" style="border-color:rgba(255,255,255,0.2)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <span class="num-tag">03 / WEB SCRAPER</span>
+            <span class="badge">DESIGN.md Synthesis</span>
+          </div>
+          <h3>UI/UX Reverse-Engineering</h3>
+          <p>Scrape computed styles, typography hierarchies, and responsive bento grid dimensions. Generate machine-readable DESIGN.md specifications adhering to Apple HIG.</p>
+          <ul class="check">
+            <li>60-30-10 color architecture extraction</li>
+            <li>100% authentic dish &amp; product scraping</li>
+            <li>Google Stitch MCP &amp; Antigravity sync</li>
+          </ul>
+          <div class="meta" style="margin-top:16px"><span class="badge neutral">● Apple HIG Standard</span></div>
+        </article>
+      </div>
+
+      <!-- Interactive Cloner Terminal Simulator -->
+      <div class="card reveal" style="margin-top:32px;background:rgba(12,14,20,0.9);border:1px solid rgba(255,85,0,0.3);padding:28px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="dot" style="background:#FF5500;box-shadow:0 0 10px #FF5500"></span>
+            <span class="mono" style="font-weight:700;color:#fff;font-size:13px">9LMNTS REVERSE-ENGINEERING ENGINE // LIVE SIMULATOR</span>
+          </div>
+          <span class="badge green">● Ready to Clone</span>
+        </div>
+        <p style="font-size:0.95rem;max-width:700px;margin-bottom:20px">Test the engine: choose a template below or enter a repository to see the 9LMNTS reverse-engineering pipeline synthesize the target into a production architecture.</p>
+        
+        <div class="cloner-preset-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:12px;margin-bottom:20px">
+          <button class="btn btn-ghost cloner-btn" style="text-align:left;padding:12px 14px;font-size:12px" data-sample="hf-tts">
+            <span class="mono accent" style="display:block;font-size:10px">HUGGING FACE</span>
+            <b>Kokoro TTS / Whisper Audio</b>
+          </button>
+          <button class="btn btn-ghost cloner-btn" style="text-align:left;padding:12px 14px;font-size:12px" data-sample="gh-booking">
+            <span class="mono accent" style="display:block;font-size:10px">GITHUB REPO</span>
+            <b>Cal.com / Supabase Booking</b>
+          </button>
+          <button class="btn btn-ghost cloner-btn" style="text-align:left;padding:12px 14px;font-size:12px" data-sample="web-catering">
+            <span class="mono accent" style="display:block;font-size:10px">WEB SCRAPER</span>
+            <b>Luxury Catering / Chef OS</b>
+          </button>
+          <button class="btn btn-ghost cloner-btn" style="text-align:left;padding:12px 14px;font-size:12px" data-sample="gh-clash">
+            <span class="mono accent" style="display:block;font-size:10px">BRACKET OS</span>
+            <b>8-Contender Sound Clash</b>
+          </button>
+        </div>
+
+        <div id="clonerOutput" class="mono" style="background:#07080B;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px;font-size:12px;color:#A3A09A;line-height:1.6">
+          <span style="color:#FF5500">&gt; 9lmnts-cli --reverse-engineer --status:</span> Ready for input. Select a preset above or run <span style="color:#fff">node scripts/reverse-engineer.js --help</span> in terminal.
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Wedding & Reception OS (Romeo & Juliet Guest Experience) -->
   <section class="section border-top" style="position:relative;background:linear-gradient(180deg, #090B0F 0%, #12141C 100%)">
     <div class="container">
@@ -2434,6 +2533,10 @@ fs.writeFileSync(path.join(OUT, '_redirects'), `
 /admin/          /admin/index.html    200
 /services        /services/index.html 200
 /work            /work/index.html     200
+/os              /work/index.html     200
+/portfolio       /work/index.html     200
+/lab             /work/index.html     200
+/reverse         /work/index.html     200
 /embeds          /embeds/index.html   200
 /audit           /audit/index.html    200
 /process         /process/index.html  200

@@ -28,8 +28,11 @@
   <nav class="nav" aria-label="Main">
     <a class="nav-logo" href="/" aria-label="9LMNTS Studio home"><img src="/assets/logo.png" alt="9LMNTS Studio" width="120" height="34"></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
-    <ul class="nav-links" id="nav-links"><li><a href="/services/" aria-current="page">Services</a></li><li><a href="/work/">Work</a></li><li><a href="/process/">Process</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul>
-    <a class="btn btn-primary btn-pill desktop" href="/contact/">Start a Sprint <span class="arrow">↗</span></a>
+    <ul class="nav-links" id="nav-links"><li><a href="/services/" aria-current="page">Services</a></li><li><a href="/work/">Work & OS</a></li><li><a href="/process/">Process</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-stations" id="stationsToggle" aria-haspopup="dialog" aria-expanded="false"><span class="pulse-dot"></span> <span class="desktop-inline">Stations</span> 01–09</button>
+      <a class="btn btn-primary btn-pill desktop" href="/contact/">Start a Sprint <span class="arrow">↗</span></a>
+    </div>
   </nav>
 </div>
 <main id="main">
@@ -215,6 +218,115 @@
 </div></div></section>
   
 </main>
+<div class="drawer-backdrop" id="stationsBackdrop" aria-hidden="true"></div>
+<aside class="stations-drawer" id="stationsDrawer" role="dialog" aria-modal="true" aria-label="9LMNTS Studio Hotspot Stations">
+  <div class="drawer-header">
+    <div>
+      <span class="eyebrow" style="margin:0"><span class="dot"></span> NotebookLM Master Architecture</span>
+      <h3>9 Hotspot Stations</h3>
+    </div>
+    <button class="drawer-close" id="stationsClose" aria-label="Close stations drawer">✕</button>
+  </div>
+  <div class="drawer-body">
+    
+    <a class="station-card" href="/darnley.html">
+      <div class="station-top">
+        <span class="station-num">01</span>
+        <span class="station-tag">UE 5.7 · Anime Action RPG</span>
+      </div>
+      <h4>Project LOA Universe</h4>
+      <p>3026 Neo-Ottawa cyber-industrial dystopia. Damian Kane mastering Blink-Strike mechanics against corrupted AI entity LOA.</p>
+      <span class="station-cta">Explore Station <span class="arrow">↗</span></span>
+    </a>
+  
+    <a class="station-card" href="/demos/sound-clash-arena.html">
+      <div class="station-top">
+        <span class="station-num">02</span>
+        <span class="station-tag">Lossless Multitrack Stems</span>
+      </div>
+      <h4>Original Audio Vault</h4>
+      <p>High-fidelity audio deck with real-time waveform visualizers, Suno original productions, and stem sync licensing.</p>
+      <span class="station-cta">Explore Station <span class="arrow">↗</span></span>
+    </a>
+  
+    <a class="station-card" href="/services/">
+      <div class="station-top">
+        <span class="station-num">03</span>
+        <span class="station-tag">7-Day Turnkey MVP</span>
+      </div>
+      <h4>Productized Agency Sprints</h4>
+      <p>Websites that book customers for you. Launch Page ($1,800), Growth Website ($4,500 ⭐), Signature System ($8,500).</p>
+      <span class="station-cta">Explore Station <span class="arrow">↗</span></span>
+    </a>
+  
+    <a class="station-card" href="/demos/event-revenue-dashboard.html">
+      <div class="station-top">
+        <span class="station-num">04</span>
+        <span class="station-tag">Gemini Live · Zero Latency</span>
+      </div>
+      <h4>AI Voice &amp; ManyChat CRM</h4>
+      <p>Autonomous bidirectional voice receptionist trained on 9LMNTS services, instant quote dispatch, and SMS/DM keyword funnels.</p>
+      <span class="station-cta">Explore Station <span class="arrow">↗</span></span>
+    </a>
+  
+    <a class="station-card" href="/demos/sound-clash-arena.html">
+      <div class="station-top">
+        <span class="station-num">05</span>
+        <span class="station-tag">Dual-Telemetry Engine</span>
+      </div>
+      <h4>Event OS Universal Showcase</h4>
+      <p>Full-stack tournament infrastructure syncing Mobile Spectator Arena with Organizer Jumbotron Sync via WebSockets.</p>
+      <span class="station-cta">Explore Station <span class="arrow">↗</span></span>
+    </a>
+  
+    <a class="station-card" href="/admin/">
+      <div class="station-top">
+        <span class="station-num">06</span>
+        <span class="station-tag">Creative Director Dossier</span>
+      </div>
+      <h4>The Helm / Darnley Sanon</h4>
+      <p>Decade-long design standard combining Hip-Hop culture with AI automation. Access to protected /admin operator portal.</p>
+      <span class="station-cta">Explore Station <span class="arrow">↗</span></span>
+    </a>
+  
+    <a class="station-card" href="/demos/sound-clash-arena.html">
+      <div class="station-top">
+        <span class="station-num">07</span>
+        <span class="station-tag">8-Contender Live Bracket</span>
+      </div>
+      <h4>Sound Clash OS Arena</h4>
+      <p>Head-to-head live DJ battle engine with dynamic crowd vote meters, QR tipping jars, and automated 70/30 pot surges.</p>
+      <span class="station-cta">Explore Station <span class="arrow">↗</span></span>
+    </a>
+  
+    <a class="station-card" href="/darnley.html">
+      <div class="station-top">
+        <span class="station-num">08</span>
+        <span class="station-tag">Lansdowne &amp; 70 Bongard</span>
+      </div>
+      <h4>January 2027 Double-Header</h4>
+      <p>Night 1: DARNLEY Runway OS (500 seated). Night 2: Corporate Clash / Pitch OS (250 investors). Powered by Worker Bee OS.</p>
+      <span class="station-cta">Explore Station <span class="arrow">↗</span></span>
+    </a>
+  
+    <a class="station-card" href="/workerbee.html">
+      <div class="station-top">
+        <span class="station-num">09</span>
+        <span class="station-tag">Commission-Free Platform</span>
+      </div>
+      <h4>Artist OS Creator HQ</h4>
+      <p>24/7 sovereign digital platform for recording artists, WAV stem licensing, direct fan tipping, and automated yield ledgers.</p>
+      <span class="station-cta">Explore Station <span class="arrow">↗</span></span>
+    </a>
+  
+  </div>
+  <div class="drawer-footer">
+    <div class="drawer-meta">
+      <span class="mono" style="font-size:11px">📍 Ottawa, ON · Desjardins Rail</span>
+      <a class="btn btn-primary btn-sm" href="/contact/">Book Diagnostic Call <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</aside>
 <footer class="site-footer">
   <div class="container">
     <div class="foot-grid">

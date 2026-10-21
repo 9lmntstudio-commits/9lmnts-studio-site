@@ -1,0 +1,16 @@
+{
+  "name": "9lmnts-studio-site",
+  "version": "2.0.0",
+  "private": true,
+  "description": "9LMNTS Studio — Production Website, Client Intake Engine & Spatial OS Suite",
+  "type": "module",
+  "scripts": {
+    "build": "node site/build.mjs",
+    "redesign": "bash scripts/redesign-pipeline.sh",
+    "reverse": "node scripts/reverse-engineer.js",
+    "vault:snapshot": "node antigravity-vault.js snapshot --label manual",
+    "vault:list": "node antigravity-vault.js list"
+  },
+  "author": "Darnley Sanon <9lmntstudio@gmail.com>",
+  "license": "UNLICENSED"
+}
