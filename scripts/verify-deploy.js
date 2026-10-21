@@ -1,21 +1,34 @@
 import https from 'node:https';
 
-https.get('https://9lmntsstudio.com', (res) => {
-  console.log('Status Code:', res.statusCode);
-  console.log('Server:', res.headers['server']);
-  console.log('Content-Type:', res.headers['content-type']);
-  console.log('ETag:', res.headers['etag']);
-  console.log('Age:', res.headers['age']);
-  console.log('X-NF-Request-ID:', res.headers['x-nf-request-id']);
-  
-  let data = '';
-  res.on('data', chunk => { data += chunk; });
-  res.on('end', () => {
-    console.log('Body length:', data.length);
-    console.log('Has stationsDrawer:', data.includes('stationsDrawer'));
-    console.log('Has Reverse-Engineer Simulator:', data.includes('clonerTerminalOutput') || data.includes('Reverse-Engineer'));
-    console.log('Title match:', data.match(/<title>([^<]+)<\/title>/)?.[1]);
+function checkUrl(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      let data = '';
+      res.on('data', chunk => { data += chunk; });
+      res.on('end', () => {
+        resolve({
+          url,
+          statusCode: res.statusCode,
+          server: res.headers['server'],
+          etag: res.headers['etag'],
+          length: data.length,
+          title: data.match(/<title>([^<]+)<\/title>/)?.[1],
+          hasTriage: data.includes('triageForm'),
+          hasWaveform: data.includes('waveform-box') || data.includes('wave-bar'),
+          hasInterac: data.includes('payments@9lmntsstudio.com')
+        });
+      });
+    }).on('error', reject);
   });
-}).on('error', (e) => {
-  console.error('Error fetching URL:', e.message);
-});
+}
+
+async function run() {
+  console.log('Testing Netlify Edge for 9LMNTS Studio...');
+  const home = await checkUrl('https://9lmntsstudio.com/');
+  console.log('\n[Home /]:', home);
+
+  const os = await checkUrl('https://9lmntsstudio.com/os/');
+  console.log('\n[OS Gateway /os/]:', os);
+}
+
+run().catch(console.error);

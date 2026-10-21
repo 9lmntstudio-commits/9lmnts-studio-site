@@ -17,3 +17,4 @@ antigravity-backup/
 .idea/
 Thumbs.db
 .netlify/
+_deploy_staging/
