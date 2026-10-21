@@ -8,8 +8,9 @@
     "build": "node site/build.mjs",
     "redesign": "bash scripts/redesign-pipeline.sh",
     "reverse": "node scripts/reverse-engineer.js",
-    "vault:snapshot": "node antigravity-vault.js snapshot --label manual",
-    "vault:list": "node antigravity-vault.js list"
+    "webhook": "node scripts/os_system_cta_webhook.js",
+    "vault:snapshot": "node antigravity-vault.cjs snapshot --label manual",
+    "vault:list": "node antigravity-vault.cjs list"
   },
   "author": "Darnley Sanon <9lmntstudio@gmail.com>",
   "license": "UNLICENSED"

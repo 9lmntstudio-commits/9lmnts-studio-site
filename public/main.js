@@ -114,6 +114,95 @@
     });
   });
 
+  // 9LMNTS Studio OS Triage & Audit Engine (/os/)
+  const triageForm = document.getElementById('triageForm');
+  const triageResult = document.getElementById('triageResult');
+  const triageOptions = document.querySelectorAll('.triage-option');
+
+  if (triageForm && triageResult) {
+    const pkgTitle = document.getElementById('triagePkgTitle');
+    const pkgPrice = document.getElementById('triagePkgPrice');
+    const pkgDeposit = document.getElementById('triagePkgDeposit');
+    const pkgTurnaround = document.getElementById('triagePkgTurnaround');
+    const pkgDeliverables = document.getElementById('triagePkgDeliverables');
+    const waLink = document.getElementById('triageWaLink');
+    const memoRef = document.getElementById('triageMemoRef');
+
+    const PACKAGES_MAP = {
+      revenue_recovery: {
+        title: 'The Revenue Recovery System',
+        price: '$1,200 CAD',
+        deposit: '$600 CAD (50% upfront deposit)',
+        turnaround: '3–5 Days (72-Hour Fast Track)',
+        deliverables: [
+          'High-converting mobile landing page',
+          '24/7 automated SMS/Email lead intake engine',
+          'Speed-to-lead auto-responder webhook',
+          'Sub-second mobile performance optimization'
+        ]
+      },
+      turnkey_os: {
+        title: 'Turnkey Business OS / Chef OS',
+        price: '$2,200 – $3,200 CAD',
+        deposit: '$1,100 – $1,600 CAD (50% upfront deposit)',
+        turnaround: '5–7 Days',
+        deliverables: [
+          'Full custom web application + Supabase database',
+          'Live customer booking & calendar reservation portal',
+          'Custom dynamic quote calculator',
+          'Automated catering/project intake pipeline'
+        ]
+      },
+      webar_menu: {
+        title: 'WebAR Signature Menu Add-On',
+        price: '$450 CAD',
+        deposit: '$225 CAD (50% upfront deposit)',
+        turnaround: '48 Hours',
+        deliverables: [
+          '3–5 signature products or dishes rendered into interactive 3D WebAR browser models',
+          'QR code table tents & printable flyers for zero-app camera scanning',
+          'Direct Apple QuickLook & Android SceneViewer compatibility'
+        ]
+      }
+    };
+
+    triageOptions.forEach((opt) => {
+      opt.addEventListener('click', () => {
+        triageOptions.forEach((o) => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        const radio = opt.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+      });
+    });
+
+    triageForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const selectedRadio = triageForm.querySelector('input[name="bottleneck"]:checked');
+      const val = selectedRadio ? selectedRadio.value : 'revenue_recovery';
+      const pkg = PACKAGES_MAP[val] || PACKAGES_MAP.revenue_recovery;
+      const url = document.getElementById('triageUrl')?.value || 'Your Business';
+      const contact = document.getElementById('triageContact')?.value || 'Pending';
+
+      if (pkgTitle) pkgTitle.textContent = pkg.title;
+      if (pkgPrice) pkgPrice.textContent = pkg.price;
+      if (pkgDeposit) pkgDeposit.textContent = pkg.deposit;
+      if (pkgTurnaround) pkgTurnaround.textContent = pkg.turnaround;
+      if (pkgDeliverables) {
+        pkgDeliverables.innerHTML = pkg.deliverables.map((d) => `<li><span class="ok" style="color:#00D2FF">✓</span> ${d}</li>`).join('');
+      }
+      if (memoRef) {
+        memoRef.textContent = `Deposit: ${url.replace(/^https?:\/\//, '')} · ${contact}`;
+      }
+      if (waLink) {
+        const text = encodeURIComponent(`Hi Darnley, I just ran the 60s Mobile Friction Audit for ${url}. Qualified for ${pkg.title} (${pkg.price}). Direct contact: ${contact}. Ready to send deposit.`);
+        waLink.href = `https://wa.me/16139094038?text=${text}`;
+      }
+
+      triageResult.style.display = 'block';
+      triageResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+
   // Footer year
   document.querySelectorAll('[data-year]').forEach((el) => (el.textContent = new Date().getFullYear()));
 })();

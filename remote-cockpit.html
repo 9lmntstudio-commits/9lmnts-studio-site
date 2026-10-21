@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>9LMNTS Remote Cockpit — Gemini Mobile Brain Bridge</title>
+    <title>9LMNTS Remote Cockpit — 9LMNTS Studio Mobile Brain Bridge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
@@ -206,8 +206,8 @@
 
     <!-- TASK INTAKE CARD -->
     <div class="card">
-        <h2 class="card-title">⚡ Gemini Mobile Task Rail</h2>
-        <p class="card-desc">Paste prompts from Gemini Mobile App or dictate instructions directly.</p>
+        <h2 class="card-title">⚡ 9LMNTS Mobile Dispatch Rail</h2>
+        <p class="card-desc">Paste prompts from mobile or dictate instructions directly into the studio dispatch engine.</p>
 
         <textarea id="taskText" class="task-input" placeholder="e.g. Build Chef OS demo for Margo Caribbean, or run vault snapshot pre_deploy..."></textarea>
         
@@ -278,7 +278,7 @@
                 const res = await fetch('/api/task', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ task: val, source: 'Gemini Mobile Cockpit' })
+                    body: JSON.stringify({ task: val, source: '9LMNTS Mobile Cockpit' })
                 });
                 const data = await res.json();
                 input.value = '';

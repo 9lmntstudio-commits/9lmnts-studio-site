@@ -40,7 +40,8 @@ export const CARE = [
 
 const NAV = [
   ['/services/', 'Services'],
-  ['/work/', 'Work & OS'],
+  ['/work/', 'Work'],
+  ['/os/', 'OS Engine'],
   ['/process/', 'Process'],
   ['/about/', 'About'],
   ['/contact/', 'Contact'],
@@ -50,7 +51,7 @@ const STATIONS = [
   { num: '01', title: 'Project LOA Universe', tag: 'UE 5.7 · Anime Action RPG', desc: '3026 Neo-Ottawa cyber-industrial dystopia. Damian Kane mastering Blink-Strike mechanics against corrupted AI entity LOA.', href: '/darnley.html' },
   { num: '02', title: 'Original Audio Vault', tag: 'Lossless Multitrack Stems', desc: 'High-fidelity audio deck with real-time waveform visualizers, Suno original productions, and stem sync licensing.', href: '/demos/sound-clash-arena.html' },
   { num: '03', title: 'Productized Agency Sprints', tag: '7-Day Turnkey MVP', desc: 'Websites that book customers for you. Launch Page ($1,800), Growth Website ($4,500 ⭐), Signature System ($8,500).', href: '/services/' },
-  { num: '04', title: 'AI Voice & ManyChat CRM', tag: 'Gemini Live · Zero Latency', desc: 'Autonomous bidirectional voice receptionist trained on 9LMNTS services, instant quote dispatch, and SMS/DM keyword funnels.', href: '/demos/event-revenue-dashboard.html' },
+  { num: '04', title: 'AI Voice & Dispatch CRM', tag: '9LMNTS Dispatch Audio · Sub-Second', desc: 'Autonomous bidirectional voice operator trained on 9LMNTS services, instant quote dispatch, and SMS/DM keyword funnels.', href: '/demos/event-revenue-dashboard.html' },
   { num: '05', title: 'Event OS Universal Showcase', tag: 'Dual-Telemetry Engine', desc: 'Full-stack tournament infrastructure syncing Mobile Spectator Arena with Organizer Jumbotron Sync via WebSockets.', href: '/demos/sound-clash-arena.html' },
   { num: '06', title: 'The Helm / Darnley Sanon', tag: 'Creative Director Dossier', desc: 'Decade-long design standard combining Hip-Hop culture with AI automation. Access to protected /admin operator portal.', href: '/admin/' },
   { num: '07', title: 'Sound Clash OS Arena', tag: '8-Contender Live Bracket', desc: 'Head-to-head live DJ battle engine with dynamic crowd vote meters, QR tipping jars, and automated 70/30 pot surges.', href: '/demos/sound-clash-arena.html' },
