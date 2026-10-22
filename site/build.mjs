@@ -1123,7 +1123,31 @@ const workHtml = layout({
             <li>Contender profile cards &amp; audio players</li>
           </ul>
           <div class="showcase-actions">
-            <a class="btn btn-primary" href="/demos/sound-clash-arena.html" target="_blank" rel="noopener">Launch Live Arena ↗</a>
+            <a class="btn btn-primary" href="https://clash.9lmntsstudio.com" target="_blank" rel="noopener">Launch Clash OS ↗</a>
+            <a class="btn btn-ghost" href="/demos/sound-clash-arena.html" target="_blank" rel="noopener">Demo Deck ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Arena 1B: Artist OS Command Center -->
+      <article class="showcase-card reveal">
+        <div class="showcase-media">
+          <img src="/assets/event-os-stage.png" alt="Artist OS Live Performance Command Center" loading="lazy">
+          <div class="showcase-overlay"></div>
+          <span class="showcase-tag">Live Performing Artist OS</span>
+          <span class="showcase-score">● BASE44 LIVE</span>
+        </div>
+        <div class="showcase-body">
+          <h3>Artist OS — Live Artist Command Center</h3>
+          <p>The sovereign digital command center for live performing artists. WAV stem distribution, crowd tipping jars, VIP fan club access, and automated yield ledgers.</p>
+          <ul class="showcase-features">
+            <li>Lossless multitrack WAV stem deck &amp; licensing</li>
+            <li>Crowd tipping rails &amp; live show requests</li>
+            <li>Direct fan pass &amp; VIP ticket drops</li>
+          </ul>
+          <div class="showcase-actions">
+            <a class="btn btn-primary" href="https://artist.9lmntsstudio.com" target="_blank" rel="noopener">Launch Artist OS ↗</a>
+            <a class="btn btn-ghost" href="/contact/?sprint=Artist+OS">Request Custom OS ↗</a>
           </div>
         </div>
       </article>
@@ -2883,6 +2907,10 @@ fs.writeFileSync(path.join(OUT, '_redirects'), `
 /brand           /about/index.html    301
 /runway          /work/index.html     301
 /fashion         /work/index.html     301
+/clash           https://clash.9lmntsstudio.com  302
+/soundclash      https://clash.9lmntsstudio.com  302
+/artist          https://artist.9lmntsstudio.com 302
+/artistos        https://artist.9lmntsstudio.com 302
 /embed.js        /embed/intake.js     200
 /intake.js       /embed/intake.js     200
 `, 'utf8');

@@ -29,5 +29,9 @@
 /brand           /about/index.html    301
 /runway          /work/index.html     301
 /fashion         /work/index.html     301
+/clash           https://clash.9lmntsstudio.com  302
+/soundclash      https://clash.9lmntsstudio.com  302
+/artist          https://artist.9lmntsstudio.com 302
+/artistos        https://artist.9lmntsstudio.com 302
 /embed.js        /embed/intake.js     200
 /intake.js       /embed/intake.js     200

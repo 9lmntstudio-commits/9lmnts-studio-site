@@ -54,9 +54,9 @@ const STATIONS = [
   { num: '04', title: 'AI Voice & Dispatch CRM', tag: '9LMNTS Dispatch Audio · Sub-Second', desc: 'Autonomous bidirectional voice operator trained on 9LMNTS services, instant quote dispatch, and SMS/DM keyword funnels.', href: '/os/' },
   { num: '05', title: 'Event OS Universal Showcase', tag: 'Dual-Telemetry Engine', desc: 'Full-stack tournament infrastructure syncing Mobile Spectator Arena with Organizer Jumbotron Sync via WebSockets.', href: '/work/' },
   { num: '06', title: 'The Helm / Darnley Sanon', tag: 'Creative Director Dossier', desc: 'Decade-long design standard combining Hip-Hop culture with AI automation. Access to protected /admin operator portal.', href: '/about/' },
-  { num: '07', title: 'Sound Clash OS Arena', tag: '8-Contender Live Bracket', desc: 'Head-to-head live DJ battle engine with dynamic crowd vote meters, QR tipping jars, and automated 70/30 pot surges.', href: '/work/' },
+  { num: '07', title: 'Sound Clash OS Arena', tag: 'DJ Battle in a Box · Base44', desc: '8-contender live DJ sound clash tournament engine with dynamic crowd vote meters, QR tipping jars, and real-time battle telemetry.', href: 'https://clash.9lmntsstudio.com' },
   { num: '08', title: 'January 2027 Double-Header', tag: 'Lansdowne & 70 Bongard', desc: 'Night 1: DARNLEY Runway OS (500 seated). Night 2: Corporate Clash / Pitch OS (250 investors). Powered by Worker Bee OS.', href: '/work/' },
-  { num: '09', title: 'Artist OS Creator HQ', tag: 'Commission-Free Platform', desc: '24/7 sovereign digital platform for recording artists, WAV stem licensing, direct fan tipping, and automated yield ledgers.', href: '/os/' },
+  { num: '09', title: 'Artist OS Command Center', tag: 'Live Performing Artist OS · Base44', desc: 'Live command center for performing artists: WAV stem distribution, crowd tipping rails, VIP fan access, and royalty yield ledgers.', href: 'https://artist.9lmntsstudio.com' },
 ];
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
