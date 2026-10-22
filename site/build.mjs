@@ -24,6 +24,138 @@ if (fs.existsSync(cssSource)) {
   console.log('✓ Copied styles.css to /public');
 }
 
+function weddingOsSection() {
+  return `
+  <!-- Wedding & Reception OS: The Sanon Reception Flagship Bento Showcase -->
+  <section class="section border-top section-sanon-stage">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="kicker">Category 02 / Hospitality &amp; Luxury Events · Wedding OS</span>
+          <h2>Wedding OS: The Sanon Reception</h2>
+        </div>
+        <p>A turn-key digital guest companion engineered for boutique weddings and luxury receptions. Features live speech voting, digital drink gifting, honeymoon getaway raffles, and Apple Pay cash registries.</p>
+      </div>
+
+      <!-- Hero 2-Column Spotlight: Live Bento Box + Flagship Mobile Screen -->
+      <div class="sanon-showcase-grid" style="margin-bottom:48px">
+        <!-- Live Frosted Glass Bento Box (Exact Replica of 9LMNTS Mockup) -->
+        <div class="sanon-bento-card reveal">
+          <div class="badge-live-now">
+            <span class="beacon-dot"></span>
+            <span>LIVE NOW</span>
+          </div>
+          <h3 class="sanon-bento-title">Wedding OS:<br>The Sanon<br><span class="tint-amber">Reception</span></h3>
+          <div class="sanon-metrics-grid">
+            <div class="sanon-metric-col">
+              <div class="sanon-metric-label">Honeymoon Fund</div>
+              <div class="sanon-metric-num">$4,850 <small>CAD</small></div>
+            </div>
+            <div class="sanon-metric-col">
+              <div class="sanon-metric-label">Guest Check-ins</div>
+              <div class="sanon-metric-num">142 <small>/ 150</small></div>
+            </div>
+          </div>
+          <a class="btn-sanon-cta" href="/contact/?sprint=Wedding+OS">
+            Send Gift &amp; Sign Book <span class="arrow">↗</span>
+          </a>
+        </div>
+
+        <!-- Phone Mockup of The Sanon Reception Screen -->
+        <div class="phone-frame-card reveal" style="max-width:380px;margin:0 auto">
+          <div class="phone-notch-bar">
+            <span>THE SANON RECEPTION</span>
+            <div class="phone-notch-pill"></div>
+            <span style="color:#FFD700">LIVE OS</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/wedding-os-sanon-reception.png" alt="Wedding OS: The Sanon Reception Live Screen" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>142 GUESTS LIVE</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Live Reception Portal</span>
+            <h4>Interactive Guest Companion</h4>
+            <p>Ballroom table finding, direct Interac/Apple Pay honeymoon gifting, and live speech battle voting.</p>
+            <div class="phone-metric-pill">🥂 100% Mobile Guest Adoption</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Screen Highlights -->
+      <div class="grid g3">
+        <!-- Screen 1: Speech Showcase -->
+        <div class="phone-frame-card reveal">
+          <div class="phone-notch-bar">
+            <span>SPEECH SHOWCASE</span>
+            <div class="phone-notch-pill"></div>
+            <span class="accent">VOTE LIVE</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/mobile-wedding-speech-showcase.jpg" alt="Speech Showcase: Live Voting & Drinks Tipping" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>$5 DRINK RAIL</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Crowd Interaction · Speech Battle</span>
+            <h4>Live Speech Voting &amp; Drink Gifting</h4>
+            <p>Guests vote on Best Man vs. Maid of Honor speeches in real time, or send them a $5 drink straight to their table from their phones.</p>
+            <div class="phone-metric-pill">🥂 Real-Time Table Delivery</div>
+          </div>
+        </div>
+
+        <!-- Screen 2: Future Fund Cash Registry -->
+        <div class="phone-frame-card reveal">
+          <div class="phone-notch-bar">
+            <span>FUTURE FUND</span>
+            <div class="phone-notch-pill"></div>
+            <span class="ok">SECURE</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/mobile-wedding-future-fund.jpg" alt="Future Fund Honeymoon Cash Registry Modal" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>APPLE PAY / VISA</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Frictionless Gifting · Zero Envelopes</span>
+            <h4>Future Fund &amp; Honeymoon Registry</h4>
+            <p>Direct cash contribution rail with $50, $100, or custom amounts. Supports Apple Pay, Visa, and PayPal with zero bank delays.</p>
+            <div class="phone-metric-pill">💳 Instant Autodeposit Rail</div>
+          </div>
+        </div>
+
+        <!-- Screen 3: Timeline & Raffle -->
+        <div class="phone-frame-card reveal">
+          <div class="phone-notch-bar">
+            <span>TIMELINE &amp; RAFFLE</span>
+            <div class="phone-notch-pill"></div>
+            <span style="color:#FFD700">RECEPTION</span>
+          </div>
+          <div class="phone-screen">
+            <img src="/assets/mobile-wedding-rj-home-raffle.jpg" alt="Timeline and Honeymoon Getaway Raffle Entry" loading="lazy">
+            <div class="phone-live-tag">
+              <span class="pulse"></span>
+              <span>$750 RAFFLE</span>
+            </div>
+          </div>
+          <div class="phone-info">
+            <span class="kicker">Schedule &amp; Raffle</span>
+            <h4>Live Program &amp; Table Activities</h4>
+            <p>Interactive evening itinerary, dinner menus, allergen filters, and raffle ticket checkout for honeymoon getaway.</p>
+            <div class="phone-metric-pill">🎟️ Automatic Ticket Generation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
 // -------------------------------------------------------------
 // 1. HOME (/)
 // -------------------------------------------------------------
@@ -305,86 +437,7 @@ const homeHtml = layout({
     </div>
   </section>
 
-  <!-- Wedding & Reception OS (Romeo & Juliet Guest Experience) -->
-  <section class="section border-top" style="position:relative;background:linear-gradient(180deg, #090B0F 0%, #12141C 100%)">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="kicker">Category 02 / Hospitality &amp; Private Events · Wedding OS</span>
-          <h2>Wedding Day Guest Portal &amp; Cash Registry</h2>
-        </div>
-        <p>A turn-key digital guest companion engineered for boutique weddings and luxury receptions. Features live speech voting, digital drink gifting, honeymoon getaway raffles, and Apple Pay cash registries.</p>
-      </div>
-
-      <div class="grid g3">
-        <!-- Screen 1: Wedding OS Home & Raffle -->
-        <div class="phone-frame-card reveal">
-          <div class="phone-notch-bar">
-            <span>R&amp;J WEDDING OS</span>
-            <div class="phone-notch-pill"></div>
-            <span style="color:#FFD700">JULY 24</span>
-          </div>
-          <div class="phone-screen">
-            <img src="/assets/mobile-wedding-rj-home-raffle.jpg" alt="Romeo &amp; Juliet Wedding OS Home and Raffle Entry" loading="lazy">
-            <div class="phone-live-tag">
-              <span class="pulse"></span>
-              <span>$750 RAFFLE</span>
-            </div>
-          </div>
-          <div class="phone-info">
-            <span class="kicker">Guest Portal · Home &amp; Timeline</span>
-            <h4>Interactive Reception Companion</h4>
-            <p>One-stop mobile guest dashboard with schedule timeline, speeches, live games, and a $10 honeymoon getaway raffle entry.</p>
-            <div class="phone-metric-pill">💍 100% Mobile Guest Adoption</div>
-          </div>
-        </div>
-
-        <!-- Screen 2: Speech Showcase Voting & Drink Buy -->
-        <div class="phone-frame-card reveal">
-          <div class="phone-notch-bar">
-            <span>SPEECH SHOWCASE</span>
-            <div class="phone-notch-pill"></div>
-            <span class="accent">VOTE LIVE</span>
-          </div>
-          <div class="phone-screen">
-            <img src="/assets/mobile-wedding-speech-showcase.jpg" alt="Speech Showcase: Best Man Mercutio vs Maid of Honor Nurse" loading="lazy">
-            <div class="phone-live-tag">
-              <span class="pulse"></span>
-              <span>$5 DRINK RAIL</span>
-            </div>
-          </div>
-          <div class="phone-info">
-            <span class="kicker">Crowd Interaction · Speech Battle</span>
-            <h4>Live Speech Voting &amp; Drink Gifting</h4>
-            <p>Guests vote on Best Man vs. Maid of Honor speeches in real time, or send them a $5 drink straight to their table from their phones.</p>
-            <div class="phone-metric-pill">🥂 Real-Time Table Delivery</div>
-          </div>
-        </div>
-
-        <!-- Screen 3: Future Fund Cash Registry -->
-        <div class="phone-frame-card reveal">
-          <div class="phone-notch-bar">
-            <span>FUTURE FUND</span>
-            <div class="phone-notch-pill"></div>
-            <span class="ok">SECURE</span>
-          </div>
-          <div class="phone-screen">
-            <img src="/assets/mobile-wedding-future-fund.jpg" alt="Future Fund Honeymoon Cash Registry Modal" loading="lazy">
-            <div class="phone-live-tag">
-              <span class="pulse"></span>
-              <span>APPLE PAY / VISA</span>
-            </div>
-          </div>
-          <div class="phone-info">
-            <span class="kicker">Frictionless Gifting · Zero Envelopes</span>
-            <h4>Future Fund &amp; Honeymoon Registry</h4>
-            <p>Direct cash contribution rail with $50, $100, or custom amounts. Supports Apple Pay, Visa, and PayPal with zero bank delays.</p>
-            <div class="phone-metric-pill">💳 Instant Autodeposit Rail</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  ${weddingOsSection()}
 
   <!-- 4-Device Live Mobile Production Engine (clash.9lmntsstudio.com) -->
   <section class="section border-top" style="position:relative;background:linear-gradient(180deg, rgba(8,9,12,0.95) 0%, rgba(16,18,24,0.98) 100%)">
@@ -856,86 +909,7 @@ const workHtml = layout({
     </div>
   </div></section>
 
-  <!-- Wedding & Reception OS (Romeo & Juliet Guest Experience) -->
-  <section class="section border-top" style="position:relative;background:linear-gradient(180deg, #090B0F 0%, #12141C 100%)">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="kicker">Category 02 / Hospitality &amp; Private Events · Wedding OS</span>
-          <h2>Wedding Day Guest Portal &amp; Cash Registry</h2>
-        </div>
-        <p>A turn-key digital guest companion engineered for boutique weddings and luxury receptions. Features live speech voting, digital drink gifting, honeymoon getaway raffles, and Apple Pay cash registries.</p>
-      </div>
-
-      <div class="grid g3">
-        <!-- Screen 1: Wedding OS Home & Raffle -->
-        <div class="phone-frame-card reveal">
-          <div class="phone-notch-bar">
-            <span>R&amp;J WEDDING OS</span>
-            <div class="phone-notch-pill"></div>
-            <span style="color:#FFD700">JULY 24</span>
-          </div>
-          <div class="phone-screen">
-            <img src="/assets/mobile-wedding-rj-home-raffle.jpg" alt="Romeo &amp; Juliet Wedding OS Home and Raffle Entry" loading="lazy">
-            <div class="phone-live-tag">
-              <span class="pulse"></span>
-              <span>$750 RAFFLE</span>
-            </div>
-          </div>
-          <div class="phone-info">
-            <span class="kicker">Guest Portal · Home &amp; Timeline</span>
-            <h4>Interactive Reception Companion</h4>
-            <p>One-stop mobile guest dashboard with schedule timeline, speeches, live games, and a $10 honeymoon getaway raffle entry.</p>
-            <div class="phone-metric-pill">💍 100% Mobile Guest Adoption</div>
-          </div>
-        </div>
-
-        <!-- Screen 2: Speech Showcase Voting & Drink Buy -->
-        <div class="phone-frame-card reveal">
-          <div class="phone-notch-bar">
-            <span>SPEECH SHOWCASE</span>
-            <div class="phone-notch-pill"></div>
-            <span class="accent">VOTE LIVE</span>
-          </div>
-          <div class="phone-screen">
-            <img src="/assets/mobile-wedding-speech-showcase.jpg" alt="Speech Showcase: Best Man Mercutio vs Maid of Honor Nurse" loading="lazy">
-            <div class="phone-live-tag">
-              <span class="pulse"></span>
-              <span>$5 DRINK RAIL</span>
-            </div>
-          </div>
-          <div class="phone-info">
-            <span class="kicker">Crowd Interaction · Speech Battle</span>
-            <h4>Live Speech Voting &amp; Drink Gifting</h4>
-            <p>Guests vote on Best Man vs. Maid of Honor speeches in real time, or send them a $5 drink straight to their table from their phones.</p>
-            <div class="phone-metric-pill">🥂 Real-Time Table Delivery</div>
-          </div>
-        </div>
-
-        <!-- Screen 3: Future Fund Cash Registry -->
-        <div class="phone-frame-card reveal">
-          <div class="phone-notch-bar">
-            <span>FUTURE FUND</span>
-            <div class="phone-notch-pill"></div>
-            <span class="ok">SECURE</span>
-          </div>
-          <div class="phone-screen">
-            <img src="/assets/mobile-wedding-future-fund.jpg" alt="Future Fund Honeymoon Cash Registry Modal" loading="lazy">
-            <div class="phone-live-tag">
-              <span class="pulse"></span>
-              <span>APPLE PAY / VISA</span>
-            </div>
-          </div>
-          <div class="phone-info">
-            <span class="kicker">Frictionless Gifting · Zero Envelopes</span>
-            <h4>Future Fund &amp; Honeymoon Registry</h4>
-            <p>Direct cash contribution rail with $50, $100, or custom amounts. Supports Apple Pay, Visa, and PayPal with zero bank delays.</p>
-            <div class="phone-metric-pill">💳 Instant Autodeposit Rail</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  ${weddingOsSection()}
 
   <!-- 4-Device Live Mobile Production Engine (clash.9lmntsstudio.com) -->
   <section class="section border-top" style="position:relative;background:linear-gradient(180deg, rgba(8,9,12,0.95) 0%, rgba(16,18,24,0.98) 100%)">
