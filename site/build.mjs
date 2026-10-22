@@ -152,7 +152,8 @@ const homeHtml = layout({
             <li>Direct Interac &amp; Stripe payment rail</li>
           </ul>
           <div class="showcase-actions">
-            <a class="btn btn-primary" href="/demo-client.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+            <a class="btn btn-primary" href="/contact/?sprint=Chef+OS">Deploy Chef OS <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -174,7 +175,8 @@ const homeHtml = layout({
             <li>Paperless 2:30 PM payroll &amp; direct Interac batching</li>
           </ul>
           <div class="showcase-actions">
-            <a class="btn btn-primary" href="/workerbee.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+            <a class="btn btn-primary" href="/contact/?sprint=WorkerBee+OS">Deploy Dispatch OS <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -196,7 +198,8 @@ const homeHtml = layout({
             <li>Zero double-booking calendar validation</li>
           </ul>
           <div class="showcase-actions">
-            <a class="btn btn-primary" href="/reception.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+            <a class="btn btn-primary" href="/contact/?sprint=Reception+OS">Deploy Booking Hub <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -797,7 +800,8 @@ const workHtml = layout({
             <li>Direct Interac e-Transfer autodeposit rail</li>
           </ul>
           <div class="showcase-actions">
-            <a class="btn btn-primary" href="/demo-client.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+            <a class="btn btn-primary" href="/contact/?sprint=Chef+OS">Deploy Chef OS <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -820,7 +824,8 @@ const workHtml = layout({
             <li>Zero lost paper time tickets</li>
           </ul>
           <div class="showcase-actions">
-            <a class="btn btn-primary" href="/workerbee.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+            <a class="btn btn-primary" href="/contact/?sprint=WorkerBee+OS">Deploy Dispatch OS <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -843,7 +848,8 @@ const workHtml = layout({
             <li>Direct calendar sync &amp; guest alerts</li>
           </ul>
           <div class="showcase-actions">
-            <a class="btn btn-primary" href="/reception.html" target="_blank" rel="noopener">Launch Live Prototype <span class="arrow">↗</span></a>
+            <a class="btn btn-primary" href="/contact/?sprint=Reception+OS">Deploy Booking Hub <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -2503,7 +2509,7 @@ const adminHtml = `<!doctype html>
                 <td>The Revenue Recovery System ($1,500 CAD)</td>
                 <td><span class="ok">$750 CAD Paid</span></td>
                 <td><span class="badge">STAGED_OUTREACH</span></td>
-                <td><a href="/demo-client.html?biz=Margo%20Caribbean%20Restaurant" target="_blank" class="btn btn-ghost" style="padding:6px 12px;font-size:12px">View Demo ↗</a></td>
+                <td><button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="alert('Standalone client presentation prototype located at client-prototypes/margo-caribbean-restaurant.html')">Client File 📁</button></td>
               </tr>
               <tr>
                 <td><strong>Andre Ottawa Home Repairs</strong></td>
@@ -2511,7 +2517,7 @@ const adminHtml = `<!doctype html>
                 <td>Launch Page ($1,800 CAD)</td>
                 <td><span class="ok">$900 CAD Paid</span></td>
                 <td><span class="badge">IN_BUILD</span></td>
-                <td><a href="/workerbee.html" target="_blank" class="btn btn-ghost" style="padding:6px 12px;font-size:12px">View Dispatch ↗</a></td>
+                <td><button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="alert('Standalone client presentation prototype located at client-prototypes/handyman-trades-contractor.html')">Client File 📁</button></td>
               </tr>
             </tbody>
           </table>
@@ -2821,21 +2827,6 @@ if (fs.existsSync(path.join(ROOT, 'demos'))) {
     fs.copyFileSync(path.join(ROOT, 'demos', file), path.join(OUT, 'demos', file));
   });
 }
-if (fs.existsSync(path.join(ROOT, 'demo-client.html'))) {
-  fs.copyFileSync(path.join(ROOT, 'demo-client.html'), path.join(OUT, 'demo-client.html'));
-}
-if (fs.existsSync(path.join(ROOT, 'workerbee.html'))) {
-  fs.copyFileSync(path.join(ROOT, 'workerbee.html'), path.join(OUT, 'workerbee.html'));
-}
-if (fs.existsSync(path.join(ROOT, 'handyman.html'))) {
-  fs.copyFileSync(path.join(ROOT, 'handyman.html'), path.join(OUT, 'handyman.html'));
-}
-if (fs.existsSync(path.join(ROOT, 'reception.html'))) {
-  fs.copyFileSync(path.join(ROOT, 'reception.html'), path.join(OUT, 'reception.html'));
-}
-if (fs.existsSync(path.join(ROOT, 'darnley.html'))) {
-  fs.copyFileSync(path.join(ROOT, 'darnley.html'), path.join(OUT, 'darnley.html'));
-}
 
 // Public Routes
 writePage('index.html', homeHtml);
@@ -2880,18 +2871,18 @@ fs.writeFileSync(path.join(OUT, '_redirects'), `
 /start           /start/index.html    200
 /portal          /start/index.html    200
 /faq             /faq/index.html      200
-/demo            /demo-client.html    200
-/chef            /demo-client.html    200
-/workerbee       /workerbee.html      200
-/handyman        /workerbee.html      200
-/dispatch        /workerbee.html      200
-/reception       /reception.html      200
-/wedding         /reception.html      200
-/darnley         /darnley.html        200
-/clothing        /darnley.html        200
-/brand           /darnley.html        200
-/runway          /04_Runway_OS_Fashion_Battle.html 200
-/fashion         /04_Runway_OS_Fashion_Battle.html 200
+/demo            /work/index.html     301
+/chef            /work/index.html     301
+/workerbee       /work/index.html     301
+/handyman        /work/index.html     301
+/dispatch        /work/index.html     301
+/reception       /work/index.html     301
+/wedding         /work/index.html     301
+/darnley         /about/index.html    301
+/clothing        /work/index.html     301
+/brand           /about/index.html    301
+/runway          /work/index.html     301
+/fashion         /work/index.html     301
 /embed.js        /embed/intake.js     200
 /intake.js       /embed/intake.js     200
 `, 'utf8');

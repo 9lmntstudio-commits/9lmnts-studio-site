@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Margo Caribbean & Canadian Restaurant — Authentic Haitian Cuisine & Catering | Ottawa, ON</title>
+    <meta name="description" content="Ottawa's home for authentic Haitian Griot, slow-braised Oxtail, Diri ak Djon Djon, and full-service event catering. Order online direct with 0% app fees or build your custom catering quote.">
+
+    <!-- Fonts: Playfair Display (Culinary Warmth) + Inter (Crisp Menu & Pricing) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS with Margo Brand Color Tokens -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        margo: {
+                            gold: '#F59E0B',
+                            amber: '#D97706',
+                            crimson: '#B91C1C',
+                            darkred: '#7F1D1D',
+                            charcoal: '#18181B',
+                            deepcharcoal: '#0F0E0D',
+                            cream: '#FEF3C7',
+                            sand: '#F5F5F4'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Cormorant Garamond', 'Georgia', 'serif'],
+                        sans: ['Inter', '-apple-system', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background-color: #0F0E0D;
+            color: #F5F5F4;
+            font-family: 'Inter', sans-serif;
+        }
+        .margo-gold-gradient {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #B91C1C 100%);
+        }
+        .margo-gold-text {
+            background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .dish-card {
+            background: rgba(24, 24, 27, 0.85);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            transition: all 0.25s ease;
+        }
+        .dish-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(245, 158, 11, 0.5);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.15);
+        }
+        .catering-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #F59E0B;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+            border: 2px solid #FFFFFF;
+        }
+    </style>
+</head>
+<body class="selection:bg-margo-amber selection:text-white pb-24">
+
+    <!-- Top Announcement Strip -->
+    <div class="bg-gradient-to-r from-margo-darkred via-margo-amber to-margo-crimson text-white text-xs py-2 px-4 text-center font-medium">
+        <span>📍 Two Ottawa Locations: <strong>606 Rideau St</strong> & <strong>1563 Bank St</strong> · Open 7 Days · Direct Pickup & Event Catering</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-[#0F0E0D]/90 backdrop-blur-md border-b border-margo-amber/20 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-margo-gold to-margo-crimson flex items-center justify-center font-serif font-bold text-white text-xl shadow-lg">
+                    M
+                </div>
+                <div>
+                    <span class="font-serif font-bold text-xl tracking-tight text-white block leading-none">MARGO</span>
+                    <span class="text-[10px] tracking-widest text-margo-gold font-sans uppercase">Caribbean & Canadian Restaurant</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
+                <a href="#menu" class="hover:text-margo-gold transition-colors">Our Menu</a>
+                <a href="#catering" class="hover:text-margo-gold transition-colors">Catering Packages</a>
+                <a href="#about" class="hover:text-margo-gold transition-colors">The Tradition</a>
+                <a href="#locations" class="hover:text-margo-gold transition-colors">Locations & Hours</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="tel:6132411400" class="hidden sm:inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full border border-margo-gold/40 text-margo-gold hover:bg-margo-gold/10 transition-colors">
+                    📞 (613) 241-1400
+                </a>
+                <a href="#catering" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-margo-gold to-margo-amber hover:from-margo-amber hover:to-margo-crimson text-white text-xs font-bold tracking-wide uppercase shadow-md transition-all">
+                    Order Catering
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-16 pb-24 px-6 overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-margo-amber/15 via-transparent to-transparent pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-margo-charcoal border border-margo-gold/30 text-xs font-medium text-margo-gold mb-6">
+                <span>🔥 Ottawa's Signature Haitian Griot & Slow-Braised Oxtail</span>
+            </div>
+
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-tight">
+                Authentic Island Flavor, <br>
+                <span class="margo-gold-text">Crafted With Pride in Ottawa.</span>
+            </h1>
+
+            <p class="mt-6 text-base sm:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed">
+                Slow-simmered marinades, perfectly seasoned meats, and authentic Haitian home cooking prepared fresh daily. Order direct for zero third-party fees or book our full-service catering for your next private event.
+            </p>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <a href="#menu" class="px-8 py-3.5 rounded-full bg-margo-gold hover:bg-margo-amber text-margo-deepcharcoal font-bold text-sm tracking-wide shadow-lg transition-all">
+                    Explore Signature Menu ↘
+                </a>
+                <a href="#catering" class="px-8 py-3.5 rounded-full bg-zinc-900 border border-margo-gold/40 hover:border-margo-gold text-white font-semibold text-sm transition-all">
+                    Build Custom Catering Quote ↗
+                </a>
+            </div>
+
+            <!-- Locations Badges -->
+            <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto text-left">
+                <div class="p-4 rounded-2xl bg-zinc-900/80 border border-white/5 flex items-center gap-4">
+                    <span class="text-2xl">📍</span>
+                    <div>
+                        <div class="text-xs text-margo-gold font-semibold uppercase tracking-wider">Downtown / Market</div>
+                        <div class="font-bold text-white text-sm">606 Rideau St, Ottawa</div>
+                        <div class="text-xs text-zinc-400">(613) 241-1400 · Dine-in & Takeout</div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-zinc-900/80 border border-white/5 flex items-center gap-4">
+                    <span class="text-2xl">📍</span>
+                    <div>
+                        <div class="text-xs text-margo-gold font-semibold uppercase tracking-wider">Ottawa South</div>
+                        <div class="font-bold text-white text-sm">1563 Bank St, Ottawa</div>
+                        <div class="text-xs text-zinc-400">(613) 421-4005 · Dine-in & Pickup</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature Menu Grid -->
+    <section id="menu" class="py-16 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-xs font-semibold uppercase tracking-widest text-margo-gold">Authentic Family Recipes</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Our Signature Haitian & Caribbean Dishes</h2>
+            <p class="text-sm text-zinc-400 mt-2 max-w-lg mx-auto">Served with your choice of Diri Kole (Rice & Beans), Diri Djon Djon, or Sweet Plantains with fresh homemade Pikliz.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dish 1: Griot -->
+            <div class="dish-card rounded-2xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="font-serif font-bold text-xl text-white">Griot Ak Pikliz</h3>
+                        <span class="font-bold text-margo-gold text-lg">$22.00</span>
+                    </div>
+                    <p class="text-xs text-zinc-300 leading-relaxed">
+                        Our flagship specialty. Tender cubed pork shoulder marinated in Seville orange, Scotch bonnet, garlic and thyme, boiled slow then fried golden brown. Served with spicy Haitian pikliz and fried plantains.
+                    </p>
+                </div>
+                <div class="mt-6 flex justify-between items-center pt-4 border-t border-white/10 text-xs">
+                    <span class="text-zinc-400">🔥 #1 Customer Favorite</span>
+                    <button class="text-margo-gold font-semibold hover:underline" onclick="addToOrder('Griot Ak Pikliz', 22)">+ Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Dish 2: Oxtail -->
+            <div class="dish-card rounded-2xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="font-serif font-bold text-xl text-white">Braised Oxtail & Butter Beans</h3>
+                        <span class="font-bold text-margo-gold text-lg">$26.00</span>
+                    </div>
+                    <p class="text-xs text-zinc-300 leading-relaxed">
+                        Select beef oxtails simmered for five hours in rich brown gravy, sweet allspice, butter beans, and fresh scallions until fall-off-the-bone tender. Served with Diri ak Pwa.
+                    </p>
+                </div>
+                <div class="mt-6 flex justify-between items-center pt-4 border-t border-white/10 text-xs">
+                    <span class="text-zinc-400">🍲 Slow-Cooked 5 Hours</span>
+                    <button class="text-margo-gold font-semibold hover:underline" onclick="addToOrder('Braised Oxtail', 26)">+ Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Dish 3: Legim -->
+            <div class="dish-card rounded-2xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="font-serif font-bold text-xl text-white">Legim ak Vyann (Vegetable Stew)</h3>
+                        <span class="font-bold text-margo-gold text-lg">$24.00</span>
+                    </div>
+                    <p class="text-xs text-zinc-300 leading-relaxed">
+                        Traditional Haitian vegetable mash of cabbage, eggplant, chayote squash, spinach, and garlic braised with tender beef chunks and crab. Deep, savory island soul food.
+                    </p>
+                </div>
+                <div class="mt-6 flex justify-between items-center pt-4 border-t border-white/10 text-xs">
+                    <span class="text-zinc-400">🌿 Traditional Heritage</span>
+                    <button class="text-margo-gold font-semibold hover:underline" onclick="addToOrder('Legim ak Vyann', 24)">+ Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Dish 4: Tassot Kabrit -->
+            <div class="dish-card rounded-2xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="font-serif font-bold text-xl text-white">Tassot Kabrit (Fried Goat)</h3>
+                        <span class="font-bold text-margo-gold text-lg">$25.00</span>
+                    </div>
+                    <p class="text-xs text-zinc-300 leading-relaxed">
+                        Marinated seasoned goat chunks, boiled tender with cloves and lime, then fried to a crispy seal. Served with spicy pikliz and hot Banann Peze.
+                    </p>
+                </div>
+                <div class="mt-6 flex justify-between items-center pt-4 border-t border-white/10 text-xs">
+                    <span class="text-zinc-400">🐐 Weekend Specialty</span>
+                    <button class="text-margo-gold font-semibold hover:underline" onclick="addToOrder('Tassot Kabrit', 25)">+ Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Dish 5: Diri Djon Djon -->
+            <div class="dish-card rounded-2xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="font-serif font-bold text-xl text-white">Diri ak Djon Djon</h3>
+                        <span class="font-bold text-margo-gold text-lg">$14.00</span>
+                    </div>
+                    <p class="text-xs text-zinc-300 leading-relaxed">
+                        Iconic black rice cooked in black mushroom extract with lima beans and sweet dried shrimp. A fragrant centerpiece for weddings, celebrations, and Sunday dinners.
+                    </p>
+                </div>
+                <div class="mt-6 flex justify-between items-center pt-4 border-t border-white/10 text-xs">
+                    <span class="text-zinc-400">🍄 Black Mushroom Rice</span>
+                    <button class="text-margo-gold font-semibold hover:underline" onclick="addToOrder('Diri Djon Djon', 14)">+ Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Dish 6: Macaroni au Gratin -->
+            <div class="dish-card rounded-2xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="font-serif font-bold text-xl text-white">Macaroni au Gratin</h3>
+                        <span class="font-bold text-margo-gold text-lg">$12.00</span>
+                    </div>
+                    <p class="text-xs text-zinc-300 leading-relaxed">
+                        Rich Haitian-style baked pasta with creamy cheese custard, spiced evaporated milk, bell peppers, ham, and a golden bubbling Parmesan crust.
+                    </p>
+                </div>
+                <div class="mt-6 flex justify-between items-center pt-4 border-t border-white/10 text-xs">
+                    <span class="text-zinc-400">🧀 Baked Creole Gratin</span>
+                    <button class="text-margo-gold font-semibold hover:underline" onclick="addToOrder('Macaroni au Gratin', 12)">+ Add to Order</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Catering Headcount Calculator Section -->
+    <section id="catering" class="py-16 px-6 bg-gradient-to-b from-transparent via-zinc-900/50 to-transparent">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-xs font-semibold uppercase tracking-widest text-margo-gold">Event Catering Engine</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mt-1">Host Your Event With Margo</h2>
+                <p class="text-sm text-zinc-300 mt-2 max-w-lg mx-auto">From 20 guests for family gatherings to 300+ guests for weddings and corporate galas. Drag the slider to calculate instant pricing.</p>
+            </div>
+
+            <div class="p-8 sm:p-10 rounded-3xl bg-zinc-900/90 border border-margo-amber/30 shadow-2xl relative">
+                <!-- Headcount Slider -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-baseline mb-3">
+                        <label for="headcount" class="font-medium text-white text-sm">SELECT NUMBER OF GUESTS:</label>
+                        <span class="font-serif text-3xl font-bold text-margo-gold" id="guestCountDisplay">75 Guests</span>
+                    </div>
+                    <input type="range" id="headcount" min="20" max="250" value="75" step="5" class="catering-slider w-full h-3 bg-zinc-800 rounded-lg appearance-none cursor-pointer">
+                    <div class="flex justify-between text-[11px] text-zinc-400 mt-2 font-mono">
+                        <span>20 GUESTS (INTIMATE)</span>
+                        <span>100 GUESTS (WEDDING)</span>
+                        <span>250+ GUESTS (LARGE GALA)</span>
+                    </div>
+                </div>
+
+                <!-- Catering Tier Selection -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                    <label class="p-4 rounded-xl border border-margo-gold/40 bg-zinc-800/80 cursor-pointer flex flex-col justify-between text-left" id="tier1-label">
+                        <input type="radio" name="cateringTier" value="24" checked class="hidden" onchange="updateCateringTotal()">
+                        <div>
+                            <div class="text-xs text-margo-gold font-bold uppercase tracking-wide">TIER 01 · HERITAGE</div>
+                            <div class="font-serif font-bold text-white text-lg mt-1">Griot & Rice Buffet</div>
+                            <p class="text-[11px] text-zinc-300 mt-1">Griot, Banann Peze, Pikliz, Diri Kole, Salad.</p>
+                        </div>
+                        <div class="font-bold text-white text-sm mt-3">$24 / guest</div>
+                    </label>
+
+                    <label class="p-4 rounded-xl border border-white/10 bg-zinc-800/40 cursor-pointer flex flex-col justify-between text-left" id="tier2-label">
+                        <input type="radio" name="cateringTier" value="32" class="hidden" onchange="updateCateringTotal()">
+                        <div>
+                            <div class="text-xs text-margo-gold font-bold uppercase tracking-wide">TIER 02 · CARIBBEAN FEAST</div>
+                            <div class="font-serif font-bold text-white text-lg mt-1">Dual Meat Island Spread</div>
+                            <p class="text-[11px] text-zinc-300 mt-1">Griot + Braised Oxtail, Diri Djon Djon, Macaroni au Gratin, Plantains.</p>
+                        </div>
+                        <div class="font-bold text-white text-sm mt-3">$32 / guest</div>
+                    </label>
+
+                    <label class="p-4 rounded-xl border border-white/10 bg-zinc-800/40 cursor-pointer flex flex-col justify-between text-left" id="tier3-label">
+                        <input type="radio" name="cateringTier" value="48" class="hidden" onchange="updateCateringTotal()">
+                        <div>
+                            <div class="text-xs text-margo-gold font-bold uppercase tracking-wide">TIER 03 · ROYAL GALA</div>
+                            <div class="font-serif font-bold text-white text-lg mt-1">Full Luxury Service</div>
+                            <p class="text-[11px] text-zinc-300 mt-1">Tassot Kabrit, Oxtail, Griot, Djon Djon, Appetizer platters & service staff.</p>
+                        </div>
+                        <div class="font-bold text-white text-sm mt-3">$48 / guest</div>
+                    </label>
+                </div>
+
+                <!-- Instant Estimate & Deposit Summary -->
+                <div class="p-6 rounded-2xl bg-black/60 border border-margo-gold/30 flex flex-wrap items-center justify-between gap-6">
+                    <div>
+                        <div class="text-xs text-zinc-400 uppercase font-mono">ESTIMATED CATERING TOTAL:</div>
+                        <div class="font-serif text-3xl font-bold text-white" id="cateringTotalDisplay">$1,800 CAD</div>
+                        <div class="text-xs text-margo-gold mt-0.5">50% Deposit to Lock Date: <strong id="cateringDepositDisplay">$900 CAD</strong></div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <button onclick="openCateringModal()" class="px-6 py-3 rounded-full bg-gradient-to-r from-margo-gold to-margo-amber hover:from-margo-amber hover:to-margo-crimson text-white font-bold text-xs tracking-wider uppercase shadow-lg transition-all">
+                            Submit Catering Inquiry & Lock 50% Deposit ↗
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Founder Story -->
+    <section id="about" class="py-16 px-6 max-w-4xl mx-auto text-center border-t border-white/10">
+        <span class="text-xs font-semibold uppercase tracking-widest text-margo-gold">A Legacy of Hospitality</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Haitian Heritage in the Heart of Canada</h2>
+        <p class="text-zinc-300 text-sm sm:text-base leading-relaxed mt-4">
+            Founded by Kivenson Augustin, Margo Caribbean & Canadian Restaurant was born out of a deep reverence for authentic Haitian culinary craftsmanship. For years, we have brought Ottawa together around authentic island spices, freshly pounded marinades, and generous hospitality. Whether welcoming regulars into our dining rooms or catering milestones for hundreds, every meal is prepared as if you were family at our home table.
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer id="locations" class="border-t border-margo-amber/20 pt-12 pb-8 px-6 text-xs text-zinc-400 bg-[#0A0908]">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8 text-left">
+            <div>
+                <h4 class="font-serif font-bold text-white text-base mb-2">Margo Caribbean & Canadian</h4>
+                <p class="text-zinc-400">Authentic Haitian restaurant & artisanal event catering.</p>
+                <p class="mt-2 text-margo-gold font-medium">Founder: Kivenson Augustin</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm mb-2">Rideau St Location</h4>
+                <p>606 Rideau St, Ottawa, ON K1N 6A2</p>
+                <p class="mt-1">📞 (613) 241-1400</p>
+                <p class="text-zinc-500 mt-1">Mon–Sun: 11:30 AM – 10:00 PM</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm mb-2">Bank St Location</h4>
+                <p>1563 Bank St, Ottawa, ON K1H 7Z3</p>
+                <p class="mt-1">📞 (613) 421-4005</p>
+                <p class="text-zinc-500 mt-1">Mon–Sun: 12:00 PM – 10:00 PM</p>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto text-center border-t border-white/5 pt-6 text-[11px] text-zinc-500">
+            © 2026 Margo Caribbean & Canadian Restaurant. All Rights Reserved. Ottawa, Ontario.
+        </div>
+    </footer>
+
+    <script>
+        const slider = document.getElementById('headcount');
+        const countDisplay = document.getElementById('guestCountDisplay');
+        const totalDisplay = document.getElementById('cateringTotalDisplay');
+        const depositDisplay = document.getElementById('cateringDepositDisplay');
+
+        function updateCateringTotal() {
+            const count = parseInt(slider.value, 10);
+            const tierRadio = document.querySelector('input[name="cateringTier"]:checked');
+            const pricePerGuest = parseInt(tierRadio ? tierRadio.value : 24, 10);
+            const total = count * pricePerGuest;
+            const deposit = total * 0.5;
+
+            countDisplay.textContent = count + ' Guests';
+            totalDisplay.textContent = '$' + total.toLocaleString('en-CA') + ' CAD';
+            depositDisplay.textContent = '$' + deposit.toLocaleString('en-CA') + ' CAD';
+
+            // Visual active borders
+            document.querySelectorAll('input[name="cateringTier"]').forEach(r => {
+                const p = r.closest('label');
+                if (r.checked) {
+                    p.classList.add('border-margo-gold/40', 'bg-zinc-800/80');
+                    p.classList.remove('border-white/10', 'bg-zinc-800/40');
+                } else {
+                    p.classList.remove('border-margo-gold/40', 'bg-zinc-800/80');
+                    p.classList.add('border-white/10', 'bg-zinc-800/40');
+                }
+            });
+        }
+
+        slider.addEventListener('input', updateCateringTotal);
+        updateCateringTotal();
+
+        function addToOrder(dishName, price) {
+            alert('Added 1x ' + dishName + ' ($' + price + ' CAD) to your direct order cart!');
+        }
+
+        function openCateringModal() {
+            const count = slider.value;
+            const total = totalDisplay.textContent;
+            const dep = depositDisplay.textContent;
+            const text = encodeURIComponent('Hello Kivenson, I am interested in catering for ' + count + ' guests. Estimated total: ' + total + ' (Deposit: ' + dep + ').');
+            window.open('https://wa.me/16132411400?text=' + text, '_blank');
+        }
+    </script>
+</body>
+</html>

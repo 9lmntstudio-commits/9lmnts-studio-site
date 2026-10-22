@@ -35,14 +35,7 @@ const filesToCopy = [
   'package.json',
   'netlify.toml',
   '_redirects',
-  'styles.css',
-  'demo-client.html',
-  'workerbee.html',
-  'handyman.html',
-  'reception.html',
-  'darnley.html',
-  '04_Runway_OS_Fashion_Battle.html',
-  'fashion.html'
+  'styles.css'
 ];
 
 for (const f of filesToCopy) {

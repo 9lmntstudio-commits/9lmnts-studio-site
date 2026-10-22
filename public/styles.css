@@ -150,9 +150,16 @@ li { margin-bottom: .35em; }
   font-weight: 600; font-size: 15px; border: 1px solid transparent;
   cursor: pointer; transition: transform .18s cubic-bezier(0.16, 1, 0.3, 1), background .2s, border-color .2s, box-shadow .2s;
   font-family: var(--body);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 .btn:hover { transform: translateY(-2px); }
-.btn:active { transform: translateY(0); }
+.btn:active { transform: scale(0.97); }
+.card:active, .showcase-card:active, .station-card:active { transform: scale(0.99); }
+.price, .stat .num, table.compare td {
+  font-feature-settings: "tnum" 1, "cv05" 1;
+  font-variant-numeric: tabular-nums;
+}
 .btn-primary {
   background: var(--flame); color: #fff;
   border-color: rgba(255, 255, 255, 0.2);

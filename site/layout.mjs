@@ -48,15 +48,15 @@ const NAV = [
 ];
 
 const STATIONS = [
-  { num: '01', title: 'Project LOA Universe', tag: 'UE 5.7 · Anime Action RPG', desc: '3026 Neo-Ottawa cyber-industrial dystopia. Damian Kane mastering Blink-Strike mechanics against corrupted AI entity LOA.', href: '/darnley.html' },
-  { num: '02', title: 'Original Audio Vault', tag: 'Lossless Multitrack Stems', desc: 'High-fidelity audio deck with real-time waveform visualizers, Suno original productions, and stem sync licensing.', href: '/demos/sound-clash-arena.html' },
+  { num: '01', title: 'Project LOA Universe', tag: 'UE 5.7 · Anime Action RPG', desc: '3026 Neo-Ottawa cyber-industrial dystopia. Damian Kane mastering Blink-Strike mechanics against corrupted AI entity LOA.', href: '/work/' },
+  { num: '02', title: 'Original Audio Vault', tag: 'Lossless Multitrack Stems', desc: 'High-fidelity audio deck with real-time waveform visualizers, Suno original productions, and stem sync licensing.', href: '/work/' },
   { num: '03', title: 'Productized Agency Sprints', tag: '7-Day Turnkey MVP', desc: 'Websites that book customers for you. Launch Page ($1,800), Growth Website ($4,500 ⭐), Signature System ($8,500).', href: '/services/' },
-  { num: '04', title: 'AI Voice & Dispatch CRM', tag: '9LMNTS Dispatch Audio · Sub-Second', desc: 'Autonomous bidirectional voice operator trained on 9LMNTS services, instant quote dispatch, and SMS/DM keyword funnels.', href: '/demos/event-revenue-dashboard.html' },
-  { num: '05', title: 'Event OS Universal Showcase', tag: 'Dual-Telemetry Engine', desc: 'Full-stack tournament infrastructure syncing Mobile Spectator Arena with Organizer Jumbotron Sync via WebSockets.', href: '/demos/sound-clash-arena.html' },
-  { num: '06', title: 'The Helm / Darnley Sanon', tag: 'Creative Director Dossier', desc: 'Decade-long design standard combining Hip-Hop culture with AI automation. Access to protected /admin operator portal.', href: '/admin/' },
-  { num: '07', title: 'Sound Clash OS Arena', tag: '8-Contender Live Bracket', desc: 'Head-to-head live DJ battle engine with dynamic crowd vote meters, QR tipping jars, and automated 70/30 pot surges.', href: '/demos/sound-clash-arena.html' },
-  { num: '08', title: 'January 2027 Double-Header', tag: 'Lansdowne & 70 Bongard', desc: 'Night 1: DARNLEY Runway OS (500 seated). Night 2: Corporate Clash / Pitch OS (250 investors). Powered by Worker Bee OS.', href: '/darnley.html' },
-  { num: '09', title: 'Artist OS Creator HQ', tag: 'Commission-Free Platform', desc: '24/7 sovereign digital platform for recording artists, WAV stem licensing, direct fan tipping, and automated yield ledgers.', href: '/workerbee.html' },
+  { num: '04', title: 'AI Voice & Dispatch CRM', tag: '9LMNTS Dispatch Audio · Sub-Second', desc: 'Autonomous bidirectional voice operator trained on 9LMNTS services, instant quote dispatch, and SMS/DM keyword funnels.', href: '/os/' },
+  { num: '05', title: 'Event OS Universal Showcase', tag: 'Dual-Telemetry Engine', desc: 'Full-stack tournament infrastructure syncing Mobile Spectator Arena with Organizer Jumbotron Sync via WebSockets.', href: '/work/' },
+  { num: '06', title: 'The Helm / Darnley Sanon', tag: 'Creative Director Dossier', desc: 'Decade-long design standard combining Hip-Hop culture with AI automation. Access to protected /admin operator portal.', href: '/about/' },
+  { num: '07', title: 'Sound Clash OS Arena', tag: '8-Contender Live Bracket', desc: 'Head-to-head live DJ battle engine with dynamic crowd vote meters, QR tipping jars, and automated 70/30 pot surges.', href: '/work/' },
+  { num: '08', title: 'January 2027 Double-Header', tag: 'Lansdowne & 70 Bongard', desc: 'Night 1: DARNLEY Runway OS (500 seated). Night 2: Corporate Clash / Pitch OS (250 investors). Powered by Worker Bee OS.', href: '/work/' },
+  { num: '09', title: 'Artist OS Creator HQ', tag: 'Commission-Free Platform', desc: '24/7 sovereign digital platform for recording artists, WAV stem licensing, direct fan tipping, and automated yield ledgers.', href: '/os/' },
 ];
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -153,7 +153,7 @@ ${body}
       </div>
       <div><h4>Studio</h4><ul>
         <li><a href="/services/">Services &amp; Pricing</a></li><li><a href="/work/">Work &amp; Prototypes</a></li><li><a href="/process/">3-Sprint Process</a></li>
-        <li><a href="/embeds/">Intake Embeds</a></li><li><a href="/darnley.html" target="_blank">Darnley Atelier ↗</a></li><li><a href="/about/">About &amp; Manifesto</a></li><li><a href="/faq/">FAQ</a></li></ul></div>
+        <li><a href="/embeds/">Intake Embeds</a></li><li><a href="/os/">9LMNTS Studio OS</a></li><li><a href="/about/">About &amp; Manifesto</a></li><li><a href="/faq/">FAQ</a></li></ul></div>
       <div><h4>Clients</h4><ul>
         <li><a href="/audit/">Free 60s Video Audit</a></li><li><a href="/contact/">Book a Call</a></li><li><a href="/start/">Client Onboarding</a></li>
         <li><a href="mailto:${SITE.email}">${SITE.email}</a></li><li><a href="${SITE.instagram}" rel="noopener" target="_blank">Instagram (@9lmntsstudio)</a></li></ul></div>

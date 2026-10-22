@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ottawa Pro Handyman & Emergency Trades — Licensed Dispatch & Repairs | Ottawa, ON</title>
+    <meta name="description" content="24/7 Licensed Ottawa Handyman & Emergency Trades. Plumbing, electrical, carpentry, drywall, and commercial property maintenance. On-site in under 60 minutes.">
+
+    <!-- Fonts: Archivo Black (Heavy Industrial) + Inter (Clean Work Orders) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS with Industrial Trade Tokens -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        trade: {
+                            amber: '#F59E0B',
+                            darkamber: '#D97706',
+                            navy: '#0A192F',
+                            deepnavy: '#060D17',
+                            steel: '#334155',
+                            slate: '#64748B',
+                            lightslate: '#F1F5F9',
+                            danger: '#DC2626'
+                        }
+                    },
+                    fontFamily: {
+                        heavy: ['Archivo', '-apple-system', 'sans-serif'],
+                        sans: ['Inter', '-apple-system', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background-color: #060D17;
+            color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+        }
+        .trade-hazard-strip {
+            background: repeating-linear-gradient(
+                -45deg,
+                #F59E0B,
+                #F59E0B 12px,
+                #D97706 12px,
+                #D97706 24px
+            );
+        }
+        .service-card {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            transition: all 0.2s ease;
+        }
+        .service-card:hover {
+            border-color: #F59E0B;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(245, 158, 11, 0.2);
+        }
+    </style>
+</head>
+<body class="selection:bg-trade-amber selection:text-black pb-24">
+
+    <!-- Top Emergency Dispatch Banner -->
+    <div class="bg-trade-amber text-trade-deepnavy text-xs py-2 px-4 font-heavy font-black uppercase tracking-wider text-center flex items-center justify-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-trade-danger animate-ping"></span>
+        <span>24/7 OTTAWA EMERGENCY TRADES DISPATCH: (613) 555-0188 · AVERAGE RESPONSE: 42 MINUTES</span>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-trade-deepnavy/95 backdrop-blur-md border-b border-trade-steel px-6 py-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-trade-amber flex items-center justify-center font-heavy font-black text-trade-deepnavy text-xl shadow-md">
+                    OP
+                </div>
+                <div>
+                    <span class="font-heavy font-black text-xl tracking-tight text-white block leading-none">OTTAWA PRO</span>
+                    <span class="text-[10px] tracking-widest text-trade-amber font-heavy font-bold uppercase">Handyman & Emergency Trades</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-xs font-heavy font-bold uppercase tracking-wider text-slate-300">
+                <a href="#services" class="hover:text-trade-amber transition-colors">Trade Services</a>
+                <a href="#dispatch" class="hover:text-trade-amber transition-colors">Instant Dispatch</a>
+                <a href="#rates" class="hover:text-trade-amber transition-colors">Flat Rates</a>
+                <a href="#credentials" class="hover:text-trade-amber transition-colors">WSIB & Licensing</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="tel:6135550188" class="hidden sm:inline-flex items-center gap-2 text-xs font-heavy font-bold uppercase tracking-wider px-4 py-2 rounded-lg bg-trade-amber/10 border border-trade-amber text-trade-amber hover:bg-trade-amber hover:text-black transition-colors">
+                    📞 (613) 555-0188
+                </a>
+                <a href="#dispatch" class="px-5 py-2.5 rounded-lg bg-trade-amber hover:bg-trade-darkamber text-trade-deepnavy font-heavy font-black text-xs uppercase tracking-wider shadow-lg transition-all">
+                    Book Tradesman ↗
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-16 sm:py-24 px-6 border-b border-trade-steel/50 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-trade-navy border border-trade-amber/30 text-xs font-heavy font-bold uppercase text-trade-amber mb-6">
+                <span>⚡ Certified Master Trades · Fully Licensed & WSIB Insured</span>
+            </div>
+
+            <h1 class="font-heavy text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-[1.05]">
+                Licensed Ottawa Tradesmen. <br>
+                <span class="text-trade-amber">At Your Door in 60 Minutes.</span>
+            </h1>
+
+            <p class="mt-6 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                Emergency plumbing, electrical fixes, drywall patching, door repairs, and facility maintenance. No voicemail tags, no hidden hourly surprises. Flat-rate diagnostics with guaranteed workmanship.
+            </p>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <a href="#dispatch" class="px-8 py-3.5 rounded-lg bg-trade-amber hover:bg-trade-darkamber text-trade-deepnavy font-heavy font-black text-xs uppercase tracking-wider shadow-lg transition-all">
+                    Request 60-Minute Emergency Dispatch ↘
+                </a>
+                <a href="#rates" class="px-8 py-3.5 rounded-lg bg-trade-navy border border-trade-steel hover:border-trade-amber text-white font-heavy font-bold text-xs uppercase tracking-wider transition-all">
+                    View Transparent Flat-Rate Pricing ↗
+                </a>
+            </div>
+
+            <!-- Credentials Strip -->
+            <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
+                <div class="p-3.5 rounded-lg bg-trade-navy/80 border border-white/5">
+                    <div class="text-[11px] text-trade-amber font-heavy font-bold">WSIB COVERAGE</div>
+                    <div class="text-sm font-bold text-white mt-0.5">100% Insured Crew</div>
+                </div>
+                <div class="p-3.5 rounded-lg bg-trade-navy/80 border border-white/5">
+                    <div class="text-[11px] text-trade-amber font-heavy font-bold">COMMERCIAL LIABILITY</div>
+                    <div class="text-sm font-bold text-white mt-0.5">$5,000,000 Policy</div>
+                </div>
+                <div class="p-3.5 rounded-lg bg-trade-navy/80 border border-white/5">
+                    <div class="text-[11px] text-trade-amber font-heavy font-bold">WARRANTY</div>
+                    <div class="text-sm font-bold text-white mt-0.5">1-Year Labor Guarantee</div>
+                </div>
+                <div class="p-3.5 rounded-lg bg-trade-navy/80 border border-white/5">
+                    <div class="text-[11px] text-trade-amber font-heavy font-bold">SERVICE RADIUS</div>
+                    <div class="text-sm font-bold text-white mt-0.5">Ottawa & Gatineau</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section id="services" class="py-16 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-xs font-heavy font-bold uppercase tracking-widest text-trade-amber">Commercial & Residential Trades</span>
+            <h2 class="font-heavy text-3xl sm:text-4xl font-black uppercase text-white mt-1">Our Core Trade Divisions</h2>
+            <p class="text-xs text-slate-400 mt-2 max-w-md mx-auto">Equipped vans loaded with commercial tools and hardware for same-day resolution.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Service 1 -->
+            <div class="service-card rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-2xl">🔧</span>
+                        <span class="text-xs font-heavy font-bold text-trade-amber uppercase bg-trade-amber/10 px-2.5 py-1 rounded">24/7 Available</span>
+                    </div>
+                    <h3 class="font-heavy font-bold text-lg text-white uppercase">Emergency Plumbing Repair</h3>
+                    <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                        Burst pipes, stubborn drain backups, toilet rebuilding, commercial valve shutoffs, faucet leak repair, and water heater troubleshooting.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                    <span class="text-slate-400">Diagnostic Fee: $95</span>
+                    <a href="#dispatch" class="text-trade-amber font-heavy font-bold uppercase hover:underline">Dispatch Plumber →</a>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-2xl">⚡</span>
+                        <span class="text-xs font-heavy font-bold text-trade-amber uppercase bg-trade-amber/10 px-2.5 py-1 rounded">Licensed Electrician</span>
+                    </div>
+                    <h3 class="font-heavy font-bold text-lg text-white uppercase">Electrical Diagnostics & Fixtures</h3>
+                    <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                        Tripping breaker panel diagnosis, outlet & GFCI replacement, commercial LED retrofits, lighting fixture installs, and EV charger wiring.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                    <span class="text-slate-400">Diagnostic Fee: $95</span>
+                    <a href="#dispatch" class="text-trade-amber font-heavy font-bold uppercase hover:underline">Dispatch Electrician →</a>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-2xl">🪚</span>
+                        <span class="text-xs font-heavy font-bold text-trade-amber uppercase bg-trade-amber/10 px-2.5 py-1 rounded">Same-Day Patch</span>
+                    </div>
+                    <h3 class="font-heavy font-bold text-lg text-white uppercase">Drywall Patching & Framing</h3>
+                    <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                        Water damage cutout, ceiling patching, seamless taping, mudding, texture matching, and steel stud wall framing for offices and homes.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                    <span class="text-slate-400">Flat Rate per Patch</span>
+                    <a href="#dispatch" class="text-trade-amber font-heavy font-bold uppercase hover:underline">Dispatch Drywaller →</a>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-2xl">🚪</span>
+                        <span class="text-xs font-heavy font-bold text-trade-amber uppercase bg-trade-amber/10 px-2.5 py-1 rounded">Hardware & Locks</span>
+                    </div>
+                    <h3 class="font-heavy font-bold text-lg text-white uppercase">Doors, Locks & Commercial Hinges</h3>
+                    <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                        Door realignment, heavy commercial closer adjustment, deadbolt install, keyless digital locks, and weatherproofing seals.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                    <span class="text-slate-400">Fixed Rate</span>
+                    <a href="#dispatch" class="text-trade-amber font-heavy font-bold uppercase hover:underline">Book Carpenter →</a>
+                </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-2xl">🏢</span>
+                        <span class="text-xs font-heavy font-bold text-trade-amber uppercase bg-trade-amber/10 px-2.5 py-1 rounded">Commercial Retainer</span>
+                    </div>
+                    <h3 class="font-heavy font-bold text-lg text-white uppercase">Facility & Property Maintenance</h3>
+                    <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                        Multi-tenant building work orders, punch-list repairs, ceiling tile swaps, commercial bath hardware, and ongoing property upkeep.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                    <span class="text-slate-400">Custom Monthly SLA</span>
+                    <a href="#dispatch" class="text-trade-amber font-heavy font-bold uppercase hover:underline">Facility Quote →</a>
+                </div>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="service-card rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-2xl">🔨</span>
+                        <span class="text-xs font-heavy font-bold text-trade-amber uppercase bg-trade-amber/10 px-2.5 py-1 rounded">General Handyman</span>
+                    </div>
+                    <h3 class="font-heavy font-bold text-lg text-white uppercase">General Repairs & Mounting</h3>
+                    <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                        Heavy TV mounting into masonry or steel, commercial whiteboard hanging, shelving, caulking, grout repair, and assembly.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                    <span class="text-slate-400">Flat Rate / Half-Day</span>
+                    <a href="#dispatch" class="text-trade-amber font-heavy font-bold uppercase hover:underline">Book Handyman →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4-Second Instant Dispatch Request Form -->
+    <section id="dispatch" class="py-16 px-6 bg-trade-navy/60 border-t border-trade-steel">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-xs font-heavy font-bold uppercase tracking-widest text-trade-amber">Direct Field Dispatch</span>
+                <h2 class="font-heavy text-3xl sm:text-5xl font-black uppercase text-white mt-1">Book a Tradesman in 60 Seconds</h2>
+                <p class="text-xs text-slate-300 mt-2">Our dispatch team verifies your work order and assigns the nearest Ottawa van directly.</p>
+            </div>
+
+            <form class="p-8 rounded-2xl bg-trade-deepnavy border border-trade-steel/80 shadow-2xl space-y-6" onsubmit="event.preventDefault(); submitDispatch();">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-heavy font-bold uppercase text-slate-300 mb-2">Trade Required *</label>
+                        <select id="tradeType" class="w-full px-4 py-3 rounded-lg bg-trade-navy border border-trade-steel text-white text-sm focus:border-trade-amber focus:outline-none">
+                            <option value="Plumbing">Emergency Plumbing Repair</option>
+                            <option value="Electrical">Electrical Troubleshooting & Fixtures</option>
+                            <option value="Drywall">Drywall Repair & Painting</option>
+                            <option value="Carpentry">Doors, Locks & Carpentry</option>
+                            <option value="General Handyman">General Handyman Maintenance</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-heavy font-bold uppercase text-slate-300 mb-2">Urgency Level *</label>
+                        <select id="urgency" class="w-full px-4 py-3 rounded-lg bg-trade-navy border border-trade-steel text-white text-sm focus:border-trade-amber focus:outline-none">
+                            <option value="Immediate (<60 min)">🚨 Emergency: On-Site in Under 60 Mins</option>
+                            <option value="Same Day">Same-Day Service Call (Next 4 Hours)</option>
+                            <option value="Scheduled">Scheduled Appointment (Select Date)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-heavy font-bold uppercase text-slate-300 mb-2">Your Name / Property Manager *</label>
+                        <input type="text" id="custName" placeholder="e.g. Jean-Luc or Ottawa Landlord" required class="w-full px-4 py-3 rounded-lg bg-trade-navy border border-trade-steel text-white text-sm focus:border-trade-amber focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-heavy font-bold uppercase text-slate-300 mb-2">Phone Number for Dispatch Alert *</label>
+                        <input type="tel" id="custPhone" placeholder="(613) 555-0100" required class="w-full px-4 py-3 rounded-lg bg-trade-navy border border-trade-steel text-white text-sm focus:border-trade-amber focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-heavy font-bold uppercase text-slate-300 mb-2">Job Site Address & Unit # (Ottawa / Gatineau) *</label>
+                    <input type="text" id="custAddress" placeholder="e.g. 450 Bank St, Unit 3B, Ottawa" required class="w-full px-4 py-3 rounded-lg bg-trade-navy border border-trade-steel text-white text-sm focus:border-trade-amber focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-heavy font-bold uppercase text-slate-300 mb-2">Brief Description of the Problem</label>
+                    <textarea id="custProblem" rows="3" placeholder="e.g. Main shutoff valve leaking under bathroom sink, need technician immediately." class="w-full px-4 py-3 rounded-lg bg-trade-navy border border-trade-steel text-white text-sm focus:border-trade-amber focus:outline-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-lg bg-trade-amber hover:bg-trade-darkamber text-trade-deepnavy font-heavy font-black text-sm uppercase tracking-wider shadow-xl transition-all">
+                    Transmit Dispatch Order to Lead Van ⚡
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Pricing Rates -->
+    <section id="rates" class="py-16 px-6 max-w-4xl mx-auto text-center">
+        <span class="text-xs font-heavy font-bold uppercase tracking-widest text-trade-amber">Zero Surprise Billing</span>
+        <h2 class="font-heavy text-3xl font-black uppercase text-white mt-1">Standard Ottawa Rate Card</h2>
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
+            <div class="p-6 rounded-xl bg-trade-navy border border-trade-steel">
+                <div class="text-xs font-heavy font-bold text-trade-amber uppercase">DIAGNOSTIC SERVICE CALL</div>
+                <div class="font-heavy text-3xl font-black text-white mt-2">$95 <small class="text-xs font-normal text-slate-400">CAD</small></div>
+                <p class="text-xs text-slate-400 mt-2">Includes van travel, complete problem diagnosis, and upfront guaranteed repair quote.</p>
+            </div>
+
+            <div class="p-6 rounded-xl bg-trade-navy border border-trade-amber/50">
+                <div class="text-xs font-heavy font-bold text-trade-amber uppercase">STANDARD HOURLY TRADE</div>
+                <div class="font-heavy text-3xl font-black text-white mt-2">$85 <small class="text-xs font-normal text-slate-400">CAD/hr</small></div>
+                <p class="text-xs text-slate-400 mt-2">Billed in clean 30-min increments after 1st hour. Zero travel markup within Ottawa/Gatineau.</p>
+            </div>
+
+            <div class="p-6 rounded-xl bg-trade-navy border border-trade-steel">
+                <div class="text-xs font-heavy font-bold text-trade-amber uppercase">EMERGENCY AFTER-HOURS</div>
+                <div class="font-heavy text-3xl font-black text-white mt-2">$145 <small class="text-xs font-normal text-slate-400">CAD/hr</small></div>
+                <p class="text-xs text-slate-400 mt-2">Active between 8:00 PM – 6:00 AM & statutory holidays. Rapid van response guarantee.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-trade-steel pt-10 pb-6 px-6 text-xs text-slate-400 bg-trade-deepnavy">
+        <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-6">
+            <div>
+                <span class="font-heavy font-black text-white uppercase text-sm">Ottawa Pro Handyman & Emergency Trades</span>
+                <p class="text-slate-500 mt-1">Licensed, Insured, Bonded. Serving Nepean, Kanata, Orleans, Centretown & Gatineau.</p>
+            </div>
+            <div class="text-right">
+                <span class="font-heavy font-bold text-trade-amber">DISPATCH HOTLINE: (613) 555-0188</span>
+                <p class="text-slate-500 mt-1">© 2026 Ottawa Pro Trades Corp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function submitDispatch() {
+            const trade = document.getElementById('tradeType').value;
+            const urgency = document.getElementById('urgency').value;
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const address = document.getElementById('custAddress').value;
+            const problem = document.getElementById('custProblem').value;
+
+            const text = encodeURIComponent(
+                `🚨 NEW DISPATCH REQUEST:\nTrade: ${trade}\nUrgency: ${urgency}\nCustomer: ${name} (${phone})\nAddress: ${address}\nDetails: ${problem}`
+            );
+            window.open(`https://wa.me/16135550188?text=${text}`, '_blank');
+        }
+    </script>
+</body>
+</html>
