@@ -24,6 +24,9 @@ const INBOX_DIR = path.join(rootDir, '.agents', 'inbox', 'spark_queue');
 const INCOMING_DIR = path.join(INBOX_DIR, 'incoming');
 const PROCESSED_DIR = path.join(INBOX_DIR, 'processed');
 
+// Google Drive Master Spark Inbox Folder ID
+export const GOOGLE_DRIVE_SPARK_FOLDER_ID = "1Fp5IZfu3LtZL6pD35fYECSUGUqzHOTAw"; // 9LMNTS-Brain-Inbox
+
 // Ensure directory layout exists
 for (const dir of [INBOX_DIR, INCOMING_DIR, PROCESSED_DIR]) {
   if (!fs.existsSync(dir)) {
@@ -101,6 +104,49 @@ ${rawText.trim()}
 }
 
 /**
+ * Sync from authenticated Google Drive folder (9LMNTS-Brain-Inbox)
+ */
+function syncGoogleDrive() {
+  const gdriveCmd = 'C:\\Users\\Darnl\\.gemini\\config\\plugins\\gdrive\\skills\\gdrive\\scripts\\gdrive.cmd';
+  if (!fs.existsSync(gdriveCmd)) {
+    console.log("• gdrive CLI not found at default plugin path.");
+    return [];
+  }
+
+  try {
+    const listJson = execSync(`"${gdriveCmd}" readonly search --parent-id ${GOOGLE_DRIVE_SPARK_FOLDER_ID} --json`, { encoding: 'utf8' });
+    const files = JSON.parse(listJson.trim() || '[]');
+    if (!Array.isArray(files) || files.length === 0) {
+      console.log(`• Google Drive '9LMNTS-Brain-Inbox' is clean (0 pending files).`);
+      return [];
+    }
+
+    console.log(`✓ Found ${files.length} remote file(s) in 9LMNTS-Brain-Inbox.`);
+    const downloaded = [];
+
+    for (const f of files) {
+      console.log(`  Downloading: ${f.name} (ID: ${f.id})...`);
+      const destPath = path.join(INCOMING_DIR, `${f.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`);
+      try {
+        if (f.mimeType && f.mimeType.includes('google-apps.document')) {
+          execSync(`"${gdriveCmd}" readonly export ${f.id} --format md "${destPath}.md"`, { stdio: 'ignore' });
+          downloaded.push(`${f.name}.md`);
+        } else {
+          execSync(`"${gdriveCmd}" readonly download ${f.id} --dest "${INCOMING_DIR}"`, { stdio: 'ignore' });
+          downloaded.push(f.name);
+        }
+      } catch (err) {
+        console.error(`  Warning: Could not download ${f.name}:`, err.message);
+      }
+    }
+    return downloaded;
+  } catch (err) {
+    console.error("• Google Drive sync check failed:", err.message);
+    return [];
+  }
+}
+
+/**
  * Scan incoming folder for new .md or .txt files
  */
 function scanIncomingSparks() {
@@ -148,6 +194,12 @@ if (sparkIdx !== -1 && args[sparkIdx + 1]) {
   process.exit(0);
 }
 
+// Check for Google Drive sync flag or default check
+if (args.includes('--drive') || args.includes('-d')) {
+  console.log("• Syncing with Google Drive (Folder: 9LMNTS-Brain-Inbox)...");
+  syncGoogleDrive();
+}
+
 // Scan incoming folder
 const processed = scanIncomingSparks();
 if (processed.length > 0) {
@@ -158,9 +210,10 @@ if (processed.length > 0) {
   }
 } else {
   console.log("• No pending files in .agents/inbox/spark_queue/incoming/");
-  console.log("• To ingest a spark directly from mobile or terminal, run:");
-  console.log('    node scripts/sync-spark-inbox.mjs --spark "Your spark notes here"');
-  console.log("  Or drop any .txt/.md file into .agents/inbox/spark_queue/incoming/");
+  console.log("• Available Triggers:");
+  console.log('    1. Google Drive: node scripts/sync-spark-inbox.mjs --drive');
+  console.log('    2. CLI Prompt:   node scripts/sync-spark-inbox.mjs --spark "Your spark notes"');
+  console.log("    3. Local File:   Drop any .txt/.md into .agents/inbox/spark_queue/incoming/");
 }
 
 console.log("===============================================================");
