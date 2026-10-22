@@ -13,6 +13,8 @@ antigravity-backup/
 .system_generated/
 
 # Local IDE / OS
+.env
+.env.*
 .vscode/
 .idea/
 Thumbs.db
