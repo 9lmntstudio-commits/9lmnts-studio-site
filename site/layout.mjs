@@ -170,6 +170,7 @@ ${body}
 </footer>
 <script src="/main.js" defer></script>
 <script src="/js/gemini-live-operator.js" defer></script>
+<script src="/js/client-preview-modal.js" defer></script>
 </body>
 </html>`;
 }

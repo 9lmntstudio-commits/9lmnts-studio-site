@@ -336,6 +336,9 @@ const homeHtml = layout({
     <div class="grid g4">
       ${PACKAGES.map((p, i) => packageCard(p, i)).join('')}
     </div>
+    <div style="margin-top:20px;text-align:center">
+      <span class="mono dim" style="font-size:12px">🛡️ Transparent Payment Rails: Quick Fix (100% upfront) · Launch Page (50/50 rail) · Growth Website &amp; Signature System (40% kickoff / 30% staging / 30% launch) · Desjardins Interac Autodeposit</span>
+    </div>
   </div></section>
 
   <!-- Live Vertical Showcases (Rich Cinematic Photography) -->
@@ -761,6 +764,9 @@ const servicesHtml = layout({
   <section class="section-tight"><div class="container">
     <div class="grid g4">
       ${PACKAGES.map((p, i) => packageCard(p, i)).join('')}
+    </div>
+    <div style="margin-top:20px;text-align:center">
+      <span class="mono dim" style="font-size:12px">🛡️ Transparent Payment Rails: Quick Fix (100% upfront) · Launch Page (50/50 rail) · Growth Website &amp; Signature System (40% kickoff / 30% staging / 30% launch) · Desjardins Interac Autodeposit</span>
     </div>
   </div></section>
 
@@ -2174,6 +2180,36 @@ const contactHtml = layout({
             <option value="quick-fix">Quick Fix / Modular Intake Widget ($500 CAD)</option>
             <option value="custom">Custom Commercial Architecture</option>
           </select>
+          <div id="pkgBreakdown" class="pkg-breakdown-card">
+            <div class="pbd-head">
+              <div>
+                <span class="pbd-kicker">SELECTED TIER</span>
+                <h4>Growth Website ⭐ (Most Popular)</h4>
+              </div>
+              <div class="pbd-price">$4,500 <small>CAD</small></div>
+            </div>
+            <div class="pbd-grid">
+              <div class="pbd-item">
+                <span class="pbd-lbl">Upfront Kickoff Deposit</span>
+                <span class="pbd-val accent">$1,800 CAD (40% to start)</span>
+              </div>
+              <div class="pbd-item">
+                <span class="pbd-lbl">Milestone Rail</span>
+                <span class="pbd-val">40% kickoff ($1,800) · 30% staging ($1,350) · 30% launch ($1,350)</span>
+              </div>
+              <div class="pbd-item">
+                <span class="pbd-lbl">Launch Turnaround</span>
+                <span class="pbd-val">3–4 weeks</span>
+              </div>
+              <div class="pbd-item">
+                <span class="pbd-lbl">Payment Method</span>
+                <span class="pbd-val ok">Desjardins Interac Autodeposit</span>
+              </div>
+            </div>
+            <div class="pbd-note">
+              🔒 <b>100% Protection Guarantee:</b> Official numbered invoice + signed milestone agreement required before any work begins.
+            </div>
+          </div>
         </div>
         <div class="field">
           <label for="cNotes">Tell us about your project</label>
@@ -2182,11 +2218,38 @@ const contactHtml = layout({
         <button class="btn btn-primary" type="submit" style="width:100%">Submit Inquiry <span class="arrow">↗</span></button>
         <span class="form-note">🔒 We review inquiries within 24 hours and will email you back with next steps.</span>
       </form>
+
+      <!-- 3-Point Client Protection Protocol -->
+      <div class="trust-shield-card">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:22px">🛡️</span>
+          <h4>Zero-Risk Kickoff &amp; Deposit Guarantee</h4>
+        </div>
+        <ul class="trust-list">
+          <li>✅ <b>Free 15-Minute Diagnostic Call:</b> Complete architectural blueprint before any commitment.</li>
+          <li>✅ <b>Signed Agreement &amp; Numbered Invoice:</b> Documented scope, revision rounds, and milestone gates.</li>
+          <li>✅ <b>Desjardins Domestic Autodeposit:</b> Official Canadian commercial rail (no passwords, instant receipt).</li>
+          <li>✅ <b>100% Code &amp; Domain Ownership:</b> Full intellectual property transferred to you upon final launch.</li>
+        </ul>
+      </div>
     </div>
 
     <!-- Direct Channels & Payment Info -->
     <div>
       <div class="grid">
+        <div class="card reveal" style="border-color:rgba(255,85,0,0.35);background:rgba(255,85,0,0.04)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <span class="kicker" style="margin:0">Direct Dispatch</span>
+            <span class="badge green">● Instant Call / Text</span>
+          </div>
+          <h4 style="margin:4px 0 10px">(613) 909-4038</h4>
+          <p style="font-size:14px;margin-bottom:14px">Direct studio line for urgent questions, 15-minute diagnostic bookings, or Ottawa emergency trades dispatches.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="tel:+16139094038" style="padding:8px 16px;font-size:13px">Call / Text Direct <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="https://wa.me/16139094038?text=Hi%20Darnley,%20I'm%20interested%20in%20a%20website%20build%20with%209LMNTS%20Studio." target="_blank" rel="noopener" style="padding:8px 16px;font-size:13px">WhatsApp <span class="arrow">↗</span></a>
+          </div>
+        </div>
+
         <div class="card reveal">
           <span class="kicker">Direct Email</span>
           <h4 style="margin:4px 0 10px">${SITE.email}</h4>
