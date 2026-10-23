@@ -168,80 +168,161 @@ const homeHtml = layout({
     <div class="hero-bg-mesh"></div>
     <div class="container"><div class="hero-grid">
       <div>
-        <span class="eyebrow"><span class="dot"></span> Digital Architecture &amp; Client Acquisition</span>
-        <h1>We Build Systems <span class="soft">That</span><br><span class="accent">Generate Cash.</span></h1>
-        <p class="lead">We architect high-converting digital platforms and zero-friction client acquisition systems for Ottawa service businesses. Rapid 2–4 week turnaround. Enterprise execution.</p>
+        <span class="eyebrow"><span class="beacon-green-dot"></span> DIGITAL ARCHITECTURE &amp; SYSTEMS</span>
+        <h1 class="hero-title">We Build<br>Systems <span class="soft-stroke">That</span><br>Generate<br>Cash.</h1>
+        <p class="lead">We architect high-converting digital platforms and zero-friction client acquisition systems. Rapid liquidity. Enterprise execution.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="/services/">Claim A System <span class="arrow">↗</span></a>
-          <a class="btn btn-ghost" href="/work/">View Live Work <span class="arrow">↗</span></a>
-          <a class="btn btn-ghost" href="/contact/">Book A Call <span class="arrow">↗</span></a>
+          <a class="btn btn-claim" href="/services/">Claim A System <span class="arrow">↗</span></a>
+          <a class="btn btn-view-work" href="/work/">View Live Work <span class="arrow">↗</span></a>
         </div>
-        <div class="hero-note">
-          <span class="mono">📍 Ottawa, ON · Founder-Led · Desjardins Interac Rail</span>
+        <div class="hero-subnote">
+          <span class="clock-icon">🕒</span> <span>Ottawa-built systems for operators and creators.</span>
         </div>
       </div>
       <div>
-        <!-- Live Studio Workbench Preview Card -->
-        <div class="workbench">
-          <div class="wb-head">
-            <span><span class="accent">9</span> STUDIO WORKBENCH</span>
-            <span>OTTAWA / ARCHITECTURE VIEW 01-03</span>
-          </div>
-          <div class="wb-body">
-            <div class="mono dim" style="font-size:11px">WORKSPACE / ACTIVE AIRSPACE</div>
-            <div class="wb-title">Built around the customer conversion handoff.</div>
-            <div class="wb-row">
-              <div class="wb-cell">
-                <div>LEAD FLOW / 01</div>
-                <div class="big accent">01 <span style="font-size:14px;color:var(--text)">INTAKE</span></div>
-                <p class="dim" style="margin:4px 0 0;font-size:10px">Capture → Qualify → Route</p>
+        <!-- Live Studio Workbench Pixel-Perfect Bento Box (Image 2 Replica) -->
+        <div class="workbench-wrapper reveal">
+          <div class="workbench">
+            <div class="wb-head">
+              <div class="wb-brand-badge">
+                <span class="wb-logo-square">9</span>
+                <span>STUDIO WORKBENCH</span>
               </div>
-              <div class="wb-cell">
-                <div>MOBILE CONVERSION</div>
-                <div class="bar"><span></span></div>
-                <p class="dim" style="margin:0;font-size:10px">ZERO FRICTION DROP-OFF</p>
+              <div class="wb-view-tag">LOCAL / ARCHITECTURE VIEW <span class="dim">01-03</span></div>
+            </div>
+            <div class="wb-body">
+              <div class="wb-meta-row">
+                <span>WORKSPACE / OTTAWA</span>
+                <span>SYSTEM MAP PREVIEW</span>
+              </div>
+              <div class="wb-title">Built around the next move.</div>
+              
+              <div class="wb-row">
+                <!-- Nested Card 1: Lead Flow -->
+                <div class="wb-subcard">
+                  <div class="wb-subcard-head"><span class="icon">🔗</span> LEAD FLOW / 01</div>
+                  <div class="wb-intake-hero"><span class="big-num">01</span> <span class="intake-txt">INTAKE</span></div>
+                  <div class="wb-bullet"><span class="beacon-green-dot"></span> Capture → qualify → route</div>
+                  <div class="wb-subcard-foot">
+                    <span>FRICTION POINTS</span>
+                    <span class="accent-orange">MAP &amp; REMOVE</span>
+                  </div>
+                </div>
+
+                <!-- Nested Card 2: System Layers & Interactive Voice Trigger -->
+                <div class="wb-subcard">
+                  <div class="wb-subcard-head"><span class="icon">☵</span> SYSTEM LAYERS</div>
+                  <div class="wb-radar-visual">
+                    <div class="wb-layer-track"><span class="wb-layer-fill"></span></div>
+                    <div class="wb-radar-orb" id="heroVoiceRadarTrigger" title="Click to Talk to 9LMNTS AI Voice Operator">
+                      <span class="radar-beacon">((o))</span>
+                    </div>
+                  </div>
+                  <div class="wb-subcard-foot">
+                    <span>ONE CLEAR PATH</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Platform Components Modular Table -->
+              <div class="wb-table-box">
+                <div class="wb-table-head">
+                  <span>PLATFORM COMPONENTS</span>
+                  <span>MODULAR / 03</span>
+                </div>
+                <div class="wb-table-row">
+                  <div class="wb-t-left"><span class="row-num">01</span> <span>CONVERSION-FIRST PAGES</span></div>
+                  <span class="row-status">STRUCTURE</span>
+                </div>
+                <div class="wb-table-row">
+                  <div class="wb-t-left"><span class="row-num">02</span> <span>CLIENT INTAKE &amp; BOOKING</span></div>
+                  <span class="row-status">CAPTURE</span>
+                </div>
+                <div class="wb-table-row">
+                  <div class="wb-t-left"><span class="row-num">03</span> <span>CONNECTED BUSINESS TOOLS</span></div>
+                  <span class="row-status">OPERATE</span>
+                </div>
               </div>
             </div>
-            <div class="wb-list">
-              <div><span>01 CONVERSION-FIRST PAGES</span><span class="ok">OPTIMIZED</span></div>
-              <div><span>02 CLIENT INTAKE &amp; BOOKING MODAL</span><span class="ok">LIVE MODAL</span></div>
-              <div><span>03 CONNECTED BUSINESS RAILS</span><span class="ok">DESJARDINS + STRIPE</span></div>
+            <div class="wb-foot">
+              <span>9LMNTS / SYSTEM PREVIEW</span>
             </div>
-          </div>
-          <div class="wb-foot">
-            <span>9LMNTS / SYSTEM TELEMETRY</span>
-            <span class="ok">● 100% OPERATIONAL</span>
-          </div>
-          <div class="wb-float">
-            <span class="accent">↘</span> <b>Friction, mapped.</b>
-            <span class="dim">Engineered for immediate cash flow.</span>
+            <!-- Floating Glass Tag -->
+            <div class="wb-float">
+              <div class="wb-float-icon">↘</div>
+              <div class="wb-float-text">
+                <b>Friction, mapped.</b>
+                <span>Designed around the handoff.</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div></div>
   </section>
 
-  <!-- Telemetry Strip -->
+  <!-- Telemetry Strip (Image 2 Exact Replica) -->
   <div class="container"><div class="stats">
-    <div class="stat"><span class="num accent">3–5</span><span class="lbl">Days Average<br>Launch Turnaround</span></div>
-    <div class="stat"><span class="num">100%</span><span class="lbl">Friction Audited<br>&amp; Mobile-First</span></div>
-    <div class="stat"><span class="num accent">50%</span><span class="lbl">Interac Deposit<br>Project Protection Rail</span></div>
+    <div class="stat"><span class="num">3–5</span><span class="lbl">Days<br>Turnaround</span></div>
+    <div class="stat"><span class="num">100%</span><span class="lbl">Friction<br>Audited</span></div>
+    <div class="stat"><span class="num">50%</span><span class="lbl">Deposit<br>Rail</span></div>
   </div></div>
 
-  <!-- 3D Hardware Device Mockup Showcase -->
-  <section class="section-tight" style="padding-top:16px"><div class="container">
-    <div class="mockup-showcase reveal">
-      <img src="/assets/mockup-devices.jpg" alt="9LMNTS Studio Turnkey Operating Systems on MacBook Pro and iPhone" loading="lazy">
-      <div class="mockup-badge">
-        <span class="dot"></span>
-        <span>TURNKEY OPERATING SYSTEMS · MULTI-SURFACE DEPLOYMENT</span>
+  <!-- Turnkey Operating Systems Hardware Showcase (Image 1 Exact Replica) -->
+  <section class="section section-turnkey-stage border-top">
+    <div class="container">
+      <div class="turnkey-head">
+        <div class="pill-badge-center">
+          <span class="pill-orange">9L</span><span class="pill-white">MNTS Studio</span>
+        </div>
+        <h2 class="turnkey-title">Turnkey Operating Systems<br>Built for Real Commerce</h2>
       </div>
-      <div class="mockup-chips desktop">
-        <span class="badge green">● Sub-Second Load Speed</span>
-        <span class="badge neutral">Mobile-First Thumb Ergonomics</span>
+
+      <!-- 4K Hardware Device Mockup Display -->
+      <div class="turnkey-mockup-wrap reveal">
+        <img src="/assets/mockup-turnkey-commerce.jpg" alt="9LMNTS Studio Turnkey Operating Systems on MacBook Pro and iPhone" loading="lazy">
+        
+        <!-- Interactive 3-Card Hotspot Overlay Grid -->
+        <div class="turnkey-hotspots-grid">
+          <a class="turnkey-hotspot-card" href="/work/#handyman" title="View Handyman Dispatch OS">
+            <div class="th-inner">
+              <div class="th-top">
+                <span class="th-tag">Trades OS</span>
+                <span class="th-badge">Sub-Second</span>
+              </div>
+              <h4>Handyman Dispatch OS</h4>
+              <p>Features 0.1px border luminance with zero companion point friction.</p>
+              <span class="th-link">Open Live System <span class="arrow">↗</span></span>
+            </div>
+          </a>
+
+          <a class="turnkey-hotspot-card" href="/work/#wedding" title="View Venue & Hospitality OS">
+            <div class="th-inner">
+              <div class="th-top">
+                <span class="th-tag">Hospitality OS</span>
+                <span class="th-badge">Real-Time</span>
+              </div>
+              <h4>Venue OS</h4>
+              <p>Exclusive 1px border luminance with deep-red accent highlights.</p>
+              <span class="th-link">Explore Venue Rail <span class="arrow">↗</span></span>
+            </div>
+          </a>
+
+          <a class="turnkey-hotspot-card" href="https://clash.9lmntsstudio.com" target="_blank" rel="noopener" title="Open Sound Clash Arena">
+            <div class="th-inner">
+              <div class="th-top">
+                <span class="th-tag">Battle OS</span>
+                <span class="th-badge live">● Live Arena</span>
+              </div>
+              <h4>Sound Clash Arena</h4>
+              <p>Immersive 1px border luminance with live sound clash heat highlights.</p>
+              <span class="th-link">Enter Sound Clash <span class="arrow">↗</span></span>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
-  </div></section>
+  </section>
 
   <!-- Commercial Offerings Bento Grid -->
   <section class="section section-offerings"><div class="container">
