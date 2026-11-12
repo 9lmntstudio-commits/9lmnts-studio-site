@@ -56,10 +56,51 @@
       previewImg: "/assets/mobile-clash-grand-finals.jpg",
       orderPkg: "growth-website",
       externalUrl: "https://clash.9lmntsstudio.com"
+    },
+    artist: {
+      title: "Artist OS Command Center",
+      kicker: "Live Performing Artist OS · Base44",
+      tagline: "Sovereign digital command center for performing artists with 0%-commission stem vault and live show QR tipping.",
+      price: "from $4,500 CAD (Growth Website ⭐)",
+      turnaround: "3–4 weeks",
+      deposit: "$1,800 CAD upfront via Interac",
+      features: [
+        "24-bit WAV multitrack stem vault & sync licensing ($250/stem)",
+        "Live show QR tipping booth & song request queue",
+        "First Tour Planner & integrated fan CRM",
+        "Phygital WebAR merch bundles & VIP fan club passes"
+      ],
+      previewImg: "/assets/event-os-stage.png",
+      orderPkg: "growth-website",
+      externalUrl: "https://artist.9lmntsstudio.com"
+    },
+    webar: {
+      title: "Phygital WebAR & Spatial Ad Engine",
+      kicker: "Zero-App Mobile Augmented Reality",
+      tagline: "Turn physical business cards, restaurant menus, streetwear merch, and print ads into instant 3D holographic conversion funnels.",
+      price: "from $450 – $1,500 CAD",
+      turnaround: "48 hours – 5 days",
+      deposit: "50% upfront ($225 – $750 CAD via Interac)",
+      features: [
+        "AR 3D Restaurant & Cocktail Menus ($450 CAD · iOS QuickLook & Android)",
+        "AR Holographic Business Cards + NFC vCard & Video Pitch ($500 CAD)",
+        "AR Phygital Merch & 3D Holographic Wings on 350–480 GSM Apparel ($1,500 CAD)",
+        "AR Interactive Flyers, Posters, Packaging & Sponsor Stage Ads ($1,500 CAD)"
+      ],
+      previewImg: "/assets/webar-wings-concert-fan.jpg",
+      orderPkg: "webar-suite"
     }
   };
 
   const PACKAGE_DETAILS = {
+    'webar-suite': {
+      name: 'Phygital WebAR Suite (Menus · Cards · Merch · Ads)',
+      price: '$450 – $1,500 CAD',
+      deposit: '$225 – $750 CAD (50% upfront)',
+      schedule: '50% kickoff ($225–$750) · 50% before public launch',
+      turnaround: '48 hours – 5 business days',
+      terms: 'Zero-app WebAR for 3D Menus ($450), Business Cards ($500), Merch ($1,500) or Ads ($1,500)'
+    },
     'quick-fix': {
       name: 'Quick Fix / Modular Upgrade',
       price: 'from $500 CAD',

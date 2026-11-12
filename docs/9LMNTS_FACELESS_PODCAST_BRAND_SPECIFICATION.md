@@ -211,7 +211,7 @@ The core revenue engine of the channel is an automated lead capture and service 
                    │
                    ▼
 [ Payment Lock: 50% Non-Refundable Deposit ]
-  * Canada (Domestic): Interac e-Transfer to payments@9lmntsstudio.com
+  * Canada (Domestic): Interac e-Transfer to 9lmntstudio@gmail.com
   * International: Instant Direct PayPal Business Invoice
                    │
                    ▼
@@ -232,6 +232,6 @@ The core revenue engine of the channel is an automated lead capture and service 
 ### Strict Deposit & Liquidity Rules
 1. **50% Non-Refundable Deposit:** No mockups, no code, and no strategy calls commence before the deposit is cleared.
 2. **Payment Rails:**
-   * **Primary Rail:** Interac e-Transfer to `payments@9lmntsstudio.com` (0% transaction fees, instant same-day settlement).
+   * **Primary Rail:** Interac e-Transfer to `9lmntstudio@gmail.com` (0% transaction fees, instant same-day settlement).
    * **Secondary Rail:** Direct PayPal business invoice for international clients.
 3. **Execution Cadence:** Fast turnaround (72-hour sprints) protecting agency margin and securing permanent founder liquidity.

@@ -154,14 +154,15 @@
         ]
       },
       webar_menu: {
-        title: 'WebAR Signature Menu Add-On',
-        price: '$450 CAD',
-        deposit: '$225 CAD (50% upfront deposit)',
-        turnaround: '48 Hours',
+        title: 'Phygital WebAR Commercial Suite (Menus · Cards · Merch · Ads)',
+        price: '$450 – $1,500 CAD',
+        deposit: '$225 – $750 CAD (50% upfront deposit)',
+        turnaround: '48 Hours – 5 Days',
         deliverables: [
-          '3–5 signature products or dishes rendered into interactive 3D WebAR browser models',
-          'QR code table tents & printable flyers for zero-app camera scanning',
-          'Direct Apple QuickLook & Android SceneViewer compatibility'
+          'AR 3D Restaurant & Cocktail Menus ($450 CAD · 3–5 dishes on QR table tents)',
+          'AR Holographic Business Cards ($500 CAD · 3D logo, video pitch & 1-tap vCard)',
+          'AR Phygital Merch & Streetwear ($1,500 CAD · 3D holographic wings & NFC sleeve tags)',
+          'AR Interactive Print Ads, Flyers & Event Stages ($1,500 CAD · zero-app iOS & Android)'
         ]
       }
     };

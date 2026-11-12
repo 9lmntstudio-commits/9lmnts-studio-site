@@ -10,7 +10,7 @@ description: >-
 # Netlify Vault & Zero-Free-Work Deploy Guard (`netlify-vault-deploy-guard`)
 
 ## Overview
-Protects 9LMNTS Studio's intellectual property by ensuring that custom client builds (`margo.html`, `businessmeter.html`, etc.) remain **locked in the local studio vault** until a **Signed 1-Page Sprint Contract Agreement + 50% Interac e-Transfer Deposit (`$1,100 CAD` to `9lmntsstudio@gmail.com`)** is verified.
+Protects 9LMNTS Studio's intellectual property by ensuring that custom client builds (`margo.html`, `businessmeter.html`, etc.) remain **locked in the local studio vault** until a **Signed 1-Page Sprint Contract Agreement + 50% Interac e-Transfer Deposit (`$1,100 CAD` to `9lmntstudio@gmail.com`)** is verified.
 
 ## Workflow
 

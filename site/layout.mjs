@@ -48,14 +48,14 @@ const NAV = [
 ];
 
 const STATIONS = [
-  { num: '01', title: 'Project LOA Universe', tag: 'UE 5.7 · Anime Action RPG', desc: '3026 Neo-Ottawa cyber-industrial dystopia. Damian Kane mastering Blink-Strike mechanics against corrupted AI entity LOA.', href: '/work/' },
-  { num: '02', title: 'Original Audio Vault', tag: 'Lossless Multitrack Stems', desc: 'High-fidelity audio deck with real-time waveform visualizers, Suno original productions, and stem sync licensing.', href: '/work/' },
+  { num: '01', title: 'Project LOA Universe', tag: 'UE 5.7 · Anime Action RPG', desc: '3026 Neo-Ottawa cyber-industrial dystopia. Damian Kane mastering Blink-Strike mechanics against corrupted AI entity LOA.', href: '/work/#arenas' },
+  { num: '02', title: 'Original Audio Vault', tag: 'Lossless Multitrack Stems', desc: 'High-fidelity audio deck with real-time waveform visualizers, Suno original productions, and stem sync licensing.', href: '/work/#artist-os' },
   { num: '03', title: 'Productized Agency Sprints', tag: '7-Day Turnkey MVP', desc: 'Websites that book customers for you. Launch Page ($1,800), Growth Website ($4,500 ⭐), Signature System ($8,500).', href: '/services/' },
   { num: '04', title: 'AI Voice & Dispatch CRM', tag: '9LMNTS Dispatch Audio · Sub-Second', desc: 'Autonomous bidirectional voice operator trained on 9LMNTS services, instant quote dispatch, and SMS/DM keyword funnels.', href: '/os/' },
-  { num: '05', title: 'Event OS Universal Showcase', tag: 'Dual-Telemetry Engine', desc: 'Full-stack tournament infrastructure syncing Mobile Spectator Arena with Organizer Jumbotron Sync via WebSockets.', href: '/work/' },
+  { num: '05', title: 'Event OS Universal Showcase', tag: 'Dual-Telemetry Engine', desc: 'Full-stack tournament infrastructure syncing Mobile Spectator Arena with Organizer Jumbotron Sync via WebSockets.', href: '/work/#arenas' },
   { num: '06', title: 'The Helm / Darnley Sanon', tag: 'Creative Director Dossier', desc: 'Decade-long design standard combining Hip-Hop culture with AI automation. Access to protected /admin operator portal.', href: '/about/' },
   { num: '07', title: 'Sound Clash OS Arena', tag: 'DJ Battle in a Box · Base44', desc: '8-contender live DJ sound clash tournament engine with dynamic crowd vote meters, QR tipping jars, and real-time battle telemetry.', href: 'https://clash.9lmntsstudio.com' },
-  { num: '08', title: 'January 2027 Double-Header', tag: 'Lansdowne & 70 Bongard', desc: 'Night 1: DARNLEY Runway OS (500 seated). Night 2: Corporate Clash / Pitch OS (250 investors). Powered by Worker Bee OS.', href: '/work/' },
+  { num: '08', title: 'January 2027 Double-Header', tag: 'Lansdowne & 70 Bongard', desc: 'Night 1: DARNLEY Runway OS (500 seated). Night 2: Corporate Clash / Pitch OS (250 investors). Powered by Worker Bee OS.', href: '/work/#arenas' },
   { num: '09', title: 'Artist OS Command Center', tag: 'Live Performing Artist OS · Base44', desc: 'Live command center for performing artists: WAV stem distribution, crowd tipping rails, VIP fan access, and royalty yield ledgers.', href: 'https://artist.9lmntsstudio.com' },
 ];
 
@@ -67,7 +67,7 @@ export function layout({ path, title, description, body, noindex = false }) {
   const nav = NAV.map(([href, label]) =>
     `<li><a href="${href}"${path.startsWith(href) ? ' aria-current="page"' : ''}>${label}</a></li>`).join('');
   const stationsList = STATIONS.map(s => `
-    <a class="station-card" href="${s.href}">
+    <a class="station-card" href="${s.href}"${s.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>
       <div class="station-top">
         <span class="station-num">${s.num}</span>
         <span class="station-tag">${esc(s.tag)}</span>

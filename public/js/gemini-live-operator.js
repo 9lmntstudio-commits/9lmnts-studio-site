@@ -40,6 +40,14 @@
       response: "Sound Clash OS is our live DJ battle in a box hosted on Base44 at clash.9lmntsstudio.com. It features real-time crowd QR voting, digital drink gifting, and automated 8-contender tournament bracket seeding."
     },
     {
+      keywords: ['artist', 'artist os', 'stem', 'stems', 'music', 'tour'],
+      response: "Artist OS is our sovereign live artist command center hosted at artist.9lmntsstudio.com. It equips performing artists with 24-bit WAV stem licensing at 0% commission, live show QR tipping rails, a Tour Planner, and VIP fan club passes."
+    },
+    {
+      keywords: ['ar', 'webar', 'augmented reality', 'hologram', 'business card', 'business cards', 'merch', 'menu', 'menus', 'ads', 'flyer'],
+      response: "Our Phygital WebAR & Spatial Advertising Suite delivers browser-native 3D Augmented Reality with zero app downloads across 4 high-converting verticals: 3D Restaurant & Cocktail Menus for $450 CAD, Holographic NFC & AR Business Cards for $500 CAD, Scannable Phygital Merch & Streetwear Capsules for $1,500 CAD, and Interactive AR Posters, Flyers, and Event Stage Ads for $1,500 CAD. All start with a 50% Interac deposit and launch in 48 hours to 5 days."
+    },
+    {
       keywords: ['wedding', 'reception', 'sanon'],
       response: "The Sanon Reception is our flagship Wedding OS showcase. It replaces paper programs with live ballroom table finding, instant Apple Pay honeymoon fund gifting, and real-time Best Man vs Maid of Honor speech voting."
     },
@@ -317,6 +325,8 @@
             <button class="v-quick-chip" data-prompt="How fast is your launch turnaround?">How fast do you launch?</button>
             <button class="v-quick-chip" data-prompt="Tell me about Handyman Dispatch OS.">Handyman Dispatch OS</button>
             <button class="v-quick-chip" data-prompt="Tell me about Sound Clash OS.">Sound Clash OS</button>
+            <button class="v-quick-chip" data-prompt="Tell me about Artist OS.">Artist OS</button>
+            <button class="v-quick-chip" data-prompt="Tell me about your Augmented Reality service for merch, business cards, menus, and ads.">AR Service Suite</button>
           </div>
         </div>
 

@@ -10,7 +10,7 @@ export const BRAND_NAME_VISUAL = "9LMNTS Studio";
 export const BRAND_NAME_AUDIO = "Nine Elements Studio";
 export const PRIMARY_DOMAIN = "9lmntsstudio.com";
 export const INTAKE_URL = `https://${PRIMARY_DOMAIN}/os`;
-export const DEPOSIT_EMAIL = "payments@9lmntsstudio.com";
+export const DEPOSIT_EMAIL = "9lmntstudio@gmail.com";
 export const FOUNDER_NAME = "Darnley Sanon";
 export const FOUNDER_HANDLE = "@9lmntsstudio";
 

@@ -15,7 +15,7 @@ function checkUrl(url) {
           title: data.match(/<title>([^<]+)<\/title>/)?.[1],
           hasTriage: data.includes('triageForm'),
           hasWaveform: data.includes('waveform-box') || data.includes('wave-bar'),
-          hasInterac: data.includes('payments@9lmntsstudio.com')
+          hasInterac: data.includes('9lmntstudio@gmail.com')
         });
       });
     }).on('error', reject);

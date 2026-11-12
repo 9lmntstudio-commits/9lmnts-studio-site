@@ -203,8 +203,8 @@ const osHtml = layout({
           <p style="font-size:13px;color:#A1A1AA;margin:0 0 14px">Zero credit card processing delays. Work commences immediately upon deposit clearance, initiating your 72-hour delivery countdown.</p>
           
           <div class="copy-row" style="margin-bottom:10px">
-            <span>payments@9lmntsstudio.com</span>
-            <button data-copy="payments@9lmntsstudio.com">Copy Email</button>
+            <span>9lmntstudio@gmail.com</span>
+            <button data-copy="9lmntstudio@gmail.com">Copy Email</button>
           </div>
           <div style="font-size:11px;font-family:var(--font-mono);color:#71717A">
             Transfer Memo: <span id="triageMemoRef" style="color:#fff">Deposit: 9LMNTS OS Sprint</span>

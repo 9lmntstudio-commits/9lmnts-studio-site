@@ -11,7 +11,7 @@ import path from 'node:path';
 // Primary Brand & Rail Constants
 const DOMAIN = 'https://9lmntsstudio.com';
 const INTERAC_EMAIL = '9lmntstudio@gmail.com'; // Desjardins Autodeposit
-const PAYMENTS_EMAIL = 'payments@9lmntsstudio.com';
+const PAYMENTS_EMAIL = '9lmntstudio@gmail.com';
 const FOUNDER_PHONE = '613-909-4038';
 
 // Top High-Probability Hitlist (Ottawa-Gatineau)

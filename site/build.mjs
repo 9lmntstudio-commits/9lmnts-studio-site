@@ -27,7 +27,7 @@ if (fs.existsSync(cssSource)) {
 function weddingOsSection() {
   return `
   <!-- Wedding & Reception OS: The Sanon Reception Flagship Bento Showcase -->
-  <section class="section border-top section-sanon-stage">
+  <section class="section border-top section-sanon-stage" id="wedding">
     <div class="container">
       <div class="section-head">
         <div>
@@ -125,7 +125,7 @@ function weddingOsSection() {
           <div class="phone-info">
             <span class="kicker">Frictionless Gifting · Zero Envelopes</span>
             <h4>Future Fund &amp; Honeymoon Registry</h4>
-            <p>Direct cash contribution rail with $50, $100, or custom amounts. Supports Apple Pay, Visa, and PayPal with zero bank delays.</p>
+            <p>Direct cash contribution rail with $50, $100, or custom amounts. Supports Apple Pay, Google Pay, Visa, and Stripe with zero bank delays.</p>
             <div class="phone-metric-pill">💳 Instant Autodeposit Rail</div>
           </div>
         </div>
@@ -369,7 +369,7 @@ const homeHtml = layout({
           </ul>
           <div class="showcase-actions">
             <a class="btn btn-primary" href="/contact/?sprint=Chef+OS">Deploy Chef OS <span class="arrow">↗</span></a>
-            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="/work/#chef">Case Study <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -392,7 +392,7 @@ const homeHtml = layout({
           </ul>
           <div class="showcase-actions">
             <a class="btn btn-primary" href="/contact/?sprint=WorkerBee+OS">Deploy Dispatch OS <span class="arrow">↗</span></a>
-            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="/work/#handyman">Case Study <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -415,7 +415,7 @@ const homeHtml = layout({
           </ul>
           <div class="showcase-actions">
             <a class="btn btn-primary" href="/contact/?sprint=Reception+OS">Deploy Booking Hub <span class="arrow">↗</span></a>
-            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="/work/#reception">Case Study <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -629,15 +629,90 @@ const homeHtml = layout({
     </div>
   </section>
 
-  <!-- Phygital WebAR Arena & Concert Experience -->
-  <section class="section border-top" style="position:relative;background-image:linear-gradient(180deg, #08090C 0%, rgba(12,14,20,0.88) 50%, #08090C 100%), url('/assets/hero-spatial-mesh.jpg');background-size:cover;background-position:center;background-attachment:fixed">
+  <!-- Phygital WebAR Commercial Suite & Concert Experience -->
+  <section class="section border-top" id="webar" style="position:relative;background-image:linear-gradient(180deg, #08090C 0%, rgba(12,14,20,0.88) 50%, #08090C 100%), url('/assets/hero-spatial-mesh.jpg');background-size:cover;background-position:center;background-attachment:fixed">
     <div class="container">
       <div class="section-head">
         <div>
-          <span class="kicker">Physical × Augmented Reality Ecosystem</span>
-          <h2>Phygital WebAR Concerts &amp; Wearable Tech</h2>
+          <span class="kicker">High-Margin Augmented Reality Service Suite</span>
+          <h2>Phygital WebAR: Merch, Business Cards, 3D Menus &amp; Interactive Ads</h2>
         </div>
-        <p>We transform physical streetwear into live interactive digital portals. No native app downloads required—fans scan wearable QR codes on 350 GSM apparel to trigger instant browser-based 3D holographic experiences.</p>
+        <p>Zero native app downloads required. Customers point any iPhone or Android camera at your business card, restaurant table tent, streetwear hoodie, or poster to launch instant 3D holographic conversion funnels in their mobile browser.</p>
+      </div>
+
+      <!-- 4 Commercial WebAR Service Verticals -->
+      <div class="grid g4" style="margin-bottom:32px">
+        <article class="card reveal">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span class="num-tag" style="margin:0">AR 01 / 48 HOURS</span>
+            <span class="badge green">Zero App</span>
+          </div>
+          <h3>AR 3D Restaurant &amp; Cocktail Menus</h3>
+          <div class="price">$450 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $225 CAD</span></div>
+          <p style="font-size:0.9rem">Guests scan QR table tents or coasters to project photorealistic 3D signature dishes and cocktails directly onto their dining table.</p>
+          <ul class="check">
+            <li>3–5 photorealistic 3D dishes (.glb &amp; .usdz)</li>
+            <li>Apple iOS QuickLook &amp; Android SceneViewer</li>
+            <li>Print-ready 300 DPI Level-H QR table tents</li>
+            <li>1-Tap "Order This Dish" checkout button</li>
+          </ul>
+          <a class="btn btn-ghost btn-sm" href="/contact/?package=webar-suite&amp;sprint=WebAR+3D+Restaurant+Menu+($450+CAD)">Lock 3D Menu Sprint <span class="arrow">↗</span></a>
+        </article>
+
+        <article class="card feature reveal">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span class="num-tag" style="margin:0">AR 02 / 48–72 HOURS</span>
+            <span class="badge">High ROI ⭐</span>
+          </div>
+          <h3>AR Holographic Business Cards</h3>
+          <div class="price">$500 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $250 CAD</span></div>
+          <p style="font-size:0.9rem">Stop handing out paper cards that get thrown away. Pointing a phone camera at your card launches a floating 3D hologram pitch &amp; 1-tap booking.</p>
+          <ul class="check">
+            <li>Optical image-tracked 3D logo &amp; founder video hologram</li>
+            <li>Matte-black NFC + Level-H QR print dielines</li>
+            <li>1-Tap "Save Contact (.vcf)" &amp; "Book Call" buttons</li>
+            <li>Optional 100 NFC/QR cards ($950 CAD total)</li>
+          </ul>
+          <a class="btn btn-primary btn-sm" href="/contact/?package=webar-suite&amp;sprint=WebAR+Holographic+Business+Cards+($500+CAD)">Order AR Business Cards <span class="arrow">↗</span></a>
+        </article>
+
+        <article class="card reveal">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span class="num-tag" style="margin:0">AR 03 / 5–7 DAYS</span>
+            <span class="badge flame">Wearable Tech</span>
+          </div>
+          <h3>AR Phygital Merch &amp; Streetwear</h3>
+          <div class="price">$1,500 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $750 CAD</span></div>
+          <p style="font-size:0.9rem">Turn 350 GSM tees and 480 GSM hoodies into wearable billboards, 3D holographic wing projections, and cryptographic VIP event keys.</p>
+          <ul class="check">
+            <li>Custom 3D Holographic Wings / Brand Mascot AR</li>
+            <li>Left-cuff NTAG215 NFC + Sleeve QR architecture</li>
+            <li>Unlocks exclusive WAV stems, drops, or VIP passes</li>
+            <li>Manufacturer-ready garment tech packs included</li>
+          </ul>
+          <a class="btn btn-ghost btn-sm" href="/contact/?package=webar-suite&amp;sprint=WebAR+Phygital+Merch+Capsule+($1,500+CAD)">Launch AR Merch Drop <span class="arrow">↗</span></a>
+        </article>
+
+        <article class="card reveal">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span class="num-tag" style="margin:0">AR 04 / 5–7 DAYS</span>
+            <span class="badge neutral">Spatial Ads</span>
+          </div>
+          <h3>AR Interactive Ads, Flyers &amp; Stages</h3>
+          <div class="price">$1,500 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $750 CAD</span></div>
+          <p style="font-size:0.9rem">Transform static event flyers, street posters, product packaging, and venue Jumbotron screens into interactive 3D sponsor activations.</p>
+          <ul class="check">
+            <li>Scannable poster, flyer &amp; packaging 3D portals</li>
+            <li>Instant VIP coupon, ticket booth, or lead capture</li>
+            <li>Real-time scan &amp; conversion analytics dashboard</li>
+            <li>Optional Arena Crowd Sync ($2,500 CAD)</li>
+          </ul>
+          <a class="btn btn-ghost btn-sm" href="/contact/?package=webar-suite&amp;sprint=WebAR+Interactive+Ads+and+Flyers+($1,500+CAD)">Deploy AR Ad Campaign <span class="arrow">↗</span></a>
+        </article>
       </div>
 
       <div class="webar-grid">
@@ -657,6 +732,10 @@ const homeHtml = layout({
               <span class="badge neutral">WebGL &amp; WebAR</span>
               <span class="badge green">Real-Time Crowd Telemetry</span>
             </div>
+            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+              <a class="btn btn-primary btn-sm" href="https://artist.9lmntsstudio.com" target="_blank" rel="noopener">Launch Artist OS <span class="arrow">↗</span></a>
+              <a class="btn btn-ghost btn-sm" href="/services/#webar-suite">View AR Service Workflow <span class="arrow">↗</span></a>
+            </div>
           </div>
         </div>
 
@@ -675,6 +754,10 @@ const homeHtml = layout({
               <span class="badge neutral">Mass Crowd Sync</span>
               <span class="badge neutral">Stage DMX Bridge</span>
               <span class="badge flame">9LMNTS Studio Proprietary</span>
+            </div>
+            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+              <a class="btn btn-ghost btn-sm" href="/work/#artist-os">Watch Artist OS Walkthrough <span class="arrow">↗</span></a>
+              <a class="btn btn-primary btn-sm" href="/contact/?package=webar-suite">Book Custom AR Activation <span class="arrow">↗</span></a>
             </div>
           </div>
         </div>
@@ -817,6 +900,117 @@ const servicesHtml = layout({
     </div>
   </section>
 
+  <!-- Phygital WebAR Commercial Service Suite & 48-Hour Workflow (/services/#webar-suite) -->
+  <section class="section border-top" id="webar-suite">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="kicker">High-Margin Spatial Add-Ons &amp; Standalone Sprints</span>
+          <h2>Phygital WebAR Service Suite: Menus, Business Cards, Merch &amp; Ads</h2>
+        </div>
+        <p>Turn physical print, hospitality tables, business cards, and streetwear into browser-native 3D Augmented Reality conversion funnels. Zero app downloads required on iPhone (QuickLook / WebXR) or Android (SceneViewer / WebXR).</p>
+      </div>
+
+      <div class="grid g4">
+        <article class="card reveal">
+          <span class="num-tag">VERTICAL 01 · 48 HOURS</span>
+          <h3>AR 3D Restaurant &amp; Cocktail Menus</h3>
+          <div class="price">$450 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $225 CAD · Full 15-Dish Suite: $1,200</span></div>
+          <p>Diners scan a QR table tent or coaster to project life-size 3D models of your highest-margin signature dishes and cocktails directly onto their table.</p>
+          <ul class="check">
+            <li>3–5 photorealistic 3D models (.glb &amp; .usdz)</li>
+            <li>Zero app install (iOS QuickLook &amp; Android)</li>
+            <li>Print-ready 300 DPI Level-H QR table tents</li>
+            <li>1-Tap "Order This Dish" button wired to checkout</li>
+          </ul>
+          <a class="btn btn-ghost" href="/contact/?package=webar-suite&amp;sprint=AR+3D+Restaurant+Menu+($450+CAD)">Start AR Menu Sprint <span class="arrow">↗</span></a>
+        </article>
+
+        <article class="card feature reveal">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span class="num-tag" style="margin:0">VERTICAL 02 · 48–72 HOURS</span>
+            <span class="badge">Executive Wedge ⭐</span>
+          </div>
+          <h3>AR Holographic Business Cards</h3>
+          <div class="price">$500 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $250 CAD · +100 NFC Cards: $950</span></div>
+          <p>Luxury matte-black business cards with optical AR tracking and NFC tap. Pointing a phone camera at your card projects a floating 3D hologram pitch above the card.</p>
+          <ul class="check">
+            <li>Floating 3D brand crest &amp; 30s founder video hologram</li>
+            <li>Custom matte-black + gold/orange tracking dielines</li>
+            <li>Embedded NTAG215 NFC tap + Level-H QR fallback</li>
+            <li>1-Tap "Save Contact (.vcf)" &amp; "Book Diagnostic Call"</li>
+          </ul>
+          <a class="btn btn-primary" href="/contact/?package=webar-suite&amp;sprint=AR+Holographic+Business+Cards+($500+CAD)">Order AR Business Cards <span class="arrow">↗</span></a>
+        </article>
+
+        <article class="card reveal">
+          <span class="num-tag">VERTICAL 03 · 5–7 DAYS</span>
+          <h3>AR Phygital Merch &amp; Streetwear</h3>
+          <div class="price">$1,500 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $750 CAD · 18-Piece Catalog Ready</span></div>
+          <p>Transform 350 GSM tees and 480 GSM French Terry hoodies into scannable 3D holographic portals, wearable ad billboards, and cryptographic VIP passes.</p>
+          <ul class="check">
+            <li>3D Holographic Energy Wings or custom brand mascot</li>
+            <li>Left-cuff waterproof NFC chip + sleeve QR badge</li>
+            <li>Unlocks exclusive WAV stems, merch drops, or VIP entry</li>
+            <li>Complete cut-and-sew manufacturer tech packs</li>
+          </ul>
+          <a class="btn btn-ghost" href="/contact/?package=webar-suite&amp;sprint=AR+Phygital+Merch+Capsule+($1,500+CAD)">Build AR Merch Capsule <span class="arrow">↗</span></a>
+        </article>
+
+        <article class="card reveal">
+          <span class="num-tag">VERTICAL 04 · 5–7 DAYS</span>
+          <h3>AR Interactive Ads, Flyers &amp; Stages</h3>
+          <div class="price">$1,500 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $750 CAD · Arena Sync: $2,500</span></div>
+          <p>Turn static event flyers, street posters, real-estate signs, product labels, and venue Jumbotron screens into interactive 3D lead-generation funnels.</p>
+          <ul class="check">
+            <li>Optical image tracking on any poster, flyer, or box</li>
+            <li>3D product demo + countdown timer in mobile browser</li>
+            <li>Instant Stripe ticket checkout or ManyChat VIP claim</li>
+            <li>Live scan telemetry (scans by hour, device &amp; CTR)</li>
+          </ul>
+          <a class="btn btn-ghost" href="/contact/?package=webar-suite&amp;sprint=AR+Interactive+Ads+and+Flyers+($1,500+CAD)">Launch AR Ad Sprint <span class="arrow">↗</span></a>
+        </article>
+      </div>
+
+      <!-- 5-Stage WebAR Production Workflow -->
+      <div class="card reveal" style="margin-top:28px;border-color:rgba(0,210,255,0.28);background:linear-gradient(135deg,rgba(14,18,26,0.95),rgba(8,10,14,0.98))">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+          <div>
+            <span class="kicker" style="color:#00D2FF">48-Hour Spatial Delivery Pipeline</span>
+            <h3 style="margin:4px 0 0">How Our 5-Stage WebAR Production Workflow Operates</h3>
+          </div>
+          <span class="badge green">● 0 MB App Download · iOS &amp; Android Native</span>
+        </div>
+        <div class="grid g4" style="gap:16px">
+          <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)">
+            <span class="mono" style="font-size:11px;color:#FF5500;font-weight:700">STAGE 01 · HOUR 0–4</span>
+            <h4 style="margin:6px 0;font-size:15px">Deposit &amp; Asset Intake</h4>
+            <p style="font-size:13px;margin:0">Lock your 50% Interac deposit (<code>9lmntstudio@gmail.com</code>) and send dish photos, vector logo, 30s video, or garment/poster art.</p>
+          </div>
+          <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)">
+            <span class="mono" style="font-size:11px;color:#00D2FF;font-weight:700">STAGE 02 · HOUR 4–16</span>
+            <h4 style="margin:6px 0;font-size:15px">3D Mesh &amp; Optical Target</h4>
+            <p style="font-size:13px;margin:0">We generate PBR 3D meshes (<code>.glb</code>/<code>.usdz</code>) and compile optical tracking targets (<code>MindAR</code> + <code>Three.js</code> WebGL shaders).</p>
+          </div>
+          <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)">
+            <span class="mono" style="font-size:11px;color:#E5A93D;font-weight:700">STAGE 03 · HOUR 16–32</span>
+            <h4 style="margin:6px 0;font-size:15px">NFC, QR &amp; Funnel Wiring</h4>
+            <p style="font-size:13px;margin:0">We generate 300 DPI Level-H vector QRs, encode NTAG215 NFC payloads, and wire in-AR buttons to Stripe or WhatsApp/ManyChat.</p>
+          </div>
+          <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)">
+            <span class="mono" style="font-size:11px;color:#10B981;font-weight:700">STAGE 04 · HOUR 32–48</span>
+            <h4 style="margin:6px 0;font-size:15px">Staging QA &amp; Live Cutover</h4>
+            <p style="font-size:13px;margin:0">Cross-tested on iPhone Safari &amp; Android Chrome. Upon final 50% balance, you receive the live WebAR portal + print-ready files.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Comparison Matrix -->
   <section class="section border-top"><div class="container">
     <div class="section-head">
@@ -923,7 +1117,7 @@ const workHtml = layout({
     </div>
     <div class="grid g3">
       <!-- Showcase 1: Chef OS -->
-      <article class="showcase-card reveal">
+      <article class="showcase-card reveal" id="chef">
         <div class="showcase-media">
           <img src="/assets/culinary-dish-showcase.jpg" alt="Chef OS Catering Showcase" loading="lazy">
           <div class="showcase-overlay"></div>
@@ -941,13 +1135,13 @@ const workHtml = layout({
           </ul>
           <div class="showcase-actions">
             <a class="btn btn-primary" href="/contact/?sprint=Chef+OS">Deploy Chef OS <span class="arrow">↗</span></a>
-            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="/embeds/">Live Calculator <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
 
       <!-- Showcase 2: Trades OS -->
-      <article class="showcase-card reveal">
+      <article class="showcase-card reveal" id="handyman">
         <div class="showcase-media">
           <img src="/assets/trades-craft-showcase.jpg" alt="Contractor Dispatch Trades Showcase" loading="lazy">
           <div class="showcase-overlay"></div>
@@ -965,13 +1159,13 @@ const workHtml = layout({
           </ul>
           <div class="showcase-actions">
             <a class="btn btn-primary" href="/contact/?sprint=WorkerBee+OS">Deploy Dispatch OS <span class="arrow">↗</span></a>
-            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="/os/#audit">Run Speed Audit <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
 
       <!-- Showcase 3: Reception OS -->
-      <article class="showcase-card reveal">
+      <article class="showcase-card reveal" id="reception">
         <div class="showcase-media">
           <img src="/assets/venue-lounge-showcase.jpg" alt="Private Dining Reception Showcase" loading="lazy">
           <div class="showcase-overlay"></div>
@@ -989,7 +1183,7 @@ const workHtml = layout({
           </ul>
           <div class="showcase-actions">
             <a class="btn btn-primary" href="/contact/?sprint=Reception+OS">Deploy Booking Hub <span class="arrow">↗</span></a>
-            <a class="btn btn-ghost" href="/work/">Case Study <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="#wedding">View Reception OS <span class="arrow">↗</span></a>
           </div>
         </div>
       </article>
@@ -1104,15 +1298,90 @@ const workHtml = layout({
     </div>
   </section>
 
-  <!-- Phygital WebAR Arena & Concert Experience -->
-  <section class="section border-top" style="position:relative;background-image:linear-gradient(180deg, #08090C 0%, rgba(12,14,20,0.88) 50%, #08090C 100%), url('/assets/hero-spatial-mesh.jpg');background-size:cover;background-position:center;background-attachment:fixed">
+  <!-- Phygital WebAR Commercial Suite & Concert Experience -->
+  <section class="section border-top" id="webar" style="position:relative;background-image:linear-gradient(180deg, #08090C 0%, rgba(12,14,20,0.88) 50%, #08090C 100%), url('/assets/hero-spatial-mesh.jpg');background-size:cover;background-position:center;background-attachment:fixed">
     <div class="container">
       <div class="section-head">
         <div>
-          <span class="kicker">Physical × Augmented Reality Ecosystem</span>
-          <h2>Phygital WebAR Concerts &amp; Wearable Tech</h2>
+          <span class="kicker">High-Margin Augmented Reality Service Suite</span>
+          <h2>Phygital WebAR: Merch, Business Cards, 3D Menus &amp; Interactive Ads</h2>
         </div>
-        <p>We transform physical streetwear into live interactive digital portals. No native app downloads required—fans scan wearable QR codes on 350 GSM apparel to trigger instant browser-based 3D holographic experiences.</p>
+        <p>Zero native app downloads required. Customers point any iPhone or Android camera at your business card, restaurant table tent, streetwear hoodie, or poster to launch instant 3D holographic conversion funnels in their mobile browser.</p>
+      </div>
+
+      <!-- 4 Commercial WebAR Service Verticals -->
+      <div class="grid g4" style="margin-bottom:32px">
+        <article class="card reveal">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span class="num-tag" style="margin:0">AR 01 / 48 HOURS</span>
+            <span class="badge green">Zero App</span>
+          </div>
+          <h3>AR 3D Restaurant &amp; Cocktail Menus</h3>
+          <div class="price">$450 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $225 CAD</span></div>
+          <p style="font-size:0.9rem">Guests scan QR table tents or coasters to project photorealistic 3D signature dishes and cocktails directly onto their dining table.</p>
+          <ul class="check">
+            <li>3–5 photorealistic 3D dishes (.glb &amp; .usdz)</li>
+            <li>Apple iOS QuickLook &amp; Android SceneViewer</li>
+            <li>Print-ready 300 DPI Level-H QR table tents</li>
+            <li>1-Tap "Order This Dish" checkout button</li>
+          </ul>
+          <a class="btn btn-ghost btn-sm" href="/contact/?package=webar-suite&amp;sprint=WebAR+3D+Restaurant+Menu+($450+CAD)">Lock 3D Menu Sprint <span class="arrow">↗</span></a>
+        </article>
+
+        <article class="card feature reveal">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span class="num-tag" style="margin:0">AR 02 / 48–72 HOURS</span>
+            <span class="badge">High ROI ⭐</span>
+          </div>
+          <h3>AR Holographic Business Cards</h3>
+          <div class="price">$500 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $250 CAD</span></div>
+          <p style="font-size:0.9rem">Stop handing out paper cards that get thrown away. Pointing a phone camera at your card launches a floating 3D hologram pitch &amp; 1-tap booking.</p>
+          <ul class="check">
+            <li>Optical image-tracked 3D logo &amp; founder video hologram</li>
+            <li>Matte-black NFC + Level-H QR print dielines</li>
+            <li>1-Tap "Save Contact (.vcf)" &amp; "Book Call" buttons</li>
+            <li>Optional 100 NFC/QR cards ($950 CAD total)</li>
+          </ul>
+          <a class="btn btn-primary btn-sm" href="/contact/?package=webar-suite&amp;sprint=WebAR+Holographic+Business+Cards+($500+CAD)">Order AR Business Cards <span class="arrow">↗</span></a>
+        </article>
+
+        <article class="card reveal">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span class="num-tag" style="margin:0">AR 03 / 5–7 DAYS</span>
+            <span class="badge flame">Wearable Tech</span>
+          </div>
+          <h3>AR Phygital Merch &amp; Streetwear</h3>
+          <div class="price">$1,500 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $750 CAD</span></div>
+          <p style="font-size:0.9rem">Turn 350 GSM tees and 480 GSM hoodies into wearable billboards, 3D holographic wing projections, and cryptographic VIP event keys.</p>
+          <ul class="check">
+            <li>Custom 3D Holographic Wings / Brand Mascot AR</li>
+            <li>Left-cuff NTAG215 NFC + Sleeve QR architecture</li>
+            <li>Unlocks exclusive WAV stems, drops, or VIP passes</li>
+            <li>Manufacturer-ready garment tech packs included</li>
+          </ul>
+          <a class="btn btn-ghost btn-sm" href="/contact/?package=webar-suite&amp;sprint=WebAR+Phygital+Merch+Capsule+($1,500+CAD)">Launch AR Merch Drop <span class="arrow">↗</span></a>
+        </article>
+
+        <article class="card reveal">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span class="num-tag" style="margin:0">AR 04 / 5–7 DAYS</span>
+            <span class="badge neutral">Spatial Ads</span>
+          </div>
+          <h3>AR Interactive Ads, Flyers &amp; Stages</h3>
+          <div class="price">$1,500 <small>CAD</small></div>
+          <div class="meta"><span class="badge neutral">50% Deposit: $750 CAD</span></div>
+          <p style="font-size:0.9rem">Transform static event flyers, street posters, product packaging, and venue Jumbotron screens into interactive 3D sponsor activations.</p>
+          <ul class="check">
+            <li>Scannable poster, flyer &amp; packaging 3D portals</li>
+            <li>Instant VIP coupon, ticket booth, or lead capture</li>
+            <li>Real-time scan &amp; conversion analytics dashboard</li>
+            <li>Optional Arena Crowd Sync ($2,500 CAD)</li>
+          </ul>
+          <a class="btn btn-ghost btn-sm" href="/contact/?package=webar-suite&amp;sprint=WebAR+Interactive+Ads+and+Flyers+($1,500+CAD)">Deploy AR Ad Campaign <span class="arrow">↗</span></a>
+        </article>
       </div>
 
       <div class="webar-grid">
@@ -1131,6 +1400,10 @@ const workHtml = layout({
               <span class="badge neutral">Zero App Install</span>
               <span class="badge neutral">WebGL &amp; WebAR</span>
               <span class="badge green">Real-Time Crowd Telemetry</span>
+            </div>
+            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+              <a class="btn btn-primary btn-sm" href="https://artist.9lmntsstudio.com" target="_blank" rel="noopener">Launch Artist OS <span class="arrow">↗</span></a>
+              <a class="btn btn-ghost btn-sm" href="/services/#webar-suite">View AR Service Workflow <span class="arrow">↗</span></a>
             </div>
           </div>
         </div>
@@ -1151,6 +1424,10 @@ const workHtml = layout({
               <span class="badge neutral">Stage DMX Bridge</span>
               <span class="badge flame">9LMNTS Studio Proprietary</span>
             </div>
+            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+              <a class="btn btn-ghost btn-sm" href="/work/#artist-os">Watch Artist OS Walkthrough <span class="arrow">↗</span></a>
+              <a class="btn btn-primary btn-sm" href="/contact/?package=webar-suite">Book Custom AR Activation <span class="arrow">↗</span></a>
+            </div>
           </div>
         </div>
       </div>
@@ -1158,7 +1435,7 @@ const workHtml = layout({
   </section>
 
   <!-- 9LMNTS Event OS Series (Live Battle Arenas) -->
-  <section class="section section-arena border-top"><div class="container">
+  <section class="section section-arena border-top" id="arenas"><div class="container">
     <div class="section-head">
       <div>
         <span class="kicker">Category 02 / 9LMNTS Event OS Series</span>
@@ -1168,10 +1445,10 @@ const workHtml = layout({
     </div>
     <div class="grid g3">
       <!-- Arena 1: Sound Clash OS -->
-      <article class="showcase-card reveal">
-        <div class="showcase-media">
-          <img src="/assets/screenshot-sound-clash.png" alt="Sound Clash OS Live DJ Battle Interface" loading="lazy">
-          <div class="showcase-overlay"></div>
+      <article class="showcase-card reveal" id="soundclash-os">
+        <div class="showcase-media" style="position:relative">
+          <video src="/assets/soundclash-attendee-journey.mp4" preload="none" loop muted playsinline controls poster="/assets/screenshot-sound-clash.png" style="width:100%;height:100%;object-fit:cover;display:block"></video>
+          <div class="showcase-overlay" style="pointer-events:none"></div>
           <span class="showcase-tag">Music &amp; Sound Clash</span>
           <span class="showcase-score">● LIVE TOURNAMENT</span>
         </div>
@@ -1191,12 +1468,12 @@ const workHtml = layout({
       </article>
 
       <!-- Arena 1B: Artist OS Command Center -->
-      <article class="showcase-card reveal">
-        <div class="showcase-media">
-          <img src="/assets/event-os-stage.png" alt="Artist OS Live Performance Command Center" loading="lazy">
-          <div class="showcase-overlay"></div>
+      <article class="showcase-card reveal" id="artist-os">
+        <div class="showcase-media" style="position:relative">
+          <video src="/assets/artist-os-scrolling-walkthrough.mp4" preload="none" loop muted playsinline controls poster="/assets/event-os-stage.png" style="width:100%;height:100%;object-fit:cover;display:block"></video>
+          <div class="showcase-overlay" style="pointer-events:none"></div>
           <span class="showcase-tag">Live Performing Artist OS</span>
-          <span class="showcase-score">● BASE44 LIVE</span>
+          <span class="showcase-score">● BASE44 LIVE VIDEO</span>
         </div>
         <div class="showcase-body">
           <h3>Artist OS — Live Artist Command Center</h3>
@@ -1564,9 +1841,9 @@ const osHtml = layout({
 
             <label class="triage-option">
               <input type="radio" name="bottleneck" value="webar_menu">
-              <span class="triage-badge">PACKAGE C · 48 HOURS</span>
-              <h4>📱 Static PDF Menus / Need 3D WebAR Experience</h4>
-              <p>Customers won't download an app. Need 3D dish/product models popping up from QR table tents on mobile cameras.</p>
+              <span class="triage-badge">PACKAGE C · 48 HOURS – 5 DAYS</span>
+              <h4>📱 Need 3D WebAR Menus, AR Business Cards, Merch or Ads</h4>
+              <p>Customers won't download an app. Launch browser-native 3D dishes ($450), holographic business cards ($500), AR merch ($1,500), or interactive print ads ($1,500).</p>
             </label>
           </div>
         </div>
@@ -1618,21 +1895,21 @@ const osHtml = layout({
           <p style="font-size:13px;color:#A1A1AA;margin:0 0 14px">Zero credit card processing delays. Work commences immediately upon deposit clearance, initiating your 72-hour delivery countdown.</p>
           
           <div class="copy-row" style="margin-bottom:10px">
-            <span>payments@9lmntsstudio.com</span>
-            <button data-copy="payments@9lmntsstudio.com">Copy Email</button>
+            <span>9lmntstudio@gmail.com</span>
+            <button data-copy="9lmntstudio@gmail.com">Copy Email</button>
           </div>
           <div style="font-size:11px;font-family:var(--font-mono);color:#71717A">
             Transfer Memo: <span id="triageMemoRef" style="color:#fff">Deposit: 9LMNTS OS Sprint</span>
           </div>
         </div>
 
-        <!-- International PayPal Alternative & WhatsApp Dispatch -->
+        <!-- International Stripe Alternative & WhatsApp Dispatch -->
         <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
           <a id="triageWaLink" class="btn btn-primary" href="https://wa.me/16139094038?text=Hi%20Darnley,%20ready%20to%20deploy%20my%20OS%20system" target="_blank" rel="noopener">
             Dispatch to Founder (WhatsApp / SMS) <span class="arrow">↗</span>
           </a>
           <a class="btn btn-ghost" href="/contact/">
-            Request Direct Invoice / PayPal Link
+            Request Direct Invoice / Stripe Link
           </a>
         </div>
       </div>
@@ -1684,16 +1961,16 @@ const osHtml = layout({
       </div>
 
       <div class="card reveal">
-        <span class="num-tag">ADD-ON · 48 HOURS</span>
-        <h3>WebAR Signature Menu</h3>
-        <div class="price">$450 <small>CAD</small></div>
-        <div class="meta"><span class="badge neutral">50% Deposit: $225 CAD</span></div>
-        <p>Interactive 3D models of signature dishes or products that pop up directly on camera phones.</p>
+        <span class="num-tag">PACKAGE 03 · 48 HOURS – 5 DAYS</span>
+        <h3>Phygital WebAR Commercial Suite</h3>
+        <div class="price">$450–$1,500 <small>CAD</small></div>
+        <div class="meta"><span class="badge neutral">50% Deposit: $225–$750 CAD</span></div>
+        <p>Browser-native 3D Augmented Reality for menus, executive business cards, streetwear merch, and print ads.</p>
         <ul class="check">
-          <li>3–5 photorealistic 3D WebAR browser models</li>
-          <li>Zero apps required (iOS QuickLook &amp; Android)</li>
-          <li>Print-ready QR table tents &amp; flyers</li>
-          <li>48-hour rapid turnaround</li>
+          <li>AR 3D Restaurant &amp; Cocktail Menus ($450 CAD · 48h)</li>
+          <li>AR Holographic Business Cards + NFC vCard ($500 CAD)</li>
+          <li>AR Phygital Merch &amp; 3D Wings Capsule ($1,500 CAD)</li>
+          <li>AR Interactive Flyers, Posters &amp; Stage Ads ($1,500 CAD)</li>
         </ul>
         <a class="btn btn-ghost" href="#audit">Select This Sprint <span class="arrow">↗</span></a>
       </div>
@@ -2175,6 +2452,7 @@ const contactHtml = layout({
           <label for="cPkg">Interested Package / Service</label>
           <select id="cPkg" name="package">
             <option value="growth-website">Growth Website ($4,500 CAD ⭐ Most Popular)</option>
+            <option value="webar-suite">Phygital WebAR Suite — Menus ($450), Business Cards ($500), Merch &amp; Ads ($1,500)</option>
             <option value="launch-page">Launch Page ($1,800 CAD)</option>
             <option value="signature-system">Signature System ($8,500+ CAD)</option>
             <option value="quick-fix">Quick Fix / Modular Intake Widget ($500 CAD)</option>
@@ -2355,6 +2633,7 @@ const startHtml = layout({
             <label for="pTier">Package Selected *</label>
             <select id="pTier" name="selectedPackage">
               <option value="Quick Fix ($500)">Quick Fix ($500 CAD)</option>
+              <option value="Phygital WebAR Suite ($450-$1,500)">Phygital WebAR Suite — Menus, Business Cards, Merch &amp; Ads ($450–$1,500 CAD)</option>
               <option value="Launch Page ($1,800)">Launch Page ($1,800 CAD - $900 Deposit)</option>
               <option value="Growth Website ($4,500)">Growth Website ($4,500 CAD - $1,800 Deposit)</option>
               <option value="Signature System ($8,500)">Signature System ($8,500+ CAD)</option>
@@ -2712,6 +2991,9 @@ const adminHtml = `<!doctype html>
           <div class="field">
             <label>Selected Sprint Package</label>
             <select id="agPackage" onchange="updateAgAmounts()">
+              <option value="450">WebAR 3D Restaurant Menu ($450 CAD - $225 Deposit)</option>
+              <option value="500">WebAR Holographic Business Cards ($500 CAD - $250 Deposit)</option>
+              <option value="1500">WebAR Phygital Merch / Interactive Ad Sprint ($1,500 CAD - $750 Deposit)</option>
               <option value="1800">Launch Page ($1,800 CAD - $900 Deposit)</option>
               <option value="4500" selected>Growth Website ($4,500 CAD - $1,800 Kickoff)</option>
               <option value="8500">Signature System ($8,500 CAD - $3,400 Kickoff)</option>
@@ -2957,6 +3239,10 @@ if (fs.existsSync(path.join(ROOT, 'assets'))) {
 }
 fs.copyFileSync(path.join(ROOT, 'site', 'styles.css'), path.join(OUT, 'styles.css'));
 fs.copyFileSync(path.join(ROOT, 'site', 'main.js'), path.join(OUT, 'main.js'));
+if (fs.existsSync(path.join(ROOT, 'site', 'js'))) {
+  ensureDir(path.join(OUT, 'js'));
+  fs.cpSync(path.join(ROOT, 'site', 'js'), path.join(OUT, 'js'), { recursive: true });
+}
 
 // Demos & Embed
 ensureDir(path.join(OUT, 'embed'));
@@ -3057,6 +3343,25 @@ fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="U
   <url><loc>${SITE.url}/legal/privacy/</loc><priority>0.3</priority></url>
   <url><loc>${SITE.url}/legal/payment-terms/</loc><priority>0.3</priority></url>
 </urlset>
+`, 'utf8');
+
+fs.writeFileSync(path.join(OUT, 'llms.txt'), `# ${SITE.name} (Nine Elements Studio)
+> Websites That Book Your Customers For You — Ottawa Digital Architecture, Event OS & Creator OS Suite.
+
+## Primary Live Platforms
+- Flagship Agency & Intake Hub: ${SITE.url}
+- SoundClash OS (Live 8-DJ Battle & Crowd Voting App): https://clash.9lmntsstudio.com
+- Artist OS (Live Performing Artist Command Center & WAV Stem Vault): https://artist.9lmntsstudio.com
+
+## Core Routes
+- Services & Fixed-Price Sprints: ${SITE.url}/services/
+- Phygital WebAR Service Suite (3D Menus $450, AR Business Cards $500, AR Merch $1,500, Interactive Ads $1,500): ${SITE.url}/services/#webar-suite
+- Production Work & Live Arenas: ${SITE.url}/work/
+- 72-Hour OS Intake & Friction Audit: ${SITE.url}/os/
+- Modular Drop-In Widgets: ${SITE.url}/embeds/
+- 3-Sprint Build Process: ${SITE.url}/process/
+- About Founder Darnley Sanon: ${SITE.url}/about/
+- Contact & Diagnostic Booking: ${SITE.url}/contact/
 `, 'utf8');
 
 console.log('✅ Full build completed successfully! All files staged in /public');

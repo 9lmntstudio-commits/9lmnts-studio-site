@@ -1,0 +1,17 @@
+# 9LMNTS Studio (Nine Elements Studio)
+> Websites That Book Your Customers For You — Ottawa Digital Architecture, Event OS & Creator OS Suite.
+
+## Primary Live Platforms
+- Flagship Agency & Intake Hub: https://9lmntsstudio.com
+- SoundClash OS (Live 8-DJ Battle & Crowd Voting App): https://clash.9lmntsstudio.com
+- Artist OS (Live Performing Artist Command Center & WAV Stem Vault): https://artist.9lmntsstudio.com
+
+## Core Routes
+- Services & Fixed-Price Sprints: https://9lmntsstudio.com/services/
+- Phygital WebAR Service Suite (3D Menus $450, AR Business Cards $500, AR Merch $1,500, Interactive Ads $1,500): https://9lmntsstudio.com/services/#webar-suite
+- Production Work & Live Arenas: https://9lmntsstudio.com/work/
+- 72-Hour OS Intake & Friction Audit: https://9lmntsstudio.com/os/
+- Modular Drop-In Widgets: https://9lmntsstudio.com/embeds/
+- 3-Sprint Build Process: https://9lmntsstudio.com/process/
+- About Founder Darnley Sanon: https://9lmntsstudio.com/about/
+- Contact & Diagnostic Booking: https://9lmntsstudio.com/contact/
