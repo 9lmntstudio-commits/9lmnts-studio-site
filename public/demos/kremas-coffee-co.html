@@ -1,0 +1,2244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kremas Coffee Co. — Artisanal Haitian Spiced Whiskey Cream & Cold Brew</title>
+<meta name="description" content="Ancestral Haitian Kremas meets 18-hour cold brew. Blended with fresh coconut cream, toasted whole spices, and smooth aged whiskey. Served with authentic Haitian baked goods.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/assets/work/coffee/still-01.jpg">
+<style>
+  :root {
+    --bg: #090706;
+    --ink: #F7EFE6;
+    --ink-dim: rgba(247, 239, 230, 0.72);
+    --ink-faint: rgba(247, 239, 230, 0.42);
+    --line: rgba(247, 239, 230, 0.12);
+    --line-bright: rgba(247, 239, 230, 0.28);
+    --glass: rgba(14, 11, 9, 0.72);
+    --accent: #C86428;
+    --accent-glow: rgba(200, 100, 40, 0.4);
+    --blend-tint: rgba(200, 100, 40, 0.45);
+    --serif: "Instrument Serif", Georgia, serif;
+    --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "JetBrains Mono", monospace;
+    --gutter: clamp(1.25rem, 4vw, 4.5rem);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); color: var(--ink); scroll-behavior: smooth; overflow-x: clip; }
+  body {
+    background: var(--bg);
+    font-family: var(--sans);
+    font-size: clamp(0.95rem, 1.05vw, 1.1rem);
+    line-height: 1.6;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ================= FIXED VIDEO CINEMA STAGE ================= */
+  .stage {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    background: #000;
+    pointer-events: none;
+  }
+  .stage video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: translateZ(0);
+  }
+  .stage .poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.8s ease;
+  }
+  .stage .poster.hide { opacity: 0; }
+
+  /* Dynamic Flavour Liquid Color Tint Overlay */
+  .stage .blend-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--blend-tint);
+    mix-blend-mode: color;
+    opacity: 0;
+    transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+    will-change: background-color, opacity;
+  }
+  .stage .blend-overlay.active { opacity: 0.82; }
+
+  /* Soft Vignette and Scrim for pristine typography contrast */
+  .stage .stage-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(9, 7, 6, 0.88) 0%, rgba(9, 7, 6, 0.45) 45%, rgba(9, 7, 6, 0.2) 100%),
+      linear-gradient(0deg, rgba(9, 7, 6, 0.85) 0%, rgba(9, 7, 6, 0) 35%),
+      linear-gradient(180deg, rgba(9, 7, 6, 0.75) 0%, rgba(9, 7, 6, 0) 25%);
+    transition: opacity 0.6s ease;
+  }
+  .stage .stage-scrim.flavors-mode {
+    background:
+      linear-gradient(0deg, rgba(9, 7, 6, 0.95) 0%, rgba(9, 7, 6, 0.65) 40%, rgba(9, 7, 6, 0.3) 80%),
+      linear-gradient(180deg, rgba(9, 7, 6, 0.85) 0%, rgba(9, 7, 6, 0) 25%);
+  }
+  .stage .story-veil {
+    position: absolute;
+    inset: 0;
+    background: rgba(9, 7, 6, 0);
+    transition: background-color 0.5s ease;
+  }
+
+  /* Giant Scrolling Background Typographic Marquee (Pinterest Reference t=6s & t=20s) */
+  .stage .bg-marquee-track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0.07;
+    transition: opacity 0.8s ease;
+  }
+  .stage .bg-marquee-text {
+    font-family: var(--serif);
+    font-size: clamp(8rem, 22vw, 24rem);
+    font-weight: 400;
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    text-transform: uppercase;
+    display: inline-block;
+    will-change: transform;
+  }
+
+  /* ================= SIMPLE TEXT HEADER MENU ================= */
+  header.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem var(--gutter);
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease, padding 0.3s ease, border-color 0.4s ease;
+  }
+  header.top-nav.scrolled {
+    background: rgba(9, 7, 6, 0.82);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border-bottom: 1px solid var(--line);
+    padding: 1rem var(--gutter);
+  }
+  .brand-logo {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+  .brand-logo em {
+    font-style: italic;
+    color: var(--accent);
+    transition: color 0.6s ease;
+  }
+  nav.text-menu {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.4rem, 2.8vw, 2.8rem);
+  }
+  nav.text-menu a {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    position: relative;
+    padding: 0.4rem 0;
+    transition: color 0.3s ease;
+  }
+  nav.text-menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.6s ease;
+  }
+  nav.text-menu a:hover,
+  nav.text-menu a.active {
+    color: var(--ink);
+  }
+  nav.text-menu a:hover::after,
+  nav.text-menu a.active::after {
+    transform: scaleX(1);
+  }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .nav-cart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    background: rgba(247, 239, 230, 0.08);
+    border: 1px solid var(--line);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  .nav-cart-btn:hover {
+    background: var(--accent);
+    color: #140904;
+    border-color: var(--accent);
+  }
+  .nav-cart-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #140904;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+  }
+  .nav-cart-btn:hover .nav-cart-count {
+    background: #140904;
+    color: var(--accent);
+  }
+  .menu-btn-mobile {
+    display: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* ================= ALL IN ONE SCROLL CONTENT ================= */
+  main.scroll-container {
+    position: relative;
+    z-index: 10;
+  }
+  .scroll-track {
+    position: relative;
+  }
+
+  /* 01 · HERO TRACK (Video 0:05 to 0:06) */
+  #hero-track {
+    height: 220vh;
+  }
+  .sticky-viewport {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(5.5rem, 10vh, 7rem) var(--gutter) clamp(2rem, 4vh, 3rem);
+  }
+  .hero-box {
+    max-width: min(620px, 92vw);
+    opacity: 1;
+    padding-bottom: 2.5rem;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.2rem;
+  }
+  .hero-badge::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+    transition: background-color 0.6s ease;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(3.2rem, 7.8vw, 7.2rem);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+    transition: color 0.6s ease;
+  }
+  .hero-detail {
+    color: var(--ink-dim);
+    font-size: clamp(1rem, 1.2vw, 1.18rem);
+    max-width: 42ch;
+    line-height: 1.68;
+    margin-bottom: 2.2rem;
+  }
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.1rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1.05rem 1.8rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s, border-color 0.3s, color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #140904;
+    box-shadow: 0 4px 24px var(--accent-glow);
+  }
+  .btn-primary:hover {
+    background: #E07434;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--accent-glow);
+  }
+  .btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--ink);
+    background: rgba(14, 11, 9, 0.4);
+    backdrop-filter: blur(12px);
+  }
+  .btn-ghost:hover {
+    border-color: var(--ink-dim);
+    transform: translateY(-2px);
+  }
+
+  /* Floating Hero Blend Preview Card (Pinterest Reference t=0s) */
+  .hero-right-card {
+    width: min(340px, 90vw);
+    background: rgba(14, 11, 9, 0.65);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 1.6rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .hero-right-tag {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .hero-right-title {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .hero-right-desc {
+    color: var(--ink-dim);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+  .hero-right-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+  }
+  .hero-right-specs b {
+    display: block;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    margin-top: 0.2rem;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    left: var(--gutter);
+    bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .scroll-indicator .line {
+    width: 1px;
+    height: 38px;
+    background: linear-gradient(var(--accent), transparent);
+    animation: pulseScroll 2.2s infinite ease-in-out;
+  }
+  @keyframes pulseScroll {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ================= 02 · UNIQUE SHOP SELECTION SCROLL ROW (Pinterest Reference t=12s) ================= */
+  .shop-row-section {
+    position: relative;
+    padding: clamp(5rem, 10vh, 8rem) 0 4rem;
+    border-top: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(9, 7, 6, 0.4) 0%, rgba(9, 7, 6, 0.92) 50%, rgba(9, 7, 6, 0.98) 100%);
+    overflow: hidden;
+  }
+  .shop-header-strip {
+    padding: 0 var(--gutter);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.8rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .shop-header-strip h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 5vw, 4.4rem);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+  .shop-header-strip h2 em {
+    font-style: italic;
+    color: var(--accent);
+    transition: color 0.6s ease;
+  }
+  .shop-header-strip p {
+    color: var(--ink-dim);
+    font-size: 0.95rem;
+    max-width: 44ch;
+    line-height: 1.55;
+  }
+
+  /* Horizontal Shop Row Container */
+  .shop-shelf-wrap {
+    width: 100%;
+    overflow-x: auto;
+    padding: 2.5rem var(--gutter) 4.5rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+  }
+  .shop-shelf-wrap::-webkit-scrollbar { display: none; }
+  .shop-shelf-row {
+    display: flex;
+    align-items: center;
+    gap: clamp(2rem, 4vw, 4.5rem);
+    width: max-content;
+  }
+
+  /* Individual Shop Row Item Node */
+  .shop-item-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: clamp(270px, 25vw, 340px);
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    opacity: 0.48;
+    transform: scale(0.88);
+    position: relative;
+  }
+  .shop-item-node.selected {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+
+  /* Item Pedestal & Glow Aura */
+  .shop-item-pedestal {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: 22px;
+    overflow: hidden;
+    background: rgba(16, 12, 10, 0.7);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.4rem;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+  }
+  .shop-item-node.selected .shop-item-pedestal {
+    border-color: var(--accent);
+    box-shadow: 0 16px 40px var(--accent-glow);
+  }
+  .shop-item-spotlight {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center 60%, var(--c) 0%, transparent 70%);
+    filter: blur(35px);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .shop-item-node.selected .shop-item-spotlight {
+    opacity: 0.45;
+  }
+  .shop-item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .shop-item-node:hover .shop-item-image {
+    transform: scale(1.06);
+  }
+
+  /* Item Typography & Info */
+  .shop-item-info {
+    text-align: center;
+    width: 100%;
+  }
+  .shop-item-category {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+    transition: color 0.6s ease;
+  }
+  .shop-item-name {
+    font-family: var(--serif);
+    font-size: 1.65rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+  .shop-item-price {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    color: var(--ink-dim);
+    margin-bottom: 1rem;
+  }
+  .shop-item-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .shop-item-node.selected .shop-item-actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .btn-quick-add {
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #140904;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+  }
+  .btn-quick-add:hover {
+    background: #FFF;
+  }
+  .btn-details {
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--line-bright);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    transition: all 0.25s ease;
+  }
+  .btn-details:hover {
+    border-color: #FFF;
+    color: #FFF;
+  }
+
+  /* ================= 03 · INTERACTIVE SPICES & CRAFT TICKER (Pinterest Reference t=14s) ================= */
+  .ticker-section {
+    padding: 4.5rem 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: rgba(9, 7, 6, 0.96);
+    overflow: hidden;
+    position: relative;
+  }
+  .ticker-header {
+    text-align: center;
+    margin-bottom: 2.2rem;
+    padding: 0 var(--gutter);
+  }
+  .ticker-header h3 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.1;
+  }
+  .ticker-header h3 em {
+    font-style: italic;
+    color: var(--accent);
+    transition: color 0.6s ease;
+  }
+  .ticker-track-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    overflow: hidden;
+  }
+  .ticker-strip {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: max-content;
+    animation: marqueeRow 38s linear infinite;
+  }
+  .ticker-strip.reverse {
+    animation: marqueeRowReverse 42s linear infinite;
+  }
+  @keyframes marqueeRow {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes marqueeRowReverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  .ticker-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(247, 239, 230, 0.03);
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink-dim);
+    white-space: nowrap;
+    transition: all 0.3s ease;
+  }
+  .ticker-badge:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+    background: rgba(200, 100, 40, 0.12);
+  }
+  .ticker-badge .symbol {
+    color: var(--accent);
+    font-size: 0.85rem;
+  }
+
+  /* ================= 04 · EDITORIAL STORY & HAITIAN BAKERY ================= */
+  .story-editorial-wrap {
+    position: relative;
+    background: #090706;
+    padding: 6rem var(--gutter) 6rem;
+  }
+  .story-editorial-container {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .story-split-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2.5rem, 6vw, 7rem);
+    align-items: start;
+    margin-bottom: 6rem;
+  }
+  .story-sticky-heading {
+    position: sticky;
+    top: 18vh;
+  }
+  .story-sticky-heading h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 4.8vw, 4.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin-top: 1.2rem;
+  }
+  .story-sticky-heading h2 em {
+    font-style: italic;
+    color: var(--accent);
+    transition: color 0.6s ease;
+  }
+  .story-editorial-body p {
+    color: var(--ink-dim);
+    font-size: clamp(1.02rem, 1.15vw, 1.15rem);
+    line-height: 1.75;
+    margin-bottom: 1.6rem;
+  }
+  .story-editorial-body p:first-child::first-letter {
+    font-family: var(--serif);
+    float: left;
+    font-size: 4.4em;
+    line-height: 0.8;
+    padding: 0.1em 0.12em 0 0;
+    color: var(--ink);
+  }
+
+  /* Gallery using the 4 Stills */
+  .story-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 3.5rem 0;
+  }
+  .story-gallery-item {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--line);
+    background: #110E0C;
+  }
+  .story-gallery-item.span-2 {
+    grid-column: span 2;
+  }
+  .story-gallery-item img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .story-gallery-item:hover img {
+    transform: scale(1.04);
+  }
+  .story-gallery-item figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.4rem;
+    background: linear-gradient(0deg, rgba(9, 7, 6, 0.9) 0%, transparent 100%);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* Metrics Strip */
+  .story-metrics-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin: 3.5rem 0;
+  }
+  .metric-block {
+    padding: 1.8rem 1.4rem;
+    border-right: 1px solid var(--line);
+  }
+  .metric-block:first-child { padding-left: 0; }
+  .metric-block:last-child { border-right: 0; }
+  .metric-number {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .metric-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ================= HAITIAN BAKERY PAIRING (Box-Free Editorial) ================= */
+  .pastry-section {
+    margin: 6rem 0 3.5rem;
+    border-top: 1px solid var(--line);
+    padding-top: 5rem;
+  }
+  .pastry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .pastry-header h3 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1;
+    margin-top: 0.5rem;
+  }
+  .pastry-header h3 em {
+    font-style: italic;
+    color: var(--accent);
+    transition: color 0.6s ease;
+  }
+  .pastry-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .pastry-card-clean {
+    border-top: 1px solid var(--line);
+    padding-top: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.3s ease;
+  }
+  .pastry-card-clean:hover {
+    border-color: var(--accent);
+  }
+  .pastry-origin {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .pastry-name {
+    font-family: var(--serif);
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    margin-bottom: 0.6rem;
+  }
+  .pastry-desc {
+    color: var(--ink-dim);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 1.4rem;
+    flex-grow: 1;
+  }
+  .pastry-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--line);
+  }
+  .pastry-price {
+    font-family: var(--mono);
+    font-size: 1.25rem;
+  }
+  .pastry-add-btn {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--line-bright);
+    border-radius: 999px;
+    transition: all 0.25s ease;
+  }
+  .pastry-add-btn:hover {
+    background: var(--accent);
+    color: #140904;
+    border-color: var(--accent);
+  }
+
+  /* Roastery Visit & Info Directory */
+  .roastery-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 4rem 0;
+    margin-top: 6rem;
+    border-top: 1px solid var(--line);
+  }
+  .info-col h5 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.1rem;
+  }
+  .info-col p, .info-col a {
+    color: var(--ink-dim);
+    font-size: 0.96rem;
+    line-height: 1.8;
+    display: block;
+  }
+
+  /* Site Footer */
+  .site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 3rem 0;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+  }
+
+  /* ================= SLIDE-IN SIDE DETAIL MODAL (BelFanm & Berry Bloom Pattern) ================= */
+  .modal-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .modal-scrim.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .side-detail-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(520px, 100vw);
+    background: #0D0A08;
+    border-left: 1px solid var(--line);
+    z-index: 100;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 2.5rem clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .side-detail-modal.open {
+    transform: translateX(0);
+  }
+  .modal-close-btn {
+    align-self: flex-end;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    margin-bottom: 1.5rem;
+    transition: all 0.25s ease;
+  }
+  .modal-close-btn:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .modal-preview-hero {
+    width: 100%;
+    aspect-ratio: 16/10;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--line);
+    margin-bottom: 1.8rem;
+    background: #110E0C;
+  }
+  .modal-preview-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .modal-category {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .modal-title {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.8rem;
+  }
+  .modal-price-bar {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 1.4rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .modal-price {
+    font-family: var(--mono);
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .modal-unit {
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+  }
+  .modal-desc {
+    color: var(--ink-dim);
+    font-size: 0.96rem;
+    line-height: 1.7;
+    margin-bottom: 1.8rem;
+  }
+  .modal-metrics-table {
+    display: grid;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    padding: 1.2rem;
+    border-radius: 14px;
+    background: rgba(247, 239, 230, 0.03);
+    border: 1px solid var(--line);
+  }
+  .modal-metric-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 30px;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.72rem;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .modal-metric-bar {
+    height: 4px;
+    border-radius: 4px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .modal-metric-bar i {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: var(--accent);
+    transition: width 0.6s ease;
+  }
+  .modal-cta-box {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  /* ================= SLIDE-UP CHECKOUT DRAWER ================= */
+  .drawer-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 110;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .drawer-scrim.open { opacity: 1; pointer-events: auto; }
+  #modalPayPalCheckout {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 90vh;
+    background: #0D0A08;
+    border-top: 1px solid var(--line);
+    border-radius: 24px 24px 0 0;
+    z-index: 120;
+    padding: 2rem var(--gutter) 2.5rem;
+    transform: translateY(100%);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+  }
+  #modalPayPalCheckout.open { transform: translateY(0); }
+  .drawer-handle {
+    width: 48px;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--line);
+    margin: 0 auto 1.5rem;
+  }
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .drawer-header h3 {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 400;
+  }
+  .order-section {
+    margin-bottom: 1.8rem;
+  }
+  .order-section-title {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.8rem;
+  }
+  .drawer-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .drawer-chip {
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: var(--ink-dim);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .drawer-chip i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--c);
+  }
+  .drawer-chip[aria-selected="true"] {
+    border-color: var(--accent);
+    color: var(--ink);
+    background: rgba(200, 100, 40, 0.12);
+  }
+  .quantity-stepper {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+  }
+  .quantity-stepper button {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    font-size: 1.2rem;
+    display: grid;
+    place-items: center;
+    transition: border-color 0.2s;
+  }
+  .quantity-stepper button:hover {
+    border-color: var(--ink-dim);
+  }
+  .quantity-stepper output {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    min-width: 2ch;
+    text-align: center;
+  }
+  .order-total-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1.4rem 0 1.2rem;
+    border-top: 1px solid var(--line);
+    margin-top: 1.5rem;
+  }
+  .order-total-bar b {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 2.1rem;
+  }
+  .drawer-actions {
+    display: grid;
+    gap: 0.8rem;
+  }
+  .drawer-actions .btn {
+    justify-content: center;
+    width: 100%;
+  }
+  .interac-box {
+    display: none;
+    margin-top: 1.1rem;
+    padding: 1.1rem;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--ink-dim);
+  }
+  .interac-box.active { display: block; }
+  .interac-box b { color: var(--ink); }
+
+  /* Hidden Founder Drawer (Shift + B) */
+  .founder-drawer {
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    z-index: 130;
+    width: 290px;
+    padding: 1.2rem;
+    border-radius: 16px;
+    background: #14100D;
+    border: 1px solid var(--line);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+    display: none;
+  }
+  .founder-drawer.open { display: block; }
+  .founder-drawer h6 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .founder-drawer label {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0.6rem 0 0.3rem;
+  }
+  .founder-drawer input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: #090706;
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.86rem;
+  }
+
+  /* ================= RESPONSIVE ADJUSTMENTS ================= */
+  @media (max-width: 960px) {
+    nav.text-menu { display: none; }
+    nav.text-menu.mobile-open {
+      display: flex;
+      position: fixed;
+      inset: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2.2rem;
+      background: rgba(9, 7, 6, 0.98);
+      z-index: 35;
+    }
+    nav.text-menu.mobile-open a { font-size: 1.1rem; }
+    .menu-btn-mobile { display: block; }
+    .hero-right-card { display: none; }
+    .pastry-grid { grid-template-columns: 1fr 1fr; }
+    .story-split-grid { grid-template-columns: 1fr; }
+    .story-sticky-heading { position: static; }
+    .roastery-info-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
+    .story-gallery { grid-template-columns: 1fr; }
+    .story-gallery-item.span-2 { grid-column: span 1; }
+  }
+  @media (max-width: 600px) {
+    .pastry-grid { grid-template-columns: 1fr; }
+    .roastery-info-grid { grid-template-columns: 1fr; }
+    .shop-header-strip { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Fixed Background Video Cinema Stage with Marquee Track -->
+<div class="stage" aria-hidden="true">
+  <img class="poster" id="bgPoster" src="/assets/work/coffee/still-01.jpg" alt="">
+  <video id="bgVideo" muted playsinline preload="auto" src="/assets/work/coffee/hero-sequence.mp4"></video>
+  <div class="blend-overlay" id="blendOverlay"></div>
+  <div class="stage-scrim" id="stageScrim"></div>
+  <div class="story-veil" id="storyVeil"></div>
+  <div class="bg-marquee-track" id="bgMarqueeTrack">
+    <div class="bg-marquee-text" id="bgMarqueeText">KREMAS · UNCORKED · KREMAS · UNCORKED ·</div>
+  </div>
+</div>
+
+<!-- Simple Text Header Menu -->
+<header class="top-nav" id="topNav">
+  <a href="#hero-track" class="brand-logo" data-brand-logo>Kremas <em>Coffee</em></a>
+  <nav class="text-menu" id="textMenu">
+    <a href="#hero-track" data-nav="hero">Home</a>
+    <a href="#shop-section" data-nav="blends">Blends</a>
+    <a href="#spices-ticker" data-nav="spices">Spices</a>
+    <a href="#bakery-section" data-nav="bakery">Bakery</a>
+    <a href="#story-section" data-nav="story">Story</a>
+    <a href="#visit-directory" data-nav="visit">Visit</a>
+  </nav>
+  <div class="nav-actions">
+    <button class="nav-cart-btn" data-trigger-order>
+      <span>Quick Cart</span>
+      <span class="nav-cart-count" id="navCartCount">2</span>
+    </button>
+    <button class="menu-btn-mobile" id="mobileMenuToggle" aria-expanded="false" aria-controls="textMenu">Menu</button>
+  </div>
+</header>
+
+<main class="scroll-container">
+
+  <!-- ================= 01 · HERO SECTION (Video 0:05 to 0:06) ================= -->
+  <section class="scroll-track" id="hero-track" data-v-start="5.0" data-v-end="6.0">
+    <div class="sticky-viewport">
+      <div class="hero-box" id="heroBox">
+        <div class="hero-badge">Haitian Whiskey Cream &amp; Cold Brew · <span data-brand-city>Ottawa</span></div>
+        <h1 class="hero-title">
+          Kremas,<br><em>uncorked.</em>
+        </h1>
+        <p class="hero-detail">
+          Inspired by Haiti's celebratory cream elixir. 18-hour single-origin cold brew blended with fresh coconut cream, hand-toasted star anise, Ceylon cinnamon, nutmeg, and smooth aged whiskey.
+        </p>
+        <div class="cta-group">
+          <a href="#shop-section" class="btn btn-primary">Explore Blends ↓</a>
+          <button class="btn btn-ghost" data-trigger-order>Reserve Bottles ($20)</button>
+        </div>
+      </div>
+
+      <!-- Floating Hero Blend Preview (Pinterest Reference t=0s) -->
+      <aside class="hero-right-card" id="heroRightCard">
+        <span class="hero-right-tag">THE RIGHT BLEND · 01</span>
+        <h3 class="hero-right-title" id="heroCardTitle">Original Kremas Reserve</h3>
+        <p class="hero-right-desc" id="heroCardDesc">
+          Rich coconut milk, sweet condensed cream, freshly grated nutmeg, star anise, and aged whiskey over cold brew.
+        </p>
+        <div class="hero-right-specs">
+          <div>EXTRACTION<b>18-Hour Steep</b></div>
+          <div>STRENGTH<b>Bold &amp; Velvety</b></div>
+        </div>
+      </aside>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="line"></div>
+        <span>Scroll To Uncork</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 02 · UNIQUE SHOP SELECTION SCROLL ROW (Pinterest Reference t=12s) ================= -->
+  <section class="shop-row-section" id="shop-section">
+    <div class="shop-header-strip">
+      <div>
+        <div class="hero-badge">Ancestral Formulations · Small Batch</div>
+        <h2>One ancestral secret.<br><em>Five legendary pours.</em></h2>
+      </div>
+      <p>
+        Scrub horizontally through our handcrafted bottles. Select any expression to flood the liquid blend color, reveal tasting notes, or reserve for direct delivery.
+      </p>
+    </div>
+
+    <!-- Horizontal Shop Shelf Row with Active Zoom & Radiant Spotlight -->
+    <div class="shop-shelf-wrap" id="shopShelfWrap">
+      <div class="shop-shelf-row" id="shopShelfRow">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 03 · INTERACTIVE SPICES & CRAFT TICKER (Pinterest Reference t=14s) ================= -->
+  <section class="ticker-section" id="spices-ticker">
+    <div class="ticker-header">
+      <div class="hero-badge">The Raw Alchemy</div>
+      <h3>Meet the spices <em>behind the elixir.</em></h3>
+    </div>
+    <div class="ticker-track-wrap">
+      <div class="ticker-strip">
+        <span class="ticker-badge"><span class="symbol">★</span> Vietnamese Star Anise</span>
+        <span class="ticker-badge"><span class="symbol">+</span> Ceylon Cinnamon Bark</span>
+        <span class="ticker-badge"><span class="symbol">★</span> Grenada Whole Nutmeg</span>
+        <span class="ticker-badge"><span class="symbol">+</span> Haitian Bourbon Vanilla Bean</span>
+        <span class="ticker-badge"><span class="symbol">★</span> 18-Hour Huila Cold Brew</span>
+        <span class="ticker-badge"><span class="symbol">+</span> Cold-Pressed Coconut Cream</span>
+        <span class="ticker-badge"><span class="symbol">★</span> Aged Whiskey Oak Finish</span>
+        <!-- Duplicated for seamless loop -->
+        <span class="ticker-badge"><span class="symbol">★</span> Vietnamese Star Anise</span>
+        <span class="ticker-badge"><span class="symbol">+</span> Ceylon Cinnamon Bark</span>
+        <span class="ticker-badge"><span class="symbol">★</span> Grenada Whole Nutmeg</span>
+        <span class="ticker-badge"><span class="symbol">+</span> Haitian Bourbon Vanilla Bean</span>
+        <span class="ticker-badge"><span class="symbol">★</span> 18-Hour Huila Cold Brew</span>
+      </div>
+      <div class="ticker-strip reverse">
+        <span class="ticker-badge"><span class="symbol">♦</span> 18-Hour Slow Cold Steep</span>
+        <span class="ticker-badge"><span class="symbol">♥</span> Small-Batch 12kg Drum Roast</span>
+        <span class="ticker-badge"><span class="symbol">♦</span> 0% Artificial Syrups</span>
+        <span class="ticker-badge"><span class="symbol">★</span> 100% Ancestral Haitian Recipe</span>
+        <span class="ticker-badge"><span class="symbol">♦</span> Natural Cork &amp; Wax Sealed</span>
+        <span class="ticker-badge"><span class="symbol">♥</span> Direct-Trade Specialty Beans</span>
+        <!-- Duplicated for seamless loop -->
+        <span class="ticker-badge"><span class="symbol">♦</span> 18-Hour Slow Cold Steep</span>
+        <span class="ticker-badge"><span class="symbol">♥</span> Small-Batch 12kg Drum Roast</span>
+        <span class="ticker-badge"><span class="symbol">♦</span> 0% Artificial Syrups</span>
+        <span class="ticker-badge"><span class="symbol">★</span> 100% Ancestral Haitian Recipe</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04 · EDITORIAL STORY & HAITIAN BAKERY ================= -->
+  <section class="story-editorial-wrap" id="story-section">
+    <div class="story-editorial-container">
+      
+      <!-- Split Grid Story -->
+      <div class="story-split-grid">
+        <div class="story-sticky-heading">
+          <div class="hero-badge">Ancestral Roots · 1952</div>
+          <h2>Born from<br>family kitchens.<br><em>Elevated for cold brew.</em></h2>
+        </div>
+
+        <div class="story-editorial-body">
+          <p>
+            Kremas is not merely a drink in Haitian culture; it is the sacred heartbeat of celebration. Every December, family kitchens across Port-au-Prince and Jacmel fill with the sweet, intoxicating aromas of simmering sweet condensed cream, fresh-pressed coconut milk, and freshly ground whole spices toasted in seasoned cast iron.
+          </p>
+          <p>
+            We took that ancestral recipe and harmonized it with third-wave specialty coffee. By replacing heat-extracted espresso with a 18-hour cold brew steep, the natural sweetness and deep cacao notes of high-altitude cherries shine with silky clarity—without burning the delicate oils of the spices.
+          </p>
+
+          <!-- 4 Stills Imagery Gallery -->
+          <div class="story-gallery">
+            <figure class="story-gallery-item">
+              <img src="/assets/work/coffee/still-01.jpg" alt="Explosive splash of Haitian Kremas cream and roasted coffee with whole spices." loading="lazy">
+              <figcaption>01 · The Alchemy — Spices &amp; Cream Uncorked</figcaption>
+            </figure>
+            <figure class="story-gallery-item">
+              <img src="/assets/work/coffee/still-02.jpg" alt="Rich espresso stream with golden crema." loading="lazy">
+              <figcaption>02 · Golden Crema Vortex</figcaption>
+            </figure>
+            <figure class="story-gallery-item">
+              <img src="/assets/work/coffee/still-03.jpg" alt="Steaming artisanal pour-over extraction." loading="lazy">
+              <figcaption>03 · 18-Hour Slow Steep</figcaption>
+            </figure>
+            <figure class="story-gallery-item span-2">
+              <img src="/assets/work/coffee/still-04.jpg" alt="Finished bottle of Kremas Coffee beside a cocktail glass with star anise garnish." loading="lazy">
+              <figcaption>04 · The Finished Pour — Served chilled or over clear ice</figcaption>
+            </figure>
+          </div>
+
+          <div class="story-metrics-strip">
+            <div class="metric-block">
+              <div class="metric-number num">18</div>
+              <div class="metric-label">Hours Cold Steeped</div>
+            </div>
+            <div class="metric-block">
+              <div class="metric-number num">12<small style="font-size:0.5em">kg</small></div>
+              <div class="metric-label">Small-Batch Roast</div>
+            </div>
+            <div class="metric-block">
+              <div class="metric-number num">0%</div>
+              <div class="metric-label">Artificial Syrups</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Haitian Bakery Pairing Section (Box-Free Pure Editorial) -->
+      <section class="pastry-section" id="bakery-section">
+        <div class="pastry-header">
+          <div>
+            <div class="hero-badge">La Pâtisserie Haïtienne</div>
+            <h3>Ancestral Confections. <em>Baked fresh daily.</em></h3>
+          </div>
+          <p style="color:var(--ink-dim); max-width:44ch; font-size:0.95rem;">
+            In Haiti, a pour of Kremas is never served alone. Our roastery bakery prepares authentic heritage confections every morning to accompany your bottles.
+          </p>
+        </div>
+
+        <div class="pastry-grid">
+          <article class="pastry-card-clean">
+            <div>
+              <div class="pastry-origin">Léogâne Tradition</div>
+              <h4 class="pastry-name">Pain Patate</h4>
+              <p class="pastry-desc">Slow-baked purple sweet potato pudding cake with fresh coconut milk, freshly grated ginger root, dark raisins, and sweet cinnamon.</p>
+            </div>
+            <div class="pastry-foot">
+              <span class="pastry-price num">$8.50</span>
+              <button class="pastry-add-btn" data-add-pastry="patate">Add to Box +</button>
+            </div>
+          </article>
+
+          <article class="pastry-card-clean">
+            <div>
+              <div class="pastry-origin">Petit-Goâve Heritage</div>
+              <h4 class="pastry-name">Dous Makòs</h4>
+              <p class="pastry-desc">The legendary tri-color Haitian fudge cooked in heavy copper cauldrons. Hand-cut layers of sweet vanilla cream, rich dark cacao, and almond.</p>
+            </div>
+            <div class="pastry-foot">
+              <span class="pastry-price num">$9.00</span>
+              <button class="pastry-add-btn" data-add-pastry="makos">Add to Box +</button>
+            </div>
+          </article>
+
+          <article class="pastry-card-clean">
+            <div>
+              <div class="pastry-origin">Jacmel Praline Recipe</div>
+              <h4 class="pastry-name">Tablèt Kokoye</h4>
+              <p class="pastry-desc">Crisp coconut praline brittle kettle-cooked in raw sugarcane syrup (siwo kann) with crushed ginger and freshly grated nutmeg.</p>
+            </div>
+            <div class="pastry-foot">
+              <span class="pastry-price num">$7.00</span>
+              <button class="pastry-add-btn" data-add-pastry="kokoye">Add to Box +</button>
+            </div>
+          </article>
+
+          <article class="pastry-card-clean">
+            <div>
+              <div class="pastry-origin">Ancestral Salon Recipe</div>
+              <h4 class="pastry-name">Gâteau au Beurre</h4>
+              <p class="pastry-desc">Moist golden Caribbean celebration crumb cake whipped with European butter, fresh lime zest, dark vanilla bean, and a whisper of rum spice.</p>
+            </div>
+            <div class="pastry-foot">
+              <span class="pastry-price num">$8.00</span>
+              <button class="pastry-add-btn" data-add-pastry="gateau">Add to Box +</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Roastery Directory & Contact -->
+      <div class="roastery-info-grid" id="visit-directory">
+        <div class="info-col">
+          <h5>Roastery &amp; Bottle Shop</h5>
+          <p>214 Dalhousie Street<br><span data-brand-city>Ottawa</span>, Ontario<br>K1N 7C8</p>
+        </div>
+        <div class="info-col">
+          <h5>Retail Hours</h5>
+          <p>Wednesday – Friday · 8am – 6pm<br>Saturday – Sunday · 9am – 5pm<br>Monday – Tuesday · Roasting Days</p>
+        </div>
+        <div class="info-col">
+          <h5>Direct Concierge</h5>
+          <a href="tel:+16134009691" class="num">(613) 400-9691</a>
+          <a href="mailto:9lmntstudio@gmail.com">9lmntstudio@gmail.com</a>
+          <a href="https://wa.me/16134009691" target="_blank" rel="noopener">WhatsApp Dispatch Bridge</a>
+        </div>
+        <div class="info-col">
+          <h5>Delivery &amp; Pickup</h5>
+          <p>Complimentary Roastery Pickup.<br>Local refrigerated courier: $6 CAD (Free on 3+ bottles).</p>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <span>© <span id="currentYear"></span> <span data-brand-name>Kremas</span> Coffee Co. Handcrafted in <span data-brand-city>Ottawa</span>.</span>
+        <span>Interac e-Transfer autodeposit enabled · Desjardins Rail</span>
+      </footer>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- Slide-in Side Detail Modal (Berry Bloom Pattern) -->
+<div class="modal-scrim" id="modalScrim"></div>
+<aside class="side-detail-modal" id="sideDetailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <button class="modal-close-btn" id="modalCloseBtn">Close [ESC]</button>
+  <div class="modal-preview-hero">
+    <img id="modalImg" src="/assets/work/coffee/still-04.jpg" alt="Selected bottle preview">
+  </div>
+  <div class="modal-category" id="modalCategory">Ancestral Haitian Recipe</div>
+  <h2 class="modal-title" id="modalTitle">Original Kremas Reserve</h2>
+  <div class="modal-price-bar">
+    <span class="modal-price num" id="modalPrice">$20.00</span>
+    <span class="modal-unit">CAD / 500ml Wax-Sealed Bottle</span>
+  </div>
+  <p class="modal-desc" id="modalDesc">
+    Rich coconut milk, sweet condensed cream, fresh-grated nutmeg, star anise, and smooth aged whiskey blended with 18-hour cold brew.
+  </p>
+
+  <div class="modal-metrics-table">
+    <div class="modal-metric-row">
+      <span>Sweetness</span>
+      <div class="modal-metric-bar"><i id="modalBarSweet" style="width: 70%;"></i></div>
+      <span class="num" id="modalValSweet">7</span>
+    </div>
+    <div class="modal-metric-row">
+      <span>Spice Warmth</span>
+      <div class="modal-metric-bar"><i id="modalBarSpice" style="width: 60%;"></i></div>
+      <span class="num" id="modalValSpice">6</span>
+    </div>
+    <div class="modal-metric-row">
+      <span>Body Depth</span>
+      <div class="modal-metric-bar"><i id="modalBarBody" style="width: 90%;"></i></div>
+      <span class="num" id="modalValBody">9</span>
+    </div>
+  </div>
+
+  <div class="modal-cta-box">
+    <button class="btn btn-primary" id="modalBtnAdd">Add to Quick Cart +</button>
+  </div>
+</aside>
+
+<!-- Slide-Up Checkout Drawer -->
+<div class="drawer-scrim" id="drawerScrim"></div>
+<div id="modalPayPalCheckout" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="drawer-handle"></div>
+  <div class="drawer-header">
+    <h3 id="drawerTitle">Reserve Your Bottles</h3>
+    <button class="close-btn" id="drawerClose">Close</button>
+  </div>
+  
+  <div class="order-section">
+    <span class="order-section-title">Select Blend</span>
+    <div class="drawer-chips" id="drawerFlavorChips"></div>
+  </div>
+
+  <div class="order-section">
+    <span class="order-section-title">Bottles (500ml Wax-Sealed)</span>
+    <div class="quantity-stepper">
+      <button id="qtyMinus" aria-label="Decrease bottle count">−</button>
+      <output id="qtyOutput" class="num">2</output>
+      <button id="qtyPlus" aria-label="Increase bottle count">+</button>
+    </div>
+  </div>
+
+  <div class="order-section">
+    <span class="order-section-title">Haitian Bakery Pairings (Optional)</span>
+    <div class="drawer-chips" id="drawerPastryChips">
+      <button class="drawer-chip" data-pastry-id="patate" data-name="Pain Patate" data-price="8.50" aria-selected="false"><i></i>+ Pain Patate ($8.50)</button>
+      <button class="drawer-chip" data-pastry-id="makos" data-name="Dous Makòs" data-price="9.00" aria-selected="false"><i></i>+ Dous Makòs ($9.00)</button>
+      <button class="drawer-chip" data-pastry-id="kokoye" data-name="Tablèt Kokoye" data-price="7.00" aria-selected="false"><i></i>+ Tablèt Kokoye ($7.00)</button>
+      <button class="drawer-chip" data-pastry-id="gateau" data-name="Gâteau au Beurre" data-price="8.00" aria-selected="false"><i></i>+ Gâteau au Beurre ($8.00)</button>
+    </div>
+  </div>
+
+  <div class="order-section">
+    <span class="order-section-title">Fulfillment Method</span>
+    <div class="drawer-chips" id="fulfillmentChips">
+      <button class="drawer-chip" aria-selected="true" data-mode="pickup">Roastery Pickup (Free)</button>
+      <button class="drawer-chip" aria-selected="false" data-mode="delivery">Local Courier ($6)</button>
+    </div>
+  </div>
+
+  <div class="order-total-bar">
+    <span>Order Total</span>
+    <b class="num" id="drawerTotal">$40.00</b>
+  </div>
+
+  <div class="drawer-actions">
+    <button class="btn btn-primary" id="btnPayInterac">Pay via Interac e-Transfer</button>
+    <a class="btn btn-ghost" id="btnSmsOrder" href="#">Confirm via Direct SMS</a>
+  </div>
+
+  <div class="interac-box" id="interacBox">
+    Send <b class="num" id="interacAmount">$40.00 CAD</b> to <b>9lmntstudio@gmail.com</b> (Autodeposit enabled). In the transfer memo, write your name and phone number. Our team sends your dispatch confirmation within 60 minutes.
+  </div>
+</div>
+
+<!-- Shift + B Rebranding Drawer -->
+<div class="founder-drawer" id="founderDrawer">
+  <h6>⚡ Founder Brand Switcher</h6>
+  <label for="brandInput">Brand Name</label>
+  <input type="text" id="brandInput" placeholder="Kremas">
+  <label for="cityInput">City / Region</label>
+  <input type="text" id="cityInput" placeholder="Ottawa">
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
+  /* ================= 1. FLAVOURS DATA & PALETTES ================= */
+  const FLAVORS = [
+    {
+      id: "kremas-reserve",
+      name: "Original Kremas Reserve",
+      category: "Ancestral Haitian Recipe",
+      color: "#E2C39B", // Cream Gold
+      blendTint: "rgba(226, 195, 155, 0.55)",
+      price: 20,
+      sweet: 7,
+      spice: 6,
+      body: 9,
+      img: "/assets/work/coffee/still-04.jpg",
+      desc: "The authentic Haitian celebratory cream. Rich coconut milk, sweet condensed cream, fresh-grated nutmeg, star anise, and smooth aged whiskey blended with 18-hour cold brew.",
+      tags: ["Coconut Cream", "Aged Whiskey Notes", "Grated Nutmeg", "Star Anise"]
+    },
+    {
+      id: "cinnamon",
+      name: "Cinnamon Ember",
+      category: "Warm Spice & Whiskey",
+      color: "#C86428", // Toasted Cinnamon Terracotta
+      blendTint: "rgba(200, 100, 40, 0.62)",
+      price: 20,
+      sweet: 5,
+      spice: 8,
+      body: 8,
+      img: "/assets/work/coffee/still-01.jpg",
+      desc: "Ceylon cinnamon toasted in cast iron, layered with rich cream, dark demerara sugar, and oak whiskey warmth.",
+      tags: ["Ceylon Cinnamon", "Dark Demerara", "Oak Whiskey", "Toasted Pecan"]
+    },
+    {
+      id: "anise",
+      name: "Star Anise Noir",
+      category: "Nocturnal Bold",
+      color: "#7A3E26", // Deep Roasted Anise Umber
+      blendTint: "rgba(122, 62, 38, 0.72)",
+      price: 21,
+      sweet: 3,
+      spice: 9,
+      body: 9,
+      img: "/assets/work/coffee/still-02.jpg",
+      desc: "Whole Vietnamese star anise with roasted espresso, 85% dark cacao, and aged whiskey. Complex, aromatic, and made for slow night sipping.",
+      tags: ["Whole Star Anise", "Dark Cacao", "Tellicherry Pepper", "Whiskey Finish"]
+    },
+    {
+      id: "nutmeg",
+      name: "Nutmeg Caramel",
+      category: "Golden Confection",
+      color: "#D49B45", // Rich Toffee Amber
+      blendTint: "rgba(212, 155, 69, 0.60)",
+      price: 21,
+      sweet: 8,
+      spice: 6,
+      body: 8,
+      img: "/assets/work/coffee/still-03.jpg",
+      desc: "Freshly grated nutmeg combined with slow-cooked artisanal caramel toffee and smooth whiskey cream over crystal ice.",
+      tags: ["Whole Nutmeg", "Salted Toffee", "Vanilla Pod", "Whiskey Cream"]
+    },
+    {
+      id: "coconut",
+      name: "Toasted Coconut (Zero-Proof)",
+      category: "Dairy-Free & Zero-Proof",
+      color: "#EDE2D0", // Silky Coconut Cream
+      blendTint: "rgba(237, 226, 208, 0.50)",
+      price: 19,
+      sweet: 6,
+      spice: 4,
+      body: 6,
+      img: "/assets/work/coffee/still-04.jpg",
+      desc: "Rich tropical coconut cream, toasted coconut flakes, and warm Kremas spices. 100% plant-based, dairy-free, and alcohol-free.",
+      tags: ["Toasted Coconut Flakes", "Coconut Cream", "Wildflower Honey", "Zero-Proof"]
+    }
+  ];
+
+  let activeFlavorIdx = 0;
+  let orderQty = 2;
+  let orderFulfillment = "pickup";
+  let orderFlavorIdx = 0;
+
+  const blendOverlay = document.getElementById("blendOverlay");
+  const stageScrim = document.getElementById("stageScrim");
+  const storyVeil = document.getElementById("storyVeil");
+  const bgMarqueeText = document.getElementById("bgMarqueeText");
+  const heroCardTitle = document.getElementById("heroCardTitle");
+  const heroCardDesc = document.getElementById("heroCardDesc");
+  const shopShelfRow = document.getElementById("shopShelfRow");
+  const navCartCount = document.getElementById("navCartCount");
+
+  // Populate Shop Shelf Row (Pinterest Berry Bloom Pattern t=12s)
+  FLAVORS.forEach((f, idx) => {
+    const node = document.createElement("div");
+    node.className = "shop-item-node" + (idx === 0 ? " selected" : "");
+    node.setAttribute("data-flavor-idx", idx);
+    node.innerHTML = `
+      <div class="shop-item-pedestal">
+        <div class="shop-item-spotlight" style="--c:${f.color}"></div>
+        <img class="shop-item-image" src="${f.img}" alt="${f.name}">
+      </div>
+      <div class="shop-item-info">
+        <div class="shop-item-category">${f.category}</div>
+        <h4 class="shop-item-name">${f.name}</h4>
+        <div class="shop-item-price num">$${f.price}.00 CAD</div>
+        <div class="shop-item-actions">
+          <button class="btn-quick-add" data-quick-add="${idx}">Add +</button>
+          <button class="btn-details" data-open-detail="${idx}">Notes →</button>
+        </div>
+      </div>
+    `;
+
+    // Click to select/highlight item
+    node.addEventListener("click", (e) => {
+      if (e.target.closest("[data-quick-add]") || e.target.closest("[data-open-detail]")) return;
+      selectShopItem(idx);
+    });
+
+    shopShelfRow.appendChild(node);
+  });
+
+  function selectShopItem(idx) {
+    activeFlavorIdx = idx;
+    const f = FLAVORS[idx];
+
+    // Update row nodes
+    document.querySelectorAll(".shop-item-node").forEach((n, i) => {
+      n.classList.toggle("selected", i === idx);
+    });
+
+    // Center selected item in scroll container
+    const activeNode = document.querySelectorAll(".shop-item-node")[idx];
+    if (activeNode) {
+      activeNode.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+
+    // Dynamic Video Liquid Color Tint (Pinterest & User Requirement)
+    blendOverlay.style.backgroundColor = f.color;
+    document.documentElement.style.setProperty("--accent", f.color === "#EDE2D0" ? "#C86428" : f.color);
+    document.documentElement.style.setProperty("--accent-glow", f.color === "#EDE2D0" ? "rgba(200, 100, 40, 0.4)" : `${f.color}66`);
+
+    // Update Hero Card preview
+    heroCardTitle.textContent = f.name;
+    heroCardDesc.textContent = f.desc;
+    bgMarqueeText.textContent = `${f.name.toUpperCase()} · KREMAS COFFEE CO. · `;
+
+    syncDrawerFlavor();
+  }
+
+  /* ================= 2. ALL IN ONE SCROLL & VIDEO SCRUB ================= */
+  const bgVideo = document.getElementById("bgVideo");
+  const bgPoster = document.getElementById("bgPoster");
+  const heroTrack = document.getElementById("hero-track");
+  const shopSection = document.getElementById("shop-section");
+  const storySection = document.getElementById("story-section");
+  const topNav = document.getElementById("topNav");
+  const heroBox = document.getElementById("heroBox");
+  const heroRightCard = document.getElementById("heroRightCard");
+
+  let isSeeking = false;
+  let pendingSeekTime = null;
+
+  bgVideo.addEventListener("seeking", () => { isSeeking = true; });
+  bgVideo.addEventListener("seeked", () => {
+    isSeeking = false;
+    if (pendingSeekTime !== null) {
+      const nextTime = pendingSeekTime;
+      pendingSeekTime = null;
+      if (Math.abs(bgVideo.currentTime - nextTime) > 0.04) {
+        bgVideo.currentTime = nextTime;
+      }
+    }
+  });
+
+  bgVideo.addEventListener("loadeddata", () => {
+    bgPoster.classList.add("hide");
+    bgVideo.currentTime = 5.0;
+  }, { once: true });
+
+  function scrubVideo(time) {
+    if (isSeeking) {
+      pendingSeekTime = time;
+    } else if (Math.abs(bgVideo.currentTime - time) > 0.04) {
+      bgVideo.currentTime = time;
+    }
+  }
+
+  // Smooth LERP Playhead Interpolation
+  let smoothTime = 5.0;
+  let targetTime = 5.0;
+
+  function calculateScrollState() {
+    const scrollY = window.scrollY;
+    const vh = window.innerHeight;
+
+    topNav.classList.toggle("scrolled", scrollY > 50);
+
+    const heroTop = heroTrack.offsetTop;
+    const heroHeight = heroTrack.offsetHeight - vh;
+
+    const shopTop = shopSection.offsetTop;
+    const shopHeight = shopSection.offsetHeight;
+
+    const storyTop = storySection.offsetTop;
+    const storyHeight = storySection.offsetHeight;
+
+    if (scrollY < shopTop) {
+      // 01 · HERO REGION: Maps to Video 0:05 to 0:06
+      const p = Math.min(1, Math.max(0, (scrollY - heroTop) / Math.max(1, heroHeight)));
+      targetTime = 5.0 + (p * 1.0); // 5.0 to 6.0
+      blendOverlay.classList.remove("active");
+      stageScrim.classList.remove("flavors-mode");
+      storyVeil.style.backgroundColor = "transparent";
+
+      // Fade & transform hero typography
+      heroBox.style.opacity = (1 - p * 1.25).toFixed(2);
+      heroBox.style.transform = `translateY(${(-p * 45).toFixed(1)}px)`;
+      heroRightCard.style.opacity = (1 - p * 1.4).toFixed(2);
+      heroRightCard.style.transform = `translateY(${(-p * 30).toFixed(1)}px)`;
+
+      setActiveNav("hero");
+
+    } else if (scrollY >= shopTop && scrollY < storyTop) {
+      // 02 · SHOP & SPICES REGION: Maps to Video 0:04 to 0:05
+      const p = Math.min(1, Math.max(0, (scrollY - shopTop) / Math.max(1, shopHeight)));
+      targetTime = 4.0 + (p * 1.0); // 4.0 to 5.0
+      blendOverlay.classList.add("active");
+      stageScrim.classList.add("flavors-mode");
+      storyVeil.style.backgroundColor = "transparent";
+
+      setActiveNav("blends");
+
+    } else {
+      // 03 · STORY & CLIMAX REGION: Maps to Video 0:07 to 0:10
+      const p = Math.min(1, Math.max(0, (scrollY - storyTop) / Math.max(1, storyHeight)));
+      targetTime = 7.0 + (p * 3.0); // 7.0 to 10.0
+      blendOverlay.classList.remove("active");
+      stageScrim.classList.remove("flavors-mode");
+
+      const storyProgress = Math.min(1, Math.max(0, (scrollY - (storyTop + vh * 0.4)) / (vh * 0.8)));
+      storyVeil.style.backgroundColor = `rgba(9, 7, 6, ${(storyProgress * 0.72).toFixed(2)})`;
+
+      setActiveNav(scrollY > (document.getElementById("visit-directory").offsetTop - vh * 0.5) ? "visit" : "story");
+    }
+  }
+
+  function setActiveNav(navKey) {
+    document.querySelectorAll(".text-menu a[data-nav]").forEach(a => {
+      a.classList.toggle("active", a.getAttribute("data-nav") === navKey);
+    });
+  }
+
+  function animationLoop() {
+    smoothTime += (targetTime - smoothTime) * 0.16;
+    scrubVideo(smoothTime);
+    requestAnimationFrame(animationLoop);
+  }
+
+  window.addEventListener("scroll", calculateScrollState, { passive: true });
+  window.addEventListener("resize", calculateScrollState, { passive: true });
+  calculateScrollState();
+  requestAnimationFrame(animationLoop);
+
+  /* ================= 3. SIDE DETAIL MODAL (Berry Bloom Pattern) ================= */
+  const sideModal = document.getElementById("sideDetailModal");
+  const modalScrim = document.getElementById("modalScrim");
+  const modalCloseBtn = document.getElementById("modalCloseBtn");
+  const modalImg = document.getElementById("modalImg");
+  const modalCategory = document.getElementById("modalCategory");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalPrice = document.getElementById("modalPrice");
+  const modalDesc = document.getElementById("modalDesc");
+  const modalBarSweet = document.getElementById("modalBarSweet");
+  const modalValSweet = document.getElementById("modalValSweet");
+  const modalBarSpice = document.getElementById("modalBarSpice");
+  const modalValSpice = document.getElementById("modalValSpice");
+  const modalBarBody = document.getElementById("modalBarBody");
+  const modalValBody = document.getElementById("modalValBody");
+  const modalBtnAdd = document.getElementById("modalBtnAdd");
+
+  function openDetailModal(idx) {
+    const f = FLAVORS[idx];
+    modalImg.src = f.img;
+    modalCategory.textContent = f.category;
+    modalTitle.textContent = f.name;
+    modalPrice.textContent = `$${f.price}.00`;
+    modalDesc.textContent = f.desc;
+    modalBarSweet.style.width = (f.sweet * 10) + "%";
+    modalValSweet.textContent = f.sweet;
+    modalBarSpice.style.width = (f.spice * 10) + "%";
+    modalValSpice.textContent = f.spice;
+    modalBarBody.style.width = (f.body * 10) + "%";
+    modalValBody.textContent = f.body;
+
+    modalBtnAdd.onclick = () => {
+      closeDetailModal();
+      orderFlavorIdx = idx;
+      openDrawer();
+    };
+
+    sideModal.classList.add("open");
+    modalScrim.classList.add("open");
+  }
+
+  function closeDetailModal() {
+    sideModal.classList.remove("open");
+    modalScrim.classList.remove("open");
+  }
+
+  modalCloseBtn.addEventListener("click", closeDetailModal);
+  modalScrim.addEventListener("click", closeDetailModal);
+
+  // Attach quick-add and notes actions on shop shelf
+  document.addEventListener("click", (e) => {
+    const quickAddBtn = e.target.closest("[data-quick-add]");
+    if (quickAddBtn) {
+      const idx = parseInt(quickAddBtn.getAttribute("data-quick-add"), 10);
+      orderFlavorIdx = idx;
+      openDrawer();
+      return;
+    }
+    const detailBtn = e.target.closest("[data-open-detail]");
+    if (detailBtn) {
+      const idx = parseInt(detailBtn.getAttribute("data-open-detail"), 10);
+      openDetailModal(idx);
+      return;
+    }
+  });
+
+  /* ================= 4. MOBILE MENU ================= */
+  const mobileToggle = document.getElementById("mobileMenuToggle");
+  const textMenu = document.getElementById("textMenu");
+  mobileToggle.addEventListener("click", () => {
+    const isOpen = textMenu.classList.toggle("mobile-open");
+    mobileToggle.setAttribute("aria-expanded", isOpen);
+    mobileToggle.textContent = isOpen ? "Close" : "Menu";
+  });
+  textMenu.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => {
+      textMenu.classList.remove("mobile-open");
+      mobileToggle.setAttribute("aria-expanded", "false");
+      mobileToggle.textContent = "Menu";
+    });
+  });
+
+  /* ================= 5. QUICK CART & REVENUE ENGINE ================= */
+  const drawer = document.getElementById("modalPayPalCheckout");
+  const scrim = document.getElementById("drawerScrim");
+  const drawerClose = document.getElementById("drawerClose");
+  const drawerFlavorChips = document.getElementById("drawerFlavorChips");
+  const fulfillmentChips = document.getElementById("fulfillmentChips");
+  const qtyMinus = document.getElementById("qtyMinus");
+  const qtyPlus = document.getElementById("qtyPlus");
+  const qtyOutput = document.getElementById("qtyOutput");
+  const drawerTotal = document.getElementById("drawerTotal");
+  const btnPayInterac = document.getElementById("btnPayInterac");
+  const btnSmsOrder = document.getElementById("btnSmsOrder");
+  const interacBox = document.getElementById("interacBox");
+  const interacAmount = document.getElementById("interacAmount");
+
+  const PASTRIES = {
+    patate: { id: "patate", name: "Pain Patate", price: 8.50 },
+    makos: { id: "makos", name: "Dous Makòs", price: 9.00 },
+    kokoye: { id: "kokoye", name: "Tablèt Kokoye", price: 7.00 },
+    gateau: { id: "gateau", name: "Gâteau au Beurre", price: 8.00 }
+  };
+  const selectedPastries = new Set();
+
+  function syncPastryUI() {
+    document.querySelectorAll("#drawerPastryChips .drawer-chip").forEach(chip => {
+      const id = chip.dataset.pastryId;
+      chip.setAttribute("aria-selected", selectedPastries.has(id) ? "true" : "false");
+    });
+    document.querySelectorAll(".pastry-add-btn").forEach(btn => {
+      const id = btn.getAttribute("data-add-pastry");
+      const isSelected = selectedPastries.has(id);
+      btn.textContent = isSelected ? "In Box ✓" : "Add to Box +";
+      btn.style.backgroundColor = isSelected ? "var(--accent)" : "";
+      btn.style.color = isSelected ? "#140904" : "";
+    });
+  }
+
+  function togglePastry(id) {
+    if (selectedPastries.has(id)) {
+      selectedPastries.delete(id);
+    } else {
+      selectedPastries.add(id);
+    }
+    syncPastryUI();
+    updateDrawerMath();
+  }
+
+  // Populate drawer chips
+  FLAVORS.forEach((f, idx) => {
+    const chip = document.createElement("button");
+    chip.className = "drawer-chip";
+    chip.setAttribute("aria-selected", idx === 0 ? "true" : "false");
+    chip.innerHTML = `<i style="--c:${f.color}"></i>${f.name}`;
+    chip.addEventListener("click", () => {
+      orderFlavorIdx = idx;
+      updateDrawerMath();
+    });
+    drawerFlavorChips.appendChild(chip);
+  });
+
+  document.querySelectorAll("#drawerPastryChips .drawer-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const id = chip.dataset.pastryId;
+      if (id) togglePastry(id);
+    });
+  });
+
+  document.querySelectorAll(".pastry-add-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-add-pastry");
+      if (id) {
+        if (!selectedPastries.has(id)) selectedPastries.add(id);
+        syncPastryUI();
+        updateDrawerMath();
+        openDrawer();
+      }
+    });
+  });
+
+  function syncDrawerFlavor() {
+    orderFlavorIdx = activeFlavorIdx;
+    updateDrawerMath();
+  }
+
+  function updateDrawerMath() {
+    if (!drawerFlavorChips || !fulfillmentChips) return;
+    drawerFlavorChips.querySelectorAll(".drawer-chip").forEach((c, i) => {
+      c.setAttribute("aria-selected", i === orderFlavorIdx ? "true" : "false");
+    });
+
+    fulfillmentChips.querySelectorAll(".drawer-chip").forEach(c => {
+      c.setAttribute("aria-selected", c.dataset.mode === orderFulfillment ? "true" : "false");
+    });
+
+    qtyOutput.textContent = orderQty;
+    navCartCount.textContent = orderQty;
+    const bottleSubtotal = FLAVORS[orderFlavorIdx].price * orderQty;
+    
+    let pastrySubtotal = 0;
+    const pastryNames = [];
+    selectedPastries.forEach(id => {
+      const p = PASTRIES[id];
+      if (p) {
+        pastrySubtotal += p.price;
+        pastryNames.push(p.name);
+      }
+    });
+
+    const shipping = (orderFulfillment === "delivery" && orderQty < 3) ? 6 : 0;
+    const total = bottleSubtotal + pastrySubtotal + shipping;
+
+    const formatted = "$" + total.toFixed(2) + " CAD";
+    drawerTotal.textContent = formatted;
+    interacAmount.textContent = formatted;
+
+    const brandName = document.querySelector("[data-brand-name]")?.textContent || "Kremas Coffee Co.";
+    let smsBody = `Hi ${brandName}! I would like to reserve ${orderQty} bottle(s) of ${FLAVORS[orderFlavorIdx].name}`;
+    if (pastryNames.length > 0) {
+      smsBody += ` + Bakery Pairing: ${pastryNames.join(", ")}`;
+    }
+    smsBody += ` (${orderFulfillment === "pickup" ? "Roastery Pickup" : "Local Delivery"}). Total: ${formatted}.`;
+    btnSmsOrder.href = `sms:+16134009691?&body=${encodeURIComponent(smsBody)}`;
+  }
+
+  qtyMinus.addEventListener("click", () => {
+    orderQty = Math.max(1, orderQty - 1);
+    updateDrawerMath();
+  });
+  qtyPlus.addEventListener("click", () => {
+    orderQty = Math.min(24, orderQty + 1);
+    updateDrawerMath();
+  });
+
+  fulfillmentChips.querySelectorAll(".drawer-chip").forEach(c => {
+    c.addEventListener("click", () => {
+      orderFulfillment = c.dataset.mode;
+      updateDrawerMath();
+    });
+  });
+
+  btnPayInterac.addEventListener("click", () => {
+    interacBox.classList.add("active");
+    navigator.clipboard?.writeText("9lmntstudio@gmail.com").catch(() => {});
+  });
+
+  function openDrawer(e) {
+    if (e) e.preventDefault();
+    syncDrawerFlavor();
+    drawer.classList.add("open");
+    scrim.classList.add("open");
+  }
+  function closeDrawer() {
+    drawer.classList.remove("open");
+    scrim.classList.remove("open");
+    interacBox.classList.remove("active");
+  }
+
+  document.querySelectorAll("[data-trigger-order]").forEach(btn => btn.addEventListener("click", openDrawer));
+  scrim.addEventListener("click", closeDrawer);
+  drawerClose.addEventListener("click", closeDrawer);
+  window.addEventListener("keydown", e => {
+    if (e.key === "Escape") {
+      closeDrawer();
+      closeDetailModal();
+    }
+  });
+
+  updateDrawerMath();
+
+  /* ================= 6. BRAND PERSONALISATION & SHIFT + B ================= */
+  const urlParams = new URLSearchParams(window.location.search);
+  function applyBrandCustomization(name, city) {
+    if (name) {
+      const parts = name.trim().split(/\s+/);
+      const lastWord = parts.length > 1 ? parts.pop() : "";
+      const formattedHtml = lastWord ? `${parts.join(" ")} <em>${lastWord}</em>` : name;
+      document.querySelectorAll("[data-brand-logo]").forEach(el => el.innerHTML = formattedHtml);
+      document.querySelectorAll("[data-brand-name]").forEach(el => el.textContent = name);
+      document.title = `${name} Coffee Co. — Artisanal Haitian Spiced Whiskey Cream & Cold Brew`;
+    }
+    if (city) {
+      document.querySelectorAll("[data-brand-city]").forEach(el => el.textContent = city);
+    }
+  }
+  applyBrandCustomization(urlParams.get("brand"), urlParams.get("city"));
+
+  const founderDrawer = document.getElementById("founderDrawer");
+  const brandInput = document.getElementById("brandInput");
+  const cityInput = document.getElementById("cityInput");
+
+  window.addEventListener("keydown", e => {
+    if (e.shiftKey && e.key.toLowerCase() === "b" && !/input|textarea/i.test(e.target.tagName)) {
+      founderDrawer.classList.toggle("open");
+    }
+  });
+  brandInput.addEventListener("input", () => applyBrandCustomization(brandInput.value || null, cityInput.value || null));
+  cityInput.addEventListener("input", () => applyBrandCustomization(brandInput.value || null, cityInput.value || null));
+
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+})();
+</script>
+</body>
+</html>

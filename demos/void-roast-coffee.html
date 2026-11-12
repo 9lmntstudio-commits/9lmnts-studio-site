@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>VOID//ROAST • Cryogenic Specialty Coffee Lab & Roastery | 9LMNTS Studio</title>
+  <meta name="description" content="Cryogenic volcanic specialty coffee roasters. Interactive 3D roast extraction, automated micro-lot subscriptions, and wholesale B2B supply." />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Three.js + GSAP ScrollTrigger + Lenis Smooth Scroll -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <style>
+    :root {
+      /* STRICT SINGLE ACCENT: Molten Crema (#E06A26) */
+      --accent: #E06A26;
+      --accent-rgb: 224, 106, 38;
+      --accent-subtle: rgba(224, 106, 38, 0.14);
+      --accent-border: rgba(224, 106, 38, 0.55);
+      --basalt-bg: #080706;
+      --bento-glass-bg: rgba(14, 14, 18, 0.70);
+      --bento-glass-border: rgba(255, 255, 255, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--basalt-bg);
+      color: #FFFFFF;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-display {
+      font-family: 'Syne', sans-serif;
+      letter-spacing: -0.035em;
+    }
+
+    .font-mono-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* LAYER 0: Ambient Radial Glow & Fixed 3D Stage */
+    .ambient-stage-backdrop {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 32% 45%, rgba(224, 106, 38, 0.16) 0%, rgba(8, 7, 6, 0.94) 68%),
+        radial-gradient(circle at 80% 20%, rgba(224, 106, 38, 0.08) 0%, transparent 50%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    #webgl-stage {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: auto;
+      cursor: grab;
+    }
+
+    #webgl-stage:active {
+      cursor: grabbing;
+    }
+
+    /* LAYER 1: Decoupled Foreground DOM Overlay */
+    .scrolly-dom-layer {
+      position: relative;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .interactive-target,
+    .bento-card,
+    button,
+    a,
+    input,
+    select,
+    textarea,
+    label {
+      pointer-events: auto;
+    }
+
+    /* 70% Chroma Glass UI Standard */
+    .chroma-glass {
+      background: var(--bento-glass-bg);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid var(--bento-glass-border);
+    }
+
+    /* Depth Layering & Parallax Card Physics */
+    .bento-card {
+      background: var(--bento-glass-bg);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (hover: hover) {
+      .bento-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--accent);
+        box-shadow: 0 24px 48px -12px rgba(224, 106, 38, 0.22);
+      }
+    }
+
+    /* Apple HIG Press Response */
+    .btn-press {
+      transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), background-color 200ms ease, border-color 200ms ease;
+    }
+    .btn-press:active {
+      transform: scale(0.96);
+    }
+
+    /* Custom Range Scrub Slider */
+    input[type="range"].crema-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"].crema-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 0 16px rgba(224, 106, 38, 0.8);
+      cursor: grab;
+      transition: transform 0.15s ease;
+    }
+
+    input[type="range"].crema-slider::-webkit-slider-thumb:active {
+      transform: scale(1.2);
+      cursor: grabbing;
+    }
+
+    /* Mobile Snap Carousel for Slots B, C, D */
+    @media (max-width: 1023px) {
+      .mobile-collage-carousel {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 16px;
+        padding-bottom: 12px;
+        scrollbar-width: none;
+      }
+      .mobile-collage-carousel::-webkit-scrollbar {
+        display: none;
+      }
+      .mobile-collage-slide {
+        flex: 0 0 86%;
+        scroll-snap-align: center;
+      }
+    }
+
+    /* Slide-Up Checkout Drawer */
+    .checkout-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .checkout-drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .checkout-drawer-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-width: 580px;
+      margin: 0 auto;
+      background: #0F0D0C;
+      border-top: 1px solid var(--accent-border);
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px 28px 0 0;
+      z-index: 101;
+      transform: translateY(105%);
+      transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .checkout-drawer-backdrop.open .checkout-drawer-sheet {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="selection:bg-[#E06A26] selection:text-white">
+
+  <!-- LAYER 0: Ambient Backdrop & Fixed 60fps Three.js Stage -->
+  <div class="ambient-stage-backdrop"></div>
+  <canvas id="webgl-stage" aria-label="Interactive 3D Espresso Extraction and Floating Roasted Beans"></canvas>
+
+  <!-- LAYER 2: Sticky Floating Glassmorphic Navigation Pill Bar -->
+  <header class="fixed top-4 left-0 right-0 z-40 px-4 md:px-8 pointer-events-none">
+    <div class="max-w-[1400px] mx-auto flex items-center justify-between">
+      <!-- Brand Identity Pill -->
+      <a href="#hero" class="chroma-glass interactive-target px-4 py-2.5 rounded-full flex items-center gap-3 btn-press">
+        <span class="w-3 h-3 rounded-full bg-[#E06A26] shadow-[0_0_12px_#E06A26]"></span>
+        <span class="font-display font-extrabold text-sm md:text-base tracking-tight text-white">VOID//ROAST</span>
+        <span class="hidden sm:inline-block text-[11px] font-mono-num uppercase px-2 py-0.5 rounded-full bg-white/10 text-white/80">
+          Westboro Lab
+        </span>
+      </a>
+
+      <!-- Center Navigation & Live Batch Counter -->
+      <nav class="hidden lg:flex items-center gap-1 chroma-glass interactive-target px-3 py-1.5 rounded-full">
+        <a href="#collage-matrix" class="px-3.5 py-1.5 rounded-full text-xs font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors">
+          Extraction Matrix
+        </a>
+        <a href="#roast-customizer" class="px-3.5 py-1.5 rounded-full text-xs font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors">
+          Flavor Curve
+        </a>
+        <a href="#subscriptions" class="px-3.5 py-1.5 rounded-full text-xs font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors">
+          Subscriptions
+        </a>
+        <a href="#wholesale" class="px-3.5 py-1.5 rounded-full text-xs font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors">
+          Wholesale B2B
+        </a>
+        <div class="h-4 w-[1px] bg-white/15 mx-2"></div>
+        <div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#E06A26]/15 border border-[#E06A26]/40">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#E06A26] animate-ping"></span>
+          <span class="font-mono-num text-[11px] font-bold text-[#E06A26]">LOT #042 • 38 BAGS LEFT</span>
+        </div>
+      </nav>
+
+      <!-- Instant Action Triggers -->
+      <div class="flex items-center gap-2.5 interactive-target">
+        <button onclick="openAgencyModal()" class="hidden sm:inline-flex items-center gap-2 chroma-glass hover:border-[#E06A26] text-white/90 text-xs font-semibold px-4 py-2.5 rounded-full btn-press">
+          <i class="fa-solid fa-bolt text-[#E06A26]"></i>
+          <span>Launch This Site ($1,200)</span>
+        </button>
+        <button onclick="openBeanCheckout('Ethiopian Gesha Cryo-Lot', 20, 'Subscription (Save 17%)')" class="bg-[#E06A26] hover:bg-[#c85a1c] text-white text-xs md:text-sm font-bold px-5 py-2.5 rounded-full shadow-[0_0_24px_rgba(224,106,38,0.45)] flex items-center gap-2 btn-press">
+          <span>Reserve Drop ($20)</span>
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- LAYER 1: Main Scrollytelling DOM Content -->
+  <main class="scrolly-dom-layer pt-24 pb-32 lg:pb-20">
+
+    <!-- SECTION 1: PC 1440px Asymmetrical 3-Column Bento Grid & Mobile Touch Stack -->
+    <section id="collage-matrix" class="max-w-[1400px] mx-auto px-4 md:px-8 pt-2 pb-16">
+      <!-- Top Intro Banner -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3">
+          <span class="px-3 py-1 rounded-full text-[11px] font-mono-num font-bold uppercase bg-[#E06A26]/15 border border-[#E06A26]/40 text-[#E06A26]">
+            Cryogenic Volcanic Roast Science
+          </span>
+          <span class="text-xs text-white/60 hidden sm:inline">
+            Scroll or drag the 3D stage to inspect extraction & bean orbit
+          </span>
+        </div>
+        <div class="flex items-center gap-4 text-xs font-mono-num text-white/70">
+          <span><i class="fa-solid fa-temperature-arrow-down text-[#E06A26] mr-1.5"></i>-196°C Cryo Lock</span>
+          <span><i class="fa-solid fa-gauge-high text-[#E06A26] mr-1.5"></i>9.0 Bar Pressure</span>
+        </div>
+      </div>
+
+      <!-- Dual-Viewport Master Layout: Left 58% Slot A (Interactive 3D Stage) | Right 42% Slots B, C, D -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+
+        <!-- SLOT A (Left 7 of 12 cols ≈ 58% Width): Interactive 3D Espresso Pour & Orbit Stage -->
+        <div class="lg:col-span-7 flex flex-col justify-between min-h-[54vh] lg:min-h-[680px] rounded-[28px] border border-white/15 bg-gradient-to-b from-white/[0.03] via-transparent to-black/75 p-6 md:p-8 relative overflow-hidden">
+          
+          <!-- Top Overlay HUD inside Slot A -->
+          <div class="flex flex-wrap items-start justify-between gap-4 z-10">
+            <div class="chroma-glass px-4 py-2.5 rounded-2xl">
+              <div class="text-[10px] font-mono-num uppercase tracking-wider text-white/50">SLOT A • LIVE 3D EXTRACTION STAGE</div>
+              <div class="text-sm md:text-base font-bold text-white flex items-center gap-2 mt-0.5">
+                <span>Ethiopian Gesha • Natural Cryo</span>
+                <span class="text-xs font-mono-num text-[#E06A26]">94.2°C</span>
+              </div>
+            </div>
+
+            <!-- Camera View Switcher Pills -->
+            <div class="flex items-center gap-1.5 chroma-glass p-1.5 rounded-full interactive-target">
+              <button onclick="setCameraView('hero')" id="cam-btn-hero" class="px-3 py-1 rounded-full text-xs font-semibold bg-[#E06A26] text-white btn-press">
+                Pour View
+              </button>
+              <button onclick="setCameraView('orbit')" id="cam-btn-orbit" class="px-3 py-1 rounded-full text-xs font-semibold text-white/70 hover:text-white btn-press">
+                Bean Orbit
+              </button>
+              <button onclick="setCameraView('crema')" id="cam-btn-crema" class="px-3 py-1 rounded-full text-xs font-semibold text-white/70 hover:text-white btn-press">
+                Crema Crown
+              </button>
+            </div>
+          </div>
+
+          <!-- Center Open Viewport Window (Reveals Fixed Three.js Canvas Behind) -->
+          <div class="my-auto py-12 flex flex-col items-start max-w-md pointer-events-none">
+            <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.02] text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.9)]">
+              Molten Crema.<br />
+              <span class="text-[#E06A26]">Zero Bitterness.</span>
+            </h1>
+            <p class="mt-4 text-sm md:text-base text-white/85 leading-relaxed drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+              Flash-frozen at -196°C before roasting to lock in 98.4% of volatile floral aromatics. Delivered fresh to your door or brewed at our Westboro tasting bar.
+            </p>
+          </div>
+
+          <!-- Bottom Interactive Thumb-Scrub Bar & Instant Purchase Trigger -->
+          <div class="chroma-glass p-4 md:p-5 rounded-2xl interactive-target z-10">
+            <div class="flex items-center justify-between text-xs font-mono-num mb-2">
+              <span class="text-white/80 flex items-center gap-2">
+                <i class="fa-solid fa-hand-pointer text-[#E06A26]"></i>
+                <span>SCRUB EXTRACTION & BEAN ORBIT</span>
+              </span>
+              <span id="scrub-readout" class="text-[#E06A26] font-bold">EXTRACTION: 35% • 21.8% TDS</span>
+            </div>
+            <input
+              id="pour-scrub-slider"
+              type="range"
+              min="0"
+              max="100"
+              value="35"
+              class="crema-slider"
+              aria-label="Scrub 3D espresso pour and coffee bean orbit"
+            />
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-4 pt-3 border-t border-white/10">
+              <div class="flex items-center gap-4">
+                <div>
+                  <div class="text-[10px] font-mono-num uppercase text-white/50">Tasting Notes</div>
+                  <div class="text-xs font-semibold text-white">Bergamot • Molten Cacao • Wild Honey</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="openBeanCheckout('Ethiopian Gesha Cryo-Lot (340g)', 24, 'One-Time Bag')" class="px-4 py-2 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/20 text-white btn-press">
+                  1-Tap Bag ($24)
+                </button>
+                <button onclick="openBeanCheckout('Ethiopian Gesha Cryo-Lot (340g)', 20, 'Auto-Renew Subscription')" class="px-4 py-2 rounded-full text-xs font-bold bg-[#E06A26] hover:bg-[#c85a1c] text-white btn-press">
+                  Subscribe ($20) →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT 42% COLUMN (5 of 12 cols): 4-Card Extraction Collage (Slots B, C, D) -->
+        <div class="lg:col-span-5 flex flex-col justify-between gap-6">
+          <div class="mobile-collage-carousel lg:flex lg:flex-col lg:gap-6">
+
+            <!-- SLOT B (3:4 Portrait Concept): Crystal Pour-Over Crema Bloom -->
+            <article class="bento-card mobile-collage-slide overflow-hidden group relative flex flex-col sm:flex-row lg:flex-row min-h-[280px]">
+              <div class="sm:w-1/2 lg:w-5/12 relative overflow-hidden min-h-[220px]">
+                <img
+                  src="/assets/work/void-roast/slot-b-pourover.png"
+                  onerror="this.src='https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=900&q=85'"
+                  alt="Crystal Pour-Over Crema Bloom"
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-mono-num font-bold bg-black/75 border border-white/15 text-[#E06A26]">
+                  SLOT B • 3:4 BLOOM
+                </div>
+              </div>
+              <div class="sm:w-1/2 lg:w-7/12 p-5 md:p-6 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between text-xs font-mono-num text-white/50 mb-1">
+                    <span>THERMAL BLOOM</span>
+                    <span class="text-[#E06A26]">22.4% YIELD</span>
+                  </div>
+                  <h2 class="font-display text-xl font-bold text-white mb-2">
+                    Crystal Pour-Over Calibration
+                  </h2>
+                  <p class="text-xs text-white/70 leading-relaxed">
+                    Precision 94.2°C spiral saturation degasses CO₂ in 35 seconds, unlocking syrupy stone-fruit sweetness without astringency.
+                  </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                  <span class="font-mono-num text-white/80">Elevation: <strong>2,250m ASL</strong></span>
+                  <a href="#roast-customizer" class="text-[#E06A26] font-semibold hover:underline">
+                    Test Curve →
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- LOWER ASYMMETRICAL SPLIT: Slot C (1:1 Macro) + Slot D (16:9 Interior) -->
+            <div class="contents lg:grid lg:grid-cols-12 lg:gap-6">
+
+              <!-- SLOT C (1:1 Square): Cryogenic Flash-Frozen Nitrogen Beans -->
+              <article class="bento-card mobile-collage-slide lg:col-span-5 overflow-hidden group flex flex-col justify-between">
+                <div class="relative h-44 overflow-hidden">
+                  <img
+                    src="/assets/work/void-roast/slot-c-cryo-beans.png"
+                    onerror="this.src='https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=85'"
+                    alt="Cryogenic Roasted Coffee Beans on Basalt"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-mono-num font-bold bg-black/75 border border-white/15 text-[#E06A26]">
+                    SLOT C • 1:1 CRYO
+                  </div>
+                </div>
+                <div class="p-4 md:p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-display text-base font-bold text-white mb-1">
+                      -196°C Cryo Beans
+                    </h3>
+                    <p class="text-xs text-white/70 leading-relaxed">
+                      Nitrogen-chilled green cherries shatter evenly on grind for uniform extraction.
+                    </p>
+                  </div>
+                  <div class="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-[11px] font-mono-num">
+                    <span class="text-white/60">ROAST LEVEL</span>
+                    <span class="text-[#E06A26] font-bold">OMNI-LIGHT</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- SLOT D (16:9 Landscape): Basalt Coffee Bar Interior -->
+              <article class="bento-card mobile-collage-slide lg:col-span-7 overflow-hidden group flex flex-col justify-between">
+                <div class="relative h-44 overflow-hidden">
+                  <img
+                    src="/assets/work/void-roast/slot-d-cafe-interior.png"
+                    onerror="this.src='https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=900&q=85'"
+                    alt="Basalt Architectural Coffee Bar Interior"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-mono-num font-bold bg-black/75 border border-white/15 text-[#E06A26]">
+                    SLOT D • 16:9 LAB
+                  </div>
+                  <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-mono-num bg-black/80 text-white/90">
+                    <i class="fa-solid fa-location-dot text-[#E06A26] mr-1"></i>Westboro, Ottawa
+                  </div>
+                </div>
+                <div class="p-4 md:p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-display text-base font-bold text-white mb-1">
+                      Basalt Tasting Room
+                    </h3>
+                    <p class="text-xs text-white/70 leading-relaxed">
+                      Skip the line with 1-tap mobile bar pickup or book a private 4-course espresso flight.
+                    </p>
+                  </div>
+                  <div class="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-xs">
+                    <span class="font-mono-num text-white/70">Wait Time: <strong>~2 Mins</strong></span>
+                    <button onclick="openBeanCheckout('Westboro Bar Flight & Bag Bundle', 32, 'VIP Tasting + 340g Bag')" class="text-[#E06A26] font-bold hover:underline">
+                      Book Flight ($32) →
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <!-- Mobile Carousel Pagination Indicator -->
+          <div class="flex lg:hidden items-center justify-center gap-2 pt-1">
+            <span class="w-6 h-1.5 rounded-full bg-[#E06A26]"></span>
+            <span class="w-2 h-1.5 rounded-full bg-white/25"></span>
+            <span class="w-2 h-1.5 rounded-full bg-white/25"></span>
+            <span class="text-[11px] font-mono-num text-white/50 ml-2">Swipe Collage Cards →</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: Interactive TDS Extraction Curve Visualizer & Roast Selector -->
+    <section id="roast-customizer" class="max-w-[1400px] mx-auto px-4 md:px-8 py-16">
+      <div class="bento-card p-6 md:p-10 lg:p-12">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+          <div>
+            <span class="text-xs font-mono-num uppercase tracking-widest text-[#E06A26] block mb-2">
+              INTERACTIVE EXTRACTION ENGINE
+            </span>
+            <h2 class="font-display text-3xl md:text-4xl font-extrabold text-white">
+              Dial In Your Roast & Flavor Profile
+            </h2>
+          </div>
+          <p class="text-sm text-white/70 max-w-md">
+            Select a micro-lot below to preview its real-time extraction curve, sweetness peak, and recommended brew parameters.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <!-- Left 5 Cols: 3 Signature Micro-Lot Selectors -->
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            <button
+              onclick="selectRoastProfile(0)"
+              id="roast-card-0"
+              class="text-left p-5 rounded-2xl border border-[#E06A26] bg-[#E06A26]/10 transition-all btn-press"
+            >
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-mono-num text-xs font-bold text-[#E06A26]">LOT 01 • ETHIOPIA YIRGACHEFFE</span>
+                <span class="font-mono-num text-sm font-bold text-white">$20 / $24 CAD</span>
+              </div>
+              <div class="font-display text-lg font-bold text-white">Ethiopian Gesha Cryo-Lot</div>
+              <div class="text-xs text-white/70 mt-1">Jasmine Blossom • White Peach • Candied Bergamot</div>
+            </button>
+
+            <button
+              onclick="selectRoastProfile(1)"
+              id="roast-card-1"
+              class="text-left p-5 rounded-2xl border border-white/15 bg-white/[0.03] hover:border-white/30 transition-all btn-press"
+            >
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-mono-num text-xs font-bold text-white/60">LOT 02 • HUILA VOLCANIC SOIL</span>
+                <span class="font-mono-num text-sm font-bold text-white">$21 / $25 CAD</span>
+              </div>
+              <div class="font-display text-lg font-bold text-white">Colombian Pink Bourbon</div>
+              <div class="text-xs text-white/70 mt-1">Molten Caramel • Blood Orange • Silky Panela</div>
+            </button>
+
+            <button
+              onclick="selectRoastProfile(2)"
+              id="roast-card-2"
+              class="text-left p-5 rounded-2xl border border-white/15 bg-white/[0.03] hover:border-white/30 transition-all btn-press"
+            >
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-mono-num text-xs font-bold text-white/60">LOT 03 • HIGH-DENSITY ESPRESSO</span>
+                <span class="font-mono-num text-sm font-bold text-white">$19 / $23 CAD</span>
+              </div>
+              <div class="font-display text-lg font-bold text-white">Obsidian Basalt Espresso</div>
+              <div class="text-xs text-white/70 mt-1">85% Dark Cacao • Roasted Hazelnut • Smoked Vanilla</div>
+            </button>
+          </div>
+
+          <!-- Right 7 Cols: Dynamic SVG Extraction Curve & Metrics -->
+          <div class="lg:col-span-7 p-6 md:p-8 rounded-2xl bg-black/60 border border-white/10">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div>
+                <div class="text-xs font-mono-num text-white/50 uppercase">ACTIVE EXTRACTION PROFILE</div>
+                <div id="curve-title" class="font-display text-xl font-bold text-white mt-0.5">
+                  Ethiopian Gesha Cryo-Lot (22.4% Peak Sweetness)
+                </div>
+              </div>
+              <div class="px-3 py-1.5 rounded-full bg-[#E06A26]/15 border border-[#E06A26]/40 text-xs font-mono-num font-bold text-[#E06A26]" id="curve-badge">
+                94.2°C • 1:2.2 RATIO
+              </div>
+            </div>
+
+            <!-- Interactive SVG Extraction Curve -->
+            <div class="relative h-48 w-full bg-white/[0.02] rounded-xl border border-white/10 p-4 overflow-hidden">
+              <svg viewBox="0 0 600 160" class="w-full h-full overflow-visible">
+                <defs>
+                  <linearGradient id="cremaGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#E06A26" stop-opacity="0.45" />
+                    <stop offset="100%" stop-color="#E06A26" stop-opacity="0.0" />
+                  </linearGradient>
+                </defs>
+                <!-- Grid Lines -->
+                <line x1="0" y1="40" x2="600" y2="40" stroke="rgba(255,255,255,0.07)" stroke-dasharray="4 4" />
+                <line x1="0" y1="80" x2="600" y2="80" stroke="rgba(255,255,255,0.07)" stroke-dasharray="4 4" />
+                <line x1="0" y1="120" x2="600" y2="120" stroke="rgba(255,255,255,0.07)" stroke-dasharray="4 4" />
+
+                <!-- Area Fill -->
+                <path
+                  id="tds-area-path"
+                  d="M 0 145 Q 150 130, 260 55 T 460 28 T 600 45 L 600 160 L 0 160 Z"
+                  fill="url(#cremaGrad)"
+                  class="transition-all duration-500"
+                />
+                <!-- Main Curve Line -->
+                <path
+                  id="tds-line-path"
+                  d="M 0 145 Q 150 130, 260 55 T 460 28 T 600 45"
+                  fill="none"
+                  stroke="#E06A26"
+                  stroke-width="3.5"
+                  stroke-linecap="round"
+                  class="transition-all duration-500"
+                />
+                <!-- Sweet Spot Marker -->
+                <circle id="tds-sweet-dot" cx="460" cy="28" r="7" fill="#FFFFFF" stroke="#E06A26" stroke-width="4" class="transition-all duration-500" />
+              </svg>
+              <div class="absolute bottom-2 left-4 right-4 flex justify-between text-[10px] font-mono-num text-white/40">
+                <span>0s (Pre-Infusion)</span>
+                <span>12s (Crema Bloom)</span>
+                <span>24s (Sweetness Peak)</span>
+                <span>32s (Cut-Off)</span>
+              </div>
+            </div>
+
+            <!-- 4 Sensory Attribute Bars -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
+              <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="text-[10px] font-mono-num text-white/50 uppercase">Sweetness</div>
+                <div id="metric-sweetness" class="text-base font-bold text-white mt-0.5">96 / 100</div>
+              </div>
+              <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="text-[10px] font-mono-num text-white/50 uppercase">Crema Body</div>
+                <div id="metric-body" class="text-base font-bold text-white mt-0.5">Silky Syrupy</div>
+              </div>
+              <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="text-[10px] font-mono-num text-white/50 uppercase">Acidity</div>
+                <div id="metric-acidity" class="text-base font-bold text-white mt-0.5">Bright Floral</div>
+              </div>
+              <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="text-[10px] font-mono-num text-white/50 uppercase">Roast Window</div>
+                <div id="metric-window" class="text-base font-bold text-[#E06A26] mt-0.5">Ships Today</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: 1-Tap Retail Bean Checkout & Automated Subscription Engine -->
+    <section id="subscriptions" class="max-w-[1400px] mx-auto px-4 md:px-8 py-12">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-mono-num uppercase tracking-widest text-[#E06A26] block mb-2">
+          AUTOMATED MORNING RITUAL
+        </span>
+        <h2 class="font-display text-3xl md:text-5xl font-extrabold text-white">
+          Fresh Cryo-Lots on Autopilot
+        </h2>
+        <p class="text-sm md:text-base text-white/70 mt-3">
+          Roasted every Tuesday and Friday in Ottawa. Subscribe for priority micro-lot allocation, save 17% on every bag, and pause or skip in one tap.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Plan 1: Single Trial Bag -->
+        <div class="bento-card p-7 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono-num text-white/60 mb-3">
+              <span>SINGLE DROP</span>
+              <span>340G CRYOGENIC BAG</span>
+            </div>
+            <h3 class="font-display text-2xl font-bold text-white">One-Time Micro-Lot</h3>
+            <div class="mt-4 flex items-baseline gap-2">
+              <span class="font-display text-4xl font-extrabold text-white">$24</span>
+              <span class="text-xs font-mono-num text-white/60">CAD / bag</span>
+            </div>
+            <p class="text-xs text-white/70 mt-3 leading-relaxed">
+              Ideal for tasting our current seasonal harvest or gifting an artisan roast bag.
+            </p>
+            <ul class="mt-6 space-y-2.5 text-xs text-white/80">
+              <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-[#E06A26]"></i> Roasted within 24 hours of dispatch</li>
+              <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-[#E06A26]"></i> Whole bean or precision ground</li>
+              <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-[#E06A26]"></i> Same-day Westboro pickup available</li>
+            </ul>
+          </div>
+          <button
+            onclick="openBeanCheckout('Single Micro-Lot Bag (340g)', 24, 'One-Time Purchase')"
+            class="mt-8 w-full py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-bold uppercase tracking-wider btn-press"
+          >
+            Buy Single Bag ($24) →
+          </button>
+        </div>
+
+        <!-- Plan 2: Signature Auto-Renew Subscription (Featured) -->
+        <div class="bento-card p-7 flex flex-col justify-between border-[#E06A26] relative shadow-[0_0_40px_rgba(224,106,38,0.18)]">
+          <div class="absolute -top-3.5 right-6 px-3.5 py-1 rounded-full bg-[#E06A26] text-white text-[10px] font-mono-num font-bold uppercase tracking-wider">
+            Most Popular • Save 17%
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono-num text-[#E06A26] mb-3">
+              <span>AUTO-RENEW CLUB</span>
+              <span>WEEKLY OR BI-WEEKLY</span>
+            </div>
+            <h3 class="font-display text-2xl font-bold text-white">Ritual Subscription</h3>
+            <div class="mt-4 flex items-baseline gap-2">
+              <span class="font-display text-4xl font-extrabold text-[#E06A26]">$20</span>
+              <span class="text-xs font-mono-num text-white/60">CAD / bag <del class="text-white/40 ml-1">$24</del></span>
+            </div>
+            <p class="text-xs text-white/70 mt-3 leading-relaxed">
+              Never run out of fresh beans. Includes rotating rare Gesha and Pink Bourbon allocations.
+            </p>
+            <ul class="mt-6 space-y-2.5 text-xs text-white/90">
+              <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-[#E06A26]"></i> <strong>17% permanent member discount</strong></li>
+              <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-[#E06A26]"></i> Free priority courier delivery in Ottawa</li>
+              <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-[#E06A26]"></i> 1-tap skip, pause, or swap via SMS</li>
+              <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-[#E06A26]"></i> PayPal Auto-Renew or Interac support</li>
+            </ul>
+          </div>
+          <button
+            onclick="openBeanCheckout('Ritual Bean Subscription (340g)', 20, 'Bi-Weekly Auto-Renew (Save 17%)')"
+            class="mt-8 w-full py-3.5 rounded-full bg-[#E06A26] hover:bg-[#c85a1c] text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_24px_rgba(224,106,38,0.4)] btn-press"
+          >
+            Start Subscription ($20) →
+          </button>
+        </div>
+
+        <!-- Plan 3: Double Bag Connoisseur Box -->
+        <div class="bento-card p-7 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono-num text-white/60 mb-3">
+              <span>HOUSEHOLD & STUDIO</span>
+              <span>2 × 340G BAGS</span>
+            </div>
+            <h3 class="font-display text-2xl font-bold text-white">Dual-Origin Box</h3>
+            <div class="mt-4 flex items-baseline gap-2">
+              <span class="font-display text-4xl font-extrabold text-white">$38</span>
+              <span class="text-xs font-mono-num text-white/60">CAD / delivery</span>
+            </div>
+            <p class="text-xs text-white/70 mt-3 leading-relaxed">
+              One bag of signature espresso + one bag of single-origin filter pour-over every shipment.
+            </p>
+            <ul class="mt-6 space-y-2.5 text-xs text-white/80">
+              <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-[#E06A26]"></i> 2 full-size 340g nitrogen-sealed bags</li>
+              <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-[#E06A26]"></i> Custom water mineral packet included</li>
+              <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-[#E06A26]"></i> Complimentary espresso bar drink monthly</li>
+            </ul>
+          </div>
+          <button
+            onclick="openBeanCheckout('Dual-Origin Connoisseur Box (2x340g)', 38, 'Monthly Subscription')"
+            class="mt-8 w-full py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-bold uppercase tracking-wider btn-press"
+          >
+            Select Dual Box ($38) →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Wholesale B2B Intake Pipe (Offices, Cafes & Restaurants) -->
+    <section id="wholesale" class="max-w-[1400px] mx-auto px-4 md:px-8 py-16">
+      <div class="bento-card p-6 md:p-10 lg:p-12 border-white/15">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6">
+            <span class="px-3 py-1 rounded-full text-[11px] font-mono-num font-bold uppercase bg-[#E06A26]/15 border border-[#E06A26]/40 text-[#E06A26]">
+              COMMERCIAL & OFFICE SUPPLY
+            </span>
+            <h2 class="font-display text-3xl md:text-4xl font-extrabold text-white mt-4">
+              Wholesale B2B Roasting & Equipment Calibration
+            </h2>
+            <p class="text-sm md:text-base text-white/70 mt-3 leading-relaxed">
+              Elevate your restaurant, creative agency office, or boutique cafe with custom-profiled bulk beans, La Marzocco machine leasing, and staff barista training.
+            </p>
+
+            <!-- Interactive Wholesale Volume Calculator -->
+            <div class="mt-8 p-5 rounded-2xl bg-black/50 border border-white/10">
+              <div class="flex items-center justify-between text-xs font-mono-num mb-2">
+                <span class="text-white/70">ESTIMATED WEEKLY VOLUME</span>
+                <span id="wholesale-vol-display" class="text-[#E06A26] font-bold">25 LBS / WEEK • $14.50/LB TIER</span>
+              </div>
+              <input
+                id="wholesale-slider"
+                type="range"
+                min="5"
+                max="150"
+                step="5"
+                value="25"
+                class="crema-slider"
+                oninput="updateWholesaleCalc(this.value)"
+              />
+              <div class="flex justify-between text-[10px] font-mono-num text-white/40 mt-2">
+                <span>5 lbs (Studio Office)</span>
+                <span>50 lbs (Busy Cafe)</span>
+                <span>150+ lbs (Multi-Location)</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 mt-6 text-center">
+              <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="font-display text-lg font-bold text-white">24h</div>
+                <div class="text-[11px] text-white/60">Ottawa Dispatch</div>
+              </div>
+              <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="font-display text-lg font-bold text-[#E06A26]">$0</div>
+                <div class="text-[11px] text-white/60">Grinder Calibration</div>
+              </div>
+              <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="font-display text-lg font-bold text-white">100%</div>
+                <div class="text-[11px] text-white/60">Custom Private Label</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- B2B Wholesale Direct Inquiry Form -->
+          <div class="lg:col-span-6 p-6 md:p-8 rounded-2xl bg-black/60 border border-white/15">
+            <h3 class="font-display text-xl font-bold text-white mb-1">Request Wholesale Sample Kit</h3>
+            <p class="text-xs text-white/60 mb-6">
+              We deliver a complimentary 3-origin tasting box to qualified Ottawa & Gatineau businesses within 48 hours.
+            </p>
+            <form onsubmit="submitWholesaleForm(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[11px] font-mono-num uppercase text-white/60 mb-1.5">Business Name *</label>
+                  <input
+                    type="text"
+                    id="b2b-company"
+                    required
+                    placeholder="e.g. Atelier Dining / Studio"
+                    class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 text-sm text-white focus:border-[#E06A26] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono-num uppercase text-white/60 mb-1.5">Contact Name *</label>
+                  <input
+                    type="text"
+                    id="b2b-name"
+                    required
+                    placeholder="Your Name"
+                    class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 text-sm text-white focus:border-[#E06A26] focus:outline-none"
+                  />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[11px] font-mono-num uppercase text-white/60 mb-1.5">Mobile / SMS Phone *</label>
+                  <input
+                    type="tel"
+                    id="b2b-phone"
+                    required
+                    placeholder="(613) 555-0199"
+                    class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 text-sm text-white focus:border-[#E06A26] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono-num uppercase text-white/60 mb-1.5">Business Type</label>
+                  <select
+                    id="b2b-type"
+                    class="w-full px-4 py-3 rounded-xl bg-[#141210] border border-white/15 text-sm text-white focus:border-[#E06A26] focus:outline-none"
+                  >
+                    <option value="Cafe / Espresso Bar">Cafe / Espresso Bar</option>
+                    <option value="Restaurant / Hospitality">Restaurant / Hospitality</option>
+                    <option value="Creative Office / Tech Hub">Creative Office / Tech Hub</option>
+                    <option value="Hotel / Private Lounge">Hotel / Private Lounge</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="w-full py-4 rounded-full bg-[#E06A26] hover:bg-[#c85a1c] text-white font-bold text-xs uppercase tracking-wider shadow-[0_0_24px_rgba(224,106,38,0.35)] btn-press"
+              >
+                Dispatch Sample Box & Pricing Sheet →
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: 9LMNTS Studio Agency Attribution & Turnkey Template Acquisition Banner -->
+    <section class="max-w-[1400px] mx-auto px-4 md:px-8 pt-4 pb-12">
+      <div class="rounded-3xl p-6 md:p-10 bg-gradient-to-r from-[#E06A26]/20 via-[#14110F] to-[#080706] border border-[#E06A26]/40 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-mono-num uppercase text-[#E06A26] mb-2">
+            <span class="w-2 h-2 rounded-full bg-[#E06A26]"></span>
+            <span>9LMNTS STUDIO • MASTER WEBSITE TEMPLATE #01</span>
+          </div>
+          <h3 class="font-display text-2xl md:text-3xl font-extrabold text-white">
+            Own a Café, Roastery, or Food Brand?
+          </h3>
+          <p class="text-xs md:text-sm text-white/75 max-w-xl mt-1">
+            We customize and launch this complete 60fps mobile & 3D ordering engine for your brand in <strong>72 hours</strong>. Includes 1-tap checkout, recurring subscriptions, and B2B intake.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 shrink-0">
+          <button
+            onclick="openAgencyModal()"
+            class="px-6 py-3.5 rounded-full bg-[#E06A26] hover:bg-[#c85a1c] text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_24px_rgba(224,106,38,0.45)] btn-press"
+          >
+            Claim This Website ($1,200 CAD) →
+          </button>
+          <a
+            href="https://wa.me/16134009691?text=COFFEE:%20I%20want%20to%20preview%20the%20VOID//ROAST%20Coffee%20Engine%20for%20my%20business"
+            target="_blank"
+            rel="noopener"
+            class="px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 text-white text-xs font-semibold flex items-center gap-2 btn-press"
+          >
+            <i class="fa-brands fa-whatsapp text-sm text-[#E06A26]"></i>
+            <span>WhatsApp (613) 400-9691</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MOBILE THUMB-ZONE ANCHORED BOTTOM CTA PILL BAR (< 1024px) -->
+  <div class="fixed bottom-4 left-4 right-4 z-40 lg:hidden pointer-events-none">
+    <div class="chroma-glass interactive-target p-2.5 pl-4 rounded-full flex items-center justify-between shadow-[0_12px_32px_rgba(0,0,0,0.85)] border border-[#E06A26]/50">
+      <div>
+        <div class="text-[10px] font-mono-num uppercase text-[#E06A26] font-bold">Micro-Lot Drop #042</div>
+        <div class="text-xs font-bold text-white">Ethiopian Gesha • $20 CAD</div>
+      </div>
+      <button
+        onclick="openBeanCheckout('Ethiopian Gesha Cryo-Lot (340g)', 20, 'Mobile 1-Tap Subscription')"
+        class="bg-[#E06A26] text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-[0_0_16px_rgba(224,106,38,0.5)] btn-press"
+      >
+        Reserve Drop ($20) →
+      </button>
+    </div>
+  </div>
+
+  <!-- NATIVE SLIDE-UP PAYMENT & DEPOSIT DRAWER (#modalPayPalCheckout) -->
+  <div id="modalPayPalCheckout" class="checkout-drawer-backdrop" onclick="if(event.target === this) closeCheckoutDrawer()">
+    <div class="checkout-drawer-sheet p-6 md:p-8">
+      <!-- Drag Handle -->
+      <div class="w-12 h-1.5 rounded-full bg-white/20 mx-auto mb-5"></div>
+
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-white/10">
+        <div>
+          <span id="drawer-tag" class="text-[10px] font-mono-num uppercase tracking-wider text-[#E06A26] font-bold">
+            INSTANT 1-TAP CHECKOUT
+          </span>
+          <h3 id="drawer-title" class="font-display text-xl md:text-2xl font-bold text-white mt-0.5">
+            Ethiopian Gesha Cryo-Lot (340g)
+          </h3>
+          <p id="drawer-subtitle" class="text-xs text-white/60 mt-0.5">
+            Auto-Renew Subscription (Save 17%)
+          </p>
+        </div>
+        <button onclick="closeCheckoutDrawer()" class="w-8 h-8 rounded-full bg-white/10 text-white/70 hover:text-white flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Grind & Quantity Options -->
+      <div id="bean-options-group" class="my-5 space-y-4">
+        <div class="grid grid-cols-3 gap-2">
+          <button type="button" onclick="selectGrind(this)" class="grind-pill py-2 px-3 rounded-xl text-xs font-semibold border border-[#E06A26] bg-[#E06A26]/15 text-white">
+            Whole Bean
+          </button>
+          <button type="button" onclick="selectGrind(this)" class="grind-pill py-2 px-3 rounded-xl text-xs font-semibold border border-white/15 bg-white/5 text-white/70">
+            Espresso Fine
+          </button>
+          <button type="button" onclick="selectGrind(this)" class="grind-pill py-2 px-3 rounded-xl text-xs font-semibold border border-white/15 bg-white/5 text-white/70">
+            Pour-Over
+          </button>
+        </div>
+      </div>
+
+      <!-- Total Price Summary Box -->
+      <div class="p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-between my-5">
+        <div>
+          <div class="text-xs text-white/60">Total Due Today (CAD)</div>
+          <div class="text-[11px] text-white/40 font-mono-num">Includes priority thermal packaging</div>
+        </div>
+        <div id="drawer-price" class="font-display text-3xl font-extrabold text-[#E06A26]">
+          $20.00
+        </div>
+      </div>
+
+      <!-- Express Payment Rails (PayPal / Apple Pay / Interac e-Transfer) -->
+      <div class="space-y-3">
+        <button
+          onclick="triggerExpressConfirm('PayPal / Apple Pay Express')"
+          class="w-full py-3.5 rounded-full bg-[#E06A26] hover:bg-[#c85a1c] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(224,106,38,0.4)] btn-press"
+        >
+          <i class="fa-brands fa-paypal"></i>
+          <span>1-Tap PayPal / Apple Pay Checkout</span>
+        </button>
+
+        <!-- Canadian Interac e-Transfer Autodeposit Rail -->
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/15">
+          <div class="flex items-center justify-between text-xs font-bold text-white mb-1">
+            <span><i class="fa-solid fa-building-columns text-[#E06A26] mr-1.5"></i>Canadian Interac e-Transfer</span>
+            <span class="text-[10px] font-mono-num text-[#E06A26] uppercase">Autodeposit Active</span>
+          </div>
+          <p class="text-[11px] text-white/70 leading-relaxed mb-3">
+            Send exact amount to <strong class="text-white select-all">9lmntstudio@gmail.com</strong> (Desjardins Commercial Bank — Zero security question required).
+          </p>
+          <div class="flex items-center gap-2">
+            <button
+              onclick="copyEmailRail()"
+              id="copy-email-btn"
+              class="flex-1 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-mono-num font-semibold text-white btn-press"
+            >
+              <i class="fa-regular fa-copy mr-1.5"></i>Copy 9lmntstudio@gmail.com
+            </button>
+            <a
+              id="whatsapp-confirm-link"
+              href="https://wa.me/16134009691?text=COFFEE%20ORDER:%20I%20just%20sent%20my%20Interac%20transfer%20for%20VOID//ROAST"
+              target="_blank"
+              rel="noopener"
+              class="py-2 px-4 rounded-xl bg-[#E06A26]/20 border border-[#E06A26]/50 text-xs font-semibold text-[#E06A26] btn-press"
+            >
+              Confirm via SMS →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="checkout-status-msg" class="hidden mt-4 p-3 rounded-xl bg-[#E06A26]/20 border border-[#E06A26] text-xs text-center text-white font-semibold"></div>
+    </div>
+  </div>
+
+  <!-- THREE.JS 60FPS INTERACTIVE ESPRESSO POUR & ORBITING BEANS ENGINE -->
+  <script>
+    // 1. Initialize Lenis Smooth Scroll + GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+    let lenis;
+    if (typeof Lenis !== 'undefined') {
+      lenis = new Lenis({
+        duration: 1.15,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        smoothTouch: false
+      });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    // 2. Three.js Scene & Renderer Initialization
+    const canvas = document.getElementById('webgl-stage');
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.5 : 2.0));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.18;
+
+    // Root Stage Group (Positioned on the left 58% column on desktop, centered on mobile)
+    const stageGroup = new THREE.Group();
+    scene.add(stageGroup);
+
+    // 3. Build Procedural 3D Basalt Espresso Cup, Molten Crema Stream & Roasted Beans
+    const cupGroup = new THREE.Group();
+    stageGroup.add(cupGroup);
+
+    // Matte Volcanic Basalt Ceramic Cup Body
+    const cupOuterGeo = new THREE.CylinderGeometry(1.12, 0.78, 1.65, 48, 1, false);
+    const basaltMat = new THREE.MeshStandardMaterial({
+      color: 0x141210,
+      roughness: 0.82,
+      metalness: 0.15
+    });
+    const cupMesh = new THREE.Mesh(cupOuterGeo, basaltMat);
+    cupGroup.add(cupMesh);
+
+    // Brushed Bronze Bottom Foot Ring
+    const footGeo = new THREE.CylinderGeometry(0.80, 0.76, 0.18, 48);
+    const bronzeMat = new THREE.MeshStandardMaterial({
+      color: 0xE06A26,
+      roughness: 0.3,
+      metalness: 0.85
+    });
+    const footMesh = new THREE.Mesh(footGeo, bronzeMat);
+    footMesh.position.y = -0.84;
+    cupGroup.add(footMesh);
+
+    // Swirling Molten Crema Liquid Surface inside Cup
+    const cremaGeo = new THREE.CircleGeometry(1.06, 48);
+    const cremaMat = new THREE.MeshStandardMaterial({
+      color: 0xE06A26,
+      emissive: 0x4A1B05,
+      emissiveIntensity: 0.45,
+      roughness: 0.22,
+      metalness: 0.08
+    });
+    const cremaMesh = new THREE.Mesh(cremaGeo, cremaMat);
+    cremaMesh.rotation.x = -Math.PI / 2;
+    cremaMesh.position.y = 0.78;
+    cupGroup.add(cremaMesh);
+
+    // Molten Espresso Pour Stream (Vertical Tiger-Striped Crema Column)
+    const streamGeo = new THREE.CylinderGeometry(0.055, 0.11, 2.8, 24);
+    const streamMat = new THREE.MeshStandardMaterial({
+      color: 0xE06A26,
+      emissive: 0x8C3709,
+      emissiveIntensity: 0.55,
+      roughness: 0.18,
+      metalness: 0.1,
+      transparent: true,
+      opacity: 0.92
+    });
+    const streamMesh = new THREE.Mesh(streamGeo, streamMat);
+    streamMesh.position.y = 2.1;
+    cupGroup.add(streamMesh);
+
+    // Crema Ripple Torus Rings on Liquid Surface
+    const rippleRings = [];
+    for (let r = 0; r < 3; r++) {
+      const rGeo = new THREE.TorusGeometry(0.25 + r * 0.26, 0.022, 16, 48);
+      const rMat = new THREE.MeshStandardMaterial({
+        color: 0xF59E0B,
+        roughness: 0.25,
+        metalness: 0.2
+      });
+      const ring = new THREE.Mesh(rGeo, rMat);
+      ring.rotation.x = Math.PI / 2;
+      ring.position.y = 0.80;
+      cupGroup.add(ring);
+      rippleRings.push(ring);
+    }
+
+    // 14 Orbiting Sculpted 3D Coffee Beans in Micro-Gravity
+    const beansGroup = new THREE.Group();
+    stageGroup.add(beansGroup);
+
+    const beanMat = new THREE.MeshStandardMaterial({
+      color: 0x26150B,
+      roughness: 0.48,
+      metalness: 0.12
+    });
+    const creaseMat = new THREE.MeshBasicMaterial({ color: 0x0A0503 });
+
+    const orbitingBeans = [];
+    const beanCount = 14;
+    for (let i = 0; i < beanCount; i++) {
+      const singleBean = new THREE.Group();
+
+      const bodyGeo = new THREE.SphereGeometry(0.22, 20, 16);
+      bodyGeo.scale(1.35, 0.78, 0.92);
+      const bodyMesh = new THREE.Mesh(bodyGeo, beanMat);
+      singleBean.add(bodyMesh);
+
+      // Center Roast Crack Crease
+      const slotGeo = new THREE.BoxGeometry(0.52, 0.04, 0.22);
+      const slotMesh = new THREE.Mesh(slotGeo, creaseMat);
+      slotMesh.position.y = 0.12;
+      singleBean.add(slotMesh);
+
+      const angle = (i / beanCount) * Math.PI * 2;
+      const radius = 1.85 + (i % 3) * 0.45;
+      const heightOffset = (Math.sin(i * 1.7) * 1.25);
+
+      singleBean.userData = {
+        baseAngle: angle,
+        baseRadius: radius,
+        baseY: heightOffset,
+        rotSpeedX: 0.008 + (i % 4) * 0.004,
+        rotSpeedZ: 0.006 + (i % 3) * 0.005
+      };
+
+      singleBean.rotation.set(i * 0.5, i * 0.8, i * 0.3);
+      beansGroup.add(singleBean);
+      orbitingBeans.push(singleBean);
+    }
+
+    // 4. Studio Rim Lighting Setup (3200K Warm Molten Key + 6500K Subtle Fill)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
+    scene.add(ambientLight);
+
+    const moltenKeyLight = new THREE.DirectionalLight(0xE06A26, 3.2);
+    moltenKeyLight.position.set(4, 5, 4);
+    scene.add(moltenKeyLight);
+
+    const rimBackLight = new THREE.DirectionalLight(0xFF9E5E, 2.0);
+    rimBackLight.position.set(-4, 3, -3);
+    scene.add(rimBackLight);
+
+    const underGlow = new THREE.PointLight(0xE06A26, 2.2, 8);
+    underGlow.position.set(0, -1.8, 1.5);
+    stageGroup.add(underGlow);
+
+    // 5. Interactive State & Responsive Positioning
+    const state = {
+      scrubProgress: 0.35, // 0 to 1
+      dragRotationY: 0,
+      dragRotationX: 0.18,
+      targetCamX: 0,
+      targetCamY: 0.4,
+      targetCamZ: 5.2
+    };
+
+    function updateStageLayout() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      camera.aspect = w / h;
+
+      if (w >= 1024) {
+        // Position 3D model inside Left 58% Column (Slot A)
+        stageGroup.position.set(-1.35, -0.15, 0);
+        state.targetCamZ = 5.1;
+      } else {
+        // Center on mobile viewports in top 55vh stage
+        stageGroup.position.set(0, 0.55, 0);
+        state.targetCamZ = 6.2;
+      }
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+    window.addEventListener('resize', updateStageLayout);
+    updateStageLayout();
+
+    // 6. Bind Scrub Slider & ScrollTrigger to 3D Extraction Physics
+    const scrubSlider = document.getElementById('pour-scrub-slider');
+    const scrubReadout = document.getElementById('scrub-readout');
+
+    function updateScrubState(val0to100) {
+      const norm = Math.max(0, Math.min(100, val0to100)) / 100;
+      state.scrubProgress = norm;
+      if (scrubSlider && Math.abs(scrubSlider.value - val0to100) > 1) {
+        scrubSlider.value = Math.round(val0to100);
+      }
+      const tds = (18.5 + norm * 4.4).toFixed(1);
+      if (scrubReadout) {
+        scrubReadout.textContent = `EXTRACTION: ${Math.round(norm * 100)}% • ${tds}% TDS`;
+      }
+    }
+
+    if (scrubSlider) {
+      scrubSlider.addEventListener('input', (e) => {
+        updateScrubState(parseFloat(e.target.value));
+      });
+    }
+
+    // Synchronize Page Scroll with 3D Extraction & Orbit Expansion
+    ScrollTrigger.create({
+      trigger: 'body',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 0.5,
+      onUpdate: (self) => {
+        updateScrubState(25 + self.progress * 75);
+      }
+    });
+
+    // 7. Direct 1:1 Pointer Drag Manipulation on Canvas
+    let isDragging = false;
+    let prevX = 0;
+    let prevY = 0;
+
+    canvas.addEventListener('pointerdown', (e) => {
+      isDragging = true;
+      prevX = e.clientX;
+      prevY = e.clientY;
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - prevX;
+      const dy = e.clientY - prevY;
+      state.dragRotationY += dx * 0.007;
+      state.dragRotationX = Math.max(-0.35, Math.min(0.85, state.dragRotationX + dy * 0.005));
+      prevX = e.clientX;
+      prevY = e.clientY;
+    });
+
+    window.addEventListener('pointerup', () => {
+      isDragging = false;
+    });
+
+    // Camera Angle Presets inside Slot A
+    window.setCameraView = function(mode) {
+      ['hero', 'orbit', 'crema'].forEach(id => {
+        const btn = document.getElementById('cam-btn-' + id);
+        if (btn) {
+          btn.className = (id === mode)
+            ? 'px-3 py-1 rounded-full text-xs font-semibold bg-[#E06A26] text-white btn-press'
+            : 'px-3 py-1 rounded-full text-xs font-semibold text-white/70 hover:text-white btn-press';
+        }
+      });
+
+      if (mode === 'hero') {
+        gsap.to(state, { dragRotationX: 0.18, targetCamY: 0.4, duration: 0.8, ease: 'power3.out' });
+      } else if (mode === 'orbit') {
+        gsap.to(state, { dragRotationX: 0.05, duration: 0.8, ease: 'power3.out' });
+        updateScrubState(88);
+      } else if (mode === 'crema') {
+        gsap.to(state, { dragRotationX: 0.78, targetCamY: 1.1, duration: 0.8, ease: 'power3.out' });
+      }
+    };
+
+    // 8. Pause GPU Rendering When Offscreen
+    let isCanvasVisible = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      isCanvasVisible = entry.isIntersecting;
+    }, { threshold: 0 });
+    observer.observe(canvas);
+
+    // 9. 60 FPS Continuous Render Loop
+    let clockTime = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      if (!isCanvasVisible) return;
+
+      clockTime += 0.016;
+      const p = state.scrubProgress;
+
+      // Smoothly interpolate camera & cup orientation
+      camera.position.z += (state.targetCamZ - camera.position.z) * 0.08;
+      camera.position.y += (state.targetCamY - camera.position.y) * 0.08;
+
+      cupGroup.rotation.y = state.dragRotationY + p * Math.PI * 1.4 + clockTime * 0.18;
+      cupGroup.rotation.x = state.dragRotationX;
+      cupGroup.rotation.z = Math.sin(p * Math.PI) * 0.18;
+
+      // Pour stream velocity & scale
+      streamMesh.scale.x = 0.85 + Math.sin(clockTime * 12) * 0.12;
+      streamMesh.scale.z = 0.85 + Math.cos(clockTime * 12) * 0.12;
+
+      // Crema ripples pulsing outward
+      rippleRings.forEach((ring, idx) => {
+        const pulse = ((clockTime * 0.6 + idx * 0.33) % 1);
+        ring.scale.set(0.5 + pulse * 1.3, 0.5 + pulse * 1.3, 1);
+      });
+
+      // Orbiting coffee beans expand outward on scroll/scrub
+      const orbitExpansion = 0.85 + p * 0.95;
+      orbitingBeans.forEach((bean, idx) => {
+        const u = bean.userData;
+        const currentAngle = u.baseAngle + clockTime * 0.35 + p * Math.PI * 1.8;
+        const currentRadius = u.baseRadius * orbitExpansion;
+        bean.position.x = Math.cos(currentAngle) * currentRadius;
+        bean.position.z = Math.sin(currentAngle) * currentRadius;
+        bean.position.y = u.baseY * orbitExpansion + Math.sin(clockTime * 1.5 + idx) * 0.15;
+        bean.rotation.x += u.rotSpeedX;
+        bean.rotation.z += u.rotSpeedZ;
+      });
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // 10. Interactive Extraction Curve & Roast Profile Switcher
+    const roastProfiles = [
+      {
+        title: 'Ethiopian Gesha Cryo-Lot (22.4% Peak Sweetness)',
+        badge: '94.2°C • 1:2.2 RATIO',
+        line: 'M 0 145 Q 150 130, 260 55 T 460 28 T 600 45',
+        area: 'M 0 145 Q 150 130, 260 55 T 460 28 T 600 45 L 600 160 L 0 160 Z',
+        cx: 460,
+        cy: 28,
+        sweetness: '96 / 100',
+        body: 'Silky Syrupy',
+        acidity: 'Bright Floral',
+        window: 'Ships Today'
+      },
+      {
+        title: 'Colombian Pink Bourbon (21.9% Caramel Balance)',
+        badge: '93.0°C • 1:2.0 RATIO',
+        line: 'M 0 148 Q 140 110, 250 48 T 420 22 T 600 38',
+        area: 'M 0 148 Q 140 110, 250 48 T 420 22 T 600 38 L 600 160 L 0 160 Z',
+        cx: 420,
+        cy: 22,
+        sweetness: '94 / 100',
+        body: 'Velvet Cream',
+        acidity: 'Juicy Citrus',
+        window: 'Roasts Tomorrow'
+      },
+      {
+        title: 'Obsidian Basalt Espresso (20.8% Heavy Crema)',
+        badge: '91.8°C • 1:1.8 RISTRETTO',
+        line: 'M 0 140 Q 120 85, 230 40 T 380 34 T 600 62',
+        area: 'M 0 140 Q 120 85, 230 40 T 380 34 T 600 62 L 600 160 L 0 160 Z',
+        cx: 380,
+        cy: 34,
+        sweetness: '92 / 100',
+        body: 'Dense Molten',
+        acidity: 'Low Smooth',
+        window: 'In Stock (Westboro)'
+      }
+    ];
+
+    window.selectRoastProfile = function(index) {
+      const p = roastProfiles[index];
+      for (let i = 0; i < 3; i++) {
+        const card = document.getElementById('roast-card-' + i);
+        if (card) {
+          card.className = (i === index)
+            ? 'text-left p-5 rounded-2xl border border-[#E06A26] bg-[#E06A26]/10 transition-all btn-press'
+            : 'text-left p-5 rounded-2xl border border-white/15 bg-white/[0.03] hover:border-white/30 transition-all btn-press';
+        }
+      }
+      document.getElementById('curve-title').textContent = p.title;
+      document.getElementById('curve-badge').textContent = p.badge;
+      document.getElementById('tds-line-path').setAttribute('d', p.line);
+      document.getElementById('tds-area-path').setAttribute('d', p.area);
+      document.getElementById('tds-sweet-dot').setAttribute('cx', p.cx);
+      document.getElementById('tds-sweet-dot').setAttribute('cy', p.cy);
+      document.getElementById('metric-sweetness').textContent = p.sweetness;
+      document.getElementById('metric-body').textContent = p.body;
+      document.getElementById('metric-acidity').textContent = p.acidity;
+      document.getElementById('metric-window').textContent = p.window;
+    };
+
+    // 11. Wholesale B2B Volume Estimator
+    window.updateWholesaleCalc = function(lbs) {
+      const vol = parseInt(lbs, 10);
+      let rate = 15.50;
+      if (vol >= 25) rate = 14.50;
+      if (vol >= 60) rate = 13.25;
+      if (vol >= 100) rate = 12.40;
+      document.getElementById('wholesale-vol-display').textContent = `${vol} LBS / WEEK • $${rate.toFixed(2)}/LB TIER`;
+    };
+
+    window.submitWholesaleForm = function(e) {
+      e.preventDefault();
+      const company = document.getElementById('b2b-company').value;
+      const name = document.getElementById('b2b-name').value;
+      const phone = document.getElementById('b2b-phone').value;
+      const type = document.getElementById('b2b-type').value;
+      const vol = document.getElementById('wholesale-slider').value;
+
+      const msg = encodeURIComponent(
+        `COFFEE WHOLESALE DISPATCH:\nBusiness: ${company} (${type})\nContact: ${name}\nPhone: ${phone}\nVolume: ${vol} lbs/week`
+      );
+      window.open(`https://wa.me/16134009691?text=${msg}`, '_blank');
+    };
+
+    // 12. Native Slide-Up Checkout & Agency Acquisition Drawer
+    window.openBeanCheckout = function(title, price, subtitle) {
+      document.getElementById('drawer-tag').textContent = 'VOID//ROAST • 1-TAP BEAN CHECKOUT';
+      document.getElementById('drawer-title').textContent = title;
+      document.getElementById('drawer-subtitle').textContent = subtitle;
+      document.getElementById('drawer-price').textContent = `$${price}.00`;
+      document.getElementById('bean-options-group').style.display = 'block';
+      document.getElementById('checkout-status-msg').classList.add('hidden');
+      document.getElementById('modalPayPalCheckout').classList.add('open');
+    };
+
+    window.openAgencyModal = function() {
+      document.getElementById('drawer-tag').textContent = '9LMNTS STUDIO • TURNKEY COFFEE ENGINE';
+      document.getElementById('drawer-title').textContent = 'Specialty Coffee Website Build ($1,200 CAD)';
+      document.getElementById('drawer-subtitle').textContent = '50% Upfront Deposit ($600 CAD) • Deploys in 72 Hours';
+      document.getElementById('drawer-price').textContent = '$600.00';
+      document.getElementById('bean-options-group').style.display = 'none';
+      document.getElementById('checkout-status-msg').classList.add('hidden');
+      document.getElementById('modalPayPalCheckout').classList.add('open');
+    };
+
+    window.closeCheckoutDrawer = function() {
+      document.getElementById('modalPayPalCheckout').classList.remove('open');
+    };
+
+    window.selectGrind = function(btn) {
+      document.querySelectorAll('.grind-pill').forEach(el => {
+        el.className = 'grind-pill py-2 px-3 rounded-xl text-xs font-semibold border border-white/15 bg-white/5 text-white/70';
+      });
+      btn.className = 'grind-pill py-2 px-3 rounded-xl text-xs font-semibold border border-[#E06A26] bg-[#E06A26]/15 text-white';
+    };
+
+    window.copyEmailRail = function() {
+      navigator.clipboard.writeText('9lmntstudio@gmail.com');
+      const btn = document.getElementById('copy-email-btn');
+      btn.innerHTML = '<i class="fa-solid fa-check mr-1.5 text-[#E06A26]"></i>Copied: 9lmntstudio@gmail.com';
+    };
+
+    window.triggerExpressConfirm = function(method) {
+      const title = document.getElementById('drawer-title').textContent;
+      const price = document.getElementById('drawer-price').textContent;
+      const statusEl = document.getElementById('checkout-status-msg');
+      statusEl.textContent = `Initializing ${method} for ${title} (${price} CAD)... Redirecting to instant confirmation.`;
+      statusEl.classList.remove('hidden');
+      setTimeout(() => {
+        const msg = encodeURIComponent(`DISPATCH ORDER: ${title} (${price} CAD) via ${method}`);
+        window.open(`https://wa.me/16134009691?text=${msg}`, '_blank');
+      }, 900);
+    };
+  </script>
+</body>
+</html>

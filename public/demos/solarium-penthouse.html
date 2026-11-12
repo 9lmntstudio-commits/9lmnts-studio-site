@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SOLARIUM / Le Sanctuaire — Suspended Penthouse Architecture</title>
+<meta name="description" content="Ultra-luxury architectural penthouse sanctuaries. 18-foot frameless glass, monolithic travertine, obsidian culinary atelier, and private thermal basalt baths.">
+
+<!-- World-Class Architectural Typography Hierarchy -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #060608;
+    --stone-dark: #0A0A0E;
+    --ink: #FFFFFF;
+    --ink-dim: rgba(255, 255, 255, 0.72);
+    --ink-faint: rgba(255, 255, 255, 0.40);
+    --line: rgba(255, 255, 255, 0.10);
+    --line-gold: rgba(212, 175, 55, 0.35);
+
+    /* STRICT SINGLE ACCENT: Architectural Champagne Gold */
+    --accent: #D4AF37;
+    --accent-glow: rgba(212, 175, 55, 0.38);
+    --accent-soft: rgba(212, 175, 55, 0.12);
+    --accent-amber: #E2C799;
+
+    /* Typographic Families */
+    --font-monumental: "Syne", -apple-system, sans-serif;
+    --font-serif: "Cormorant Garamond", Georgia, serif;
+    --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+
+    --gutter: clamp(1.5rem, 5vw, 6rem);
+    --mx: 50vw;
+    --my: 50vh;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); color: var(--ink); scroll-behavior: smooth; overflow-x: clip; cursor: none; }
+  body {
+    background: var(--bg);
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.05vw, 1.15rem);
+    line-height: 1.65;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
+  }
+  a, button { color: inherit; text-decoration: none; cursor: none; }
+  button { font: inherit; background: none; border: 0; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ================= 1. FLUID MAGNETIC CURSOR & TORCHLIGHT SPOTLIGHT ================= */
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+  }
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, background-color 0.3s, transform 0.1s linear;
+  }
+  .cursor-ring.hovering {
+    width: 72px;
+    height: 72px;
+    background: rgba(212, 175, 55, 0.15);
+    border-color: #FFFFFF;
+    backdrop-filter: blur(2px);
+  }
+  .cursor-ring.hovering::after {
+    content: attr(data-cursor-label);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    white-space: nowrap;
+  }
+
+  /* Dynamic Torchlight Gradient Tracking Cursor */
+  .torchlight-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    background: radial-gradient(circle 480px at var(--mx) var(--my), rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 40%, transparent 75%);
+    mix-blend-mode: screen;
+    will-change: background;
+  }
+
+  /* ================= 2. FIXED 3D MULTI-ROOM DRONE VIDEO STAGE ================= */
+  .drone-viewport-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    background: var(--bg);
+    pointer-events: none;
+    perspective: 1400px;
+    transform-style: preserve-3d;
+  }
+  .drone-camera-rig {
+    position: absolute;
+    inset: -4%;
+    width: 108%;
+    height: 108%;
+    will-change: transform;
+    transform-origin: center center;
+    transition: transform 0.05s linear;
+  }
+
+  /* Individual Room Presentation Layers */
+  .room-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .room-layer.active { opacity: 1; }
+
+  .room-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    filter: brightness(0.85) contrast(1.05);
+    transform: scale(1.02);
+    will-change: transform;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .room-layer.active .room-media {
+    transform: scale(1.0);
+  }
+
+  /* Vignette & Cinematic Atmospheric Scrim */
+  .drone-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(6, 6, 8, 0.75) 100%),
+      linear-gradient(180deg, rgba(6, 6, 8, 0.85) 0%, transparent 22%, transparent 75%, rgba(6, 6, 8, 0.95) 100%),
+      linear-gradient(90deg, rgba(6, 6, 8, 0.75) 0%, transparent 35%, transparent 65%, rgba(6, 6, 8, 0.75) 100%);
+    pointer-events: none;
+  }
+
+  /* ================= 3. BORDERLESS LUXURY TOP NAVIGATION ================= */
+  header.architectural-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.2rem var(--gutter);
+    transition: background 0.4s ease, padding 0.3s ease;
+  }
+  header.architectural-nav.scrolled {
+    background: rgba(6, 6, 8, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
+    padding: 1.2rem var(--gutter);
+  }
+  .brand-mark {
+    display: flex;
+    flex-direction: column;
+  }
+  .brand-logo-text {
+    font-family: var(--font-monumental);
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .brand-logo-text em {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-transform: none;
+    margin-left: 0.35rem;
+  }
+  .brand-subtext {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 0.15rem;
+  }
+
+  /* Room Quick-Selector Bar (Borderless Links) */
+  nav.room-selector-strip {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.2rem, 2.8vw, 3rem);
+  }
+  .room-nav-btn {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    position: relative;
+    padding: 0.4rem 0;
+    transition: color 0.3s ease;
+  }
+  .room-nav-btn:hover { color: var(--ink); }
+  .room-nav-btn.active {
+    color: var(--accent);
+  }
+  .room-nav-btn.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .nav-cta-btn {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 0.25rem;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .nav-cta-btn:hover { color: #FFFFFF; border-color: #FFFFFF; }
+
+  /* ================= 4. PINNED 600VH DRONE SCROLL TRACK ================= */
+  .drone-scroll-track {
+    position: relative;
+    height: 600vh;
+    z-index: 10;
+  }
+
+  /* Viewport Sticky Scrollytelling Stage (Borderless Typography) */
+  .sticky-spatial-hud {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(6.8rem, 11.5vh, 8.8rem) var(--gutter) clamp(1.4rem, 2.8vh, 2.2rem);
+    pointer-events: none;
+  }
+  .hud-interactive { pointer-events: auto; }
+
+  /* Kinetic Section Headline Container */
+  .kinetic-room-scene {
+    position: relative;
+    width: 100%;
+    max-width: clamp(480px, 58vw, 860px);
+    z-index: 10;
+    pointer-events: auto;
+  }
+  .room-headline-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .room-headline-block.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Architectural Sub-Badge */
+  .architectural-meta-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+  .architectural-meta-tag::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+  }
+
+  /* Kinetic Headlines (Refined, Secondary to Drone Visuals) */
+  .kinetic-title-wrap {
+    margin-bottom: 0.8rem;
+  }
+  .kinetic-title-line {
+    display: block;
+    font-family: var(--font-monumental);
+    font-weight: 800;
+    font-size: clamp(1.3rem, 2.2vw, 2.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+    transition: transform 0.4s ease-out, color 0.4s ease;
+  }
+  .kinetic-title-line.serif-accent {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    text-transform: none;
+    font-size: clamp(1.2rem, 1.9vw, 2.0rem);
+    margin-top: 0.2em;
+    text-shadow: 0 0 16px var(--accent-glow);
+  }
+  .kinetic-title-line.wireframe {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.45);
+    color: transparent;
+    transition: color 0.6s ease, -webkit-text-stroke 0.6s ease;
+  }
+  .room-headline-block.active .kinetic-title-line.wireframe {
+    color: #FFFFFF;
+    -webkit-text-stroke: 0;
+  }
+
+  /* Borderless Architectural Description (Understated) */
+  .architectural-narrative {
+    font-size: clamp(0.85rem, 0.95vw, 1.0rem);
+    line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 42ch;
+    margin-bottom: 1.4rem;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
+  }
+
+  /* Borderless Technical Dimension Strip */
+  .borderless-spec-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(1.5rem, 3.5vw, 3.5rem);
+    border-top: 1px solid var(--line-gold);
+    padding-top: 1.4rem;
+    margin-bottom: 2.2rem;
+  }
+  .borderless-spec-node {
+    display: flex;
+    flex-direction: column;
+  }
+  .spec-node-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.3rem;
+  }
+  .spec-node-val {
+    font-family: var(--font-monumental);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .spec-node-val em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1.2rem;
+  }
+
+  /* CTA Buttons (Pure Glass & Gold) */
+  .action-lineup {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.4rem;
+  }
+  .btn-gold-monolith {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.05rem 2.2rem;
+    background: var(--accent);
+    color: #060608;
+    font-family: var(--font-monumental);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    box-shadow: 0 6px 30px var(--accent-glow);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s, box-shadow 0.3s;
+  }
+  .btn-gold-monolith:hover {
+    background: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px var(--accent-glow);
+  }
+  .btn-ghost-minimal {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .btn-ghost-minimal:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* Floating Right Telemetry Coordinate */
+  .floating-telemetry-hud {
+    position: absolute;
+    right: var(--gutter);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.4rem;
+    pointer-events: auto;
+    z-index: 10;
+  }
+  .hud-coord-item {
+    text-align: right;
+  }
+  .hud-coord-key {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .hud-coord-value {
+    font-family: var(--font-monumental);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* Bottom Pinned Scrolly Progress Bar */
+  .bottom-spatial-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .drone-flight-tracker {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--ink);
+  }
+  .drone-pulse-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    animation: dronePulse 1.8s infinite ease-in-out;
+  }
+  @keyframes dronePulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.6); opacity: 0.5; }
+  }
+  .scrub-track-rail {
+    flex: 1;
+    max-width: 320px;
+    height: 2px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .scrub-track-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    transition: width 0.1s linear;
+  }
+
+  /* ================= 5. UNIQUE FLOORPLATE SELECTION SHELF (NO BENTO BOXES) ================= */
+  .residences-shelf-section {
+    position: relative;
+    z-index: 20;
+    padding: clamp(6rem, 12vh, 9rem) 0 5rem;
+    border-top: 1px solid var(--line);
+    background: var(--stone-dark);
+    overflow: hidden;
+  }
+  .shelf-header-container {
+    padding: 0 var(--gutter);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .shelf-header-container h2 {
+    font-family: var(--font-monumental);
+    font-size: clamp(2.4rem, 5vw, 4.4rem);
+    font-weight: 800;
+    line-height: 1.02;
+    text-transform: uppercase;
+  }
+  .shelf-header-container h2 em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--accent);
+    text-transform: none;
+    font-weight: 400;
+  }
+  .shelf-header-container p {
+    color: var(--ink-dim);
+    font-size: 1.05rem;
+    max-width: 42ch;
+    line-height: 1.6;
+  }
+
+  /* Horizontal Scrolling Floorplate Row */
+  .shelf-horizontal-wrap {
+    width: 100%;
+    overflow-x: auto;
+    padding: 2.5rem var(--gutter) 4.5rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+  }
+  .shelf-horizontal-wrap::-webkit-scrollbar { display: none; }
+  .shelf-horizontal-track {
+    display: flex;
+    align-items: center;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+    width: max-content;
+  }
+
+  /* Individual Penthouse Residence Node */
+  .residence-node {
+    display: flex;
+    flex-direction: column;
+    width: clamp(300px, 30vw, 420px);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    opacity: 0.42;
+    transform: scale(0.92);
+  }
+  .residence-node.selected {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  .residence-image-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    margin-bottom: 1.6rem;
+    overflow: hidden;
+  }
+  .residence-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9) contrast(1.08);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+  }
+  .residence-node.selected .residence-img {
+    transform: scale(1.05);
+    filter: brightness(1) contrast(1.12);
+  }
+  .residence-spotlight-halo {
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+  .residence-node.selected .residence-spotlight-halo { opacity: 0.65; }
+
+  /* Borderless Text Metadata */
+  .residence-num {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .residence-title {
+    font-family: var(--font-monumental);
+    font-size: 1.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    line-height: 1.15;
+  }
+  .residence-price {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-style: italic;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .residence-inspect-btn {
+    opacity: 0;
+    transform: translateY(8px);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #060608;
+    background: var(--accent);
+    padding: 0.6rem 1.4rem;
+    align-self: flex-start;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .residence-node.selected .residence-inspect-btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ================= 6. MONUMENTAL ARCHITECTURAL MANIFESTO ================= */
+  .manifesto-section {
+    padding: clamp(6rem, 12vh, 9rem) var(--gutter);
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .manifesto-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: clamp(3rem, 6vw, 7rem);
+    margin-bottom: 5rem;
+  }
+  .manifesto-sticky-headline h3 {
+    font-family: var(--font-monumental);
+    font-size: clamp(2.6rem, 5.2vw, 4.8rem);
+    font-weight: 800;
+    line-height: 1.02;
+    text-transform: uppercase;
+  }
+  .manifesto-sticky-headline h3 em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--accent);
+    text-transform: none;
+    font-weight: 400;
+  }
+  .manifesto-body p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--ink-dim);
+    margin-bottom: 2rem;
+  }
+
+  /* Directory Colonnade */
+  .architectural-directory {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 3rem;
+    border-top: 1px solid var(--line);
+    padding: 4rem 0 2rem;
+  }
+  .directory-branch h5 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .directory-branch p, .directory-branch a {
+    font-size: 0.92rem;
+    color: var(--ink-dim);
+    display: block;
+    line-height: 1.7;
+  }
+
+  .site-colophon {
+    border-top: 1px solid var(--line);
+    padding: 2.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--ink-faint);
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  /* ================= 7. SLIDE-IN RESIDENCE DETAIL MODAL (BORDERLESS) ================= */
+  .modal-backdrop-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 6, 8, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 80;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .modal-backdrop-scrim.open { opacity: 1; pointer-events: auto; }
+  .residence-slide-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(580px, 94vw);
+    background: rgba(10, 10, 14, 0.98);
+    backdrop-filter: blur(36px);
+    border-left: 1px solid var(--accent);
+    z-index: 85;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.8rem, 4vw, 3.2rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    transform: translateX(105%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .residence-slide-modal.open { transform: translateX(0); }
+  .modal-close-trigger {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .modal-close-trigger:hover { color: #FFFFFF; }
+  .modal-media-view {
+    width: 100%;
+    aspect-ratio: 16/10;
+    margin: 1.5rem 0 2rem;
+    overflow: hidden;
+  }
+  .modal-media-view img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .modal-residence-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .modal-residence-title {
+    font-family: var(--font-monumental);
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.05;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .modal-residence-price {
+    font-family: var(--font-serif);
+    font-size: 2.1rem;
+    font-style: italic;
+    color: var(--accent);
+    margin-bottom: 1.8rem;
+  }
+  .modal-specs-table {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 1.4rem 0;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .modal-spec-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+  .modal-spec-row span:first-child {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .modal-spec-row span:last-child {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ================= 8. SLIDE-UP PRIVATE ACQUISITION DRAWER ================= */
+  .drawer-scrim-veil {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 6, 8, 0.75);
+    backdrop-filter: blur(12px);
+    z-index: 95;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .drawer-scrim-veil.open { opacity: 1; pointer-events: auto; }
+  #modalAcquisitionDrawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: rgba(10, 10, 14, 0.98);
+    backdrop-filter: blur(36px);
+    border-top: 1px solid var(--accent);
+    z-index: 100;
+    padding: 2.4rem var(--gutter) 4rem;
+    transform: translateY(105%);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #modalAcquisitionDrawer.open { transform: translateY(0); }
+  .drawer-drag-line {
+    width: 48px;
+    height: 3px;
+    background: var(--ink-faint);
+    margin: 0 auto 2rem;
+  }
+  .drawer-top-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.2rem;
+  }
+  .drawer-top-strip h3 {
+    font-family: var(--font-monumental);
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  .drawer-top-strip h3 em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--accent);
+    text-transform: none;
+    font-weight: 400;
+  }
+
+  .acquisition-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .interac-deposit-box {
+    margin-top: 1.5rem;
+    padding: 1.4rem;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    font-size: 0.92rem;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    display: none;
+  }
+  .interac-deposit-box.active { display: block; }
+
+  /* Shift + B Developer Switcher */
+  .architect-switcher {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 320px;
+    background: rgba(10, 10, 14, 0.98);
+    border: 1px solid var(--accent);
+    padding: 1.4rem;
+    z-index: 120;
+    transform: translateY(140%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .architect-switcher.open { transform: translateY(0); }
+  .architect-switcher h6 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .architect-switcher input {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: #FFFFFF;
+    font: inherit;
+    font-size: 0.86rem;
+    margin-bottom: 0.6rem;
+  }
+
+  @media (max-width: 900px) {
+    nav.room-selector-strip { display: none; }
+    .manifesto-split-grid { grid-template-columns: 1fr; }
+    .acquisition-actions-grid { grid-template-columns: 1fr; }
+    .floating-telemetry-hud { display: none; }
+  }
+  @media (max-height: 720px) {
+    .sticky-spatial-hud { padding: 4.2rem var(--gutter) 1.0rem; }
+    .kinetic-title-line { font-size: clamp(1.6rem, 3.2vw, 2.8rem); }
+    .kinetic-title-line.serif-accent { font-size: clamp(1.4rem, 2.8vw, 2.4rem); }
+    .architectural-narrative { font-size: 0.88rem; line-height: 1.5; margin-bottom: 0.9rem; max-width: 42ch; }
+    .borderless-spec-strip { display: none; }
+    .btn-gold-monolith { padding: 0.65rem 1.4rem; font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Fluid Magnetic Cursor & Torchlight Spotlight -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing" data-cursor-label="VIEW"></div>
+<div class="torchlight-overlay" id="torchlightOverlay"></div>
+
+<!-- Fixed 3D Multi-Room Drone Video Stage -->
+<div class="drone-viewport-stage" id="droneViewportStage" aria-hidden="true">
+  <div class="drone-camera-rig" id="droneCameraRig">
+    
+    <!-- Room 01: Grand Horizon Atrium -->
+    <div class="room-layer active" id="roomLayer1">
+      <video class="room-media" id="videoRoom1" muted playsinline preload="auto" src="/assets/work/solarium/room_01_atrium.mp4" poster="/assets/work/solarium/room_01_atrium_start.jpg"></video>
+      <img class="room-media fallback" src="/assets/work/solarium/room_01_atrium_start.jpg" alt="Grand Horizon Atrium">
+    </div>
+
+    <!-- Room 02: Culinary Atelier & Wine Gallery -->
+    <div class="room-layer" id="roomLayer2">
+      <video class="room-media" id="videoRoom2" muted playsinline preload="auto" src="/assets/work/solarium/room_02_atelier.mp4" poster="/assets/work/solarium/room_02_atelier_start.jpg"></video>
+      <img class="room-media fallback" src="/assets/work/solarium/room_02_atelier_start.jpg" alt="Culinary Atelier & Wine Gallery">
+    </div>
+
+    <!-- Room 03: Primary Suite & Sky Terrace -->
+    <div class="room-layer" id="roomLayer3">
+      <video class="room-media" id="videoRoom3" muted playsinline preload="auto" src="/assets/work/solarium/room_03_suite.mp4" poster="/assets/work/solarium/room_03_suite_start.jpg"></video>
+      <img class="room-media fallback" src="/assets/work/solarium/room_03_suite_start.jpg" alt="Primary Suite & Sky Terrace">
+    </div>
+
+    <!-- Room 04: Subterranean Basalt Thermal Spa -->
+    <div class="room-layer" id="roomLayer4">
+      <video class="room-media" id="videoRoom4" muted playsinline preload="auto" src="/assets/work/solarium/room_04_spa.mp4" poster="/assets/work/solarium/room_04_spa_start.jpg"></video>
+      <img class="room-media fallback" src="/assets/work/solarium/room_04_spa_start.jpg" alt="Thermal Basalt Spa Sanctuary">
+    </div>
+
+    <!-- Room 05: Cantilevered Skyline Horizon Terrace -->
+    <div class="room-layer" id="roomLayer5">
+      <video class="room-media" id="videoRoom5" muted playsinline preload="auto" src="/assets/work/solarium/room_05_terrace.mp4" poster="/assets/work/solarium/room_05_terrace_start.jpg"></video>
+      <img class="room-media fallback" src="/assets/work/solarium/room_05_terrace_start.jpg" alt="Cantilevered Skyline Horizon Terrace">
+    </div>
+
+  </div>
+  <div class="drone-scrim"></div>
+</div>
+
+<!-- Borderless Luxury Top Navigation -->
+<header class="architectural-nav" id="topNav">
+  <a href="#droneTrack" class="brand-mark" data-cursor="EXPLORE">
+    <span class="brand-logo-text" data-brand-title>SOLARIUM<em>Sanctuaire</em></span>
+    <span class="brand-subtext" data-brand-sub>Mount Royal Ridge × Skyline Horizon</span>
+  </a>
+
+  <!-- Room Quick-Selector Links (One-Click Jump to Video Waypoints) -->
+  <nav class="room-selector-strip" id="roomSelectorStrip">
+    <button class="room-nav-btn active" data-room-idx="0" data-cursor="ROOM 01">01 Atrium</button>
+    <button class="room-nav-btn" data-room-idx="1" data-cursor="ROOM 02">02 Atelier</button>
+    <button class="room-nav-btn" data-room-idx="2" data-cursor="ROOM 03">03 Suite</button>
+    <button class="room-nav-btn" data-room-idx="3" data-cursor="ROOM 04">04 Thermal Spa</button>
+    <button class="room-nav-btn" data-room-idx="4" data-cursor="ROOM 05">05 Terrace</button>
+  </nav>
+
+  <button class="nav-cta-btn" id="openAcquisitionTop" data-trigger-acquisition data-cursor="RESERVE">Private Inquiry</button>
+</header>
+
+<main>
+
+  <!-- ================= 4. PINNED 600VH DRONE SCROLL TRACK ================= -->
+  <section class="drone-scroll-track" id="droneTrack">
+    <div class="sticky-spatial-hud">
+      
+      <!-- Borderless Kinetic Headlines (Playing with Typography on Scroll) -->
+      <div class="kinetic-room-scene">
+        
+        <!-- Room 01: Grand Horizon Atrium -->
+        <div class="room-headline-block active" id="sceneRoom1">
+          <div class="architectural-meta-tag">Drone Approach · 880 FT Altitude · Room 01</div>
+          <div class="kinetic-title-wrap">
+            <span class="kinetic-title-line wireframe" data-parallax="0.08">Suspended Between</span>
+            <span class="kinetic-title-line" data-parallax="0.04">Earth &amp; Sky</span>
+            <span class="kinetic-title-line serif-accent" data-parallax="0.02">the panoramic atrium.</span>
+          </div>
+          <p class="architectural-narrative">
+            18-foot frameless acoustic glass curtain walls cantilevered over the dusk metropolis. Monolithic Roman travertine floors with low-slung Italian linen sectional seating and fluted bronze linear fireplace.
+          </p>
+          <div class="borderless-spec-strip">
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Ceiling Span</span>
+              <span class="spec-node-val">18.4 <em>FT</em></span>
+            </div>
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Glass Horizon</span>
+              <span class="spec-node-val">360° <em>UNOBSTRUCTED</em></span>
+            </div>
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Material Core</span>
+              <span class="spec-node-val">Roman <em>TRAVERTINE</em></span>
+            </div>
+          </div>
+          <div class="action-lineup">
+            <a href="#residences-section" class="btn-gold-monolith" data-cursor="FLOORPLANS">Explore Floorplates ↓</a>
+            <button class="btn-ghost-minimal" data-trigger-acquisition data-cursor="VIP ACCESS">Request Private Prospectus</button>
+          </div>
+        </div>
+
+        <!-- Room 02: Culinary Atelier & Wine Gallery -->
+        <div class="room-headline-block" id="sceneRoom2">
+          <div class="architectural-meta-tag">Drone Flythrough · Culinary Gallery · Room 02</div>
+          <div class="kinetic-title-wrap">
+            <span class="kinetic-title-line wireframe" data-parallax="0.08">Obsidian Monolith</span>
+            <span class="kinetic-title-line" data-parallax="0.04">&amp; Backlit Gold</span>
+            <span class="kinetic-title-line serif-accent" data-parallax="0.02">the sommelier atelier.</span>
+          </div>
+          <p class="architectural-narrative">
+            A 16-foot seamless black quartzite waterfall island with liquid gold veining. Integrated induction hearth, brushed champagne brass cabinetry, and climate-controlled sommelier vault showcasing 650 vintage selections.
+          </p>
+          <div class="borderless-spec-strip">
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Island Span</span>
+              <span class="spec-node-val">16.0 <em>FT</em></span>
+            </div>
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Cellar Vault</span>
+              <span class="spec-node-val">650 <em>BOTTLES</em></span>
+            </div>
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Cabinetry Alloy</span>
+              <span class="spec-node-val">Champagne <em>BRASS</em></span>
+            </div>
+          </div>
+          <div class="action-lineup">
+            <a href="#residences-section" class="btn-gold-monolith" data-cursor="SPECS">Inspect Joinery Specs ↓</a>
+            <button class="btn-ghost-minimal" data-trigger-acquisition data-cursor="VIP ACCESS">Private Sommelier Walkthrough</button>
+          </div>
+        </div>
+
+        <!-- Room 03: Primary Suite & Sky Terrace -->
+        <div class="room-headline-block" id="sceneRoom3">
+          <div class="architectural-meta-tag">Drone Sweep · Horizon Sanctuary · Room 03</div>
+          <div class="kinetic-title-wrap">
+            <span class="kinetic-title-line wireframe" data-parallax="0.08">Cantilevered Horizon</span>
+            <span class="kinetic-title-line" data-parallax="0.04">In Warm Bouclé</span>
+            <span class="kinetic-title-line serif-accent" data-parallax="0.02">the primary suite.</span>
+          </div>
+          <p class="architectural-narrative">
+            Corner frameless pocket doors slide away into the walls, dissolving into a private cantilevered sky terrace. Minimalist raw bouclé platform bed, vertical fluted American walnut cove wall, and open outdoor linear fire table.
+          </p>
+          <div class="borderless-spec-strip">
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Private Terrace</span>
+              <span class="spec-node-val">1,200 <em>SQ FT</em></span>
+            </div>
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Millwork Joinery</span>
+              <span class="spec-node-val">Fluted <em>WALNUT</em></span>
+            </div>
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Hearth System</span>
+              <span class="spec-node-val">Outdoor <em>FIRE TABLE</em></span>
+            </div>
+          </div>
+          <div class="action-lineup">
+            <a href="#residences-section" class="btn-gold-monolith" data-cursor="VIEW SUITE">View Suite Layout ↓</a>
+            <button class="btn-ghost-minimal" data-trigger-acquisition data-cursor="VIP ACCESS">Inquire on Aurora Penthouse</button>
+          </div>
+        </div>
+
+        <!-- Room 04: Subterranean Basalt Thermal Spa -->
+        <div class="room-headline-block" id="sceneRoom4">
+          <div class="architectural-meta-tag">Drone Descent · Subterranean Well · Room 04</div>
+          <div class="kinetic-title-wrap">
+            <span class="kinetic-title-line wireframe" data-parallax="0.08">Volcanic Basalt</span>
+            <span class="kinetic-title-line" data-parallax="0.04">&amp; Rising Mist</span>
+            <span class="kinetic-title-line serif-accent" data-parallax="0.02">the thermal sanctuary.</span>
+          </div>
+          <p class="architectural-narrative">
+            Heated mineral infinity pool carved from solid charcoal volcanic basalt. Fluted warm limestone colonnade, ethereal thermal steam mist, charcoal slate stepping stones, and private Finnish cedar dry sauna.
+          </p>
+          <div class="borderless-spec-strip">
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Pool Basin</span>
+              <span class="spec-node-val">Solid <em>BASALT</em></span>
+            </div>
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Thermal Water</span>
+              <span class="spec-node-val">102°F <em>MINERAL</em></span>
+            </div>
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Acoustic Shield</span>
+              <span class="spec-node-val">42 <em>dB QUIET</em></span>
+            </div>
+          </div>
+          <div class="action-lineup">
+            <a href="#residences-section" class="btn-gold-monolith" data-cursor="RESERVE">Acquire Floorplate ↓</a>
+            <button class="btn-ghost-minimal" data-trigger-acquisition data-cursor="VIP ACCESS">Private Thermal Inspection</button>
+          </div>
+        </div>
+
+        <!-- Room 05: Cantilevered Skyline Horizon Terrace -->
+        <div class="room-headline-block" id="sceneRoom5">
+          <div class="architectural-meta-tag">Drone Ascent · 920 FT Horizon · Room 05</div>
+          <div class="kinetic-title-wrap">
+            <span class="kinetic-title-line wireframe" data-parallax="0.08">Infinite Threshold</span>
+            <span class="kinetic-title-line" data-parallax="0.04">Skyline &amp; Stars</span>
+            <span class="kinetic-title-line serif-accent" data-parallax="0.02">the cantilevered terrace.</span>
+          </div>
+          <p class="architectural-narrative">
+            Heated dark basalt flagstone extending 22 feet beyond the structural perimeter. Heated plunge pool, seamless glass parapet, and panoramic 360-degree vista of the illuminated city below.
+          </p>
+          <div class="borderless-spec-strip">
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Terrace Projection</span>
+              <span class="spec-node-val">22.0 <em>FT</em></span>
+            </div>
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Altitude</span>
+              <span class="spec-node-val">920 <em>FT</em></span>
+            </div>
+            <div class="borderless-spec-node">
+              <span class="spec-node-label">Horizon Vista</span>
+              <span class="spec-node-val">360° <em>PANORAMIC</em></span>
+            </div>
+          </div>
+          <div class="action-lineup">
+            <a href="#residences-section" class="btn-gold-monolith" data-cursor="RESERVE">Acquire Floorplate ↓</a>
+            <button class="btn-ghost-minimal" data-trigger-acquisition data-cursor="VIP ACCESS">Request Sunset Walkthrough</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Floating Right Telemetry Coordinates -->
+      <aside class="floating-telemetry-hud" aria-label="Drone Flight Coordinates">
+        <div class="hud-coord-item">
+          <div class="hud-coord-key">Flight Elevation</div>
+          <div class="hud-coord-value" id="hudAltitude">880 FT</div>
+        </div>
+        <div class="hud-coord-item">
+          <div class="hud-coord-key">Camera Waypoint</div>
+          <div class="hud-coord-value" id="hudWaypoint">ROOM 01</div>
+        </div>
+        <div class="hud-coord-item">
+          <div class="hud-coord-key">Orientation</div>
+          <div class="hud-coord-value" id="hudOrientation">310° NW</div>
+        </div>
+      </aside>
+
+      <!-- Bottom Pinned Flight Tracker Bar -->
+      <div class="bottom-spatial-bar">
+        <div class="drone-flight-tracker">
+          <span class="drone-pulse-indicator"></span>
+          <span id="flightTrackerLabel">Drone Telemetry · Grand Horizon Atrium</span>
+        </div>
+        <div class="scrub-track-rail">
+          <div class="scrub-track-fill" id="flightProgressFill"></div>
+        </div>
+        <div id="flightPercentLabel">00% FLIGHT</div>
+
+        <!-- Interactive Drone Controls: Auto-Fly & Ambient Soundscape -->
+        <div class="spatial-controls-cluster hud-interactive" style="display:flex;align-items:center;gap:0.8rem;">
+          <button class="flight-hud-pill-btn" id="autoFlyToggle" data-cursor="AUTO-FLY" style="padding:0.35rem 0.85rem;border:1px solid var(--line-gold);border-radius:20px;font-family:var(--font-mono);font-size:0.64rem;color:var(--accent);letter-spacing:0.14em;background:rgba(6,6,8,0.7);transition:all 0.3s;display:inline-flex;align-items:center;gap:0.4rem;">
+            <span class="play-icon">▶</span>
+            <span id="autoFlyLabel">AUTO-FLY</span>
+          </button>
+          <button class="flight-hud-pill-btn" id="soundscapeToggle" data-cursor="AMBIENCE" style="padding:0.35rem 0.85rem;border:1px solid var(--line);border-radius:20px;font-family:var(--font-mono);font-size:0.64rem;color:var(--ink-dim);letter-spacing:0.14em;background:rgba(6,6,8,0.7);transition:all 0.3s;display:inline-flex;align-items:center;gap:0.4rem;">
+            <span>♪</span>
+            <span id="soundscapeLabel">AMBIENCE: OFF</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 5. UNIQUE FLOORPLATE SELECTION SHELF (NO BENTO BOXES) ================= -->
+  <section class="residences-shelf-section" id="residences-section">
+    <div class="shelf-header-container">
+      <div>
+        <div class="architectural-meta-tag">The Floorplates · Exclusive Residences</div>
+        <h2>The Collection. <em>Select &amp; Inspect.</em></h2>
+      </div>
+      <p>
+        Scroll horizontally to inspect each bespoke penthouse floorplate. Tap any residence to expand full architectural blueprints and schedule private physical walkthrough.
+      </p>
+    </div>
+
+    <!-- Horizontal Floorplate Shelf Track -->
+    <div class="shelf-horizontal-wrap" id="shelfWrap">
+      <div class="shelf-horizontal-track" id="shelfTrack">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6. MONUMENTAL ARCHITECTURAL MANIFESTO ================= -->
+  <section class="manifesto-section" id="manifesto-section">
+    <div class="manifesto-split-grid">
+      <div class="manifesto-sticky-headline">
+        <div class="architectural-meta-tag">Architectural Manifesto</div>
+        <h3>The Monolith <em>Above The Clouds.</em></h3>
+      </div>
+      <div class="manifesto-body">
+        <p>
+          <span data-brand-name>SOLARIUM</span> represents a radical rejection of generic glass towers. Designed as a suspended monolithic pavilion on Mount Royal Ridge, every square foot is anchored by solid Roman travertine, hand-selected obsidian quartzite, and acoustic glass that eliminates metropolitan noise down to ambient forest stillness.
+        </p>
+        <p>
+          With only 4 bespoke private residences across the top 12 levels, each residence commands an uninterrupted 360-degree horizon with private dual high-speed elevators, temperature-controlled subterranean 4-car vaults, and direct access to the subterranean volcanic basalt thermal baths.
+        </p>
+      </div>
+    </div>
+
+    <!-- Colonnade Directory -->
+    <div class="architectural-directory">
+      <div class="directory-branch">
+        <h5>Sales Pavilion &amp; Gallery</h5>
+        <p>SOLARIUM Private Atelier<br>1200 Avenue des Canadiens<br>Montreal, QC H3B 0G7</p>
+      </div>
+      <div class="directory-branch">
+        <h5>Direct Concierge Dispatch</h5>
+        <a href="tel:+16134009691" class="num">(613) 400-9691</a>
+        <a href="mailto:9lmntstudio@gmail.com">9lmntstudio@gmail.com</a>
+        <a href="https://wa.me/16134009691?text=SOLARIUM:%20Inquire%20on%20Penthouse%20Acquisition" target="_blank" rel="noopener">WhatsApp Private Bridge</a>
+      </div>
+      <div class="directory-branch">
+        <h5>Acquisition &amp; Escrow Rail</h5>
+        <p>Desjardins Escrow Autodeposit Enabled.<br>Initial reservation deposit: $10,000 CAD.<br>Full closing prospectus issued upon deposit.</p>
+      </div>
+    </div>
+
+    <footer class="site-colophon">
+      <span>© <span id="currentYear"></span> <span data-brand-name>SOLARIUM</span> Residences. All Architectural Rights Reserved.</span>
+      <span>Interac e-Transfer autodeposit enabled · 9lmntstudio@gmail.com</span>
+    </footer>
+  </section>
+
+</main>
+
+<!-- ================= 7. SLIDE-IN RESIDENCE DETAIL MODAL (BORDERLESS) ================= -->
+<div class="modal-backdrop-scrim" id="modalScrim"></div>
+<aside class="residence-slide-modal" id="residenceModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div>
+    <button class="modal-close-trigger" id="modalClose">Close ✕</button>
+    <div class="modal-media-view">
+      <img id="modalImg" src="/assets/work/solarium/room_01_atrium_start.jpg" alt="">
+    </div>
+    <div class="modal-residence-tag" id="modalTag">PENTHOUSE RESIDENCE · 01</div>
+    <h3 class="modal-residence-title" id="modalTitle">The Aurora Penthouse</h3>
+    <div class="modal-residence-price num" id="modalPrice">$18,200,000 CAD</div>
+
+    <div class="modal-specs-table">
+      <div class="modal-spec-row">
+        <span>Interior Area</span>
+        <span id="modalInterior">8,450 SQ FT</span>
+      </div>
+      <div class="modal-spec-row">
+        <span>Terrace Area</span>
+        <span id="modalTerrace">3,200 SQ FT Cantilevered</span>
+      </div>
+      <div class="modal-spec-row">
+        <span>Ceiling Clear</span>
+        <span id="modalCeilings">18.4 FT Double-Height</span>
+      </div>
+      <div class="modal-spec-row">
+        <span>Parking Vault</span>
+        <span id="modalParking">4 Private Subterranean Bays</span>
+      </div>
+      <div class="modal-spec-row">
+        <span>Private Thermal Spa</span>
+        <span id="modalSpa">Dedicated Basalt Mineral Pool</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-lineup" style="flex-direction:column; width:100%;">
+    <button class="btn-gold-monolith" id="modalReserveBtn" style="width:100%; justify-content:center;">Place Reservation Deposit ($10K) ➔</button>
+    <button class="btn-ghost-minimal" id="modalSmsInquiry" style="text-align:center; padding:0.6rem 0;">Direct SMS to Principal Architect</button>
+  </div>
+</aside>
+
+<!-- ================= 8. SLIDE-UP PRIVATE ACQUISITION DRAWER ================= -->
+<div class="drawer-scrim-veil" id="drawerScrim"></div>
+<div id="modalAcquisitionDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerHeading">
+  <div class="drawer-drag-line"></div>
+  <div class="drawer-top-strip">
+    <h3 id="drawerHeading">Private Penthouse <em>Acquisition</em></h3>
+    <button class="modal-close-trigger" id="drawerClose">Close</button>
+  </div>
+
+  <div style="margin-bottom:1.5rem;">
+    <span style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:0.8rem;">Selected Floorplate</span>
+    <div style="font-family:var(--font-monumental); font-size:1.8rem; font-weight:800; text-transform:uppercase;" id="drawerSelectedResidence">The Aurora Penthouse</div>
+    <div style="font-family:var(--font-serif); font-size:1.6rem; font-style:italic; color:var(--accent);" id="drawerSelectedPrice">$18,200,000 CAD</div>
+  </div>
+
+  <div style="border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:1.2rem 0; margin-bottom:1.5rem; font-size:0.92rem; color:var(--ink-dim); line-height:1.6;">
+    An initial refundable escrow reservation deposit of <b style="color:#FFF;">$10,000 CAD</b> locks in your 14-day exclusive due diligence and architectural preview period. Funds held securely in legal escrow with Desjardins autodeposit.
+  </div>
+
+  <div class="acquisition-actions-grid">
+    <button class="btn-gold-monolith" id="btnDepositInterac" style="justify-content:center;">Lock via Interac e-Transfer</button>
+    <a class="btn-ghost-minimal" id="btnSmsDispatch" href="#" style="text-align:center; padding:1.1rem 0;">Confirm via VIP Direct SMS ➔</a>
+  </div>
+
+  <div class="interac-deposit-box" id="interacBox">
+    Send <b>$10,000.00 CAD</b> to <b>9lmntstudio@gmail.com</b> (Autodeposit enabled). In the transfer memo, write your legal name and selected residence. Our lead development partner will confirm your escrow receipt within 30 minutes.
+  </div>
+</div>
+
+<!-- Shift + B Developer Switcher -->
+<div class="architect-switcher" id="architectSwitcher">
+  <h6>⚡ Developer Brand Switcher</h6>
+  <label for="brandInput" style="font-family:var(--font-mono); font-size:0.65rem; text-transform:uppercase; color:var(--ink-faint); display:block; margin-bottom:0.3rem;">Project Name</label>
+  <input type="text" id="brandInput" placeholder="SOLARIUM">
+  <label for="subInput" style="font-family:var(--font-mono); font-size:0.65rem; text-transform:uppercase; color:var(--ink-faint); display:block; margin-bottom:0.3rem;">Subtitle / Location</label>
+  <input type="text" id="subInput" placeholder="Mount Royal Ridge × Skyline Horizon">
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
+  /* ================= 1. PENTHOUSE RESIDENCES COLLECTION ================= */
+  const RESIDENCES = [
+    {
+      id: "aurora",
+      name: "The Aurora Penthouse",
+      tag: "TOP FLOOR TRIPLEX · LEVEL 78–80",
+      price: "$18,200,000 CAD",
+      rawPrice: 18200000,
+      interior: "8,450 SQ FT",
+      terrace: "3,200 SQ FT Cantilevered",
+      ceilings: "18.4 FT Double-Height",
+      parking: "4 Private Subterranean Bays",
+      spa: "Private Basalt Mineral Bath & Steam",
+      img: "/assets/work/solarium/room_01_atrium_start.jpg",
+      fallbackImg: "/assets/work/solarium/room_01_atrium_start.jpg"
+    },
+    {
+      id: "horizon",
+      name: "The Horizon Sky Villa",
+      tag: "DUPLEX SANCTUARY · LEVEL 76–77",
+      price: "$14,500,000 CAD",
+      rawPrice: 14500000,
+      interior: "6,200 SQ FT",
+      terrace: "2,100 SQ FT Sunset Deck",
+      ceilings: "14.2 FT Frameless Glass",
+      parking: "3 Private Subterranean Bays",
+      spa: "Private Cold Plunge & Cedar Sauna",
+      img: "/assets/work/solarium/room_02_atelier_start.jpg",
+      fallbackImg: "/assets/work/solarium/room_02_atelier_start.jpg"
+    },
+    {
+      id: "obsidian",
+      name: "The Obsidian Atelier Loft",
+      tag: "PANORAMIC FLAT · LEVEL 74–75",
+      price: "$9,800,000 CAD",
+      rawPrice: 9800000,
+      interior: "4,800 SQ FT",
+      terrace: "1,400 SQ FT Wraparound",
+      ceilings: "12.6 FT Exposed Slab",
+      parking: "2 Private Subterranean Bays",
+      spa: "Access to Residents' Thermal Spa",
+      img: "/assets/work/solarium/room_03_suite_start.jpg",
+      fallbackImg: "/assets/work/solarium/room_03_suite_start.jpg"
+    },
+    {
+      id: "sanctuaire",
+      name: "The Garden Sanctum",
+      tag: "CANTILEVERED TERRACE · LEVEL 72–73",
+      price: "$7,400,000 CAD",
+      rawPrice: 7400000,
+      interior: "3,900 SQ FT",
+      terrace: "1,100 SQ FT Alpine Garden",
+      ceilings: "12.0 FT Acoustic Wood",
+      parking: "2 Private Subterranean Bays",
+      spa: "Access to Residents' Thermal Spa",
+      img: "/assets/work/solarium/room_04_spa_start.jpg",
+      fallbackImg: "/assets/work/solarium/room_04_spa_start.jpg"
+    }
+  ];
+
+  let selectedResidenceIdx = 0;
+
+  // Render Horizontal Floorplate Shelf
+  const shelfTrack = document.getElementById("shelfTrack");
+  RESIDENCES.forEach((r, idx) => {
+    const node = document.createElement("div");
+    node.className = `residence-node ${idx === 0 ? "selected" : ""}`;
+    node.dataset.idx = idx;
+    node.innerHTML = `
+      <div class="residence-image-stage">
+        <div class="residence-spotlight-halo"></div>
+        <img class="residence-img" src="${r.img}" alt="${r.name}" onerror="this.onerror=null; this.src='${r.fallbackImg}'">
+      </div>
+      <span class="residence-num">0${idx + 1} / 04</span>
+      <h3 class="residence-title">${r.name}</h3>
+      <span class="residence-price num">${r.price}</span>
+      <button class="residence-inspect-btn" data-cursor="INSPECT">Inspect Floorplate ➔</button>
+    `;
+
+    node.addEventListener("click", () => {
+      selectResidence(idx);
+      openResidenceModal(r);
+    });
+
+    shelfTrack.appendChild(node);
+  });
+
+  function selectResidence(idx) {
+    selectedResidenceIdx = idx;
+    document.querySelectorAll(".residence-node").forEach((n, i) => {
+      n.classList.toggle("selected", i === idx);
+    });
+    syncDrawer();
+  }
+
+  /* ================= 2. FLUID MAGNETIC CURSOR & TORCHLIGHT ================= */
+  const cursorDot = document.getElementById("cursorDot");
+  const cursorRing = document.getElementById("cursorRing");
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+  let tiltX = 0;
+  let tiltY = 0;
+
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    document.documentElement.style.setProperty("--mx", mouseX + "px");
+    document.documentElement.style.setProperty("--my", mouseY + "px");
+
+    cursorDot.style.left = mouseX + "px";
+    cursorDot.style.top = mouseY + "px";
+
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    tiltX = ((mouseX - cx) / cx) * 2.5; // max ±2.5deg
+    tiltY = -((mouseY - cy) / cy) * 2.5;
+  }, { passive: true });
+
+  function renderCursor() {
+    ringX += (mouseX - ringX) * 0.18;
+    ringY += (mouseY - ringY) * 0.18;
+    cursorRing.style.left = ringX + "px";
+    cursorRing.style.top = ringY + "px";
+    requestAnimationFrame(renderCursor);
+  }
+  requestAnimationFrame(renderCursor);
+
+  document.querySelectorAll("[data-cursor]").forEach(el => {
+    el.addEventListener("mouseenter", () => {
+      cursorRing.classList.add("hovering");
+      cursorRing.setAttribute("data-cursor-label", el.getAttribute("data-cursor") || "VIEW");
+    });
+    el.addEventListener("mouseleave", () => {
+      cursorRing.classList.remove("hovering");
+    });
+  });
+
+  /* ================= 3. MULTI-ROOM DRONE PRESENTATION & KINETIC SCROLLER ================= */
+  const droneTrack = document.getElementById("droneTrack");
+  const droneCameraRig = document.getElementById("droneCameraRig");
+  const topNav = document.getElementById("topNav");
+  const flightProgressFill = document.getElementById("flightProgressFill");
+  const flightPercentLabel = document.getElementById("flightPercentLabel");
+  const flightTrackerLabel = document.getElementById("flightTrackerLabel");
+
+  const hudAltitude = document.getElementById("hudAltitude");
+  const hudWaypoint = document.getElementById("hudWaypoint");
+  const hudOrientation = document.getElementById("hudOrientation");
+
+  const roomLayers = [
+    document.getElementById("roomLayer1"),
+    document.getElementById("roomLayer2"),
+    document.getElementById("roomLayer3"),
+    document.getElementById("roomLayer4"),
+    document.getElementById("roomLayer5")
+  ];
+  const roomVideos = [
+    document.getElementById("videoRoom1"),
+    document.getElementById("videoRoom2"),
+    document.getElementById("videoRoom3"),
+    document.getElementById("videoRoom4"),
+    document.getElementById("videoRoom5")
+  ];
+  const headlineBlocks = [
+    document.getElementById("sceneRoom1"),
+    document.getElementById("sceneRoom2"),
+    document.getElementById("sceneRoom3"),
+    document.getElementById("sceneRoom4"),
+    document.getElementById("sceneRoom5")
+  ];
+  const roomNavButtons = document.querySelectorAll(".room-nav-btn");
+
+  const ROOM_METAS = [
+    { name: "Grand Horizon Atrium", altitude: "880 FT", waypoint: "ROOM 01", orientation: "310° NW" },
+    { name: "Culinary Atelier & Sommelier Vault", altitude: "870 FT", waypoint: "ROOM 02", orientation: "180° S" },
+    { name: "Primary Suite & Sky Terrace", altitude: "895 FT", waypoint: "ROOM 03", orientation: "270° W" },
+    { name: "Subterranean Basalt Thermal Spa", altitude: "820 FT", waypoint: "ROOM 04", orientation: "000° N" },
+    { name: "Cantilevered Skyline Horizon Terrace", altitude: "920 FT", waypoint: "ROOM 05", orientation: "045° NE" }
+  ];
+
+  let targetProgress = 0;
+  let smoothProgress = 0;
+  let currentActiveRoom = 0;
+  let isAutoFlying = false;
+  let autoFlyInterval = null;
+
+  function calculateScroll() {
+    const scrollY = window.scrollY;
+    const vh = window.innerHeight;
+    topNav.classList.toggle("scrolled", scrollY > 60);
+
+    const trackTop = droneTrack.offsetTop;
+    const trackHeight = droneTrack.offsetHeight - vh;
+    targetProgress = Math.min(1, Math.max(0, (scrollY - trackTop) / Math.max(1, trackHeight)));
+  }
+
+  function scrubRoomVideo(video, time) {
+    if (!video || !video.duration) return;
+    if (Math.abs(video.currentTime - time) > 0.04) {
+      video.currentTime = Math.min(video.duration - 0.05, Math.max(0, time));
+    }
+  }
+
+  function renderDroneFlight() {
+    calculateScroll();
+    smoothProgress += (targetProgress - smoothProgress) * 0.14;
+    const p = smoothProgress;
+
+    flightProgressFill.style.width = (p * 100).toFixed(1) + "%";
+    flightPercentLabel.textContent = Math.round(p * 100).toString().padStart(2, "0") + "% FLIGHT";
+
+    // 5 Rooms spread across 0.0 to 1.0 (0.20 each)
+    const step = 0.20;
+    const roomIdx = Math.min(4, Math.max(0, Math.floor(p / step)));
+    const subProgress = Math.min(1, Math.max(0, (p - (roomIdx * step)) / step));
+
+    if (roomIdx !== currentActiveRoom) {
+      currentActiveRoom = roomIdx;
+      roomLayers.forEach((layer, i) => {
+        if (layer) layer.classList.toggle("active", i === roomIdx);
+      });
+      headlineBlocks.forEach((block, i) => {
+        if (block) block.classList.toggle("active", i === roomIdx);
+      });
+      roomNavButtons.forEach((btn, i) => {
+        if (btn) btn.classList.toggle("active", i === roomIdx);
+      });
+
+      const meta = ROOM_METAS[roomIdx];
+      if (meta) {
+        flightTrackerLabel.textContent = `Drone Telemetry · ${meta.name}`;
+        hudAltitude.textContent = meta.altitude;
+        hudWaypoint.textContent = meta.waypoint;
+        hudOrientation.textContent = meta.orientation;
+      }
+
+      // Ensure active video is playing/ready
+      const newVideo = roomVideos[roomIdx];
+      if (newVideo) {
+        newVideo.play().catch(() => {});
+      }
+    }
+
+    // Scrub video playhead for the active room based on scroll subProgress
+    const activeVideo = roomVideos[roomIdx];
+    if (activeVideo && activeVideo.duration) {
+      scrubRoomVideo(activeVideo, subProgress * activeVideo.duration);
+    }
+
+    // Text is secondary to video: dissolves out rapidly as we scroll deeper into room
+    const activeBlock = headlineBlocks[roomIdx];
+    if (activeBlock) {
+      let textOpacity = 1;
+      if (subProgress < 0.12) {
+        textOpacity = 1;
+      } else if (subProgress >= 0.12 && subProgress < 0.50) {
+        // Fast architectural dissolve into pure video
+        textOpacity = Math.max(0, 1 - ((subProgress - 0.12) / 0.28));
+      } else {
+        textOpacity = 0;
+      }
+      activeBlock.style.opacity = textOpacity.toFixed(3);
+      activeBlock.style.transform = `translateY(${((1 - textOpacity) * 22).toFixed(1)}px)`;
+
+      activeBlock.querySelectorAll("[data-parallax]").forEach(el => {
+        const factor = parseFloat(el.getAttribute("data-parallax") || "0.05");
+        const offset = (subProgress - 0.5) * 50 * factor;
+        el.style.transform = `translateX(${offset.toFixed(1)}px)`;
+      });
+    }
+
+    // 3D Camera Rig subtle drone sway & mouse tilt
+    const droneScale = 1.0 + (subProgress * 0.05);
+    const cameraZ = subProgress * 40;
+    droneCameraRig.style.transform = `
+      scale(${droneScale.toFixed(3)})
+      translate3d(${(tiltX * 5).toFixed(1)}px, ${(tiltY * 5).toFixed(1)}px, ${cameraZ.toFixed(1)}px)
+      rotateX(${tiltY.toFixed(2)}deg)
+      rotateY(${tiltX.toFixed(2)}deg)
+    `;
+
+    requestAnimationFrame(renderDroneFlight);
+  }
+
+  window.addEventListener("scroll", () => {
+    calculateScroll();
+    renderDroneFlight();
+  }, { passive: true });
+  window.addEventListener("resize", () => {
+    calculateScroll();
+    renderDroneFlight();
+  }, { passive: true });
+  calculateScroll();
+  requestAnimationFrame(renderDroneFlight);
+
+  // Room Quick-Selector Click Handlers
+  roomNavButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = parseInt(btn.getAttribute("data-room-idx"), 10);
+      const vh = window.innerHeight;
+      const trackTop = droneTrack.offsetTop;
+      const trackHeight = droneTrack.offsetHeight - vh;
+      const targetProg = (idx * 0.20) + 0.08;
+      const targetY = trackTop + (targetProg * trackHeight);
+      smoothProgress = targetProg;
+      window.scrollTo({ top: targetY, behavior: "smooth" });
+      renderDroneFlight();
+    });
+  });
+
+  // Auto-Fly Mode Toggle
+  const autoFlyToggle = document.getElementById("autoFlyToggle");
+  const autoFlyLabel = document.getElementById("autoFlyLabel");
+  if (autoFlyToggle) {
+    autoFlyToggle.addEventListener("click", () => {
+      isAutoFlying = !isAutoFlying;
+      if (isAutoFlying) {
+        autoFlyLabel.textContent = "FLYING (PAUSE)";
+        autoFlyToggle.style.background = "var(--accent)";
+        autoFlyToggle.style.color = "#060608";
+        autoFlyInterval = setInterval(() => {
+          const trackTop = droneTrack.offsetTop;
+          const trackHeight = droneTrack.offsetHeight - window.innerHeight;
+          if (window.scrollY >= trackTop + trackHeight) {
+            window.scrollTo({ top: trackTop, behavior: "instant" });
+          } else {
+            window.scrollBy({ top: 4, behavior: "auto" });
+          }
+        }, 16);
+      } else {
+        autoFlyLabel.textContent = "AUTO-FLY";
+        autoFlyToggle.style.background = "rgba(6, 6, 8, 0.7)";
+        autoFlyToggle.style.color = "var(--accent)";
+        clearInterval(autoFlyInterval);
+      }
+    });
+  }
+
+  // Web Audio Synthesized Spatial Ambience
+  let audioCtx = null;
+  let isSoundActive = false;
+  let droneGain = null;
+  const soundscapeToggle = document.getElementById("soundscapeToggle");
+  const soundscapeLabel = document.getElementById("soundscapeLabel");
+
+  if (soundscapeToggle) {
+    soundscapeToggle.addEventListener("click", () => {
+      if (!audioCtx) {
+        try {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          
+          // Soft pink noise buffer for ambient architectural air/wind
+          const bufferSize = audioCtx.sampleRate * 2;
+          const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          let b0 = 0, b1 = 0, b2 = 0;
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            b0 = 0.99886 * b0 + white * 0.0555179;
+            b1 = 0.99332 * b1 + white * 0.0750759;
+            b2 = 0.96900 * b2 + white * 0.1538520;
+            output[i] = (b0 + b1 + b2) * 0.04;
+          }
+          const whiteNoise = audioCtx.createBufferSource();
+          whiteNoise.buffer = noiseBuffer;
+          whiteNoise.loop = true;
+
+          // Warm low-pass filter
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = "lowpass";
+          filter.frequency.setValueAtTime(260, audioCtx.currentTime);
+
+          // Deep sub-harmonic 55Hz foundation
+          const osc = audioCtx.createOscillator();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(55, audioCtx.currentTime);
+
+          droneGain = audioCtx.createGain();
+          droneGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+
+          whiteNoise.connect(filter);
+          filter.connect(droneGain);
+          osc.connect(droneGain);
+          droneGain.connect(audioCtx.destination);
+
+          whiteNoise.start(0);
+          osc.start(0);
+        } catch (e) {
+          console.warn("AudioContext init error:", e);
+        }
+      }
+
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+
+      isSoundActive = !isSoundActive;
+      if (isSoundActive) {
+        soundscapeLabel.textContent = "AMBIENCE: ON";
+        soundscapeToggle.style.color = "var(--accent)";
+        soundscapeToggle.style.borderColor = "var(--accent)";
+        if (droneGain) droneGain.gain.setTargetAtTime(0.12, audioCtx.currentTime, 0.5);
+      } else {
+        soundscapeLabel.textContent = "AMBIENCE: OFF";
+        soundscapeToggle.style.color = "var(--ink-dim)";
+        soundscapeToggle.style.borderColor = "var(--line)";
+        if (droneGain) droneGain.gain.setTargetAtTime(0.001, audioCtx.currentTime, 0.3);
+      }
+    });
+  }
+
+  /* ================= 4. SLIDE-IN DETAIL MODAL ================= */
+  const modalScrim = document.getElementById("modalScrim");
+  const residenceModal = document.getElementById("residenceModal");
+  const modalClose = document.getElementById("modalClose");
+  const modalImg = document.getElementById("modalImg");
+  const modalTag = document.getElementById("modalTag");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalPrice = document.getElementById("modalPrice");
+  const modalInterior = document.getElementById("modalInterior");
+  const modalTerrace = document.getElementById("modalTerrace");
+  const modalCeilings = document.getElementById("modalCeilings");
+  const modalParking = document.getElementById("modalParking");
+  const modalSpa = document.getElementById("modalSpa");
+  const modalReserveBtn = document.getElementById("modalReserveBtn");
+  const modalSmsInquiry = document.getElementById("modalSmsInquiry");
+
+  function openResidenceModal(r) {
+    modalImg.src = r.img;
+    modalTag.textContent = r.tag;
+    modalTitle.textContent = r.name;
+    modalPrice.textContent = r.price;
+    modalInterior.textContent = r.interior;
+    modalTerrace.textContent = r.terrace;
+    modalCeilings.textContent = r.ceilings;
+    modalParking.textContent = r.parking;
+    modalSpa.textContent = r.spa;
+
+    modalScrim.classList.add("open");
+    residenceModal.classList.add("open");
+  }
+
+  function closeResidenceModal() {
+    modalScrim.classList.remove("open");
+    residenceModal.classList.remove("open");
+  }
+
+  modalClose.addEventListener("click", closeResidenceModal);
+  modalScrim.addEventListener("click", closeResidenceModal);
+
+  modalReserveBtn.addEventListener("click", () => {
+    closeResidenceModal();
+    openAcquisitionDrawer();
+  });
+  modalSmsInquiry.addEventListener("click", () => {
+    closeResidenceModal();
+    const r = RESIDENCES[selectedResidenceIdx];
+    window.location.href = `sms:+16134009691?&body=${encodeURIComponent("SOLARIUM Inquiry: I would like a private consultation for " + r.name + " (" + r.price + ").")}`;
+  });
+
+  /* ================= 5. ACQUISITION DRAWER ================= */
+  const drawer = document.getElementById("modalAcquisitionDrawer");
+  const drawerScrim = document.getElementById("drawerScrim");
+  const drawerClose = document.getElementById("drawerClose");
+  const drawerSelectedResidence = document.getElementById("drawerSelectedResidence");
+  const drawerSelectedPrice = document.getElementById("drawerSelectedPrice");
+  const btnDepositInterac = document.getElementById("btnDepositInterac");
+  const btnSmsDispatch = document.getElementById("btnSmsDispatch");
+  const interacBox = document.getElementById("interacBox");
+
+  function syncDrawer() {
+    const r = RESIDENCES[selectedResidenceIdx];
+    drawerSelectedResidence.textContent = r.name;
+    drawerSelectedPrice.textContent = r.price;
+
+    const brandTitle = document.querySelector("[data-brand-title]")?.textContent || "SOLARIUM";
+    const bodyText = `Hi ${brandTitle}! I wish to register private interest in ${r.name} (${r.price}). Please initiate the initial escrow protocol.`;
+    btnSmsDispatch.href = `sms:+16134009691?&body=${encodeURIComponent(bodyText)}`;
+  }
+
+  btnDepositInterac.addEventListener("click", () => {
+    interacBox.classList.add("active");
+    navigator.clipboard?.writeText("9lmntstudio@gmail.com").catch(() => {});
+  });
+
+  function openAcquisitionDrawer(e) {
+    if (e) e.preventDefault();
+    syncDrawer();
+    drawer.classList.add("open");
+    drawerScrim.classList.add("open");
+  }
+
+  function closeAcquisitionDrawer() {
+    drawer.classList.remove("open");
+    drawerScrim.classList.remove("open");
+    interacBox.classList.remove("active");
+  }
+
+  document.querySelectorAll("[data-trigger-acquisition]").forEach(b => b.addEventListener("click", openAcquisitionDrawer));
+  drawerScrim.addEventListener("click", closeAcquisitionDrawer);
+  drawerClose.addEventListener("click", closeAcquisitionDrawer);
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeResidenceModal();
+      closeAcquisitionDrawer();
+    }
+  });
+
+  syncDrawer();
+
+  /* ================= 6. DEVELOPER BRAND SWITCHER (SHIFT + B) ================= */
+  const architectSwitcher = document.getElementById("architectSwitcher");
+  const brandInput = document.getElementById("brandInput");
+  const subInput = document.getElementById("subInput");
+
+  function applyBrandCustomization(title, sub) {
+    if (title) {
+      document.querySelectorAll("[data-brand-title]").forEach(el => el.innerHTML = `${title}<em>Sanctuaire</em>`);
+      document.querySelectorAll("[data-brand-name]").forEach(el => el.textContent = title);
+      document.title = `${title} / Le Sanctuaire — Suspended Penthouse Architecture`;
+    }
+    if (sub) {
+      document.querySelectorAll("[data-brand-sub]").forEach(el => el.textContent = sub);
+    }
+  }
+
+  window.addEventListener("keydown", (e) => {
+    if (e.shiftKey && e.key.toLowerCase() === "b" && !/input|textarea/i.test(e.target.tagName)) {
+      architectSwitcher.classList.toggle("open");
+    }
+  });
+
+  brandInput?.addEventListener("input", () => applyBrandCustomization(brandInput.value || null, subInput.value || null));
+  subInput?.addEventListener("input", () => applyBrandCustomization(brandInput.value || null, subInput.value || null));
+
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+})();
+</script>
+</body>
+</html>
