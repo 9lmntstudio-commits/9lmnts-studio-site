@@ -3,6 +3,7 @@ export const SITE = {
   name: '9LMNTS Studio',
   url: 'https://9lmntsstudio.com',
   email: '9lmntstudio@gmail.com',
+  phone: '(613) 400-9691',
   instagram: 'https://instagram.com/9lmntsstudio',
   city: 'Ottawa, Ontario, Canada',
   founder: 'Darnley Sanon',
@@ -156,7 +157,7 @@ ${body}
         <li><a href="/embeds/">Intake Embeds</a></li><li><a href="/os/">9LMNTS Studio OS</a></li><li><a href="/about/">About &amp; Manifesto</a></li><li><a href="/faq/">FAQ</a></li></ul></div>
       <div><h4>Clients</h4><ul>
         <li><a href="/audit/">Free 60s Video Audit</a></li><li><a href="/contact/">Book a Call</a></li><li><a href="/start/">Client Onboarding</a></li>
-        <li><a href="mailto:${SITE.email}">${SITE.email}</a></li><li><a href="${SITE.instagram}" rel="noopener" target="_blank">Instagram (@9lmntsstudio)</a></li></ul></div>
+        <li><a href="tel:+16134009691">${SITE.phone}</a></li><li><a href="mailto:${SITE.email}">${SITE.email}</a></li><li><a href="${SITE.instagram}" rel="noopener" target="_blank">Instagram (@9lmntsstudio)</a></li></ul></div>
       <div><h4>Legal &amp; Trust</h4><ul>
         <li><a href="/legal/terms/">Terms of Service</a></li><li><a href="/legal/privacy/">Privacy Policy</a></li>
         <li><a href="/legal/payment-terms/">Payment &amp; Refund Terms</a></li><li><a href="/legal/cookies/">Cookie Notice</a></li>

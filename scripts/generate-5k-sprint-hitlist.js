@@ -12,7 +12,7 @@ import path from 'node:path';
 const DOMAIN = 'https://9lmntsstudio.com';
 const INTERAC_EMAIL = '9lmntstudio@gmail.com'; // Desjardins Autodeposit
 const PAYMENTS_EMAIL = '9lmntstudio@gmail.com';
-const FOUNDER_PHONE = '613-909-4038';
+const FOUNDER_PHONE = '613-400-9691';
 
 // Top High-Probability Hitlist (Ottawa-Gatineau)
 const PROSPECTS = [

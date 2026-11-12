@@ -1905,7 +1905,7 @@ const osHtml = layout({
 
         <!-- International Stripe Alternative & WhatsApp Dispatch -->
         <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
-          <a id="triageWaLink" class="btn btn-primary" href="https://wa.me/16139094038?text=Hi%20Darnley,%20ready%20to%20deploy%20my%20OS%20system" target="_blank" rel="noopener">
+          <a id="triageWaLink" class="btn btn-primary" href="https://wa.me/16134009691?text=Hi%20Darnley,%20ready%20to%20deploy%20my%20OS%20system" target="_blank" rel="noopener">
             Dispatch to Founder (WhatsApp / SMS) <span class="arrow">↗</span>
           </a>
           <a class="btn btn-ghost" href="/contact/">
@@ -2520,11 +2520,11 @@ const contactHtml = layout({
             <span class="kicker" style="margin:0">Direct Dispatch</span>
             <span class="badge green">● Instant Call / Text</span>
           </div>
-          <h4 style="margin:4px 0 10px">(613) 909-4038</h4>
+          <h4 style="margin:4px 0 10px">(613) 400-9691</h4>
           <p style="font-size:14px;margin-bottom:14px">Direct studio line for urgent questions, 15-minute diagnostic bookings, or Ottawa emergency trades dispatches.</p>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn btn-primary" href="tel:+16139094038" style="padding:8px 16px;font-size:13px">Call / Text Direct <span class="arrow">↗</span></a>
-            <a class="btn btn-ghost" href="https://wa.me/16139094038?text=Hi%20Darnley,%20I'm%20interested%20in%20a%20website%20build%20with%209LMNTS%20Studio." target="_blank" rel="noopener" style="padding:8px 16px;font-size:13px">WhatsApp <span class="arrow">↗</span></a>
+            <a class="btn btn-primary" href="tel:+16134009691" style="padding:8px 16px;font-size:13px">Call / Text Direct <span class="arrow">↗</span></a>
+            <a class="btn btn-ghost" href="https://wa.me/16134009691?text=Hi%20Darnley,%20I'm%20interested%20in%20a%20website%20build%20with%209LMNTS%20Studio." target="_blank" rel="noopener" style="padding:8px 16px;font-size:13px">WhatsApp <span class="arrow">↗</span></a>
           </div>
         </div>
 

@@ -196,7 +196,7 @@
       }
       if (waLink) {
         const text = encodeURIComponent(`Hi Darnley, I just ran the 60s Mobile Friction Audit for ${url}. Qualified for ${pkg.title} (${pkg.price}). Direct contact: ${contact}. Ready to send deposit.`);
-        waLink.href = `https://wa.me/16139094038?text=${text}`;
+        waLink.href = `https://wa.me/16134009691?text=${text}`;
       }
 
       triageResult.style.display = 'block';

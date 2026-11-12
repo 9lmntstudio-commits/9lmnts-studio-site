@@ -213,7 +213,7 @@ const osHtml = layout({
 
         <!-- International PayPal Alternative & WhatsApp Dispatch -->
         <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
-          <a id="triageWaLink" class="btn btn-primary" href="https://wa.me/16139094038?text=Hi%20Darnley,%20ready%20to%20deploy%20my%20OS%20system" target="_blank" rel="noopener">
+          <a id="triageWaLink" class="btn btn-primary" href="https://wa.me/16134009691?text=Hi%20Darnley,%20ready%20to%20deploy%20my%20OS%20system" target="_blank" rel="noopener">
             Dispatch to Founder (WhatsApp / SMS) <span class="arrow">↗</span>
           </a>
           <a class="btn btn-ghost" href="/contact/">

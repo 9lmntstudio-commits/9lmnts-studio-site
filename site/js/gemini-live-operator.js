@@ -52,8 +52,8 @@
       response: "The Sanon Reception is our flagship Wedding OS showcase. It replaces paper programs with live ballroom table finding, instant Apple Pay honeymoon fund gifting, and real-time Best Man vs Maid of Honor speech voting."
     },
     {
-      keywords: ['contact', 'book', 'call', 'talk', 'hire', 'start'],
-      response: "You can book a direct 15-minute diagnostic call with founder Darnley Sanon right from our contact page, or click Claim A System. You'll leave the call with a complete architectural roadmap and a fixed price."
+      keywords: ['contact', 'book', 'call', 'talk', 'hire', 'start', 'phone', 'number'],
+      response: "You can call or text founder Darnley Sanon directly at 613-400-9691, email 9lmntstudio@gmail.com, or book a 15-minute diagnostic call right from our contact page. You'll leave the call with a complete architectural roadmap and a fixed price."
     }
   ];
 
