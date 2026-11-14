@@ -1,17 +1,20 @@
 # 9LMNTS Studio (Nine Elements Studio)
-> Websites That Book Your Customers For You — Ottawa Digital Architecture, Event OS & Creator OS Suite.
+> Creative Cultural Agency & Live Cultural SaaS Platforms — Ottawa, Ontario, Canada
 
 ## Primary Live Platforms
-- Flagship Agency & Intake Hub: https://9lmntsstudio.com
-- SoundClash OS (Live 8-DJ Battle & Crowd Voting App): https://clash.9lmntsstudio.com
-- Artist OS (Live Performing Artist Command Center & WAV Stem Vault): https://artist.9lmntsstudio.com
+- Flagship Creative Agency & 2-Option Customer Gateway: https://9lmntsstudio.com
+- SoundClash OS (Published Live Competition & Event Arena App): https://clash.9lmntsstudio.com
+- Artist OS (Published Live Artist Flagship & Music Hub): https://artist.9lmntsstudio.com
 
-## Core Routes
-- Services & Fixed-Price Sprints: https://9lmntsstudio.com/services/
-- Phygital WebAR Service Suite (3D Menus $450, AR Business Cards $500, AR Merch $1,500, Interactive Ads $1,500): https://9lmntsstudio.com/services/#webar-suite
-- Production Work & Live Arenas: https://9lmntsstudio.com/work/
-- 72-Hour OS Intake & Friction Audit: https://9lmntsstudio.com/os/
-- Modular Drop-In Widgets: https://9lmntsstudio.com/embeds/
-- 3-Sprint Build Process: https://9lmntsstudio.com/process/
-- About Founder Darnley Sanon: https://9lmntsstudio.com/about/
-- Contact & Diagnostic Booking: https://9lmntsstudio.com/contact/
+## Core Agency Packages (CAD)
+- Spark Drop-In ($500 CAD · 48 Hours): Modular booking widget or landing upgrade
+- Flow Sprint ($1,500 CAD · 5–7 Days): Focused high-converting website & booking/payment readiness
+- Beat Sprint ($3,000 CAD · 1–2 Weeks · Most Popular): Up to 10 pages, custom brand design system & interactive flows
+- Cypher OS ($5,000 CAD · 2–3 Weeks): Full flagship experience, database workflows & custom AI concierge
+- Kickoff Terms: 1-Page Project Agreement + 50% deposit via Interac e-Transfer (9lmntstudio@gmail.com) or PayPal Invoice
+
+## Contact
+- Founder & Principal Creative Director: Darnley Sanon
+- Email: 9lmntstudio@gmail.com
+- Phone: (613) 400-9691
+- Instagram: https://instagram.com/9lmntsstudio

@@ -1,73 +1,37 @@
-# DESIGN.md — 9LMNTS Studio Design System & Visual Specification
+# DESIGN.md — 9LMNTS Studio Showroom + Client Brand Chameleon Spec
 
-**Brand Identity:** 9LMNTS Studio  
-**Design Philosophy:** Tactile Minimalist Tech / Modern High-Converting B2B Creative Agency  
-**Target Visual Benchmark:** Clean Split-Hero & Bento Grid (Reference: Pinterest agency standard)  
-**Conversion Focus:** Immediate Founder-Led Cash Flow ($500 – $5,000 Sprints with 50% Upfront Interac e-Transfer Deposit)
+## 1. Visual Architecture Overview
 
----
+`9lmntsstudio.com` separates **who we are** (an elite Obsidian + Flame Orange AI Creative Agency rooted in the 9 Elements of Hip-Hop) from **what we build** (authentic, industry-native digital storefronts and operating systems for each client).
 
-## 1. Color System (Strict Triad + Luminescence)
+### A. Outer Agency Showroom Tokens
+- **Void Obsidian (`--bg-void`)**: `#050505` — Root page canvas
+- **Deep Obsidian (`--bg-obsidian`)**: `#08090C` — Workflow showcase & modal backdrop
+- **Subtle Glass (`--bg-glass`)**: `rgba(12, 14, 20, 0.72)` — Sticky pill header, navigation rail, and modal surfaces with `backdrop-filter: blur(18px)`
+- **Flame Orange (`--accent-flame`)**: `#FF5500` (hover `#FF6B1A`) — Primary CTAs, `9L` wordmark, handwritten script `+ AI` / `Studio`, leader pins, and orbital glow
+- **Telemetry Cyan (`--accent-cyan`)**: `#00D2FF` — Technical nodes & LUA/Gaming bridge
+- **Live Matrix Green (`--accent-live`)**: `#00FF88` — Ottawa Studio availability beacon
+- **Hairline Borders**: `rgba(255, 255, 255, 0.10)` (never heavy cards or boxed grids)
 
-| Token | Light Mode Value | Dark Mode Value | Semantic Role |
-| :--- | :--- | :--- | :--- |
-| `--canvas-base` | `#FFFFFF` (Crisp Paper) | `#08090C` (Obsidian Void) | Root page background |
-| `--surface-card` | `#F8F9FA` (Soft Alabaster) | `#101218` (Smoked Obsidian) | Bento cards, containers |
-| `--surface-elevated`| `#FFFFFF` (Pure White) | `#161922` (Elevated Charcoal) | Floating modals, popovers |
-| `--border-subtle` | `rgba(0, 0, 0, 0.08)` | `rgba(255, 255, 255, 0.08)` | 1px hairline card borders |
-| `--border-glow` | `rgba(255, 85, 0, 0.35)` | `rgba(255, 85, 0, 0.45)` | Active borders, hover states |
-| `--text-primary` | `#0A0A0A` (Deep Carbon) | `#FFFFFF` (Stark White) | Display hero text, titles |
-| `--text-secondary` | `#52525B` (Slate Graphite) | `#94A3B8` (Cool Slate) | Body copy, descriptions |
-| `--text-tertiary` | `#71717A` (Muted Zinc) | `#64748B` (Muted Steel) | Telemetry labels, microcopy |
-| `--brand-orange` | `#FF5500` (Flame Orange) | `#FF5500` (Flame Orange) | Primary CTAs, active highlights |
-| `--brand-orange-hover`| `#E04B00` | `#FF6A1A` | Button hover/active states |
-| `--brand-orange-subtle`| `rgba(255, 85, 0, 0.08)`| `rgba(255, 85, 0, 0.12)`| Accent badges, active pill backgrounds |
+### B. Typography Hierarchy
+- **Display & Wordmark**: `Syne` (700/800) — High-impact geometric headers (`9 Elements`, `SPARK`, `FLOW`, `CYPHER`)
+- **Handwritten Script**: `Alex Brush` & `Caveat` — Warm human signature contrasting sharp tech (`+ AI`, `Studio`)
+- **UI & Client Copy**: `Plus Jakarta Sans` (400–800) — Frictionless business-owner readability
+- **Editorial Accent**: `Instrument Serif` (regular/italic) — Client stage headlines inside `#work`
+- **Pricing & Telemetry**: `JetBrains Mono` (400–600) — Monospace prices, turnaround timers, and sprint tags
 
 ---
 
-## 2. Typography Hierarchy
-
-- **Hero Display:** `Syne` or `Inter Display`, 800 ExtraBold, `-0.035em` tracking.
-- **Section H1:** `Inter`, 700 Bold, `-0.025em` tracking.
-- **Bento Card Titles (H2):** `Inter`, 600 SemiBold, `-0.015em` tracking.
-- **Body & Subtitles:** `Inter`, 400 Regular / 500 Medium, `160%` line-height.
-- **Eyebrow Badges & Status:** `Inter`, 700 Bold, `+0.06em` letter-spacing, uppercase.
-- **Telemetry & Numbers:** `JetBrains Mono` or `Inter`, 700 Bold, `tabular-nums`.
-- **Signature Script (Logo):** `Caveat` or `Alex Brush` for "Studio" accent.
+## 2. Layout Discipline (Zero Bento Mandate)
+1. **No Bento Grids on the Agency Shell**: Do not box agency concepts inside symmetrical multi-card grids. Use asymmetric open dark space (`#050505`), floating text columns, hairline SVG leader pins anchored to `/assets/hero-orchestrator.jpg`, and progressive modal overlays (`85vh` frosted obsidian) when visitors want deeper breakdowns.
+2. **Subtle Ambient Culture Layer**: Low-opacity ambient SVG glyphs (`#FFFFFF` at 3–6% opacity, plus subtle `#FF5500` AI sparks) drifting slowly behind the hero and workflow section — evoking vinyl grooves, spray nozzles, sneaker silhouettes, microphones, code brackets, and neural nodes without visual clutter.
 
 ---
 
-## 3. Spatial & Component Metrics (Strict 8pt Grid)
-
-- **Container Max-Width:** `1200px` (with `24px` gutter on desktop, `16px` on mobile).
-- **Corner Radii:**
-  - Pills & Badges: `9999px`
-  - Bento Modules & Cards: `24px`
-  - Modal Dialogs: `24px`
-  - Input Fields & Buttons: `12px`
-- **Backdrop Blur:** `backdrop-filter: blur(16px)` on floating navigation and modals.
-
----
-
-## 4. Commercial Offerings
-
-> **Superseded (Oct 2026):** Current packages are Quick Fix (from $500), Launch Page ($1,800), Growth Website ($4,500), Signature System (from $8,500), Care Plan ($199/$449/mo) — see `GEMINI.md` §2. The legacy list below is kept for reference only.
-
-### Legacy (pre-Oct 2026) — The 4 Commercial Offerings
-
-1. **Modular System Upgrade** — `$500 CAD` (50% Deposit: `$250 CAD`)
-   - 24–48h Turnaround. Drop-in interactive modal for existing websites without rebuilding.
-2. **The Revenue Recovery System** — `$1,500 CAD` (50% Deposit: `$750 CAD`)
-   - 3–5 Business Days. High-speed, mobile-first landing page with automated lead capture.
-3. **The Turnkey Business OS** — `$3,000 CAD` (50% Deposit: `$1,500 CAD`)
-   - 2–3 Weeks. [⭐ Most Popular] Complete digital headquarters, multi-step booking engine, and database sync.
-4. **The Enterprise Sprint** — `$5,000 CAD` (50% Deposit: `$2,500 CAD`)
-   - 3–4 Weeks. Bespoke digital architecture, reusable Figma design system, advanced logic, and developer handoff.
-
----
-
-## 5. Payment Rail Standard
-
-- **Domestic Rail (Canada):** Direct Interac e-Transfer to `9lmntstudio@gmail.com` with Autodeposit enabled (Desjardins account). 0% merchant fees, instant 2-minute settlement.
-- **International Rail (US/Global):** Direct PayPal 50% deposit checkout button.
-- **Terms:** Strict 50% upfront deposit to lock in development sprint; 50% final balance upon staging review before live domain switch.
+## 3. Client Brand Chameleon Firewall (`#work`)
+When the visitor enters `#work`, each live industry demonstration swaps cleanly into its authentic palette:
+1. **Shawarma & Mediterranean Bistro (`#stage-shawarma`)**: `#FAF6EF` Warm Limestone · `#A84A28` Terracotta · `#FF5500` PayPal Complete Payments 1-Tap Order & Catering Calculator
+2. **Kremas & Crema Specialty Coffee (`#stage-crema`)**: `#FFFFFF` Gallery White · Scroll-scrubbed espresso extraction + PayPal Express Menu
+3. **Atelier Streetwear Capsule (`#stage-streetwear`)**: `#FFFFFF` Studio Light · Floating hover garment rack + PayPal Express Slide-Out Cart
+4. **Artisan Bakery & Smash Co. (`#stage-bakery`)**: `#F7F5F0` Editorial Cream · Interactive Morning/Evening split + Box Checkout
+5. **Project LOA & Sound Clash Arena (`#stage-lua`)**: `#08090C` Night HUD · `#00D2FF` Cyber Cyan · Direct live bridges to `clash.9lmntsstudio.com` and `artist.9lmntsstudio.com`

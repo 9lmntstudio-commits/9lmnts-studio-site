@@ -17,14 +17,16 @@ jobs:
         with:
           node-version: 20
 
-      - name: Build Production Suite
+      - name: Install & Build Production Suite
         run: |
-          node site/build.mjs
+          npm ci
+          npx tsc --noEmit
+          npm run build
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
         with:
-          publish-dir: './public'
+          publish-dir: './dist'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions: ${{ github.sha }}"

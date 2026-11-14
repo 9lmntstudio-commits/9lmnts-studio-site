@@ -1,0 +1,22 @@
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/embed/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Access-Control-Allow-Headers: Content-Type
+  Cache-Control: public, max-age=3600
+
+/embed.js
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/intake.js
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/index.html
+  Cache-Control: no-cache, no-store, must-revalidate

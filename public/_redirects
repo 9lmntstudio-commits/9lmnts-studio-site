@@ -1,37 +1,10 @@
+# Netlify redirects for 9lmntsstudio.com (Spatial Editorial + Live OS Subdomains + Embeds)
+/clash https://clash.9lmntsstudio.com 302
+/soundclash https://clash.9lmntsstudio.com 302
+/artist https://artist.9lmntsstudio.com 302
+/artistos https://artist.9lmntsstudio.com 302
 
-# 9LMNTS Studio Clean URL Redirects
-/admin           /admin/index.html    200
-/admin/          /admin/index.html    200
-/services        /services/index.html 200
-/work            /work/index.html     200
-/os              /os/index.html       200
-/os/             /os/index.html       200
-/portfolio       /work/index.html     200
-/lab             /work/index.html     200
-/reverse         /work/index.html     200
-/embeds          /embeds/index.html   200
-/audit           /audit/index.html    200
-/process         /process/index.html  200
-/about           /about/index.html    200
-/contact         /contact/index.html  200
-/start           /start/index.html    200
-/portal          /start/index.html    200
-/faq             /faq/index.html      200
-/demo            /work/index.html     301
-/chef            /work/index.html     301
-/workerbee       /work/index.html     301
-/handyman        /work/index.html     301
-/dispatch        /work/index.html     301
-/reception       /work/index.html     301
-/wedding         /work/index.html     301
-/darnley         /about/index.html    301
-/clothing        /work/index.html     301
-/brand           /about/index.html    301
-/runway          /work/index.html     301
-/fashion         /work/index.html     301
-/clash           https://clash.9lmntsstudio.com  302
-/soundclash      https://clash.9lmntsstudio.com  302
-/artist          https://artist.9lmntsstudio.com 302
-/artistos        https://artist.9lmntsstudio.com 302
-/embed.js        /embed/intake.js     200
-/intake.js       /embed/intake.js     200
+/embed.js /embed/intake.js 200
+/intake.js /embed/intake.js 200
+
+/* /index.html 200

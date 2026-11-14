@@ -1,5 +1,6 @@
 # 9LMNTS Studio Git Ignore
 node_modules/
+dist/
 .DS_Store
 *.log
 
