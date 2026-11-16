@@ -68,11 +68,11 @@ const CLASH_BASE44_SCREENS = [
   },
   {
     id: 'sponsors',
-    label: '04 // Sponsors & Attendee Reel',
-    src: '/assets/soundclash-attendee-journey.mp4',
-    secondarySrc: '',
-    isVideo: true,
-    caption: 'SoundClash OS Attendee Journey Reel (Pulse Drinks & Wave Collective Sponsors)',
+    label: '04 // Sponsors & AR Merch',
+    src: '/assets/gdrive-clash-08-sponsors.jpg',
+    secondarySrc: '/assets/gdrive-clash-07-ar-merch.jpg',
+    isVideo: false,
+    caption: 'Pulse Drinks / Wave Collective Sponsors + WebAR Merch Drops ($25–$90)',
   },
 ];
 
@@ -344,6 +344,7 @@ export function TwoPathGatewaySection({ onOpenModal }: TwoPathGatewaySectionProp
                 <div className="relative aspect-[16/10] w-full overflow-hidden border border-white/[0.12] bg-[#050507]">
                   <video
                     src="/assets/artist-os-scrolling-walkthrough.mp4"
+                    poster="/assets/artist-os-preview.png"
                     autoPlay
                     muted
                     loop
