@@ -43,28 +43,36 @@ const AGENCY_LEDGER_ROWS = [
 
 const CLASH_BASE44_SCREENS = [
   {
-    id: 'arena',
-    label: '01 // 8-Contender Bracket',
+    id: 'overview',
+    label: '01 // 3-Screen Overview',
     src: '/assets/screenshot-sound-clash.png',
-    caption: 'Live Base44 Arena · 8-DJ Knockout & Crowd Voting',
+    secondarySrc: '',
+    isVideo: false,
+    caption: 'Google Drive SoundClash OS · 8-DJ Bracket + Live Battle + $1,500 Crowd Pot',
   },
   {
     id: 'bracket',
-    label: '02 // Mobile Bracket Tree',
-    src: '/assets/mobile-clash-bracket-tree.jpg',
-    caption: 'Authentic Base44 Mobile Matchup Progression',
+    label: '02 // 8-DJ Bracket & Live Vote',
+    src: '/assets/gdrive-clash-02-bracket.jpg',
+    secondarySrc: '/assets/gdrive-clash-03-live-battle.jpg',
+    isVideo: false,
+    caption: 'Quarterfinals/Semifinals Bracket + Live DJ K-OS vs DJ Lumen 99% Split',
   },
   {
     id: 'hype',
-    label: '03 // $50 25× Power Hype',
-    src: '/assets/mobile-clash-tipping-powerhype.jpg',
-    caption: '4-Box Monetization ($20 GA / $10 Tip / $50 Hype / $150 VIP)',
+    label: '03 // $1,500 Pot & $50 Hype',
+    src: '/assets/gdrive-clash-04-prize-pot.jpg',
+    secondarySrc: '/assets/gdrive-clash-06-power-hype.jpg',
+    isVideo: false,
+    caption: '$1,500 Crowd Prize Pot + Power Vote Packs + $50 Power Hype (25× Votes)',
   },
   {
-    id: 'tickets',
-    label: '04 // Finals & Door Entry',
-    src: '/assets/mobile-clash-grand-finals.jpg',
-    caption: '$500 Base Pot · 70/30 Split · $1,500 Sponsor Stage Dominance',
+    id: 'sponsors',
+    label: '04 // Sponsors & Attendee Reel',
+    src: '/assets/soundclash-attendee-journey.mp4',
+    secondarySrc: '',
+    isVideo: true,
+    caption: 'SoundClash OS Attendee Journey Reel (Pulse Drinks & Wave Collective Sponsors)',
   },
 ];
 
@@ -238,11 +246,36 @@ export function TwoPathGatewaySection({ onOpenModal }: TwoPathGatewaySectionProp
             {activeSaas === 'soundclash' ? (
               <div>
                 <div className="relative aspect-[16/10] w-full overflow-hidden border border-white/[0.12] bg-[#050507]">
-                  <img
-                    src={currentClashScreen.src}
-                    alt={currentClashScreen.caption}
-                    className="h-full w-full object-cover object-top"
-                  />
+                  {currentClashScreen.isVideo ? (
+                    <video
+                      key={currentClashScreen.src}
+                      src={currentClashScreen.src}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="h-full w-full object-cover object-center"
+                    />
+                  ) : currentClashScreen.secondarySrc ? (
+                    <div className="grid h-full w-full grid-cols-2 gap-3 bg-[#060608] p-4 pb-11">
+                      <img
+                        src={currentClashScreen.src}
+                        alt={currentClashScreen.caption}
+                        className="h-full w-full border border-white/[0.12] object-contain bg-[#09090D]"
+                      />
+                      <img
+                        src={currentClashScreen.secondarySrc}
+                        alt={currentClashScreen.caption}
+                        className="h-full w-full border border-white/[0.12] object-contain bg-[#09090D]"
+                      />
+                    </div>
+                  ) : (
+                    <img
+                      src={currentClashScreen.src}
+                      alt={currentClashScreen.caption}
+                      className="h-full w-full object-cover object-center"
+                    />
+                  )}
                   <div className="absolute inset-x-0 bottom-0 border-t border-white/10 bg-[#060608]/90 px-4 py-2.5 backdrop-blur-md">
                     <div className="flex flex-wrap items-center justify-between gap-2 font-mono-hud text-[10px] tracking-[0.14em] uppercase">
                       <span className="text-[#E5A93C]">{currentClashScreen.caption}</span>

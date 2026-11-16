@@ -98,9 +98,10 @@ const EXHIBITION_CHAPTERS: ExhibitionChapter[] = [
     italicLead:
       'Shipped live on Base44: 8-contender crowd battle tipping and 0%-cut 24-bit stem vaults running 24/7.',
     frames: [
-      { label: '01 SoundClash Arena (Base44)', src: '/assets/screenshot-sound-clash.png' },
-      { label: '02 Tournament Map', src: '/assets/soundclash-tournament-diagram.png' },
-      { label: '03 Artist OS Motion (Base44)', src: '/assets/artist-os-scrolling-walkthrough.mp4', isVideo: true },
+      { label: '01 SoundClash Live Screens (GDrive)', src: '/assets/screenshot-sound-clash.png' },
+      { label: '02 Attendee Journey Reel (GDrive)', src: '/assets/soundclash-attendee-journey.mp4', isVideo: true },
+      { label: '03 Tournament Engine Map (GDrive)', src: '/assets/soundclash-tournament-diagram.png' },
+      { label: '04 Artist OS Walkthrough (GDrive)', src: '/assets/artist-os-scrolling-walkthrough.mp4', isVideo: true },
     ],
     bottleneck:
       'Live battles and independent releases leak cash through fragmented ticketing, CashApp links, and DSP middlemen.',
