@@ -1,197 +1,178 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
-import { ArrowUpRight, Camera, ExternalLink, Mail, Phone } from 'lucide-react';
-import { LIVE_SAAS_PLATFORMS, PORTFOLIO_CASES, STUDIO_CONTACT } from '../data/agencyData';
+import { useState, type MouseEvent } from 'react';
+import { ArrowRight, CalendarCheck2, Camera, CreditCard, MessageSquareCode, Users } from 'lucide-react';
 
 interface StudioConsoleSectionProps {
   onOpenModal: (opts: {
     path?: 'agency' | 'saas';
     tier?: 'spark' | 'flow' | 'beat' | 'cypher' | 'custom';
+    focus?: string;
     saasId?: 'soundclash' | 'artist';
   }) => void;
 }
 
-type StudioTab = 'story' | 'portfolio' | 'saas' | 'book';
-
-const STUDIO_CAMERA_WAYPOINTS = [
+const CAMERA_WAYPOINTS = [
   {
     id: 'wide',
-    label: '01 · Wide Rig',
-    lens: '24mm Establishing Shot · 1.04x',
-    callout: 'Darnley Sanon · Founder & Solo Multi-Hyphenate Studio',
-    pinClass: 'top-5 left-5',
-    scale: 1.04,
-    x: '0%',
-    y: '0%',
-    rotate: 0,
+    label: '01 // WIDE_ATELIER_RIG',
+    transform: 'scale(1.02) translate(0%, 0%)',
+    caption: 'Ottawa Command Desk · Analog SSL Mastering + Dual Display Pipeline',
   },
   {
     id: 'hoodie',
-    label: '02 · QR Hoodie Pan',
-    lens: '85mm Focal Pan · 1.52x',
-    callout: 'Sleeve QR Wearable Merch → Instant Mobile Lead Scan',
-    pinClass: 'top-8 right-6',
-    scale: 1.52,
-    x: '-12%',
-    y: '-5%',
-    rotate: -0.7,
+    label: '02 // PHYGITAL_QR_WEAVE',
+    transform: 'scale(1.24) translate(-6%, 5%)',
+    caption: 'Direct NFC / QR Apparel Scan Into Live Digital Merch Vaults',
   },
   {
     id: 'console',
-    label: '03 · Console Macro',
-    lens: '100mm Macro Push · 1.62x',
-    callout: 'Live Audio Console + Automated Booking & PayPal Stack',
-    pinClass: 'bottom-24 left-6',
-    scale: 1.62,
-    x: '14%',
-    y: '-10%',
-    rotate: 0.6,
+    label: '03 // SSL_CONSOLE_MACRO',
+    transform: 'scale(1.32) translate(7%, -7%)',
+    caption: 'Real-Time AI Audio/Lead Routing & 0%-Fee Checkout Controls',
   },
-] as const;
+];
+
+const CONSOLE_MODULES = [
+  {
+    id: 'booking',
+    code: '01_BOOKING_CALENDAR',
+    label: 'Booking Calendar',
+    icon: CalendarCheck2,
+    headline: 'Instant 50% Deposit Scheduling Without Back-and-Forth DM Lag',
+    detail:
+      'Prospects select a table, consultation, or sprint date, lock it against your real calendar, and receive automatic SMS reminders.',
+    metrics: ['48-Hr Install Available', 'Zero Double-Bookings', 'SMS + Email Reminders'],
+  },
+  {
+    id: 'paypal',
+    code: '02_PAYPAL_DIRECT_CHECKOUT',
+    label: 'PayPal Complete Checkout',
+    icon: CreditCard,
+    headline: '0% Studio Commission Ordering, Apple Pay & Pay Later 4× Split',
+    detail:
+      'Stop handing 28% of restaurant and e-commerce margin to aggregators. Direct Apple Pay, Google Pay, Cards, and 50% catering deposits.',
+    metrics: ['0% 9LMNTS Cut', '50% Catering Deposits', 'Pay Later 4× Enabled'],
+  },
+  {
+    id: 'ai',
+    code: '03_VOICE_CHAT_RECEPTION',
+    label: 'AI Voice & Chat',
+    icon: MessageSquareCode,
+    headline: 'EN / FR / Kreyòl Reception Answering Every Missed Call in 3 Seconds',
+    detail:
+      'Captures late-night catering requests, tables, and service quotes automatically while routing hot prospects straight to your phone.',
+    metrics: ['Trilingual Ready', 'Instant Quote Capture', 'WhatsApp & SMS Sync'],
+  },
+  {
+    id: 'crm',
+    code: '04_OWNER_CRM_LEDGER',
+    label: 'Owner CRM Ledger',
+    icon: Users,
+    headline: 'Every Lead, Deposit, Invoice & Repeat Customer in One Obsidian Ledger',
+    detail:
+      'Connected directly to Supabase & webhook triggers so every inquiry turns into a tagged client record with lifetime spend tracking.',
+    metrics: ['Real-Time Webhook Sync', 'Zero Spreadsheet Mess', 'One-Tap Reactivation'],
+  },
+];
 
 export function StudioConsoleSection({ onOpenModal }: StudioConsoleSectionProps) {
-  const [activeTab, setActiveTab] = useState<StudioTab>('story');
   const [waypointIdx, setWaypointIdx] = useState(0);
-  const [autoOrbit, setAutoOrbit] = useState(true);
+  const [moduleIdx, setModuleIdx] = useState(0);
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
 
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const pointerX = useMotionValue(0);
-  const pointerY = useMotionValue(0);
-  const smoothX = useSpring(pointerX, { stiffness: 120, damping: 22 });
-  const smoothY = useSpring(pointerY, { stiffness: 120, damping: 22 });
+  const activeWaypoint = CAMERA_WAYPOINTS[waypointIdx] ?? CAMERA_WAYPOINTS[0];
+  const activeModule = CONSOLE_MODULES[moduleIdx] ?? CONSOLE_MODULES[0];
+  const ActiveIcon = activeModule.icon;
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'center center'],
-  });
-
-  // Technique C: Z-Axis Expanding Scroll Portal
-  const portalScale = useTransform(scrollYProgress, [0, 1], [0.94, 1]);
-  const portalClip = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ['inset(5% 3% 5% 3% round 38px)', 'inset(0% 0% 0% 0% round 32px)']
-  );
-
-  // Technique B: 2.5D Mouse Tilt & 1.45x Foreground Bokeh Parallax
-  const tiltX = useTransform(smoothY, [-0.5, 0.5], [2, -2]);
-  const tiltY = useTransform(smoothX, [-0.5, 0.5], [-2.5, 2.5]);
-  const bokehX = useTransform(smoothX, [-0.5, 0.5], [-32, 32]);
-  const bokehY = useTransform(smoothY, [-0.5, 0.5], [-20, 20]);
-
-  useEffect(() => {
-    if (!autoOrbit) return;
-    const timer = window.setInterval(() => {
-      setWaypointIdx((prev) => (prev + 1) % STUDIO_CAMERA_WAYPOINTS.length);
-    }, 4500);
-    return () => window.clearInterval(timer);
-  }, [autoOrbit]);
-
-  const activeWaypoint = STUDIO_CAMERA_WAYPOINTS[waypointIdx];
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const nx = (e.clientX - rect.left) / rect.width - 0.5;
+    const ny = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ rx: ny * -4, ry: nx * 5 });
+  };
 
   return (
-    <section ref={sectionRef} id="studio" className="bg-[#F5F6F8] px-5 pb-16 sm:px-8 sm:pb-24">
-      <div className="mx-auto max-w-7xl">
-        {/* Clean Editorial Header Above the Studio Console Feature */}
-        <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <p className="text-xs font-extrabold tracking-[0.16em] uppercase text-[#E95004]">
-              Founder &amp; Living Studio · 2.5D Camera Portal
+    <section
+      id="studio"
+      className="relative border-t border-white/[0.08] bg-[#060608] text-[#F3F4F6]"
+    >
+      {/* Chapter Telemetry Header */}
+      <div className="border-b border-white/[0.08] bg-[#09090C]">
+        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-8">
+          <div className="flex items-center gap-3 font-mono-hud text-[11px] tracking-[0.18em] uppercase">
+            <span className="text-[#E95004]">CHAPTER 03 //</span>
+            <span className="text-white">THE STUDIO HELM — PRODUCTION COMMAND</span>
+          </div>
+          <div className="flex items-center gap-2 font-mono-hud text-[10px] tracking-[0.16em] uppercase text-[#9CA3AF]">
+            <Camera className="h-3.5 w-3.5 text-[#E5A93C]" />
+            <span>3-WAYPOINT 2.5D CAMERA RIG</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-8">
+        {/* Pull Quote Row */}
+        <div className="mb-8 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-6">
+            <p className="font-mono-hud text-[11px] tracking-[0.18em] uppercase text-[#E95004]">
+              LIVE WORKBENCH HARDWARE &amp; OPS
             </p>
-            <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-[#111827] sm:text-4xl">
-              Direct Creative Direction — Inside The Studio
+            <h2 className="mt-2 font-syne text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+              Your site as a command desk.
             </h2>
           </div>
-          <p className="max-w-md text-sm text-[#4B5563]">
-            You work directly with founder {STUDIO_CONTACT.founder} from discovery to launch day.
-          </p>
+          <div className="lg:col-span-6">
+            <blockquote className="border-l-2 border-[#E95004] pl-5 font-editorial-serif text-xl italic leading-relaxed text-[#D1D5DB] sm:text-2xl">
+              &ldquo;We don&apos;t hand you a pretty mockup and wish you luck. Every system ships wired to your real calendar, customer payments, and follow-up messages.&rdquo;
+            </blockquote>
+          </div>
         </div>
 
-        {/* Technique C Expanding Scroll Portal + Technique B Virtual Camera Rig */}
-        <div style={{ perspective: 1400 }}>
-          <motion.div
-            style={{ scale: portalScale, clipPath: portalClip }}
-            onMouseMove={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              pointerX.set((e.clientX - rect.left) / rect.width - 0.5);
-              pointerY.set((e.clientY - rect.top) / rect.height - 0.5);
-            }}
-            onMouseLeave={() => {
-              pointerX.set(0);
-              pointerY.set(0);
-            }}
-            className="relative overflow-hidden rounded-[32px] bg-[#141519] shadow-[0_28px_70px_-22px_rgba(17,24,39,0.28)] will-change-transform"
-          >
-            {/* Upper Studio Scene with 2.5D Virtual Camera Waypoints */}
-            <div className="relative h-[340px] w-full overflow-hidden sm:h-[440px] lg:h-[480px]">
-              <motion.div
-                style={{
-                  rotateX: tiltX,
-                  rotateY: tiltY,
-                  transformStyle: 'preserve-3d',
-                }}
-                animate={{
-                  scale: activeWaypoint.scale,
-                  x: activeWaypoint.x,
-                  y: activeWaypoint.y,
-                  rotateZ: activeWaypoint.rotate,
-                }}
-                transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
-                className="h-full w-full will-change-transform"
-              >
-                <img
-                  src="/assets/studio-console-darnley.jpg"
-                  alt="Darnley Sanon working at the 9LMNTS Studio audio console in black 9LMNTS hoodie with sleeve QR patch"
-                  className="h-full w-full object-cover object-[center_22%] select-none"
-                />
-              </motion.div>
+        {/* Full-Bleed 2.5D Camera Rig Stage */}
+        <div
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => setTilt({ rx: 0, ry: 0 })}
+          className="relative border border-white/[0.12] bg-[#050507]"
+          style={{ perspective: '1200px' }}
+        >
+          <div className="relative aspect-[16/9] max-h-[620px] w-full overflow-hidden">
+            <img
+              src="/assets/studio-console-darnley.jpg"
+              alt="Darnley Sanon 9LMNTS Studio Console Helm"
+              style={{
+                transform: `${activeWaypoint.transform} rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
+              }}
+              className="h-full w-full object-cover object-center transition-transform duration-500 ease-out will-change-transform"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#060608] via-transparent to-[#060608]/45" />
 
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#141519] via-[#141519]/30 to-transparent"
-              />
+            {/* Architectural Corner Registration Marks */}
+            <span className="pointer-events-none absolute top-4 left-4 font-mono-hud text-xs text-white/60">
+              [+]
+            </span>
+            <span className="pointer-events-none absolute top-4 right-4 font-mono-hud text-xs text-white/60">
+              [+]
+            </span>
 
-              {/* Layer 1 Foreground Blurred Bokeh Particles (1.45x parallax) */}
-              <motion.div
-                aria-hidden="true"
-                style={{ x: bokehX, y: bokehY, filter: 'blur(4px)' }}
-                className="pointer-events-none absolute inset-0 will-change-transform"
-              >
-                <span className="absolute top-12 left-[22%] h-4 w-4 rounded-full bg-[#FF781F]/35" />
-                <span className="absolute top-28 right-[26%] h-6 w-6 rounded-full bg-white/20" />
-                <span className="absolute bottom-24 right-[18%] h-4 w-4 rounded-full bg-[#FF781F]/30" />
-              </motion.div>
-
-              {/* Animated Hotspot Callout Pin */}
-              <motion.div
-                key={activeWaypoint.id}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35 }}
-                className={`pointer-events-none absolute z-10 hidden max-w-xs items-center gap-2 rounded-full border border-white/20 bg-black/65 px-3.5 py-1.5 text-[11px] font-semibold text-white backdrop-blur-md sm:inline-flex ${activeWaypoint.pinClass}`}
-              >
-                <span className="h-2 w-2 rounded-full bg-[#FF781F] shadow-[0_0_8px_#FF781F]" />
-                <span>{activeWaypoint.callout}</span>
-              </motion.div>
-
-              {/* Camera Waypoint Rig Bar */}
-              <div className="absolute right-4 bottom-24 z-10 flex flex-wrap items-center gap-1.5 sm:right-8 sm:bottom-32">
-                <span className="hidden items-center gap-1 rounded-full border border-white/15 bg-black/55 px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase text-white/75 backdrop-blur-md md:inline-flex">
-                  <Camera className="h-3 w-3 text-[#FF781F]" />
-                  {activeWaypoint.lens}
-                </span>
-                {STUDIO_CAMERA_WAYPOINTS.map((wp, idx) => (
+            {/* Waypoint Switcher Bar */}
+            <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 bg-[#060608]/88 px-4 py-3.5 backdrop-blur-md sm:px-6">
+              <div>
+                <p className="font-mono-hud text-[10px] tracking-[0.16em] uppercase text-[#E5A93C]">
+                  ACTIVE CAMERA WAYPOINT
+                </p>
+                <p className="mt-0.5 text-xs text-[#E5E7EB] sm:text-sm">
+                  {activeWaypoint.caption}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {CAMERA_WAYPOINTS.map((wp, idx) => (
                   <button
                     key={wp.id}
                     type="button"
-                    onClick={() => {
-                      setAutoOrbit(false);
-                      setWaypointIdx(idx);
-                    }}
-                    className={`cursor-pointer rounded-full px-3 py-1 text-[11px] font-bold backdrop-blur-md transition-colors ${
-                      idx === waypointIdx
-                        ? 'bg-[#E95004] text-white shadow-sm'
-                        : 'border border-white/20 bg-black/55 text-white/80 hover:bg-black/80 hover:text-white'
+                    onClick={() => setWaypointIdx(idx)}
+                    className={`cursor-pointer border px-3 py-1.5 font-mono-hud text-[10px] tracking-[0.14em] uppercase transition-colors ${
+                      waypointIdx === idx
+                        ? 'border-[#E95004] bg-[#E95004] text-white'
+                        : 'border-white/15 bg-[#0B0B0F] text-[#9CA3AF] hover:border-white/40 hover:text-white'
                     }`}
                   >
                     {wp.label}
@@ -199,192 +180,76 @@ export function StudioConsoleSection({ onOpenModal }: StudioConsoleSectionProps)
                 ))}
               </div>
             </div>
+          </div>
 
-          {/* Crisp Interactive Glass Studio Window Positioned Cleanly Over Lower Frame */}
-          <div className="relative z-10 -mt-20 px-4 pb-6 sm:-mt-28 sm:px-8 sm:pb-8 lg:px-10">
-            <div className="rounded-3xl border border-white/15 bg-[#16181F]/90 text-white shadow-2xl backdrop-blur-xl">
-              {/* Window Top Bar */}
-              <div className="flex flex-col justify-between gap-3 border-b border-white/10 px-5 py-4 sm:flex-row sm:items-center sm:px-6">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#E95004] text-xs font-black text-white">
-                    DS
-                  </span>
+          {/* Docked 4-Tab Operational Module Ledger */}
+          <div className="grid grid-cols-2 border-t border-white/[0.1] bg-[#0A0A0E] sm:grid-cols-4">
+            {CONSOLE_MODULES.map((mod, idx) => {
+              const Icon = mod.icon;
+              const active = idx === moduleIdx;
+              return (
+                <button
+                  key={mod.id}
+                  type="button"
+                  onClick={() => setModuleIdx(idx)}
+                  className={`flex cursor-pointer items-center gap-2.5 border-b border-r border-white/[0.08] px-4 py-4 text-left transition-colors sm:border-b-0 last:border-r-0 ${
+                    active
+                      ? 'bg-[#14141A] text-white border-t-2 border-t-[#E95004]'
+                      : 'text-[#9CA3AF] hover:bg-white/[0.02] hover:text-white'
+                  }`}
+                >
+                  <Icon className={`h-4 w-4 shrink-0 ${active ? 'text-[#FF5500]' : 'text-[#6B7280]'}`} />
                   <div>
-                    <p className="text-xs font-bold tracking-[0.12em] uppercase text-white/95">
-                      The Studio // {STUDIO_CONTACT.founder}
+                    <p className="font-mono-hud text-[9px] tracking-[0.14em] uppercase text-[#E5A93C]">
+                      {mod.code}
                     </p>
-                    <p className="text-[11px] text-white/60">{STUDIO_CONTACT.role}</p>
+                    <p className="mt-0.5 text-xs font-bold">{mod.label}</p>
                   </div>
-                </div>
+                </button>
+              );
+            })}
+          </div>
 
-                {/* 4 Studio Tabs */}
-                <div className="flex flex-wrap gap-1.5">
-                  {(
-                    [
-                      ['story', '01. Story & Ethos'],
-                      ['portfolio', '02. Selected Work'],
-                      ['saas', '03. Live SaaS'],
-                      ['book', '04. Work With Darnley'],
-                    ] as const
-                  ).map(([id, label]) => (
-                    <button
-                      key={id}
-                      type="button"
-                      onClick={() => setActiveTab(id)}
-                      className={`cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-bold transition-colors ${
-                        activeTab === id
-                          ? 'bg-[#E95004] text-white'
-                          : 'bg-white/[0.06] text-white/75 hover:bg-white/12 hover:text-white'
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
+          {/* Active Module Detail Panel */}
+          <div className="grid grid-cols-1 gap-6 border-t border-white/[0.08] bg-[#0D0D12] p-6 lg:grid-cols-12 lg:items-center lg:p-8">
+            <div className="lg:col-span-8">
+              <div className="flex items-center gap-2 font-mono-hud text-[10px] tracking-[0.16em] uppercase text-[#E95004]">
+                <ActiveIcon className="h-4 w-4" />
+                <span>{activeModule.code}</span>
               </div>
+              <h3 className="mt-2 font-syne text-2xl font-bold text-white sm:text-3xl">
+                {activeModule.headline}
+              </h3>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#9CA3AF]">
+                {activeModule.detail}
+              </p>
+            </div>
 
-              {/* Tab Content Area */}
-              <div className="p-5 sm:p-7">
-                {activeTab === 'story' && (
-                  <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
-                    <div className="lg:col-span-7">
-                      <span className="text-3xl leading-none font-black text-[#FF781F]">“</span>
-                      <blockquote className="mt-1 text-lg font-bold leading-snug text-white sm:text-2xl">
-                        Every project is an opportunity to tell a story, to create something that resonates beyond the screen. That&apos;s the power of combining art, culture, and technology.
-                      </blockquote>
-                      <p className="mt-4 text-sm leading-relaxed text-white/75">
-                        With over a decade in graphic design and UI/UX across Ottawa and Southeast Asia, Darnley founded 9LMNTS Studio so everyday business owners, restaurants, and creators can launch digital experiences with cultural soul and zero technical frustration.
-                      </p>
-                    </div>
-
-                    <div className="flex flex-col justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 lg:col-span-5">
-                      <div>
-                        <p className="text-xs font-bold tracking-[0.12em] uppercase text-[#FF781F]">
-                          Direct Studio Line
-                        </p>
-                        <div className="mt-3 space-y-2 text-sm text-white/90">
-                          <a
-                            href={`mailto:${STUDIO_CONTACT.email}`}
-                            className="flex items-center gap-2 hover:text-[#FF781F]"
-                          >
-                            <Mail className="h-4 w-4 text-[#FF781F]" />
-                            {STUDIO_CONTACT.email}
-                          </a>
-                          <a
-                            href={STUDIO_CONTACT.phoneHref}
-                            className="flex items-center gap-2 hover:text-[#FF781F]"
-                          >
-                            <Phone className="h-4 w-4 text-[#FF781F]" />
-                            {STUDIO_CONTACT.phoneDisplay}
-                          </a>
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => onOpenModal({ path: 'agency', tier: 'beat' })}
-                        className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#E95004] px-5 py-3 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#FF5500]"
-                      >
-                        <span>Book a Studio Sprint</span>
-                        <ArrowUpRight className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === 'portfolio' && (
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    {PORTFOLIO_CASES.map((item) => (
-                      <a
-                        key={item.id}
-                        href="#work"
-                        className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors hover:border-[#FF781F]/60"
-                      >
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="h-28 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                        <div className="p-3.5">
-                          <p className="text-[11px] font-bold uppercase tracking-wider text-[#FF781F]">
-                            {item.category}
-                          </p>
-                          <p className="mt-1 text-sm font-bold text-white">{item.title}</p>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                )}
-
-                {activeTab === 'saas' && (
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    {LIVE_SAAS_PLATFORMS.map((platform) => (
-                      <div
-                        key={platform.id}
-                        className="flex flex-col justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5"
-                      >
-                        <div>
-                          <div className="flex items-center justify-between gap-2">
-                            <h3 className="text-lg font-extrabold text-white">
-                              {platform.name}
-                            </h3>
-                            <span className="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[11px] font-bold text-emerald-300">
-                              Published &amp; Live
-                            </span>
-                          </div>
-                          <p className="mt-2 text-xs leading-relaxed text-white/75">
-                            {platform.summary}
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-2.5">
-                          <a
-                            href={platform.url}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-1.5 rounded-full bg-[#E95004] px-4 py-2 text-xs font-bold text-white hover:bg-[#FF5500]"
-                          >
-                            <span>Launch {platform.name}</span>
-                            <ExternalLink className="h-3.5 w-3.5" />
-                          </a>
-                          <button
-                            type="button"
-                            onClick={() => onOpenModal({ path: 'saas', saasId: platform.id })}
-                            className="cursor-pointer rounded-full border border-white/20 px-4 py-2 text-xs font-semibold text-white hover:bg-white/10"
-                          >
-                            Preview Modal
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {activeTab === 'book' && (
-                  <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
-                    <div className="max-w-xl">
-                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#FF781F]">
-                        Zero Surprises · 1-Page Agreement + 50% Deposit Kickoff
-                      </p>
-                      <h3 className="mt-2 text-2xl font-extrabold text-white">
-                        Ready to lock your build week?
-                      </h3>
-                      <p className="mt-2 text-sm text-white/75">
-                        Pick Flow ($1,500 CAD), Beat ($3,000 CAD), or Cypher ($5,000 CAD). Scope locks immediately with a 1-page agreement and 50% deposit via Interac e-Transfer ({STUDIO_CONTACT.email}) or PayPal Invoice.
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => onOpenModal({ path: 'agency', tier: 'beat' })}
-                      className="inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-[#E95004] px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-colors hover:bg-[#FF5500]"
-                    >
-                      <span>Open Onboarding &amp; Booking</span>
-                      <ArrowUpRight className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
+            <div className="flex flex-col justify-between gap-4 border-t border-white/[0.08] pt-4 lg:col-span-4 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
+              <div className="space-y-1.5 font-mono-hud text-xs">
+                {activeModule.metrics.map((metric) => (
+                  <p key={metric} className="text-[#E5E7EB]">
+                    <span className="mr-2 text-[#E5A93C]">[+]</span>
+                    {metric}
+                  </p>
+                ))}
               </div>
+              <button
+                type="button"
+                onClick={() =>
+                  onOpenModal({
+                    path: 'agency',
+                    tier: 'beat',
+                    focus: 'Full Studio Console & Owner CRM',
+                  })
+                }
+                className="inline-flex cursor-pointer items-center justify-center gap-2 bg-[#E95004] px-5 py-3 font-mono-hud text-xs font-bold tracking-[0.16em] uppercase text-white transition-colors hover:bg-[#FF5500]"
+              >
+                <span>Deploy Console Stack</span>
+                <ArrowRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
-          </motion.div>
         </div>
       </div>
     </section>

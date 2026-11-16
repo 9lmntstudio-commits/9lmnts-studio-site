@@ -35,9 +35,10 @@ interface GatewayBookingModalProps {
 
 const FOCUS_OPTIONS = [
   'Custom Agency Website & Booking',
+  '48-Hour WebAR 3D Menu / Holographic Card',
+  'Spark Drop-In Booking & AI Widget',
+  'Founding Client 30%-Off Flow Sprint ($1,050 CAD)',
   'Restaurant / Hospitality & Catering',
-  'Brand Identity & Visual System',
-  'Specialty Coffee / Local Service Brand',
   'Fashion / Apparel & QR Merch',
   'AI Lead Automation & Concierge',
 ];
@@ -87,7 +88,7 @@ export function GatewayBookingModal({
     try {
       await navigator.clipboard.writeText(STUDIO_CONTACT.email);
     } catch {
-      // Clipboard API may be restricted in non-HTTPS previews; keep visual confirmation
+      // Clipboard API fallback
     }
     setCopiedEmail(true);
     window.setTimeout(() => setCopiedEmail(false), 2200);
@@ -118,7 +119,7 @@ export function GatewayBookingModal({
         body: JSON.stringify(payload),
       });
     } catch {
-      // Non-blocking notification; instant confirmation still displays with direct e-Transfer & email backup
+      // Non-blocking notification
     } finally {
       setSubmitting(false);
       setSubmitted(true);
@@ -140,24 +141,24 @@ export function GatewayBookingModal({
       aria-label="9LMNTS Customer Gateway & Onboarding"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
     >
-      {/* Frosted Scrim */}
+      {/* Obsidian Scrim */}
       <div
         onClick={onClose}
-        className="fixed inset-0 bg-[#111827]/60 backdrop-blur-sm"
+        className="fixed inset-0 bg-[#060608]/85 backdrop-blur-md"
       />
 
-      {/* Modal Sheet */}
-      <div className="relative z-10 max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-[28px] bg-white p-6 text-[#111827] shadow-2xl sm:p-8">
+      {/* Architectural Modal Sheet (0px radius, 1px hairline) */}
+      <div className="relative z-10 max-h-[92vh] w-full max-w-2xl overflow-y-auto border border-white/[0.14] bg-[#0B0B0F] p-6 text-[#F3F4F6] shadow-2xl sm:p-8">
         {/* Top Modal Bar */}
-        <div className="flex items-start justify-between gap-4 border-b border-black/[0.07] pb-5">
+        <div className="flex items-start justify-between gap-4 border-b border-white/[0.08] pb-5">
           <div>
-            <p className="text-xs font-extrabold tracking-[0.14em] uppercase text-[#E95004]">
-              9LMNTS Studio Gateway
+            <p className="font-mono-hud text-[10px] font-bold tracking-[0.18em] uppercase text-[#E95004]">
+              9LMNTS STUDIO GATEWAY // DISPATCH
             </p>
-            <h2 className="mt-1 text-2xl font-extrabold tracking-tight sm:text-3xl">
+            <h2 className="mt-1 font-syne text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
               {config.path === 'agency'
-                ? 'Book Your Agency Sprint'
-                : 'Explore Live SaaS Platforms'}
+                ? 'Reserve Your Agency Sprint'
+                : 'Launch Live Base44 Platforms'}
             </h2>
           </div>
 
@@ -165,73 +166,72 @@ export function GatewayBookingModal({
             type="button"
             onClick={onClose}
             aria-label="Close modal"
-            className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-[#F9FAFB] text-[#111827] transition-colors hover:bg-[#111827] hover:text-white"
+            className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center border border-white/15 bg-[#060608] text-white transition-colors hover:border-[#E95004] hover:bg-[#E95004]"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
         {/* 2-Option Path Toggle */}
-        <div className="mt-5 grid grid-cols-2 gap-2 rounded-2xl bg-[#F3F4F6] p-1.5">
+        <div className="mt-5 grid grid-cols-2 border border-white/[0.1] bg-[#060608]">
           <button
             type="button"
             onClick={() => onChangePath('agency')}
-            className={`flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all sm:text-sm ${
+            className={`flex cursor-pointer items-center justify-center gap-2 border-r border-white/[0.1] px-4 py-3 font-mono-hud text-[11px] font-bold tracking-[0.12em] uppercase transition-colors ${
               config.path === 'agency'
-                ? 'bg-white text-[#111827] shadow-sm'
-                : 'text-[#6B7280] hover:text-[#111827]'
+                ? 'bg-[#E95004] text-white'
+                : 'text-[#9CA3AF] hover:text-white'
             }`}
           >
-            <Sparkles className="h-4 w-4 text-[#E95004]" />
+            <Sparkles className="h-3.5 w-3.5" />
             <span>Agency Services</span>
           </button>
 
           <button
             type="button"
             onClick={() => onChangePath('saas')}
-            className={`flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all sm:text-sm ${
+            className={`flex cursor-pointer items-center justify-center gap-2 px-4 py-3 font-mono-hud text-[11px] font-bold tracking-[0.12em] uppercase transition-colors ${
               config.path === 'saas'
-                ? 'bg-white text-[#111827] shadow-sm'
-                : 'text-[#6B7280] hover:text-[#111827]'
+                ? 'bg-[#E95004] text-white'
+                : 'text-[#9CA3AF] hover:text-white'
             }`}
           >
-            <Layers className="h-4 w-4 text-emerald-600" />
-            <span>Live SaaS Platforms</span>
+            <Layers className="h-3.5 w-3.5" />
+            <span>Live Base44 Flagships</span>
           </button>
         </div>
 
-        {/* PATH A: AGENCY SERVICES ONBOARDING & BOOKING */}
+        {/* PATH A: AGENCY SERVICES ONBOARDING */}
         {config.path === 'agency' && (
           <div className="mt-6">
             {submitted ? (
-              <div className="rounded-3xl border border-black/[0.08] bg-[#F9FAFB] p-6 sm:p-7">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#E95004] text-white">
-                  <Check className="h-6 w-6" />
+              <div className="border border-emerald-500/35 bg-emerald-950/20 p-6 sm:p-7">
+                <div className="flex h-11 w-11 items-center justify-center bg-[#E95004] text-white">
+                  <Check className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 text-2xl font-extrabold text-[#111827]">
+                <h3 className="mt-4 font-syne text-2xl font-extrabold text-white">
                   Brief Received for {businessName || clientName || 'Your Brand'}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#4B5563]">
+                <p className="mt-2 text-sm leading-relaxed text-[#D1D5DB]">
                   Selected Package:{' '}
-                  <strong className="text-[#111827]">
+                  <strong className="text-[#E5A93C]">
                     {selectedPkg.name} ({selectedPkg.price})
                   </strong>
-                  . Next steps: Darnley reviews your goals, sends your{' '}
-                  <strong className="text-[#111827]">1-Page Project Agreement</strong>, and
-                  your build date locks upon receipt of your{' '}
-                  <strong className="text-[#111827]">{selectedPkg.deposit}</strong> via{' '}
+                  . Next steps: Darnley reviews your brief, sends your{' '}
+                  <strong className="text-white">1-Page Project Agreement</strong>, and locks your build slot upon receipt of{' '}
+                  <strong className="text-white">{selectedPkg.deposit}</strong> via{' '}
                   {depositMethod === 'interac'
                     ? 'Interac e-Transfer'
                     : 'PayPal Invoice'}
                   .
                 </p>
 
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-black/10 bg-white p-4">
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border border-white/15 bg-[#060608] p-4">
                   <div>
-                    <p className="text-[11px] font-bold tracking-wider uppercase text-[#6B7280]">
+                    <p className="font-mono-hud text-[10px] tracking-[0.14em] uppercase text-[#9CA3AF]">
                       Official Interac &amp; Kickoff Email
                     </p>
-                    <p className="text-sm font-extrabold text-[#111827]">
+                    <p className="mt-0.5 font-mono-hud text-sm font-bold text-white">
                       {STUDIO_CONTACT.email}
                     </p>
                   </div>
@@ -239,7 +239,7 @@ export function GatewayBookingModal({
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-[#111827] px-4 py-2 text-xs font-bold text-white hover:bg-[#E95004]"
+                    className="inline-flex cursor-pointer items-center gap-1.5 bg-[#E95004] px-4 py-2 font-mono-hud text-[10px] font-bold uppercase text-white hover:bg-[#FF5500]"
                   >
                     {copiedEmail ? (
                       <Check className="h-3.5 w-3.5" />
@@ -253,14 +253,14 @@ export function GatewayBookingModal({
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a
                     href={mailtoBrief}
-                    className="inline-flex items-center gap-2 rounded-full bg-[#E95004] px-5 py-2.5 text-xs font-bold text-white hover:bg-[#FF5500]"
+                    className="inline-flex items-center gap-2 bg-[#E95004] px-5 py-2.5 font-mono-hud text-xs font-bold uppercase text-white hover:bg-[#FF5500]"
                   >
                     <Mail className="h-3.5 w-3.5" />
                     <span>Open Email Backup</span>
                   </a>
                   <a
                     href={STUDIO_CONTACT.phoneHref}
-                    className="inline-flex items-center gap-2 rounded-full border border-black/12 bg-white px-5 py-2.5 text-xs font-bold text-[#111827] hover:border-[#E95004]"
+                    className="inline-flex items-center gap-2 border border-white/20 px-5 py-2.5 font-mono-hud text-xs font-bold uppercase text-white hover:border-[#E95004]"
                   >
                     <Phone className="h-3.5 w-3.5 text-[#E95004]" />
                     <span>Call {STUDIO_CONTACT.phoneDisplay}</span>
@@ -268,7 +268,7 @@ export function GatewayBookingModal({
                   <button
                     type="button"
                     onClick={() => setSubmitted(false)}
-                    className="cursor-pointer rounded-full px-4 py-2.5 text-xs font-semibold text-[#6B7280] hover:text-[#111827]"
+                    className="cursor-pointer px-4 py-2.5 font-mono-hud text-xs uppercase text-[#9CA3AF] hover:text-white"
                   >
                     Edit Details
                   </button>
@@ -278,10 +278,10 @@ export function GatewayBookingModal({
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* 1. Package Tier Picker */}
                 <div>
-                  <p className="mb-2 text-xs font-extrabold tracking-wider uppercase text-[#4B5563]">
-                    1 · Pick Your Sprint Scope
+                  <p className="mb-2 font-mono-hud text-[10px] tracking-[0.16em] uppercase text-[#9CA3AF]">
+                    1 · PICK YOUR SPRINT SCOPE
                   </p>
-                  <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                     {EXPRESS_MODAL_PACKAGES.map((pkg) => {
                       const active = pkg.id === config.tier;
                       return (
@@ -289,19 +289,19 @@ export function GatewayBookingModal({
                           key={pkg.id}
                           type="button"
                           onClick={() => onChangeTier(pkg.id)}
-                          className={`cursor-pointer rounded-2xl border p-3 text-left transition-all ${
+                          className={`cursor-pointer border p-3 text-left transition-colors ${
                             active
-                              ? 'border-[#E95004] bg-[#FFF7F3] shadow-xs'
-                              : 'border-black/10 bg-white hover:border-black/25'
+                              ? 'border-[#E95004] bg-[#E95004]/15'
+                              : 'border-white/[0.1] bg-[#060608] hover:border-white/30'
                           }`}
                         >
-                          <p className="text-xs font-extrabold text-[#E95004]">
+                          <p className="font-mono-hud text-[10px] font-bold uppercase text-[#E5A93C]">
                             {pkg.name}
                           </p>
-                          <p className="mt-0.5 text-sm font-black text-[#111827]">
+                          <p className="mt-0.5 font-syne text-sm font-extrabold text-white">
                             {pkg.price}
                           </p>
-                          <p className="text-[11px] text-[#6B7280]">{pkg.timeline}</p>
+                          <p className="font-mono-hud text-[10px] text-[#9CA3AF]">{pkg.timeline}</p>
                         </button>
                       );
                     })}
@@ -313,7 +313,7 @@ export function GatewayBookingModal({
                   <div>
                     <label
                       htmlFor="modal-focus"
-                      className="mb-1.5 block text-xs font-bold text-[#374151]"
+                      className="mb-1.5 block font-mono-hud text-[10px] uppercase text-[#9CA3AF]"
                     >
                       Project Focus
                     </label>
@@ -321,7 +321,7 @@ export function GatewayBookingModal({
                       id="modal-focus"
                       value={focusArea}
                       onChange={(e) => setFocusArea(e.target.value)}
-                      className="w-full rounded-xl border border-black/12 bg-[#F9FAFB] px-3.5 py-2.5 text-sm font-medium text-[#111827] outline-none focus:border-[#E95004]"
+                      className="w-full border border-white/15 bg-[#060608] px-3.5 py-2.5 text-sm text-white outline-none focus:border-[#E95004]"
                     >
                       {!FOCUS_OPTIONS.includes(focusArea) && (
                         <option value={focusArea}>{focusArea}</option>
@@ -335,17 +335,17 @@ export function GatewayBookingModal({
                   </div>
 
                   <div>
-                    <p className="mb-1.5 text-xs font-bold text-[#374151]">
+                    <p className="mb-1.5 font-mono-hud text-[10px] uppercase text-[#9CA3AF]">
                       Preferred Kickoff Deposit Rail
                     </p>
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         type="button"
                         onClick={() => setDepositMethod('interac')}
-                        className={`cursor-pointer rounded-xl border px-3 py-2.5 text-xs font-bold transition-colors ${
+                        className={`cursor-pointer border px-3 py-2.5 font-mono-hud text-[11px] font-bold uppercase transition-colors ${
                           depositMethod === 'interac'
-                            ? 'border-[#E95004] bg-[#FFF7F3] text-[#E95004]'
-                            : 'border-black/12 bg-white text-[#4B5563]'
+                            ? 'border-[#E95004] bg-[#E95004]/15 text-[#FF781F]'
+                            : 'border-white/15 bg-[#060608] text-[#9CA3AF]'
                         }`}
                       >
                         Interac (CAD)
@@ -353,14 +353,14 @@ export function GatewayBookingModal({
                       <button
                         type="button"
                         onClick={() => setDepositMethod('paypal')}
-                        className={`inline-flex cursor-pointer items-center justify-center gap-1 rounded-xl border px-3 py-2.5 text-xs font-bold transition-colors ${
+                        className={`inline-flex cursor-pointer items-center justify-center gap-1 border px-3 py-2.5 font-mono-hud text-[11px] font-bold uppercase transition-colors ${
                           depositMethod === 'paypal'
-                            ? 'border-[#E95004] bg-[#FFF7F3] text-[#E95004]'
-                            : 'border-black/12 bg-white text-[#4B5563]'
+                            ? 'border-[#E95004] bg-[#E95004]/15 text-[#FF781F]'
+                            : 'border-white/15 bg-[#060608] text-[#9CA3AF]'
                         }`}
                       >
                         <CreditCard className="h-3.5 w-3.5" />
-                        <span>PayPal Invoice</span>
+                        <span>PayPal</span>
                       </button>
                     </div>
                   </div>
@@ -371,7 +371,7 @@ export function GatewayBookingModal({
                   <div>
                     <label
                       htmlFor="modal-client-name"
-                      className="mb-1.5 block text-xs font-bold text-[#374151]"
+                      className="mb-1.5 block font-mono-hud text-[10px] uppercase text-[#9CA3AF]"
                     >
                       Your Name
                     </label>
@@ -382,13 +382,13 @@ export function GatewayBookingModal({
                       placeholder="Alex Mercer"
                       value={clientName}
                       onChange={(e) => setClientName(e.target.value)}
-                      className="w-full rounded-xl border border-black/12 bg-[#F9FAFB] px-3.5 py-2.5 text-sm outline-none focus:border-[#E95004]"
+                      className="w-full border border-white/15 bg-[#060608] px-3.5 py-2.5 text-sm text-white placeholder-[#6B7280] outline-none focus:border-[#E95004]"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="modal-business"
-                      className="mb-1.5 block text-xs font-bold text-[#374151]"
+                      className="mb-1.5 block font-mono-hud text-[10px] uppercase text-[#9CA3AF]"
                     >
                       Business / Brand Name
                     </label>
@@ -399,7 +399,7 @@ export function GatewayBookingModal({
                       placeholder="Your Restaurant, Studio, or Brand"
                       value={businessName}
                       onChange={(e) => setBusinessName(e.target.value)}
-                      className="w-full rounded-xl border border-black/12 bg-[#F9FAFB] px-3.5 py-2.5 text-sm outline-none focus:border-[#E95004]"
+                      className="w-full border border-white/15 bg-[#060608] px-3.5 py-2.5 text-sm text-white placeholder-[#6B7280] outline-none focus:border-[#E95004]"
                     />
                   </div>
                 </div>
@@ -408,7 +408,7 @@ export function GatewayBookingModal({
                   <div>
                     <label
                       htmlFor="modal-email"
-                      className="mb-1.5 block text-xs font-bold text-[#374151]"
+                      className="mb-1.5 block font-mono-hud text-[10px] uppercase text-[#9CA3AF]"
                     >
                       Email Address
                     </label>
@@ -419,13 +419,13 @@ export function GatewayBookingModal({
                       placeholder="you@yourbrand.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full rounded-xl border border-black/12 bg-[#F9FAFB] px-3.5 py-2.5 text-sm outline-none focus:border-[#E95004]"
+                      className="w-full border border-white/15 bg-[#060608] px-3.5 py-2.5 text-sm text-white placeholder-[#6B7280] outline-none focus:border-[#E95004]"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="modal-phone"
-                      className="mb-1.5 block text-xs font-bold text-[#374151]"
+                      className="mb-1.5 block font-mono-hud text-[10px] uppercase text-[#9CA3AF]"
                     >
                       Phone / Text Number
                     </label>
@@ -436,7 +436,7 @@ export function GatewayBookingModal({
                       placeholder="(613) 555-0148"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full rounded-xl border border-black/12 bg-[#F9FAFB] px-3.5 py-2.5 text-sm outline-none focus:border-[#E95004]"
+                      className="w-full border border-white/15 bg-[#060608] px-3.5 py-2.5 text-sm text-white placeholder-[#6B7280] outline-none focus:border-[#E95004]"
                     />
                   </div>
                 </div>
@@ -444,7 +444,7 @@ export function GatewayBookingModal({
                 <div>
                   <label
                     htmlFor="modal-notes"
-                    className="mb-1.5 block text-xs font-bold text-[#374151]"
+                    className="mb-1.5 block font-mono-hud text-[10px] uppercase text-[#9CA3AF]"
                   >
                     Tell Us What You Want To Launch
                   </label>
@@ -454,24 +454,24 @@ export function GatewayBookingModal({
                     placeholder="Share your website goals, launch date, or current bottleneck..."
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    className="w-full rounded-xl border border-black/12 bg-[#F9FAFB] px-3.5 py-2.5 text-sm outline-none focus:border-[#E95004]"
+                    className="w-full border border-white/15 bg-[#060608] px-3.5 py-2.5 text-sm text-white placeholder-[#6B7280] outline-none focus:border-[#E95004]"
                   />
                 </div>
 
                 {/* Kickoff Footer Strip */}
-                <div className="rounded-2xl bg-[#F9FAFB] p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                    <span className="font-semibold text-[#4B5563]">
-                      Zero Surprises · 1-Page Agreement + 50% Kickoff Deposit:
+                <div className="border border-white/[0.1] bg-[#060608] p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2 font-mono-hud text-[11px]">
+                    <span className="text-[#9CA3AF]">
+                      1-Page Agreement + 50% Kickoff Deposit:
                     </span>
-                    <span className="font-extrabold text-[#E95004]">
+                    <span className="font-bold text-[#E5A93C]">
                       {selectedPkg.deposit}
                     </span>
                   </div>
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="mt-3 w-full cursor-pointer rounded-full bg-[#E95004] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#FF5500] disabled:opacity-60"
+                    className="mt-3 w-full cursor-pointer bg-[#E95004] px-6 py-3.5 font-mono-hud text-xs font-bold tracking-[0.14em] uppercase text-white transition-colors hover:bg-[#FF5500] disabled:opacity-60"
                   >
                     {submitting
                       ? 'Locking Sprint Request...'
@@ -483,10 +483,10 @@ export function GatewayBookingModal({
           </div>
         )}
 
-        {/* PATH B: LIVE PUBLISHED SAAS PLATFORMS (NO REDESIGN NEEDED) */}
+        {/* PATH B: LIVE PUBLISHED BASE44 PLATFORMS (UNCHANGED) */}
         {config.path === 'saas' && (
           <div className="mt-6 space-y-5">
-            <div className="flex gap-2">
+            <div className="grid grid-cols-2 border border-white/[0.12] bg-[#060608]">
               {LIVE_SAAS_PLATFORMS.map((platform) => {
                 const active = platform.id === selectedPlatform.id;
                 return (
@@ -494,16 +494,16 @@ export function GatewayBookingModal({
                     key={platform.id}
                     type="button"
                     onClick={() => onChangeSaas(platform.id)}
-                    className={`flex-1 cursor-pointer rounded-2xl border p-3.5 text-left transition-all ${
+                    className={`cursor-pointer border-r border-white/[0.1] p-3.5 text-left last:border-r-0 transition-colors ${
                       active
-                        ? 'border-[#E95004] bg-[#FFF7F3]'
-                        : 'border-black/10 bg-[#F9FAFB] hover:border-black/25'
+                        ? 'bg-[#E95004]/15 border-b-2 border-b-[#E95004]'
+                        : 'hover:bg-white/[0.03]'
                     }`}
                   >
-                    <p className="text-[11px] font-bold uppercase text-[#E95004]">
-                      Platform {platform.code}
+                    <p className="font-mono-hud text-[10px] font-bold uppercase text-[#E5A93C]">
+                      Base44 Platform {platform.code}
                     </p>
-                    <p className="mt-0.5 text-base font-extrabold text-[#111827]">
+                    <p className="mt-0.5 font-syne text-base font-extrabold text-white">
                       {platform.name}
                     </p>
                   </button>
@@ -511,26 +511,26 @@ export function GatewayBookingModal({
               })}
             </div>
 
-            <div className="overflow-hidden rounded-3xl border border-black/[0.08] bg-[#F9FAFB]">
+            <div className="border border-white/[0.12] bg-[#060608]">
               <img
                 src={selectedPlatform.image}
                 alt={selectedPlatform.name}
-                className="h-52 w-full object-cover object-top"
+                className="h-52 w-full border-b border-white/[0.08] object-cover object-top"
               />
               <div className="p-6">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="text-xl font-extrabold text-[#111827]">
+                  <h3 className="font-syne text-xl font-extrabold text-white">
                     {selectedPlatform.name}
                   </h3>
-                  <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+                  <span className="border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 font-mono-hud text-[10px] font-bold uppercase text-emerald-300">
                     {selectedPlatform.badge}
                   </span>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-[#4B5563]">
+                <p className="mt-2 text-sm leading-relaxed text-[#D1D5DB]">
                   {selectedPlatform.summary}
                 </p>
 
-                <ul className="mt-4 space-y-2 text-xs text-[#374151]">
+                <ul className="mt-4 space-y-2 text-xs text-[#D1D5DB]">
                   {selectedPlatform.highlights.map((item) => (
                     <li key={item} className="flex items-start gap-2">
                       <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#E95004]" />
@@ -544,7 +544,7 @@ export function GatewayBookingModal({
                     href={selectedPlatform.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#E95004] px-6 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#FF5500]"
+                    className="inline-flex items-center gap-2 bg-[#E95004] px-6 py-3 font-mono-hud text-xs font-bold uppercase text-white transition-colors hover:bg-[#FF5500]"
                   >
                     <span>Open {selectedPlatform.name} Live</span>
                     <ExternalLink className="h-4 w-4" />
@@ -557,9 +557,9 @@ export function GatewayBookingModal({
                       onChangeTier('cypher');
                       setFocusArea(`White-Label / Event Customization for ${selectedPlatform.name}`);
                     }}
-                    className="cursor-pointer rounded-full border border-black/12 bg-white px-5 py-3 text-xs font-bold text-[#111827] hover:border-[#E95004] hover:text-[#E95004]"
+                    className="cursor-pointer border border-white/20 px-5 py-3 font-mono-hud text-xs font-bold uppercase text-white transition-colors hover:border-[#E5A93C] hover:text-[#E5A93C]"
                   >
-                    Book White-Label Event Setup →
+                    Book Venue / Sponsor Setup →
                   </button>
                 </div>
               </div>

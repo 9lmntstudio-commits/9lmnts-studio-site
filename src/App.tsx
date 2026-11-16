@@ -37,7 +37,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F6F8] text-[#111827]">
+    <div className="min-h-screen bg-[#060608] text-[#F3F4F6] selection:bg-[#FF5500] selection:text-white">
       <StickyPearlHeader onOpenModal={openModal} />
 
       <main>

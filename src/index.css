@@ -55,3 +55,58 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+
+/* ============================================================================
+   9LMNTS STUDIO FLAGSHIP V4 — SOLARIUM x KAISEKI 3D CINEMA TOKENS & UTILITIES
+   Below the Behance Flame Orange Hero: #060608 Obsidian Void + 0px Hairlines
+   ============================================================================ */
+
+:root {
+  --obsidian-void: #060608;
+  --obsidian-surface: #0d0d12;
+  --obsidian-panel: #131316;
+  --flame-orange: #e95004;
+  --flame-neon: #ff5500;
+  --kemet-gold: #e5a93c;
+  --hairline-ghost: rgba(255, 255, 255, 0.08);
+  --hairline-active: rgba(233, 80, 4, 0.35);
+}
+
+html,
+body {
+  background-color: #060608 !important;
+  color: #f3f4f6;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.font-syne {
+  font-family: 'Syne', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.font-editorial-serif {
+  font-family: 'EB Garamond', Georgia, serif;
+}
+
+.font-mono-hud {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+.solarium-hairline {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0px;
+}
+
+.solarium-hairline-active {
+  border: 1px solid rgba(233, 80, 4, 0.35);
+  border-radius: 0px;
+}
+
+.kaiseki-stage {
+  background-color: #060608;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+}

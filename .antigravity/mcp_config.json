@@ -1,25 +1,16 @@
 {
   "mcpServers": {
-    "stitch": {
-      "command": "npx",
-      "args": ["-y", "@google/stitch-mcp"],
-      "env": {
-        "STITCH_API_KEY": "${STITCH_API_KEY}"
-      }
+    "9lmnts-agents": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\Darnl\\Downloads\\9LMNTS Studio cyber V2\\scripts\\mcp-9lmnts-agents.mjs"
+      ]
     },
-    "notebooklm": {
-      "command": "npx",
-      "args": ["-y", "@google/notebooklm-mcp"],
-      "env": {
-        "NOTEBOOKLM_API_KEY": "${NOTEBOOKLM_API_KEY}"
-      }
-    },
-    "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
-      }
+    "google-creative-studio": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\Darnl\\OneDrive\\Documents\\Desktop\\9LMNTS-Site\\scripts\\mcp-google-creative-studio.mjs"
+      ]
     }
   }
 }
