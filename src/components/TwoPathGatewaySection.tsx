@@ -1,3 +1,5 @@
+import { useRef, type ReactNode } from 'react';
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight, CheckCircle2, ExternalLink, Layers, Sparkles } from 'lucide-react';
 import { LIVE_SAAS_PLATFORMS } from '../data/agencyData';
 
@@ -9,6 +11,56 @@ interface TwoPathGatewaySectionProps {
   }) => void;
 }
 
+function GatewayDepthCard({
+  children,
+  className = '',
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const smoothX = useSpring(pointerX, { stiffness: 150, damping: 22 });
+  const smoothY = useSpring(pointerY, { stiffness: 150, damping: 22 });
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'center center'],
+  });
+
+  const scrollScale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+  const scrollY = useTransform(scrollYProgress, [0, 1], [28, 0]);
+  const rotateX = useTransform(smoothY, [-0.5, 0.5], [2.5, -2.5]);
+  const rotateY = useTransform(smoothX, [-0.5, 0.5], [-3.5, 3.5]);
+
+  return (
+    <div ref={cardRef} style={{ perspective: 1400 }}>
+      <motion.div
+        style={{
+          scale: scrollScale,
+          y: scrollY,
+          rotateX,
+          rotateY,
+          transformStyle: 'preserve-3d',
+        }}
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          pointerX.set((e.clientX - rect.left) / rect.width - 0.5);
+          pointerY.set((e.clientY - rect.top) / rect.height - 0.5);
+        }}
+        onMouseLeave={() => {
+          pointerX.set(0);
+          pointerY.set(0);
+        }}
+        className={`will-change-transform ${className}`}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
 export function TwoPathGatewaySection({ onOpenModal }: TwoPathGatewaySectionProps) {
   return (
     <section id="gateways" className="bg-[#F5F6F8] px-5 py-16 sm:px-8 sm:py-24">
@@ -17,7 +69,7 @@ export function TwoPathGatewaySection({ onOpenModal }: TwoPathGatewaySectionProp
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-2xl">
             <p className="text-xs font-extrabold tracking-[0.16em] uppercase text-[#E95004]">
-              2-Option Customer Gateway
+              2-Option Customer Gateway · 2.5D Scrollytelling Architecture
             </p>
             <h2 className="mt-2.5 text-3xl font-extrabold tracking-tight text-[#111827] sm:text-5xl">
               Crafted For Scale &amp; Independence
@@ -28,17 +80,19 @@ export function TwoPathGatewaySection({ onOpenModal }: TwoPathGatewaySectionProp
           </p>
         </div>
 
-        {/* Two Elevated Pearl Cards */}
+        {/* Two Elevated Pearl Cards with 2.5D Scroll Scale + Pointer Micro-Tilt */}
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
           {/* Option 1: Agency Services */}
-          <div className="pearl-card flex flex-col justify-between rounded-[28px] p-7 transition-shadow hover:shadow-[0_24px_60px_-18px_rgba(17,24,39,0.12)] sm:p-9">
+          <GatewayDepthCard className="pearl-card flex h-full flex-col justify-between rounded-[28px] p-7 transition-shadow hover:shadow-[0_24px_60px_-18px_rgba(17,24,39,0.14)] sm:p-9">
             <div>
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center justify-between gap-3">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FFF2EB] px-3.5 py-1 text-xs font-bold text-[#E95004]">
                   <Sparkles className="h-3.5 w-3.5" />
                   Option 01 · Agency Services
                 </span>
-                <span className="text-xs font-semibold text-[#6B7280]">5–14 Day Sprints</span>
+                <span className="rounded-full border border-[#E95004]/25 bg-white px-2.5 py-0.5 text-[11px] font-bold text-[#374151]">
+                  2.5D Scrollytelling Ready · 5–14 Days
+                </span>
               </div>
 
               <h3 className="mt-5 text-2xl font-extrabold tracking-tight text-[#111827] sm:text-3xl">
@@ -80,19 +134,19 @@ export function TwoPathGatewaySection({ onOpenModal }: TwoPathGatewaySectionProp
                 Compare packages
               </a>
             </div>
-          </div>
+          </GatewayDepthCard>
 
           {/* Option 2: Live Published SaaS Platforms */}
-          <div className="pearl-card flex flex-col justify-between rounded-[28px] p-7 transition-shadow hover:shadow-[0_24px_60px_-18px_rgba(17,24,39,0.12)] sm:p-9">
+          <GatewayDepthCard className="pearl-card flex h-full flex-col justify-between rounded-[28px] p-7 transition-shadow hover:shadow-[0_24px_60px_-18px_rgba(17,24,39,0.14)] sm:p-9">
             <div>
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center justify-between gap-3">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold text-emerald-700">
                   <span className="h-2 w-2 rounded-full bg-emerald-500" />
                   Option 02 · Live SaaS Systems
                 </span>
-                <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#6B7280]">
+                <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-white px-2.5 py-0.5 text-[11px] font-bold text-[#374151]">
                   <Layers className="h-3.5 w-3.5 text-[#E95004]" />
-                  Ready Today
+                  2.5D Scrollytelling · Ready Today
                 </span>
               </div>
 
@@ -157,7 +211,7 @@ export function TwoPathGatewaySection({ onOpenModal }: TwoPathGatewaySectionProp
                 <ArrowUpRight className="h-4 w-4" />
               </button>
             </div>
-          </div>
+          </GatewayDepthCard>
         </div>
       </div>
     </section>

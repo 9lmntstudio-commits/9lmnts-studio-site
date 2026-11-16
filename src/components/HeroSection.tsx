@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight, ChevronLeft, ChevronRight, Grid, Menu, Star, X } from 'lucide-react';
 import { HERO_SERVICE_PILLS, LIVE_SAAS_PLATFORMS, STUDIO_CONTACT } from '../data/agencyData';
 
@@ -16,6 +17,34 @@ export function HeroSection({ onOpenModal }: HeroSectionProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [ottawaTime, setOttawaTime] = useState(() => formatOttawaTime());
 
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothMouseX = useSpring(mouseX, { stiffness: 120, damping: 24 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 120, damping: 24 });
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  // 2.5D Virtual Camera Rig transforms across deep background, focal portrait, and foreground bokeh
+  const beamScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
+  const beamY = useTransform(scrollYProgress, [0, 1], [0, -28]);
+  const beamX = useTransform(smoothMouseX, [-0.5, 0.5], [14, -14]);
+
+  const portraitScale = useTransform(scrollYProgress, [0, 1], [1, 1.09]);
+  const portraitY = useTransform(scrollYProgress, [0, 1], [0, 28]);
+  const portraitRotateX = useTransform(smoothMouseY, [-0.5, 0.5], [2.5, -2.5]);
+  const portraitRotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-3.5, 3.5]);
+
+  // Foreground out-of-focus particles moving at ~1.45x opposite pan speed for binocular parallax
+  const bokehX = useTransform(smoothMouseX, [-0.5, 0.5], [-38, 38]);
+  const bokehY = useTransform(scrollYProgress, [0, 1], [0, -56]);
+
+  const cardRotateX = useTransform(smoothMouseY, [-0.5, 0.5], [3, -3]);
+  const cardRotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-3.5, 3.5]);
+
   useEffect(() => {
     const id = window.setInterval(() => {
       setOttawaTime(formatOttawaTime());
@@ -27,36 +56,73 @@ export function HeroSection({ onOpenModal }: HeroSectionProps) {
 
   return (
     <section
+      ref={sectionRef}
       id="top"
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+        mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+      }}
+      onMouseLeave={() => {
+        mouseX.set(0);
+        mouseY.set(0);
+      }}
       className="hero-sunset-canvas relative min-h-[780px] w-full overflow-hidden text-white lg:min-h-[860px]"
     >
-      {/* Subtle diagonal studio light beams matching the Behance inspiration */}
-      <div
+      {/* Layer 0: Deep studio light beams with scroll camera push */}
+      <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-45"
+        className="pointer-events-none absolute inset-0 opacity-45 will-change-transform"
         style={{
+          scale: beamScale,
+          x: beamX,
+          y: beamY,
           background:
             'linear-gradient(125deg, rgba(255,180,90,0.38) 0%, rgba(233,80,4,0) 42%, rgba(120,25,0,0.32) 100%)',
         }}
       />
 
-      {/* Desktop Focal Portrait Layer (Darnley Sanon wearing black 9LMNTS STUDIO Service Modules hoodie) */}
+      {/* Layer 1: Desktop Focal Portrait with 2.5D Virtual Camera Rig + 3D Mouse Tilt */}
       <div
         aria-hidden="true"
+        style={{ perspective: 1400 }}
         className="pointer-events-none hidden lg:absolute lg:inset-x-0 lg:bottom-0 lg:top-0 lg:flex lg:items-end lg:justify-center lg:pt-8"
       >
-        <img
-          src="/assets/hero-darnley-orange.jpg"
-          alt="Darnley Sanon, Founder and Creative Director of 9LMNTS Studio"
-          className="h-[95%] w-auto max-w-none object-cover object-[50%_14%] select-none"
+        <motion.div
           style={{
-            WebkitMaskImage:
-              'radial-gradient(66% 86% at 50% 48%, #000 58%, rgba(0,0,0,0.75) 74%, transparent 98%)',
-            maskImage:
-              'radial-gradient(66% 86% at 50% 48%, #000 58%, rgba(0,0,0,0.75) 74%, transparent 98%)',
+            scale: portraitScale,
+            y: portraitY,
+            rotateX: portraitRotateX,
+            rotateY: portraitRotateY,
+            transformStyle: 'preserve-3d',
           }}
-        />
+          className="flex h-full items-end justify-center will-change-transform"
+        >
+          <img
+            src="/assets/hero-darnley-orange.jpg"
+            alt="Darnley Sanon, Founder and Creative Director of 9LMNTS Studio"
+            className="h-[95%] w-auto max-w-none object-cover object-[50%_14%] select-none"
+            style={{
+              WebkitMaskImage:
+                'radial-gradient(66% 86% at 50% 48%, #000 58%, rgba(0,0,0,0.75) 74%, transparent 98%)',
+              maskImage:
+                'radial-gradient(66% 86% at 50% 48%, #000 58%, rgba(0,0,0,0.75) 74%, transparent 98%)',
+            }}
+          />
+        </motion.div>
       </div>
+
+      {/* Layer 2: Foreground Out-of-Focus Studio Bokeh Particles (1.45x Parallax Depth) */}
+      <motion.div
+        aria-hidden="true"
+        style={{ x: bokehX, y: bokehY, filter: 'blur(4px)' }}
+        className="pointer-events-none absolute inset-0 z-10 hidden will-change-transform lg:block"
+      >
+        <span className="absolute top-[18%] left-[28%] h-4 w-4 rounded-full bg-[#FFD6A5]/35" />
+        <span className="absolute top-[62%] left-[19%] h-6 w-6 rounded-full bg-white/15" />
+        <span className="absolute top-[26%] right-[24%] h-5 w-5 rounded-full bg-[#FFE0B2]/30" />
+        <span className="absolute bottom-[24%] right-[31%] h-3.5 w-3.5 rounded-full bg-white/25" />
+      </motion.div>
 
       {/* Main Content Grid Overlay */}
       <div className="relative z-20 mx-auto flex min-h-[780px] max-w-[1440px] flex-col justify-between px-5 pt-5 pb-7 sm:px-8 lg:min-h-[860px] lg:px-12 lg:pt-7 lg:pb-10">
@@ -234,8 +300,16 @@ export function HeroSection({ onOpenModal }: HeroSectionProps) {
             </div>
           </div>
 
-          {/* Right Column: Frosted JOIN US QR Card + Interactive Live SaaS 01/02 Card */}
-          <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-end lg:col-span-4 lg:flex-row lg:items-center lg:justify-end">
+          {/* Right Column: Frosted JOIN US QR Card + Interactive Live SaaS 01/02 Card with 2.5D Depth */}
+          <div style={{ perspective: 1400 }} className="lg:col-span-4">
+            <motion.div
+              style={{
+                rotateX: cardRotateX,
+                rotateY: cardRotateY,
+                transformStyle: 'preserve-3d',
+              }}
+              className="flex flex-col items-start gap-5 will-change-transform sm:flex-row sm:items-end lg:flex-row lg:items-center lg:justify-end"
+            >
             {/* JOIN US QR Card */}
             <button
               type="button"
@@ -325,6 +399,7 @@ export function HeroSection({ onOpenModal }: HeroSectionProps) {
                 <span aria-hidden="true">→</span>
               </button>
             </div>
+            </motion.div>
           </div>
         </div>
 

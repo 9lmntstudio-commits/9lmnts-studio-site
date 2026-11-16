@@ -2,7 +2,7 @@ import { ArrowUpRight, Check, ShieldCheck } from 'lucide-react';
 import { PRICING_TIERS } from '../data/pillarsData';
 
 interface PricingShowcaseProps {
-  onOpenBook: (presetNiche?: string, presetTier?: 'spark' | 'flow' | 'cypher') => void;
+  onOpenBook: (presetNiche?: string, presetTier?: 'spark' | 'flow' | 'beat' | 'cypher') => void;
 }
 
 export function PricingShowcase({ onOpenBook }: PricingShowcaseProps) {
@@ -41,14 +41,14 @@ export function PricingShowcase({ onOpenBook }: PricingShowcaseProps) {
         </div>
 
         {/* Pure Typographic Hairline Columns — ZERO Bento Boxes */}
-        <div className="grid grid-cols-1 divide-y divide-white/10 border-b border-white/10 lg:grid-cols-3 lg:divide-x lg:divide-y-0">
+        <div className="grid grid-cols-1 divide-y divide-white/10 border-b border-white/10 lg:grid-cols-4 lg:divide-x lg:divide-y-0">
           {PRICING_TIERS.map((tier, idx) => {
             const isPopular = Boolean(tier.badge);
             return (
               <div
                 key={tier.id}
                 className={`flex flex-col justify-between py-10 lg:px-8 ${
-                  idx === 0 ? 'lg:pl-0' : idx === 2 ? 'lg:pr-0' : ''
+                  idx === 0 ? 'lg:pl-0' : idx === PRICING_TIERS.length - 1 ? 'lg:pr-0' : ''
                 }`}
               >
                 <div>

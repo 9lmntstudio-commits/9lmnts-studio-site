@@ -11,7 +11,7 @@ export interface UnifiedPillar {
   metrics: string[];
   deliverables: string[];
   idealFor: string;
-  recommendedTierId: 'spark' | 'flow' | 'cypher';
+  recommendedTierId: 'spark' | 'flow' | 'beat' | 'cypher';
   recommendedNiche: string;
 }
 
@@ -23,7 +23,7 @@ export interface NineElementItem {
 }
 
 export interface PricingTier {
-  id: 'spark' | 'flow' | 'cypher';
+  id: 'spark' | 'flow' | 'beat' | 'cypher';
   code: string;
   name: string;
   badge?: string;
@@ -187,47 +187,62 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     id: 'spark',
     code: 'TIER 01 // DROP-IN OR EXPRESS',
-    name: 'SPARK',
+    name: 'Spark Drop-In',
     price: '$500 CAD',
     deposit: '$250 CAD (50% Deposit)',
-    turnaround: '48-Hour Delivery',
+    turnaround: '48 Hours',
     idealClient: 'Existing websites needing instant conversion power',
     bullets: [
       'Express Single-Offer Landing Page OR Modular Booking / Catering Calculator Widget embedded into your existing site',
       'Instant webhook lead notifications via SMS & Email',
       '60-Second Mobile Friction Audit + speed fixes included',
     ],
-    ctaLabel: 'Launch SPARK ($500)',
+    ctaLabel: 'Launch Spark ($500)',
   },
   {
     id: 'flow',
-    code: 'TIER 02 // MOST POPULAR',
-    name: 'FLOW',
-    badge: 'Most Popular',
-    price: '$1,500 – $2,200 CAD',
-    deposit: '$750 – $1,100 CAD (50% Deposit)',
-    turnaround: '3–7 Day Sprint',
-    idealClient: 'Restaurants, cafés, streetwear drops & local services',
+    code: 'TIER 02 // FAST LAUNCH',
+    name: 'Flow Sprint',
+    price: '$1,500 CAD',
+    deposit: '$750 CAD (50% Deposit)',
+    turnaround: '5–7 Days',
+    idealClient: 'Restaurants, cafés & local service businesses launching fast',
     bullets: [
       'Custom Brand Chameleon website built in your authentic colour palette (zero templates)',
       'Native PayPal Complete Payments (PayPal, Pay Later 4x, Apple Pay & Cards · 0% agency fee)',
       'Interactive menu/catalog switcher + automated AI lead intake & local SEO schema',
     ],
-    ctaLabel: 'Book FLOW Sprint',
+    ctaLabel: 'Book Flow ($1,500)',
+  },
+  {
+    id: 'beat',
+    code: 'TIER 03 // MOST POPULAR',
+    name: 'Beat Sprint',
+    badge: 'Most Popular',
+    price: '$3,000 CAD',
+    deposit: '$1,500 CAD (50% Deposit)',
+    turnaround: '1–2 Weeks',
+    idealClient: 'Growing hospitality venues, streetwear drops & flagship local brands',
+    bullets: [
+      'Everything in Flow Sprint, expanded up to 10 tailored sections/pages',
+      'Complete custom brand identity system, typography & photography art direction',
+      'Interactive menu, showcase tabs, 50% deposit automation & handover walkthrough',
+    ],
+    ctaLabel: 'Book Beat ($3,000)',
   },
   {
     id: 'cypher',
-    code: 'TIER 03 // FLAGSHIP OS',
-    name: 'CYPHER',
-    price: '$3,000 – $5,000 CAD',
-    deposit: '$1,500 – $2,500 CAD (50% Deposit)',
-    turnaround: '10–14 Day Build',
-    idealClient: 'Multi-location brands, flagship creators & live event promoters',
+    code: 'TIER 04 // FLAGSHIP OS',
+    name: 'Cypher OS',
+    price: '$5,000 CAD',
+    deposit: '$2,500 CAD (50% Deposit)',
+    turnaround: '2–3 Weeks',
+    idealClient: 'Multi-location brands, dual-pitch venues & live event promoters',
     bullets: [
       'Full Business-in-a-Box OS with database dashboard, client portal & multi-page UX',
-      'Custom 24/7 AI Voice / DM Concierge trained on your pricing, hours & inventory',
-      'Optional Sound Clash Arena, WebAR merch unlock ($450 add-on) & full design system',
+      'Custom 24/7 AI Voice / DM Concierge tuned to your hours, pricing & bilingual EN/FR/Kreyòl tone',
+      'Multi-location catering, ticketing, or SoundClash / Artist OS white-label integration',
     ],
-    ctaLabel: 'Reserve CYPHER OS',
+    ctaLabel: 'Reserve Cypher OS ($5,000)',
   },
 ];

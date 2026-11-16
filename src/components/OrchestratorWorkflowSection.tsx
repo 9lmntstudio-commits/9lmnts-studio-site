@@ -6,7 +6,7 @@ import { AmbientSymbolsLayer } from './AmbientSymbolsLayer';
 
 interface OrchestratorWorkflowSectionProps {
   onSelectPillar: (pillar: UnifiedPillar) => void;
-  onOpenBook: (presetNiche?: string, presetTier?: 'spark' | 'flow' | 'cypher') => void;
+  onOpenBook: (presetNiche?: string, presetTier?: 'spark' | 'flow' | 'beat' | 'cypher') => void;
 }
 
 export function OrchestratorWorkflowSection({

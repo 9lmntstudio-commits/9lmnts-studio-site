@@ -1,12 +1,13 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Check, Copy, CreditCard, Phone, Sparkles, X } from 'lucide-react';
+import { STUDIO_CONTACT } from '../data/agencyData';
 import { PRICING_TIERS } from '../data/pillarsData';
 
 interface BookBuildDrawerProps {
   isOpen: boolean;
   initialNiche?: string;
-  initialTier?: 'spark' | 'flow' | 'cypher';
+  initialTier?: 'spark' | 'flow' | 'beat' | 'cypher';
   onClose: () => void;
 }
 
@@ -25,7 +26,7 @@ export function BookBuildDrawer({
   initialTier,
   onClose,
 }: BookBuildDrawerProps) {
-  const [selectedTier, setSelectedTier] = useState<'spark' | 'flow' | 'cypher'>(
+  const [selectedTier, setSelectedTier] = useState<'spark' | 'flow' | 'beat' | 'cypher'>(
     initialTier || 'flow'
   );
   const [niche, setNiche] = useState(initialNiche || NICHES[0]);
@@ -68,9 +69,31 @@ export function BookBuildDrawer({
     }
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    try {
+      await fetch(STUDIO_CONTACT.webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: '9lmntsstudio.com-drawer',
+          path: 'agency',
+          package: `${activeTier.name} (${activeTier.price})`,
+          deposit: activeTier.deposit,
+          paymentPreference: paymentMethod,
+          focusArea: niche,
+          businessName,
+          email: contactEmail,
+          phone,
+          notes: careRetainer ? `${notes} [+$297/mo Growth Care]`.trim() : notes,
+          submittedAt: new Date().toISOString(),
+        }),
+      });
+    } catch {
+      // Non-blocking notification; instant confirmation still renders with direct Interac/email backup
+    } finally {
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -192,7 +215,7 @@ export function BookBuildDrawer({
                   <p className="mb-2.5 font-telemetry text-[11px] font-semibold tracking-wider uppercase text-zinc-400">
                     1 · Select Package Tier
                   </p>
-                  <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+                  <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                     {PRICING_TIERS.map((tier) => {
                       const active = selectedTier === tier.id;
                       return (

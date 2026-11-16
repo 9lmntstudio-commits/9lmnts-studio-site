@@ -7,7 +7,7 @@ interface PillarDetailModalProps {
   pillar: UnifiedPillar | null;
   showManifesto: boolean;
   onClose: () => void;
-  onOpenBook: (presetNiche?: string, presetTier?: 'spark' | 'flow' | 'cypher') => void;
+  onOpenBook: (presetNiche?: string, presetTier?: 'spark' | 'flow' | 'beat' | 'cypher') => void;
 }
 
 export function PillarDetailModal({
