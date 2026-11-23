@@ -65,7 +65,7 @@ export default function App() {
         <div className="mx-auto flex max-w-[1380px] flex-col items-start justify-between gap-8 px-6 sm:flex-row sm:items-center sm:px-12">
           <div className="space-y-2">
             <img
-              src="/brand/Letter Orange black.svg"
+              src="/brand/9LMNTS LOGO.svg"
               onError={(e) => {
                 e.currentTarget.src = '/brand/website nav logo.png';
               }}
@@ -166,3 +166,4 @@ export default function App() {
     </div>
   );
 }
+
