@@ -132,7 +132,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
               onClick={() => onOpenBooking?.('spark')}
               className="cursor-pointer rounded-full bg-[#FF5500] px-8 py-4 text-sm font-bold text-white shadow-[0_16px_32px_-8px_rgba(255,85,0,0.45)] transition hover:-translate-y-0.5 hover:bg-[#E04B00]"
             >
-              Lock 48-Hr Upgrade ($225 Deposit) →
+              Lock 48-Hr Upgrade ($500 One-Time) →
             </button>
             <a
               href="#pricing"

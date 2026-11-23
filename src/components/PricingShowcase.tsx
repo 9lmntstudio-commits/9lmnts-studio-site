@@ -26,7 +26,7 @@ const OFFERS: OfferCard[] = [
     name: '48-Hr Menu & Booking Upgrade',
     subtitle: 'Keep your current website — stop losing mobile orders & quotes.',
     price: '$500 CAD',
-    deposit: '$250 Interac Deposit to Start',
+    deposit: '100% Upfront One-Time Payment',
     turnaround: '48 Hours',
     featured: true,
     bullets: [
@@ -35,7 +35,7 @@ const OFFERS: OfferCard[] = [
       'Replaces static PDF menus and slow email quote back-and-forth',
       '100% of your $500 credited if you upgrade to a full OS within 30 days',
     ],
-    cta: 'Lock 48-Hr Slot ($250 Dep) →',
+    cta: 'Lock 48-Hr Upgrade ($500) →',
   },
   {
     id: 'flow',
