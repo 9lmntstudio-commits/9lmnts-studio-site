@@ -264,3 +264,5 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
 };
 
 export default HeroSection;
+
+

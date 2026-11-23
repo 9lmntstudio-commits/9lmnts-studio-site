@@ -211,3 +211,4 @@ export const PricingShowcase: React.FC<PricingShowcaseProps> = ({ onSelectTier }
 };
 
 export default PricingShowcase;
+
