@@ -1,469 +1,266 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
-import { ArrowUpRight, ChevronLeft, ChevronRight, Grid, Menu, Star, X } from 'lucide-react';
-import { HERO_SERVICE_PILLS, LIVE_SAAS_PLATFORMS, STUDIO_CONTACT } from '../data/agencyData';
+﻿import React, { useState } from 'react';
 
 interface HeroSectionProps {
-  onOpenModal: (opts: {
-    path?: 'agency' | 'saas';
-    tier?: 'spark' | 'flow' | 'beat' | 'cypher' | 'custom';
-    focus?: string;
-    saasId?: 'soundclash' | 'artist';
-  }) => void;
+  onOpenBooking?: (presetTier?: 'spark' | 'flow' | 'beat' | 'cypher') => void;
 }
 
-export function HeroSection({ onOpenModal }: HeroSectionProps) {
-  const [activeSaasIdx, setActiveSaasIdx] = useState(0);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [ottawaTime, setOttawaTime] = useState(() => formatOttawaTime());
+const LIVE_DEMOS = [
+  {
+    id: 'coffee',
+    tag: 'HOSPITALITY & CAFÉ',
+    name: 'Kremas Coffee Co.',
+    metric: '0% Delivery App Fees · Direct Apple Pay',
+    url: '/demo/coffee/',
+    accent: '#C69C6D',
+  },
+  {
+    id: 'belfanm',
+    tag: 'E-COMMERCE & BEAUTY',
+    name: 'BelFanm Botanicals',
+    metric: 'Interactive Product Stage · Pay-in-4 Ready',
+    url: '/demo/belfanm/',
+    accent: '#FF5500',
+  },
+  {
+    id: 'preworkout',
+    tag: 'CONSUMER BRAND',
+    name: 'VÒLT Hybrid Energy',
+    metric: '60fps Scroll Storytelling · Instant Checkout',
+    url: '/demo/preworkout/',
+    accent: '#121212',
+  },
+];
 
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothMouseX = useSpring(mouseX, { stiffness: 120, damping: 24 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 120, damping: 24 });
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  });
-
-  // 2.5D Virtual Camera Rig transforms across deep background, focal portrait, and foreground bokeh
-  const beamScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
-  const beamY = useTransform(scrollYProgress, [0, 1], [0, -28]);
-  const beamX = useTransform(smoothMouseX, [-0.5, 0.5], [14, -14]);
-
-  const portraitScale = useTransform(scrollYProgress, [0, 1], [1, 1.09]);
-  const portraitY = useTransform(scrollYProgress, [0, 1], [0, 28]);
-  const portraitRotateX = useTransform(smoothMouseY, [-0.5, 0.5], [2.5, -2.5]);
-  const portraitRotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-3.5, 3.5]);
-
-  // Foreground out-of-focus particles moving at ~1.45x opposite pan speed for binocular parallax
-  const bokehX = useTransform(smoothMouseX, [-0.5, 0.5], [-38, 38]);
-  const bokehY = useTransform(scrollYProgress, [0, 1], [0, -56]);
-
-  const cardRotateX = useTransform(smoothMouseY, [-0.5, 0.5], [3, -3]);
-  const cardRotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-3.5, 3.5]);
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setOttawaTime(formatOttawaTime());
-    }, 30000);
-    return () => window.clearInterval(id);
-  }, []);
-
-  const currentPlatform = LIVE_SAAS_PLATFORMS[activeSaasIdx];
+export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
+  const [activeDemo, setActiveDemo] = useState(LIVE_DEMOS[0]);
 
   return (
-    <section
-      ref={sectionRef}
-      id="top"
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
-        mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
-      }}
-      onMouseLeave={() => {
-        mouseX.set(0);
-        mouseY.set(0);
-      }}
-      className="hero-sunset-canvas relative min-h-[780px] w-full overflow-hidden text-white lg:min-h-[860px]"
-    >
-      {/* Layer 0: Deep studio light beams with scroll camera push */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-45 will-change-transform"
-        style={{
-          scale: beamScale,
-          x: beamX,
-          y: beamY,
-          background:
-            'linear-gradient(125deg, rgba(255,180,90,0.38) 0%, rgba(233,80,4,0) 42%, rgba(120,25,0,0.32) 100%)',
-        }}
-      />
+    <section className="relative min-h-[92vh] w-full bg-[#F7F5F0] text-[#121212] selection:bg-[#FF5500] selection:text-white">
+      <header className="mx-auto flex max-w-[1380px] items-center justify-between px-6 py-7 sm:px-12">
+        <a href="/" className="flex items-baseline gap-0.5 tracking-tight">
+          <span className="font-['Syne',sans-serif] text-2xl font-extrabold text-[#FF5500]">
+            9L
+          </span>
+          <span className="font-['Syne',sans-serif] text-2xl font-extrabold text-[#121212]">
+            MNTS
+          </span>
+          <span className="ml-1.5 font-['Instrument_Serif',Georgia,serif] text-2xl italic text-[#FF5500]">
+            Studio
+          </span>
+        </a>
 
-      {/* Layer 1: Desktop Focal Portrait with 2.5D Virtual Camera Rig + 3D Mouse Tilt */}
-      <div
-        aria-hidden="true"
-        style={{ perspective: 1400 }}
-        className="pointer-events-none hidden lg:absolute lg:inset-x-0 lg:bottom-0 lg:top-0 lg:flex lg:items-end lg:justify-center lg:pt-8"
-      >
-        <motion.div
-          style={{
-            scale: portraitScale,
-            y: portraitY,
-            rotateX: portraitRotateX,
-            rotateY: portraitRotateY,
-            transformStyle: 'preserve-3d',
-          }}
-          className="flex h-full items-end justify-center will-change-transform"
-        >
-          <img
-            src="/assets/hero-darnley-orange.jpg"
-            alt="Darnley Sanon, Founder and Creative Director of 9LMNTS Studio"
-            className="h-[95%] w-auto max-w-none object-cover object-[50%_14%] select-none"
-            style={{
-              WebkitMaskImage:
-                'radial-gradient(66% 86% at 50% 48%, #000 58%, rgba(0,0,0,0.75) 74%, transparent 98%)',
-              maskImage:
-                'radial-gradient(66% 86% at 50% 48%, #000 58%, rgba(0,0,0,0.75) 74%, transparent 98%)',
-            }}
-          />
-        </motion.div>
-      </div>
+        <nav className="hidden items-center gap-1 rounded-full bg-[#EAE6DF]/80 p-1.5 backdrop-blur-md md:flex">
+          <a
+            href="#demos"
+            className="rounded-full px-4 py-1.5 text-xs font-semibold text-[#121212] transition hover:bg-white"
+          >
+            Live Demos
+          </a>
+          <a
+            href="#pricing"
+            className="rounded-full px-4 py-1.5 text-xs font-semibold text-[#121212] transition hover:bg-white"
+          >
+            Packages &amp; Pricing
+          </a>
+          <a
+            href="https://clash.9lmntsstudio.com"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full px-4 py-1.5 text-xs font-semibold text-[#474747] transition hover:bg-white hover:text-[#121212]"
+          >
+            SoundClash OS ↗
+          </a>
+          <a
+            href="https://artist.9lmntsstudio.com"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full px-4 py-1.5 text-xs font-semibold text-[#474747] transition hover:bg-white hover:text-[#121212]"
+          >
+            Artist OS ↗
+          </a>
+        </nav>
 
-      {/* Layer 2: Foreground Out-of-Focus Studio Bokeh Particles (1.45x Parallax Depth) */}
-      <motion.div
-        aria-hidden="true"
-        style={{ x: bokehX, y: bokehY, filter: 'blur(4px)' }}
-        className="pointer-events-none absolute inset-0 z-10 hidden will-change-transform lg:block"
-      >
-        <span className="absolute top-[18%] left-[28%] h-4 w-4 rounded-full bg-[#FFD6A5]/35" />
-        <span className="absolute top-[62%] left-[19%] h-6 w-6 rounded-full bg-white/15" />
-        <span className="absolute top-[26%] right-[24%] h-5 w-5 rounded-full bg-[#FFE0B2]/30" />
-        <span className="absolute bottom-[24%] right-[31%] h-3.5 w-3.5 rounded-full bg-white/25" />
-      </motion.div>
+        <div className="flex items-center gap-3">
+          <a
+            href="tel:+16134009691"
+            className="hidden text-xs font-semibold tracking-wide text-[#474747] hover:text-[#121212] sm:inline-block"
+          >
+            (613) 400-9691
+          </a>
+          <button
+            onClick={() => onOpenBooking?.('spark')}
+            className="cursor-pointer rounded-full bg-[#FF5500] px-5 py-2.5 text-xs font-bold tracking-wide text-white shadow-[0_10px_25px_-6px_rgba(255,85,0,0.45)] transition hover:bg-[#E04B00]"
+          >
+            Start 48-Hr Upgrade →
+          </button>
+        </div>
+      </header>
 
-      {/* Main Content Grid Overlay */}
-      <div className="relative z-20 mx-auto flex min-h-[780px] max-w-[1440px] flex-col justify-between px-5 pt-5 pb-7 sm:px-8 lg:min-h-[860px] lg:px-12 lg:pt-7 lg:pb-10">
-        {/* Hero Header Bar — White 9LMNTS Wordmark */}
-        <header className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-8 lg:gap-12">
+      <div className="mx-auto grid max-w-[1380px] grid-cols-1 items-center gap-12 px-6 pt-8 pb-20 sm:px-12 lg:grid-cols-12 lg:pt-14">
+        <div className="lg:col-span-7 space-y-7">
+          <div className="inline-flex items-center gap-2.5 rounded-full bg-[#EAE6DF] px-4 py-1.5 text-xs font-semibold text-[#121212]">
+            <span className="h-2 w-2 rounded-full bg-[#FF5500]" />
+            <span>Ottawa Creative Tech &amp; Booking Systems</span>
+          </div>
+
+          <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl font-extrabold leading-[1.02] tracking-[-0.035em] text-[#121212] sm:text-6xl xl:text-[72px]">
+            Websites &amp; Booking Systems That{' '}
+            <span className="font-['Instrument_Serif',Georgia,serif] font-normal italic text-[#FF5500]">
+              Pay for Themselves
+            </span>{' '}
+            in 14 Days.
+          </h1>
+
+          <p className="max-w-2xl text-base leading-relaxed text-[#474747] sm:text-lg">
+            We replace slow websites, static PDF menus, and missed phone calls with{' '}
+            <strong className="font-semibold text-[#121212]">
+              0%-commission online ordering
+            </strong>
+            ,{' '}
+            <strong className="font-semibold text-[#121212]">
+              instant 50% deposit calculators
+            </strong>
+            , and{' '}
+            <strong className="font-semibold text-[#121212]">
+              24/7 AI receptionists
+            </strong>{' '}
+            — delivered in 48 hours to 7 days with zero monthly agency retainers.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <button
+              onClick={() => onOpenBooking?.('spark')}
+              className="cursor-pointer rounded-full bg-[#FF5500] px-8 py-4 text-sm font-bold text-white shadow-[0_16px_32px_-8px_rgba(255,85,0,0.45)] transition hover:-translate-y-0.5 hover:bg-[#E04B00]"
+            >
+              Lock 48-Hr Upgrade ($225 Deposit) →
+            </button>
             <a
-              href="#top"
-              aria-label="9LMNTS Home"
-              className="inline-flex shrink-0 items-center py-1"
+              href="#pricing"
+              className="rounded-full bg-white px-7 py-4 text-sm font-bold text-[#121212] shadow-sm transition hover:bg-[#EAE6DF]"
             >
-              <img
-                src="/assets/9lmnts-logo-white.png"
-                alt="9LMNTS"
-                className="h-6 w-auto sm:h-8"
-              />
+              Compare Packages ↓
             </a>
-
-            <nav
-              aria-label="Hero Navigation"
-              className="hidden items-center gap-7 text-xs font-semibold tracking-[0.08em] uppercase text-white/90 md:flex"
-            >
-              <a href="#culture" className="transition-colors hover:text-white">
-                About Us +
-              </a>
-              <a href="#gateways" className="transition-colors hover:text-white">
-                Services +
-              </a>
-              <button
-                type="button"
-                onClick={() => onOpenModal({ path: 'saas', saasId: 'soundclash' })}
-                className="cursor-pointer uppercase tracking-[0.08em] transition-colors hover:text-white"
-              >
-                Platforms +
-              </button>
-            </nav>
           </div>
 
-          <div className="flex items-center gap-3 sm:gap-4">
-            <div className="hidden text-right text-[11px] leading-tight text-white/85 sm:block">
-              <p className="font-medium text-white/75">Ottawa · Global</p>
-              <p className="font-semibold tracking-wide text-white">{ottawaTime}</p>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => onOpenModal({ path: 'agency', tier: 'flow' })}
-              className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-xs font-bold tracking-[0.06em] uppercase text-[#111827] shadow-lg transition-transform hover:scale-[1.03] active:scale-[0.98]"
-            >
-              <span aria-hidden="true">→</span>
-              Contact Us
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setDrawerOpen((prev) => !prev)}
-              aria-label={drawerOpen ? 'Close quick menu' : 'Open quick menu'}
-              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/25 bg-black/25 text-white backdrop-blur-md transition-colors hover:bg-black/40"
-            >
-              {drawerOpen ? (
-                <X className="h-4 w-4" />
-              ) : (
-                <>
-                  <Grid className="hidden h-4 w-4 md:block" />
-                  <Menu className="h-4 w-4 md:hidden" />
-                </>
-              )}
-            </button>
-          </div>
-        </header>
-
-        {/* Quick Dropdown Menu */}
-        {drawerOpen && (
-          <div className="mt-3 ml-auto w-full max-w-xs rounded-2xl border border-white/25 bg-[#111827]/90 p-5 text-sm text-white shadow-2xl backdrop-blur-xl">
-            <p className="text-[11px] font-bold tracking-[0.14em] uppercase text-[#FF781F]">
-              Quick Gateway
-            </p>
-            <div className="mt-3 flex flex-col gap-2.5 font-semibold">
-              <a
-                href="#gateways"
-                onClick={() => setDrawerOpen(false)}
-                className="rounded-lg px-2 py-1.5 hover:bg-white/10"
-              >
-                2-Option Customer Gateway
-              </a>
-              <a
-                href="#culture"
-                onClick={() => setDrawerOpen(false)}
-                className="rounded-lg px-2 py-1.5 hover:bg-white/10"
-              >
-                9 Elements + Practical AI
-              </a>
-              <a
-                href="#studio"
-                onClick={() => setDrawerOpen(false)}
-                className="rounded-lg px-2 py-1.5 hover:bg-white/10"
-              >
-                Studio &amp; Founder Story
-              </a>
-              <a
-                href="#pricing"
-                onClick={() => setDrawerOpen(false)}
-                className="rounded-lg px-2 py-1.5 hover:bg-white/10"
-              >
-                Agency Sprint Pricing
-              </a>
-              <button
-                type="button"
-                onClick={() => {
-                  setDrawerOpen(false);
-                  onOpenModal({ path: 'saas', saasId: 'soundclash' });
-                }}
-                className="cursor-pointer rounded-lg px-2 py-1.5 text-left text-[#FF781F] hover:bg-white/10"
-              >
-                Launch SoundClash OS / Artist OS ↗
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Middle Row: Left Bold Display + Right QR & Live SaaS Card */}
-        <div className="my-auto grid grid-cols-1 items-center gap-8 py-6 lg:grid-cols-12 lg:py-4">
-          {/* Left Hero Story & Headline */}
-          <div className="lg:col-span-5">
-            <span className="inline-flex items-center rounded-lg border border-white/55 bg-white/10 px-3.5 py-1 text-xs font-semibold tracking-[0.12em] uppercase text-white backdrop-blur-sm">
-              9 Elements + AI
-            </span>
-
-            <h1 className="mt-4 font-hero-display text-[3.5rem] font-black uppercase tracking-[-0.02em] leading-[0.88] text-white sm:text-[4.8rem] xl:text-[5.8rem]">
-              <span className="block text-white/75">Creative</span>
-              <span className="block">Cultural</span>
-              <span className="block">Agency</span>
-            </h1>
-
-            <p className="mt-5 max-w-md text-base leading-relaxed text-white/95 drop-shadow-[0_1px_12px_rgba(140,35,0,0.45)] sm:text-lg">
-              From strategy to launch, we blend Hip-Hop&apos;s 9 elements with practical AI to design websites, brands &amp; platforms your customers love.
-            </p>
-
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                onClick={() => onOpenModal({ path: 'agency', tier: 'flow' })}
-                className="group inline-flex cursor-pointer items-center gap-3 rounded-xl bg-white py-2.5 pr-2.5 pl-5 text-xs font-extrabold tracking-[0.08em] uppercase text-[#111827] shadow-[0_16px_38px_-10px_rgba(0,0,0,0.35)] transition-transform hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <span>Start a Project</span>
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#111827] text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                  <ArrowUpRight className="h-4 w-4" />
-                </span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => onOpenModal({ path: 'saas', saasId: currentPlatform.id })}
-                className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/40 bg-black/15 px-4 py-3 text-xs font-bold tracking-[0.06em] uppercase text-white backdrop-blur-md transition-colors hover:bg-black/30"
-              >
-                Explore Live SaaS ↗
-              </button>
-            </div>
-          </div>
-
-          {/* Center Spacer (Desktop) & Clean Portrait Block (Mobile) */}
-          <div className="lg:col-span-3">
-            <div className="mx-auto flex h-[340px] w-full max-w-[420px] items-end justify-center overflow-hidden sm:h-[400px] lg:hidden">
-              <img
-                src="/assets/hero-darnley-orange.jpg"
-                alt="Darnley Sanon, Founder and Creative Director of 9LMNTS Studio"
-                className="h-full w-auto max-w-none object-cover object-[50%_14%] select-none"
-                style={{
-                  WebkitMaskImage:
-                    'radial-gradient(66% 86% at 50% 48%, #000 58%, rgba(0,0,0,0.75) 74%, transparent 98%)',
-                  maskImage:
-                    'radial-gradient(66% 86% at 50% 48%, #000 58%, rgba(0,0,0,0.75) 74%, transparent 98%)',
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Right Column: Frosted JOIN US QR Card + Interactive Live SaaS 01/02 Card with 2.5D Depth */}
-          <div style={{ perspective: 1400 }} className="lg:col-span-4">
-            <motion.div
-              style={{
-                rotateX: cardRotateX,
-                rotateY: cardRotateY,
-                transformStyle: 'preserve-3d',
-              }}
-              className="flex flex-col items-start gap-5 will-change-transform sm:flex-row sm:items-end lg:flex-row lg:items-center lg:justify-end"
-            >
-            {/* JOIN US QR Card */}
-            <button
-              type="button"
-              onClick={() => onOpenModal({ path: 'agency', tier: 'flow' })}
-              className="group flex cursor-pointer flex-col items-center rounded-2xl border border-white/25 bg-white/15 p-3.5 text-center backdrop-blur-md transition-transform hover:-translate-y-1"
-            >
-              <span className="text-[11px] font-bold tracking-[0.14em] uppercase text-white">
-                Join Us
-              </span>
-              <div className="mt-2 rounded-xl bg-white p-1.5 shadow-sm">
-                <img
-                  src="/assets/9lmntsstudio-qr.png"
-                  alt="Scan QR to launch 9LMNTS project onboarding"
-                  className="h-20 w-20 object-contain"
-                />
-              </div>
-              <div className="mt-2.5 flex items-center gap-1 text-xs font-bold text-white">
-                <span>5.0</span>
-                <span className="flex text-[#FDE047]" aria-label="5 out of 5 stars">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-3 w-3 fill-current" />
-                  ))}
-                </span>
-              </div>
-              <span className="text-[10px] font-semibold tracking-[0.12em] uppercase text-white/85">
-                Verified Studio
-              </span>
-            </button>
-
-            {/* LIVE SAAS 01/02 Switcher Card */}
-            <div className="w-full max-w-[250px] rounded-2xl border border-white/30 bg-black/25 p-4 text-white shadow-2xl backdrop-blur-xl">
-              <div className="flex items-center justify-between text-[11px] font-bold tracking-[0.1em] uppercase text-white/85">
-                <span>Live SaaS</span>
-                <div className="flex items-center gap-1.5">
-                  <button
-                    type="button"
-                    aria-label="Previous Live SaaS Platform"
-                    onClick={() =>
-                      setActiveSaasIdx((prev) =>
-                        prev === 0 ? LIVE_SAAS_PLATFORMS.length - 1 : prev - 1
-                      )
-                    }
-                    className="cursor-pointer rounded-md p-0.5 hover:bg-white/15"
-                  >
-                    <ChevronLeft className="h-3.5 w-3.5" />
-                  </button>
-                  <span>
-                    {currentPlatform.code} / 0{LIVE_SAAS_PLATFORMS.length}
-                  </span>
-                  <button
-                    type="button"
-                    aria-label="Next Live SaaS Platform"
-                    onClick={() =>
-                      setActiveSaasIdx((prev) => (prev + 1) % LIVE_SAAS_PLATFORMS.length)
-                    }
-                    className="cursor-pointer rounded-md p-0.5 hover:bg-white/15"
-                  >
-                    <ChevronRight className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => onOpenModal({ path: 'saas', saasId: currentPlatform.id })}
-                className="mt-3 block w-full cursor-pointer overflow-hidden rounded-xl border border-white/15 bg-black/40 text-left transition-transform hover:scale-[1.02]"
-              >
-                <img
-                  src={currentPlatform.image}
-                  alt={currentPlatform.name}
-                  className="h-28 w-full object-cover object-top"
-                />
-              </button>
-
-              <p className="mt-3 text-lg font-extrabold leading-tight">
-                {currentPlatform.name}
+          <div className="grid grid-cols-3 gap-6 border-t border-[#121212]/10 pt-7 sm:max-w-xl">
+            <div>
+              <p className="text-2xl font-extrabold tracking-tight text-[#121212] sm:text-3xl">
+                0%
               </p>
-              <p className="mt-1 text-xs leading-snug text-white/85">
-                2 Live SaaS · Published Platforms
+              <p className="mt-1 text-xs font-medium text-[#474747]">
+                Commission on direct orders &amp; deposits
               </p>
-              <button
-                type="button"
-                onClick={() => onOpenModal({ path: 'saas', saasId: currentPlatform.id })}
-                className="mt-2 inline-flex cursor-pointer items-center gap-1 text-xs font-bold text-[#FFE0C2] hover:text-white"
-              >
-                <span>Ready Today</span>
-                <span aria-hidden="true">→</span>
-              </button>
             </div>
-            </motion.div>
+            <div>
+              <p className="text-2xl font-extrabold tracking-tight text-[#121212] sm:text-3xl">
+                48 Hrs
+              </p>
+              <p className="mt-1 text-xs font-medium text-[#474747]">
+                Fastest turnaround on menu &amp; quote widgets
+              </p>
+            </div>
+            <div>
+              <p className="text-2xl font-extrabold tracking-tight text-[#121212] sm:text-3xl">
+                $0/mo
+              </p>
+              <p className="mt-1 text-xs font-medium text-[#474747]">
+                Mandatory agency subscription fees
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Row: Social Strip Left + 8 Unique Service Pills Right */}
-        <div className="flex flex-col items-start justify-between gap-5 pt-2 lg:flex-row lg:items-end">
-          {/* Bottom-Left Social Widget */}
-          <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-white/25 bg-black/15 p-2.5 backdrop-blur-md">
-            <div className="flex h-10 w-16 items-center justify-center rounded-xl bg-white px-2 text-center text-[9px] font-extrabold leading-tight tracking-wider uppercase text-[#111827]">
-              Direct
-              <br />
-              Connect
+        <div id="demos" className="lg:col-span-5">
+          <div className="rounded-[28px] bg-white p-7 shadow-[0_24px_60px_-15px_rgba(18,18,18,0.08)] sm:p-8">
+            <div className="flex items-center justify-between border-b border-[#121212]/8 pb-4">
+              <span className="text-[11px] font-bold tracking-[0.14em] uppercase text-[#FF5500]">
+                Interactive Client Blueprints
+              </span>
+              <span className="rounded-full bg-[#F7F5F0] px-3 py-1 text-[11px] font-semibold text-[#474747]">
+                Click to Preview Live
+              </span>
             </div>
-            <a
-              href="https://instagram.com/9lmntsstudio"
-              target="_blank"
-              rel="noreferrer"
-              className="flex h-10 items-center rounded-xl border border-white/20 bg-white/10 px-3 text-xs font-semibold text-white transition-colors hover:bg-white/20"
-            >
-              Instagram ↗
-            </a>
-            <a
-              href={`mailto:${STUDIO_CONTACT.email}`}
-              className="flex h-10 items-center rounded-xl border border-white/20 bg-white/10 px-3 text-xs font-semibold text-white transition-colors hover:bg-white/20"
-            >
-              Email
-            </a>
-            <a
-              href={STUDIO_CONTACT.phoneHref}
-              className="flex h-10 items-center rounded-xl border border-white/20 bg-white/10 px-3 text-xs font-semibold text-white transition-colors hover:bg-white/20"
-            >
-              Call Ottawa
-            </a>
-          </div>
 
-          {/* Bottom-Right Unique 8 Service Pills */}
-          <div className="flex max-w-xl flex-wrap gap-2 lg:justify-end">
-            {HERO_SERVICE_PILLS.map((pill) => (
-              <button
-                key={pill.id}
-                type="button"
-                onClick={() =>
-                  onOpenModal({ path: 'agency', tier: 'flow', focus: pill.focusArea })
-                }
-                className="cursor-pointer rounded-full border border-white/30 bg-white/15 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md transition-colors hover:bg-white hover:text-[#111827]"
-              >
-                • {pill.label}
-              </button>
-            ))}
+            <div className="mt-6 rounded-2xl bg-[#F7F5F0] p-6 transition-all">
+              <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-[#474747]">
+                {activeDemo.tag}
+              </span>
+              <h2 className="mt-1.5 font-['Plus_Jakarta_Sans',sans-serif] text-2xl font-extrabold text-[#121212]">
+                {activeDemo.name}
+              </h2>
+              <p className="mt-1 text-sm font-medium text-[#474747]">
+                {activeDemo.metric}
+              </p>
+
+              <div className="mt-6 flex items-center justify-between gap-3">
+                <a
+                  href={activeDemo.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#121212] px-5 py-2.5 text-xs font-bold text-white transition hover:bg-[#FF5500]"
+                >
+                  Open Live Demo ↗
+                </a>
+                <button
+                  onClick={() => onOpenBooking?.('flow')}
+                  className="cursor-pointer text-xs font-bold text-[#FF5500] underline-offset-4 hover:underline"
+                >
+                  Build Similar for My Business
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-5 space-y-2">
+              <p className="text-[11px] font-semibold text-[#474747]">
+                Switch White-Label Demo:
+              </p>
+              <div className="grid grid-cols-3 gap-2">
+                {LIVE_DEMOS.map((demo) => {
+                  const isActive = demo.id === activeDemo.id;
+                  return (
+                    <button
+                      key={demo.id}
+                      onClick={() => setActiveDemo(demo)}
+                      className={`cursor-pointer rounded-xl px-3 py-2.5 text-left text-xs font-bold transition ${
+                        isActive
+                          ? 'bg-[#121212] text-white shadow-sm'
+                          : 'bg-[#F7F5F0] text-[#474747] hover:bg-[#EAE6DF] hover:text-[#121212]'
+                      }`}
+                    >
+                      <span className="block truncate">{demo.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="mt-6 flex items-center justify-between border-t border-[#121212]/8 pt-4 text-xs">
+              <span className="font-medium text-[#474747]">Live Platforms:</span>
+              <div className="flex items-center gap-3 font-bold text-[#121212]">
+                <a
+                  href="https://clash.9lmntsstudio.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-[#FF5500]"
+                >
+                  SoundClash OS ↗
+                </a>
+                <span className="text-[#121212]/20">•</span>
+                <a
+                  href="https://artist.9lmntsstudio.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-[#FF5500]"
+                >
+                  Artist OS ↗
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
-}
+};
 
-function formatOttawaTime(): string {
-  try {
-    return new Intl.DateTimeFormat('en-CA', {
-      timeZone: 'America/Toronto',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    }).format(new Date()) + ' EST';
-  } catch {
-    return 'EST Live';
-  }
-}
+export default HeroSection;
