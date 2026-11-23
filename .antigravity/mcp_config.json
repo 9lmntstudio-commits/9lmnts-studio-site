@@ -9,7 +9,13 @@
     "google-creative-studio": {
       "command": "node",
       "args": [
-        "C:\\Users\\Darnl\\OneDrive\\Documents\\Desktop\\9LMNTS-Site\\scripts\\mcp-google-creative-studio.mjs"
+        "C:\\Users\\Darnl\\Downloads\\9LMNTS Studio cyber V2\\scripts\\mcp-google-creative-studio.mjs"
+      ]
+    },
+    "motionsites": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\Darnl\\Downloads\\9LMNTS Studio cyber V2\\scripts\\mcp-motionsites.mjs"
       ]
     }
   }

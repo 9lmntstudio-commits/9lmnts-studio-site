@@ -21,3 +21,4 @@ antigravity-backup/
 Thumbs.db
 .netlify/
 _deploy_staging/
+.venv/
