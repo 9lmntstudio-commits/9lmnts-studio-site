@@ -1,0 +1,2403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VÒLT — 3D Immersive Hybrid Energy &amp; Pre-Workout</title>
+<meta name="description" content="Overclock your output. Experience the 3D exploded pre-workout ready-to-drink revolution. 6000mg L-Citrulline, 3200mg CarnoSyn, 300mg PurCaf. Zero sugar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700;1,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="../../assets/preworkout/hero-can.jpg">
+<link rel="preload" as="image" href="../../assets/preworkout/exploded-can.jpg">
+<link rel="preload" as="image" href="../../assets/preworkout/powder-tub.jpg">
+<link rel="preload" as="image" href="../../assets/preworkout/flavor-trio.jpg">
+<style>
+  :root {
+    --bg: #07090B;
+    --ink: #FFFFFF;
+    --ink-dim: rgba(255, 255, 255, 0.72);
+    --ink-faint: rgba(255, 255, 255, 0.40);
+    --line: rgba(0, 240, 255, 0.14);
+    --line-bright: rgba(0, 240, 255, 0.45);
+    --glass: rgba(10, 14, 18, 0.78);
+    --accent: #00F0FF;
+    --accent-glow: rgba(0, 240, 255, 0.5);
+    --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "JetBrains Mono", monospace;
+    --gutter: clamp(1.25rem, 4vw, 4.5rem);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); color: var(--ink); scroll-behavior: smooth; overflow-x: clip; }
+  body {
+    background: var(--bg);
+    font-family: var(--sans);
+    font-size: clamp(0.95rem, 1.05vw, 1.1rem);
+    line-height: 1.6;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ================= FIXED 3D VIRTUAL CAMERA CINEMA STAGE ================= */
+  .camera-viewport-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    background: #050709;
+    pointer-events: none;
+    perspective: 1400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 3D Scene Root for Camera Zoom, Dolly, and Pan */
+  .camera-rig {
+    position: relative;
+    width: min(84vw, 560px);
+    height: min(72vh, 680px);
+    transform-style: preserve-3d;
+    will-change: transform;
+    transform-origin: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Multi-Layer 3D Visual Planes & Generated Video Scrubber */
+  .video-scrubber-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 50px var(--accent-glow));
+    z-index: 2;
+    opacity: 0.95;
+    pointer-events: none;
+  }
+  .plane-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    will-change: opacity, transform;
+    transform-origin: center center;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 50px var(--accent-glow));
+    transition: opacity 0.35s ease-out;
+  }
+  #planeHeroCan { opacity: 1; z-index: 3; }
+  #planeExplodedCan { opacity: 0; z-index: 4; }
+  #planePowderTub { opacity: 0; z-index: 5; }
+  #planeFlavorTrio { opacity: 0; z-index: 6; }
+
+  /* Deep Cinematic Ambient Glow Overlay Behind Product */
+  .camera-ambient-aura {
+    position: absolute;
+    width: clamp(380px, 45vw, 650px);
+    height: clamp(380px, 45vw, 650px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at center, var(--accent-glow) 0%, rgba(0, 240, 255, 0.14) 40%, transparent 70%);
+    filter: blur(55px);
+    opacity: 0.65;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 1;
+    transition: background 0.8s ease, opacity 0.6s ease;
+  }
+
+  /* Scrim Vignette for Pristine Typography Contrast */
+  .stage-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(5, 7, 9, 0.75) 100%),
+      linear-gradient(180deg, rgba(5, 7, 9, 0.7) 0%, transparent 20%, transparent 80%, rgba(5, 7, 9, 0.95) 100%);
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+  }
+
+  /* Floating 3D Spatial Hotspots / Callout Pins */
+  .spatial-callout-pin {
+    position: absolute;
+    z-index: 8;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: rgba(10, 14, 18, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--line-bright);
+    box-shadow: 0 0 25px var(--accent-glow);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0;
+    transform: translateY(16px) scale(0.92);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+  }
+  .spatial-callout-pin .pin-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    animation: pulsePin 1.8s infinite ease-in-out;
+  }
+  @keyframes pulsePin {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.6); opacity: 0.6; }
+  }
+  .spatial-callout-pin.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Specific Pin Coordinates in 3D Space */
+  #pinCitrulline { top: 25%; left: 44%; }
+  #pinBetaAlanine { top: 48%; left: 40%; }
+  #pinPurCaf { top: 70%; left: 43%; }
+
+  /* Giant Background Watermark Marquee */
+  .bg-marquee-track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0.05;
+    z-index: 1;
+    transition: opacity 0.8s ease;
+  }
+  .bg-marquee-text {
+    font-family: var(--sans);
+    font-size: clamp(8rem, 24vw, 26rem);
+    font-weight: 800;
+    font-style: italic;
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    text-transform: uppercase;
+    display: inline-block;
+  }
+
+  /* ================= SIMPLE TEXT HEADER MENU ================= */
+  header.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem var(--gutter);
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease, padding 0.3s ease, border-color 0.4s ease;
+  }
+  header.top-nav.scrolled {
+    background: rgba(7, 9, 11, 0.88);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border-bottom: 1px solid var(--line);
+    padding: 1rem var(--gutter);
+  }
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--sans);
+    font-weight: 800;
+    font-style: italic;
+    font-size: 1.8rem;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+  .brand-logo em {
+    color: var(--accent);
+    font-style: normal;
+    transition: color 0.6s ease;
+  }
+  nav.text-menu {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.4rem, 2.8vw, 2.8rem);
+  }
+  nav.text-menu a {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    position: relative;
+    padding: 0.4rem 0;
+    transition: color 0.3s ease;
+  }
+  nav.text-menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  nav.text-menu a:hover,
+  nav.text-menu a.active {
+    color: var(--ink);
+  }
+  nav.text-menu a:hover::after,
+  nav.text-menu a.active::after {
+    transform: scaleX(1);
+  }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .nav-cart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.15rem;
+    border-radius: 999px;
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid var(--line);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  .nav-cart-btn:hover {
+    background: var(--accent);
+    color: #07090B;
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+  .nav-cart-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #07090B;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+  }
+  .menu-btn-mobile {
+    display: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* ================= 3D PINNED SCROLL TRACK CONTAINER (450vh) ================= */
+  .scrollytelling-track {
+    position: relative;
+    height: 480vh;
+    z-index: 10;
+  }
+
+  /* Floating UI Overlays Snapped to Viewport */
+  .sticky-hud {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(5.5rem, 9vh, 7.5rem) var(--gutter) clamp(1.5rem, 3.5vh, 2.5rem);
+    pointer-events: none;
+  }
+  .hud-interactive { pointer-events: auto; }
+
+  /* Dynamic Beat Content Box */
+  .beat-overlay-container {
+    position: relative;
+    width: 100%;
+    max-width: clamp(340px, 32vw, 440px);
+    z-index: 10;
+  }
+  .beat-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .beat-card.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .badge-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .badge-tag::before {
+    content: "";
+    width: 18px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .beat-title {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-style: italic;
+    font-size: clamp(2.2rem, 3.8vw, 4.2rem);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .beat-title em {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .beat-desc {
+    color: var(--ink-dim);
+    font-size: clamp(0.88rem, 1.05vw, 1rem);
+    max-width: 40ch;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s, border-color 0.3s, color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #07090B;
+    box-shadow: 0 4px 24px var(--accent-glow);
+  }
+  .btn-primary:hover {
+    background: #FFF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--accent-glow);
+  }
+  .btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--ink);
+    background: rgba(10, 14, 18, 0.5);
+    backdrop-filter: blur(12px);
+  }
+  .btn-ghost:hover {
+    border-color: var(--line-bright);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* Right Side Telemetry Card */
+  .hud-right-card {
+    position: absolute;
+    right: var(--gutter);
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(300px, 26vw);
+    background: rgba(10, 14, 18, 0.72);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    pointer-events: auto;
+    z-index: 10;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .hud-right-tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .hud-right-title {
+    font-family: var(--sans);
+    font-size: 1.7rem;
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .hud-right-desc {
+    color: var(--ink-dim);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+  .hud-right-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+  }
+  .hud-right-specs b {
+    display: block;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+  }
+
+  /* Bottom HUD Scrollytelling Progress Bar */
+  .hud-bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-top: 1px solid var(--line);
+    padding-top: 1.4rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .scrub-progress-track {
+    width: 180px;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .scrub-progress-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    transition: width 0.1s linear;
+  }
+
+  /* ================= 02 · UNIQUE SHOP SELECTION SCROLL ROW (Pinterest Reference t=12s) ================= */
+  .shop-row-section {
+    position: relative;
+    z-index: 20;
+    padding: clamp(5rem, 10vh, 8rem) 0 4rem;
+    border-top: 1px solid var(--line);
+    background: #07090B;
+    overflow: hidden;
+  }
+  .shop-header-strip {
+    padding: 0 var(--gutter);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.8rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .shop-header-strip h2 {
+    font-family: var(--sans);
+    font-size: clamp(2.6rem, 5vw, 4.4rem);
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  .shop-header-strip h2 em {
+    color: var(--accent);
+    transition: color 0.6s ease;
+  }
+  .shop-header-strip p {
+    color: var(--ink-dim);
+    font-size: 0.95rem;
+    max-width: 44ch;
+    line-height: 1.55;
+  }
+
+  /* Horizontal Shop Row Container */
+  .shop-shelf-wrap {
+    width: 100%;
+    overflow-x: auto;
+    padding: 2.5rem var(--gutter) 4.5rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+  }
+  .shop-shelf-wrap::-webkit-scrollbar { display: none; }
+  .shop-shelf-row {
+    display: flex;
+    align-items: center;
+    gap: clamp(2rem, 4vw, 4.5rem);
+    width: max-content;
+  }
+
+  /* Individual Shop Row Item Node */
+  .shop-item-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: clamp(270px, 25vw, 340px);
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    opacity: 0.48;
+    transform: scale(0.88);
+    position: relative;
+  }
+  .shop-item-node.selected {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+
+  /* Item Pedestal & Glow Aura */
+  .shop-item-pedestal {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: 22px;
+    overflow: hidden;
+    background: rgba(14, 18, 24, 0.7);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.4rem;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+  }
+  .shop-item-node.selected .shop-item-pedestal {
+    border-color: var(--accent);
+    box-shadow: 0 16px 40px var(--accent-glow);
+  }
+  .shop-item-spotlight {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center 60%, var(--c) 0%, transparent 70%);
+    filter: blur(35px);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .shop-item-node.selected .shop-item-spotlight {
+    opacity: 0.55;
+  }
+  .shop-item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .shop-item-node:hover .shop-item-image {
+    transform: scale(1.06);
+  }
+
+  /* Item Typography & Info */
+  .shop-item-info {
+    text-align: center;
+    width: 100%;
+  }
+  .shop-item-category {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+    transition: color 0.6s ease;
+  }
+  .shop-item-name {
+    font-family: var(--sans);
+    font-size: 1.65rem;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .shop-item-price {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    color: var(--ink-dim);
+    margin-bottom: 1rem;
+  }
+  .shop-item-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .shop-item-node.selected .shop-item-actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .btn-quick-add {
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #07090B;
+    font-size: 0.72rem;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+  }
+  .btn-quick-add:hover {
+    background: #FFF;
+    box-shadow: 0 0 15px var(--accent-glow);
+  }
+  .btn-details {
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--line-bright);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    transition: all 0.25s ease;
+  }
+  .btn-details:hover {
+    border-color: #FFF;
+    color: #FFF;
+  }
+
+  /* ================= 03 · CLINICAL TELEMETRY TICKER (Pinterest Reference t=14s) ================= */
+  .ticker-section {
+    position: relative;
+    z-index: 20;
+    padding: 4.5rem 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: rgba(7, 9, 11, 0.98);
+    overflow: hidden;
+  }
+  .ticker-header {
+    text-align: center;
+    margin-bottom: 2.2rem;
+    padding: 0 var(--gutter);
+  }
+  .ticker-header h3 {
+    font-family: var(--sans);
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+  .ticker-header h3 em {
+    color: var(--accent);
+    transition: color 0.6s ease;
+  }
+  .ticker-track-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    overflow: hidden;
+  }
+  .ticker-strip {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: max-content;
+    animation: marqueeRow 36s linear infinite;
+  }
+  .ticker-strip.reverse {
+    animation: marqueeRowReverse 40s linear infinite;
+  }
+  @keyframes marqueeRow {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes marqueeRowReverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  .ticker-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(0, 240, 255, 0.04);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink-dim);
+    white-space: nowrap;
+    transition: all 0.3s ease;
+  }
+  .ticker-badge:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+    background: rgba(0, 240, 255, 0.12);
+  }
+  .ticker-badge .symbol {
+    color: var(--accent);
+    font-size: 0.85rem;
+  }
+
+  /* ================= 04 · CLINICAL ENGINEERING & ATHLETIC PROOF ================= */
+  .story-editorial-wrap {
+    position: relative;
+    z-index: 20;
+    background: #07090B;
+    padding: 6rem var(--gutter) 6rem;
+  }
+  .story-editorial-container {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .story-split-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2.5rem, 6vw, 7rem);
+    align-items: start;
+    margin-bottom: 6rem;
+  }
+  .story-sticky-heading {
+    position: sticky;
+    top: 18vh;
+  }
+  .story-sticky-heading h2 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-style: italic;
+    font-size: clamp(2.6rem, 4.8vw, 4.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-top: 1.2rem;
+  }
+  .story-sticky-heading h2 em {
+    color: var(--accent);
+    transition: color 0.6s ease;
+  }
+  .story-editorial-body p {
+    color: var(--ink-dim);
+    font-size: clamp(1.02rem, 1.15vw, 1.15rem);
+    line-height: 1.75;
+    margin-bottom: 1.6rem;
+  }
+
+  /* 4 Mockups Imagery Gallery */
+  .story-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 3.5rem 0;
+  }
+  .story-gallery-item {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--line);
+    background: #0F1318;
+  }
+  .story-gallery-item.span-2 {
+    grid-column: span 2;
+  }
+  .story-gallery-item img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .story-gallery-item:hover img {
+    transform: scale(1.04);
+  }
+  .story-gallery-item figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.4rem;
+    background: linear-gradient(0deg, rgba(7, 9, 11, 0.92) 0%, transparent 100%);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* Clinical Dosing Strip */
+  .story-metrics-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin: 3.5rem 0;
+  }
+  .metric-block {
+    padding: 1.8rem 1.4rem;
+    border-right: 1px solid var(--line);
+  }
+  .metric-block:first-child { padding-left: 0; }
+  .metric-block:last-child { border-right: 0; }
+  .metric-number {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-style: italic;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .metric-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* Supplement Facts Section (Box-Free) */
+  .facts-section {
+    margin: 6rem 0 3.5rem;
+    border-top: 1px solid var(--line);
+    padding-top: 5rem;
+  }
+  .facts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .facts-header h3 {
+    font-family: var(--sans);
+    font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .facts-header h3 em {
+    color: var(--accent);
+    transition: color 0.6s ease;
+  }
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .fact-card-clean {
+    border-top: 1px solid var(--line);
+    padding-top: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.3s ease;
+  }
+  .fact-card-clean:hover {
+    border-color: var(--accent);
+  }
+  .fact-dosage {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .fact-name {
+    font-family: var(--sans);
+    font-size: 1.55rem;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .fact-desc {
+    color: var(--ink-dim);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 1.4rem;
+    flex-grow: 1;
+  }
+  .fact-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--line);
+  }
+  .fact-tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+  }
+
+  /* Gym & Lab Directory */
+  .roastery-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 4rem 0;
+    margin-top: 6rem;
+    border-top: 1px solid var(--line);
+  }
+  .info-col h5 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.1rem;
+  }
+  .info-col p, .info-col a {
+    color: var(--ink-dim);
+    font-size: 0.96rem;
+    line-height: 1.8;
+    display: block;
+  }
+
+  /* Site Footer */
+  .site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 3rem 0;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+  }
+
+  /* ================= SLIDE-IN SIDE DETAIL MODAL (Berry Bloom Pattern) ================= */
+  .modal-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .modal-scrim.open { opacity: 1; pointer-events: auto; }
+  .side-detail-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(520px, 100vw);
+    background: #0B0E12;
+    border-left: 1px solid var(--line);
+    z-index: 100;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 2.5rem clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .side-detail-modal.open { transform: translateX(0); }
+  .modal-close-btn {
+    align-self: flex-end;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    margin-bottom: 1.5rem;
+    transition: all 0.25s ease;
+  }
+  .modal-close-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .modal-preview-hero {
+    width: 100%;
+    aspect-ratio: 16/10;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--line);
+    margin-bottom: 1.8rem;
+    background: #0F1318;
+  }
+  .modal-preview-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .modal-category {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .modal-title {
+    font-family: var(--sans);
+    font-size: 2.3rem;
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .modal-price-bar {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 1.4rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .modal-price {
+    font-family: var(--mono);
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .modal-unit {
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+  }
+  .modal-desc {
+    color: var(--ink-dim);
+    font-size: 0.96rem;
+    line-height: 1.7;
+    margin-bottom: 1.8rem;
+  }
+  .modal-metrics-table {
+    display: grid;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    padding: 1.2rem;
+    border-radius: 14px;
+    background: rgba(0, 240, 255, 0.03);
+    border: 1px solid var(--line);
+  }
+  .modal-metric-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 30px;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.72rem;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .modal-metric-bar {
+    height: 4px;
+    border-radius: 4px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .modal-metric-bar i {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: var(--accent);
+    transition: width 0.6s ease;
+  }
+  .modal-cta-box {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  /* ================= SLIDE-UP CHECKOUT DRAWER ================= */
+  .drawer-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 110;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .drawer-scrim.open { opacity: 1; pointer-events: auto; }
+  #modalPayPalCheckout {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 90vh;
+    background: #0B0E12;
+    border-top: 1px solid var(--line);
+    border-radius: 24px 24px 0 0;
+    z-index: 120;
+    padding: 2rem var(--gutter) 2.5rem;
+    transform: translateY(100%);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+  }
+  #modalPayPalCheckout.open { transform: translateY(0); }
+  .drawer-handle {
+    width: 48px;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--line);
+    margin: 0 auto 1.5rem;
+  }
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .drawer-header h3 {
+    font-family: var(--sans);
+    font-size: 2rem;
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+  }
+  .order-section {
+    margin-bottom: 1.8rem;
+  }
+  .order-section-title {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.8rem;
+  }
+  .drawer-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .drawer-chip {
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: var(--ink-dim);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .drawer-chip i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--c);
+  }
+  .drawer-chip[aria-selected="true"] {
+    border-color: var(--accent);
+    color: var(--ink);
+    background: rgba(0, 240, 255, 0.12);
+  }
+  .quantity-stepper {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+  }
+  .quantity-stepper button {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    font-size: 1.2rem;
+    display: grid;
+    place-items: center;
+    transition: border-color 0.2s;
+  }
+  .quantity-stepper button:hover {
+    border-color: var(--accent);
+  }
+  .quantity-stepper output {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    min-width: 2ch;
+    text-align: center;
+  }
+  .order-total-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1.4rem 0 1.2rem;
+    border-top: 1px solid var(--line);
+    margin-top: 1.5rem;
+  }
+  .order-total-bar b {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 2.1rem;
+    color: var(--accent);
+  }
+  .drawer-actions {
+    display: grid;
+    gap: 0.8rem;
+  }
+  .drawer-actions .btn {
+    justify-content: center;
+    width: 100%;
+  }
+  .interac-box {
+    display: none;
+    margin-top: 1.1rem;
+    padding: 1.1rem;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: rgba(0, 240, 255, 0.04);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--ink-dim);
+  }
+  .interac-box.active { display: block; }
+  .interac-box b { color: var(--accent); }
+
+  /* Hidden Founder Drawer (Shift + B) */
+  .founder-drawer {
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    z-index: 130;
+    width: 290px;
+    padding: 1.2rem;
+    border-radius: 16px;
+    background: #0F1318;
+    border: 1px solid var(--line);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+    display: none;
+  }
+  .founder-drawer.open { display: block; }
+  .founder-drawer h6 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .founder-drawer label {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0.6rem 0 0.3rem;
+  }
+  .founder-drawer input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: #07090B;
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.86rem;
+  }
+
+  /* ================= RESPONSIVE ADJUSTMENTS ================= */
+  @media (max-width: 960px) {
+    nav.text-menu { display: none; }
+    nav.text-menu.mobile-open {
+      display: flex;
+      position: fixed;
+      inset: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2.2rem;
+      background: rgba(7, 9, 11, 0.98);
+      z-index: 35;
+    }
+    nav.text-menu.mobile-open a { font-size: 1.1rem; }
+    .menu-btn-mobile { display: block; }
+    .hud-right-card { display: none; }
+    .facts-grid { grid-template-columns: 1fr 1fr; }
+    .story-split-grid { grid-template-columns: 1fr; }
+    .story-sticky-heading { position: static; }
+    .roastery-info-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
+    .story-gallery { grid-template-columns: 1fr; }
+    .story-gallery-item.span-2 { grid-column: span 1; }
+  }
+  @media (max-width: 600px) {
+    .facts-grid { grid-template-columns: 1fr; }
+    .roastery-info-grid { grid-template-columns: 1fr; }
+    .shop-header-strip { flex-direction: column; align-items: flex-start; }
+    .spatial-callout-pin { font-size: 0.64rem; padding: 0.4rem 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Fixed 3D Virtual Camera Stage (Continuous Cross-Beat 3D Movement) -->
+<div class="camera-viewport-stage" aria-hidden="true">
+  <div class="camera-rig" id="cameraRig">
+    <video id="bgVideo" class="video-scrubber-media" muted playsinline preload="auto" src="../../assets/preworkout/hero-sequence.mp4"></video>
+    <img class="plane-layer" id="planeHeroCan" src="../../assets/preworkout/hero-can.jpg" alt="VÒLT Assembled 16oz Can">
+    <img class="plane-layer" id="planeExplodedCan" src="../../assets/preworkout/exploded-can.jpg" alt="VÒLT 3D Exploded Core">
+    <img class="plane-layer" id="planePowderTub" src="../../assets/preworkout/powder-tub.jpg" alt="VÒLT Hardcore 40-Serving Tub">
+    <img class="plane-layer" id="planeFlavorTrio" src="../../assets/preworkout/flavor-trio.jpg" alt="VÒLT 3-Flavor Showcase Lineup">
+  </div>
+  
+  <!-- Interactive 3D Spatial Hotspots Locked to Product Anatomy -->
+  <div class="spatial-callout-pin" id="pinCitrulline">
+    <span class="pin-dot"></span>
+    <span>6,000mg L-Citrulline Malate</span>
+  </div>
+  <div class="spatial-callout-pin" id="pinBetaAlanine">
+    <span class="pin-dot"></span>
+    <span>3,200mg CarnoSyn® Beta-Alanine</span>
+  </div>
+  <div class="spatial-callout-pin" id="pinPurCaf">
+    <span class="pin-dot"></span>
+    <span>300mg PurCaf® Organic Energy</span>
+  </div>
+
+  <div class="camera-ambient-aura" id="cameraAura"></div>
+  <div class="stage-scrim"></div>
+  <div class="bg-marquee-track" id="bgMarqueeTrack">
+    <div class="bg-marquee-text" id="bgMarqueeText">OVERCLOCK · YOUR · OUTPUT · OVERCLOCK ·</div>
+  </div>
+</div>
+
+<!-- Simple Text Header Menu -->
+<header class="top-nav" id="topNav">
+  <a href="#scrollyTrack" class="brand-logo" data-brand-logo>VÒLT <em>HYBRID</em></a>
+  <nav class="text-menu" id="textMenu">
+    <a href="#scrollyTrack" data-nav="hero" class="active">Overclock</a>
+    <a href="#shop-section" data-nav="flavors">Flavors</a>
+    <a href="#telemetry-ticker" data-nav="telemetry">Telemetry</a>
+    <a href="#clinical-section" data-nav="clinical">Formula</a>
+    <a href="#story-section" data-nav="science">Science</a>
+    <a href="#visit-directory" data-nav="distribution">Distribution</a>
+  </nav>
+  <div class="nav-actions">
+    <button class="nav-cart-btn" data-trigger-order>
+      <span>Quick Cart</span>
+      <span class="nav-cart-count" id="navCartCount">2</span>
+    </button>
+    <button class="menu-btn-mobile" id="mobileMenuToggle" aria-expanded="false" aria-controls="textMenu">Menu</button>
+  </div>
+</header>
+
+<main class="scroll-container">
+
+  <!-- ================= 3D PINNED SCROLLTRACK: CONTINUOUS VIRTUAL CAMERA (480vh) ================= -->
+  <section class="scrollytelling-track" id="scrollyTrack">
+    <div class="sticky-hud">
+      
+      <!-- Left Editorial Story Overlay Transitions -->
+      <div class="beat-overlay-container">
+        
+        <!-- Beat 01: Hero Ignition (0% - 25% Scroll) -->
+        <div class="beat-card active" id="beatCard1">
+          <div class="badge-tag">Stage 01 · Assembled Can · Ottawa</div>
+          <h1 class="beat-title">Overclock<br><em>your output.</em></h1>
+          <p class="beat-desc">
+            The first 16oz ready-to-drink aluminum can with a full 12-gram clinical pre-workout scoop. 6,000mg L-Citrulline, 3,200mg CarnoSyn® Beta-Alanine, and 300mg PurCaf® organic caffeine. Zero clumping shaker cups.
+          </p>
+          <div class="btn-group">
+            <a href="#shop-section" class="btn btn-primary">Select Formula ↓</a>
+            <button class="btn btn-ghost" data-trigger-order>Order 12-Pack ($48)</button>
+          </div>
+        </div>
+
+        <!-- Beat 02: 3D Exploded Core (25% - 55% Scroll) -->
+        <div class="beat-card" id="beatCard2">
+          <div class="badge-tag">Stage 02 · 3D Deconstruction · Zero-Gravity</div>
+          <h2 class="beat-title">Deconstructing<br><em>the energy scam.</em></h2>
+          <p class="beat-desc">
+            Convenience store energy drinks sell 200mg of synthetic caffeine and zero pump. VÒLT separates in mid-air to reveal real crystal ice, pure green coffee beans, and clinical amino acids.
+          </p>
+          <div class="btn-group">
+            <a href="#clinical-section" class="btn btn-primary">Inspect Dosages ↓</a>
+            <button class="btn btn-ghost" data-trigger-order>Reserve Batch ($48)</button>
+          </div>
+        </div>
+
+        <!-- Beat 03: 40-Serving Tub Allocation (55% - 80% Scroll) -->
+        <div class="beat-card" id="beatCard3">
+          <div class="badge-tag">Stage 03 · Hardcore Tub · 40 Servings</div>
+          <h2 class="beat-title">Clinical powder.<br><em>Zero compromises.</em></h2>
+          <p class="beat-desc">
+            Prefer scooping at home? Our 40-serving heavy obsidian tub pairs an anodized knurled lid with a weighted measuring scoop. Zero proprietary blends. 100% full disclosure.
+          </p>
+          <div class="btn-group">
+            <a href="#shop-section" class="btn btn-primary">Grab 40-Serving Tub ($54) ↓</a>
+            <button class="btn btn-ghost" data-trigger-order>Order Tub + RTD Case</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Side Live Telemetry HUD -->
+      <aside class="hud-right-card" id="hudRightCard">
+        <span class="hud-right-tag" id="hudRightTag">3D CAMERA WAYPOINT · 01</span>
+        <h3 class="hud-right-title" id="hudRightTitle">16oz Ultra-Matte Can</h3>
+        <p class="hud-right-desc" id="hudRightDesc">
+          Tactile powder-coat finish with cold condensation beads and embossed lightning bolt spine.
+        </p>
+        <div class="hud-right-specs">
+          <div>VASODILATION<b id="hudMetricPump">6,000 mg</b></div>
+          <div>BUFFERING<b id="hudMetricBuff">3,200 mg</b></div>
+        </div>
+      </aside>
+
+      <!-- Bottom HUD Scrollytelling Telemetry -->
+      <div class="hud-bottom-bar">
+        <span>3D Telemetry · <span id="telemetryStatus" style="color:var(--accent);">Assembled Core</span></span>
+        <div class="scrub-progress-track">
+          <div class="scrub-progress-fill" id="scrubProgressFill"></div>
+        </div>
+        <span id="telemetryPercent" class="num">00% SCROLL</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 02 · UNIQUE SHOP SELECTION SCROLL ROW (Pinterest Reference t=12s) ================= -->
+  <section class="shop-row-section" id="shop-section">
+    <div class="shop-header-strip">
+      <div>
+        <div class="badge-tag">Clinical Formulations · Non-Proprietary</div>
+        <h2>One relentless formula.<br><em>Five explosive expressions.</em></h2>
+      </div>
+      <p>
+        Scrub horizontally through our 16oz RTD cans. Select any flavor to flood the reactor aura, inspect exact lab dosages, or reserve your 12-can case.
+      </p>
+    </div>
+
+    <!-- Horizontal Shop Shelf Row with Active Zoom & Radiant Spotlight -->
+    <div class="shop-shelf-wrap" id="shopShelfWrap">
+      <div class="shop-shelf-row" id="shopShelfRow">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 03 · CLINICAL TELEMETRY TICKER (Pinterest Reference t=14s) ================= -->
+  <section class="ticker-section" id="telemetry-ticker">
+    <div class="ticker-header">
+      <div class="badge-tag">Non-Proprietary Transparency</div>
+      <h3>Exact Milligram <em>Clinical Dosing.</em></h3>
+    </div>
+    <div class="ticker-track-wrap">
+      <div class="ticker-strip">
+        <span class="ticker-badge"><span class="symbol">⚡</span> 6,000mg L-Citrulline Malate (2:1)</span>
+        <span class="ticker-badge"><span class="symbol">+</span> 3,200mg CarnoSyn® Beta-Alanine</span>
+        <span class="ticker-badge"><span class="symbol">⚡</span> 2,500mg Betaine Anhydrous</span>
+        <span class="ticker-badge"><span class="symbol">+</span> 1,500mg L-Tyrosine</span>
+        <span class="ticker-badge"><span class="symbol">⚡</span> 300mg PurCaf® Organic Green Coffee</span>
+        <span class="ticker-badge"><span class="symbol">+</span> 100mg Dynamine™ Methylliberine</span>
+        <span class="ticker-badge"><span class="symbol">⚡</span> 50mg AstraGin® Intestinal Absorption</span>
+        <!-- Duplicated for seamless loop -->
+        <span class="ticker-badge"><span class="symbol">⚡</span> 6,000mg L-Citrulline Malate (2:1)</span>
+        <span class="ticker-badge"><span class="symbol">+</span> 3,200mg CarnoSyn® Beta-Alanine</span>
+        <span class="ticker-badge"><span class="symbol">⚡</span> 2,500mg Betaine Anhydrous</span>
+        <span class="ticker-badge"><span class="symbol">+</span> 1,500mg L-Tyrosine</span>
+      </div>
+      <div class="ticker-strip reverse">
+        <span class="ticker-badge"><span class="symbol">♦</span> 0g Sugar / Zero Artificial Dyes</span>
+        <span class="ticker-badge"><span class="symbol">♥</span> 100% Fully Disclosed Dosing Label</span>
+        <span class="ticker-badge"><span class="symbol">♦</span> Informed-Sport Certified Facility</span>
+        <span class="ticker-badge"><span class="symbol">⚡</span> Zero Shaker Bottle Clumping</span>
+        <span class="ticker-badge"><span class="symbol">♦</span> 5 Total Calories per 16oz Can</span>
+        <span class="ticker-badge"><span class="symbol">♥</span> Sustained 5-Hour Mind-Muscle Lock</span>
+        <!-- Duplicated for seamless loop -->
+        <span class="ticker-badge"><span class="symbol">♦</span> 0g Sugar / Zero Artificial Dyes</span>
+        <span class="ticker-badge"><span class="symbol">♥</span> 100% Fully Disclosed Dosing Label</span>
+        <span class="ticker-badge"><span class="symbol">♦</span> Informed-Sport Certified Facility</span>
+        <span class="ticker-badge"><span class="symbol">⚡</span> Zero Shaker Bottle Clumping</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04 · CLINICAL ENGINEERING & ATHLETIC PROOF ================= -->
+  <section class="story-editorial-wrap" id="story-section">
+    <div class="story-editorial-container">
+      
+      <!-- Split Grid Science -->
+      <div class="story-split-grid">
+        <div class="story-sticky-heading">
+          <div class="badge-tag">Clinical Innovation · 2026</div>
+          <h2>Destroying the<br>convenience store<br><em>energy drink scam.</em></h2>
+        </div>
+
+        <div class="story-editorial-body">
+          <p>
+            For twenty years, multinational energy drink conglomerates sold athletes carbonated water filled with 200mg of cheap synthetic caffeine, Red 40, and zero nitric oxide precursors. They masked inferior formulas behind extreme sports sponsorships while delivering a 30-minute jitter spike followed by an afternoon neuro-chemical crash.
+          </p>
+          <p>
+            VÒLT engineered a new paradigm: true clinical sports nutrition dissolved in an ice-cold, carbonated 16oz aluminum can. By utilizing micro-ionized, cold-stabilized active compounds, we eliminated the need for clumpy shaker cups without sacrificing a single milligram of clinical dosage.
+          </p>
+
+          <!-- 4 Mockups Imagery Gallery -->
+          <div class="story-gallery">
+            <figure class="story-gallery-item">
+              <img src="../../assets/preworkout/hero-can.jpg" alt="16oz ultra-matte black aluminum can with cold condensation water droplets." loading="lazy">
+              <figcaption>01 · The Vessel — 16oz Ultra-Matte Obsidian Aluminum Can</figcaption>
+            </figure>
+            <figure class="story-gallery-item">
+              <img src="../../assets/preworkout/exploded-can.jpg" alt="3D exploded view of the energy can with floating ice and pre-workout powder." loading="lazy">
+              <figcaption>02 · The Core — 3D Exploded Nitric Oxide &amp; Powder Matrix</figcaption>
+            </figure>
+            <figure class="story-gallery-item">
+              <img src="../../assets/preworkout/powder-tub.jpg" alt="40-serving heavy matte black pre-workout tub with cyan metallic lid." loading="lazy">
+              <figcaption>03 · Hardcore Tub Allocation — 40 Clinical Doses</figcaption>
+            </figure>
+            <figure class="story-gallery-item span-2">
+              <img src="../../assets/preworkout/flavor-trio.jpg" alt="3-can horizontal flavor lineup on illuminated glass pedestal." loading="lazy">
+              <figcaption>04 · The Lineup — Electric Blue Razz, Sour Neon Matrix, Cyber Blood Orange</figcaption>
+            </figure>
+          </div>
+
+          <div class="story-metrics-strip">
+            <div class="metric-block">
+              <div class="metric-number num">6,000<small style="font-size:0.5em">mg</small></div>
+              <div class="metric-label">L-Citrulline Malate</div>
+            </div>
+            <div class="metric-block">
+              <div class="metric-number num">3,200<small style="font-size:0.5em">mg</small></div>
+              <div class="metric-label">CarnoSyn® Beta-Alanine</div>
+            </div>
+            <div class="metric-block">
+              <div class="metric-number num">0%</div>
+              <div class="metric-label">Proprietary Blends</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Supplement Facts Section (Box-Free Pure Editorial) -->
+      <section class="facts-section" id="clinical-section">
+        <div class="facts-header">
+          <div>
+            <div class="badge-tag">Clinical Architecture</div>
+            <h3>Active Biomarkers. <em>Zero fluff.</em></h3>
+          </div>
+          <p style="color:var(--ink-dim); max-width:44ch; font-size:0.95rem;">
+            Every compound in VÒLT is dosed at the exact threshold validated in peer-reviewed clinical trials for human athletic performance.
+          </p>
+        </div>
+
+        <div class="facts-grid">
+          <article class="fact-card-clean">
+            <div>
+              <div class="fact-dosage">6,000 MG · VASODILATION</div>
+              <h4 class="fact-name">L-Citrulline Malate</h4>
+              <p class="fact-desc">Converts directly into L-arginine in the kidneys to flood endothelial nitric oxide production, expanding blood vessels for skin-splitting muscular fullness.</p>
+            </div>
+            <div class="fact-foot">
+              <span class="fact-tag">Endurance &amp; Pump</span>
+            </div>
+          </article>
+
+          <article class="fact-card-clean">
+            <div>
+              <div class="fact-dosage">3,200 MG · BUFFERING</div>
+              <h4 class="fact-name">CarnoSyn® Beta-Alanine</h4>
+              <p class="fact-desc">Elevates intramuscular carnosine levels to buffer hydrogen ion (H+) accumulation and delay fatigue during high-threshold sets.</p>
+            </div>
+            <div class="fact-foot">
+              <span class="fact-tag">Rep Threshold</span>
+            </div>
+          </article>
+
+          <article class="fact-card-clean">
+            <div>
+              <div class="fact-dosage">300 MG · CLEAN STIM</div>
+              <h4 class="fact-name">PurCaf® Organic Caffeine</h4>
+              <p class="fact-desc">Water-extracted from green organic coffee beans. Delivers sustained central nervous system stimulation without the harsh crash of synthetic anhydrous.</p>
+            </div>
+            <div class="fact-foot">
+              <span class="fact-tag">Zero Jitter</span>
+            </div>
+          </article>
+
+          <article class="fact-card-clean">
+            <div>
+              <div class="fact-dosage">100 MG · NEURO-LOCK</div>
+              <h4 class="fact-name">Dynamine™ Methylliberine</h4>
+              <p class="fact-desc">Amplifies dopamine receptor sensitivity and cognitive flow state without elevating resting heart rate or blood pressure.</p>
+            </div>
+            <div class="fact-foot">
+              <span class="fact-tag">Mind-Muscle Lock</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Gym & Lab Directory -->
+      <div class="roastery-info-grid" id="visit-directory">
+        <div class="info-col">
+          <h5>Laboratory &amp; Distribution</h5>
+          <p>9LMNTS Studio Athletics Lab<br><span data-brand-city>Ottawa</span>, Ontario<br>K1N 7C8</p>
+        </div>
+        <div class="info-col">
+          <h5>Wholesale &amp; Gym Accounts</h5>
+          <p>Refrigerated mini-coolers available for Crossfit boxes, MMA gyms, and independent powerlifting facilities.</p>
+        </div>
+        <div class="info-col">
+          <h5>Direct Dispatch</h5>
+          <a href="tel:+16134009691" class="num">(613) 400-9691</a>
+          <a href="mailto:9lmntstudio@gmail.com">9lmntstudio@gmail.com</a>
+          <a href="https://wa.me/16134009691" target="_blank" rel="noopener">WhatsApp Dispatch Bridge</a>
+        </div>
+        <div class="info-col">
+          <h5>Delivery &amp; Freight</h5>
+          <p>12-Can Case Freight: $8 CAD.<br>Complimentary shipping on 2+ cases.</p>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <span>© <span id="currentYear"></span> <span data-brand-name>VÒLT</span> Hybrid Energy Systems. Engineered in <span data-brand-city>Ottawa</span>.</span>
+        <span>Interac e-Transfer autodeposit enabled · Desjardins Commercial Rail</span>
+      </footer>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- Slide-in Side Detail Modal (Berry Bloom Pattern) -->
+<div class="modal-scrim" id="modalScrim"></div>
+<aside class="side-detail-modal" id="sideDetailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <button class="modal-close-btn" id="modalCloseBtn">Close [ESC]</button>
+  <div class="modal-preview-hero">
+    <img id="modalImg" src="../../assets/preworkout/hero-can.jpg" alt="Selected bottle preview">
+  </div>
+  <div class="modal-category" id="modalCategory">Clinical RTD Formula</div>
+  <h2 class="modal-title" id="modalTitle">Electric Blue Razz</h2>
+  <div class="modal-price-bar">
+    <span class="modal-price num" id="modalPrice">$48.00</span>
+    <span class="modal-unit">CAD / 12-Can Case (16oz Cans)</span>
+  </div>
+  <p class="modal-desc" id="modalDesc">
+    Tart blue raspberry with a frozen carbonated snap. Formulated for skin-splitting nitric oxide pumps and sustained cognitive flow.
+  </p>
+
+  <div class="modal-metrics-table">
+    <div class="modal-metric-row">
+      <span>Vasodilation</span>
+      <div class="modal-metric-bar"><i id="modalBarPump" style="width: 95%;"></i></div>
+      <span class="num" id="modalValPump">10</span>
+    </div>
+    <div class="modal-metric-row">
+      <span>Endurance</span>
+      <div class="modal-metric-bar"><i id="modalBarEndurance" style="width: 90%;"></i></div>
+      <span class="num" id="modalValEndurance">9</span>
+    </div>
+    <div class="modal-metric-row">
+      <span>Neuro-Focus</span>
+      <div class="modal-metric-bar"><i id="modalBarFocus" style="width: 95%;"></i></div>
+      <span class="num" id="modalValFocus">10</span>
+    </div>
+  </div>
+
+  <div class="modal-cta-box">
+    <button class="btn btn-primary" id="modalBtnAdd">Add 12-Can Case to Cart +</button>
+  </div>
+</aside>
+
+<!-- Slide-Up Checkout Drawer -->
+<div class="drawer-scrim" id="drawerScrim"></div>
+<div id="modalPayPalCheckout" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="drawer-handle"></div>
+  <div class="drawer-header">
+    <h3 id="drawerTitle">Secure Your Allocation</h3>
+    <button class="close-btn" id="drawerClose">Close</button>
+  </div>
+  
+  <div class="order-section">
+    <span class="order-section-title">Select Flavor Expression</span>
+    <div class="drawer-chips" id="drawerFlavorChips"></div>
+  </div>
+
+  <div class="order-section">
+    <span class="order-section-title">Cases (12 × 16oz Cans per Case)</span>
+    <div class="quantity-stepper">
+      <button id="qtyMinus" aria-label="Decrease case count">−</button>
+      <output id="qtyOutput" class="num">2</output>
+      <button id="qtyPlus" aria-label="Increase case count">+</button>
+    </div>
+  </div>
+
+  <div class="order-section">
+    <span class="order-section-title">Fulfillment Method</span>
+    <div class="drawer-chips" id="fulfillmentChips">
+      <button class="drawer-chip" aria-selected="true" data-mode="pickup">Ottawa Lab Pickup (Free)</button>
+      <button class="drawer-chip" aria-selected="false" data-mode="delivery">Refrigerated Freight ($8)</button>
+    </div>
+  </div>
+
+  <div class="order-total-bar">
+    <span>Order Total</span>
+    <b class="num" id="drawerTotal">$96.00 CAD</b>
+  </div>
+
+  <div class="drawer-actions">
+    <button class="btn btn-primary" id="btnPayInterac">Pay via Interac e-Transfer</button>
+    <a class="btn btn-ghost" id="btnSmsOrder" href="#">Confirm via Direct SMS</a>
+  </div>
+
+  <div class="interac-box" id="interacBox">
+    Send <b class="num" id="interacAmount">$96.00 CAD</b> to <b>9lmntstudio@gmail.com</b> (Autodeposit enabled). In the transfer memo, write your name and gym address. Our team dispatches your refrigerated order within 60 minutes.
+  </div>
+</div>
+
+<!-- Shift + B Rebranding Drawer -->
+<div class="founder-drawer" id="founderDrawer">
+  <h6>⚡ Founder Brand Switcher</h6>
+  <label for="brandInput">Brand Name</label>
+  <input type="text" id="brandInput" placeholder="VÒLT">
+  <label for="cityInput">City / Region</label>
+  <input type="text" id="cityInput" placeholder="Ottawa">
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
+  /* ================= 1. FLAVOURS DATA & PALETTES ================= */
+  const FLAVORS = [
+    {
+      id: "blue-razz",
+      name: "Electric Blue Razz",
+      category: "High-Stim Energy & Nitric Pump",
+      color: "#00F0FF",
+      price: 48,
+      pump: 10,
+      endurance: 9,
+      focus: 10,
+      img: "../../assets/preworkout/hero-can.jpg",
+      desc: "Tart blue raspberry with an icy carbonated snap. Dosed with 6,000mg L-Citrulline, 3,200mg CarnoSyn® Beta-Alanine, and 300mg PurCaf® organic caffeine.",
+      tags: ["6g L-Citrulline", "3.2g Beta-Alanine", "300mg PurCaf", "Zero Sugar"]
+    },
+    {
+      id: "sour-matrix",
+      name: "Sour Neon Matrix",
+      category: "Hyper-Focus & Electrified Citric",
+      color: "#39FF14",
+      price: 48,
+      pump: 9,
+      endurance: 10,
+      focus: 9,
+      img: "../../assets/preworkout/flavor-trio.jpg",
+      desc: "Electrifying sour green apple and fresh squeezed lime. Amplified with 100mg Dynamine™ for rapid cognitive flow and zero heart-rate spikes.",
+      tags: ["100mg Dynamine", "Sour Lime Squeeze", "AstraGin Absorption", "Zero Dyes"]
+    },
+    {
+      id: "reactor-red",
+      name: "Cyber Blood Orange",
+      category: "Hardcore Vasodilation",
+      color: "#FF334B",
+      price: 48,
+      pump: 10,
+      endurance: 8,
+      focus: 9,
+      img: "../../assets/preworkout/exploded-can.jpg",
+      desc: "Sicilian blood orange with pomegranate bitters. Maximum endothelial vasodilation and muscle cell swelling.",
+      tags: ["Blood Orange Bitters", "Max Nitric Oxide", "Betaine Anhydrous", "5 Calories"]
+    },
+    {
+      id: "midnight",
+      name: "Midnight Blackberry",
+      category: "Nocturnal Heavy Stim",
+      color: "#A855F7",
+      price: 48,
+      pump: 8,
+      endurance: 9,
+      focus: 10,
+      img: "../../assets/preworkout/hero-can.jpg",
+      desc: "Wild mountain blackberry with elderberry antioxidant finish and 1,500mg L-Tyrosine for locked-in mind-muscle focus.",
+      tags: ["1.5g L-Tyrosine", "Wild Blackberry", "Huperzine-A", "Zero Crash"]
+    },
+    {
+      id: "ghost-pump",
+      name: "Pure Ghost Pump (Non-Stim)",
+      category: "Late-Night Caffeine-Free Matrix",
+      color: "#F8FAFC",
+      price: 46,
+      pump: 10,
+      endurance: 9,
+      focus: 7,
+      img: "../../assets/preworkout/powder-tub.jpg",
+      desc: "100% caffeine-free nitric oxide matrix for late-night heavy lifting. Massive cellular hydration without keeping you awake.",
+      tags: ["Non-Stimulant", "Zero Caffeine", "Bedtime Safe", "10/10 Muscle Pump"]
+    }
+  ];
+
+  let activeFlavorIdx = 0;
+  let orderQty = 2;
+  let orderFulfillment = "pickup";
+  let orderFlavorIdx = 0;
+
+  // DOM Elements
+  const cameraRig = document.getElementById("cameraRig");
+  const cameraAura = document.getElementById("cameraAura");
+  const planeHeroCan = document.getElementById("planeHeroCan");
+  const planeExplodedCan = document.getElementById("planeExplodedCan");
+  const planePowderTub = document.getElementById("planePowderTub");
+  const planeFlavorTrio = document.getElementById("planeFlavorTrio");
+  const pinCitrulline = document.getElementById("pinCitrulline");
+  const pinBetaAlanine = document.getElementById("pinBetaAlanine");
+  const pinPurCaf = document.getElementById("pinPurCaf");
+
+  const scrollyTrack = document.getElementById("scrollyTrack");
+  const beatCard1 = document.getElementById("beatCard1");
+  const beatCard2 = document.getElementById("beatCard2");
+  const beatCard3 = document.getElementById("beatCard3");
+
+  const hudRightCard = document.getElementById("hudRightCard");
+  const hudRightTag = document.getElementById("hudRightTag");
+  const hudRightTitle = document.getElementById("hudRightTitle");
+  const hudRightDesc = document.getElementById("hudRightDesc");
+  const hudMetricPump = document.getElementById("hudMetricPump");
+  const hudMetricBuff = document.getElementById("hudMetricBuff");
+
+  const telemetryStatus = document.getElementById("telemetryStatus");
+  const telemetryPercent = document.getElementById("telemetryPercent");
+  const scrubProgressFill = document.getElementById("scrubProgressFill");
+  const topNav = document.getElementById("topNav");
+  const bgMarqueeText = document.getElementById("bgMarqueeText");
+
+  /* ================= 2. GENERATED VIDEO SCROLL SCRUBBER & 3D RIG ================= */
+  const bgVideo = document.getElementById("bgVideo");
+  let isSeeking = false;
+  let pendingSeekTime = null;
+
+  if (bgVideo) {
+    bgVideo.addEventListener("seeking", () => { isSeeking = true; });
+    bgVideo.addEventListener("seeked", () => {
+      isSeeking = false;
+      if (pendingSeekTime !== null) {
+        const nextTime = pendingSeekTime;
+        pendingSeekTime = null;
+        if (Math.abs(bgVideo.currentTime - nextTime) > 0.04) {
+          bgVideo.currentTime = nextTime;
+        }
+      }
+    });
+  }
+
+  function scrubVideo(time) {
+    if (!bgVideo || !bgVideo.duration) return;
+    if (isSeeking) {
+      pendingSeekTime = time;
+    } else if (Math.abs(bgVideo.currentTime - time) > 0.04) {
+      bgVideo.currentTime = time;
+    }
+  }
+
+  let targetProgress = 0;
+  let smoothProgress = 0;
+  let mouseTiltX = 0;
+  let mouseTiltY = 0;
+  let smoothTiltX = 0;
+  let smoothTiltY = 0;
+
+  // Mouse / Pointer Parallax
+  window.addEventListener("mousemove", (e) => {
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    mouseTiltX = ((e.clientX - cx) / cx) * 3.5; // max ±3.5deg
+    mouseTiltY = -((e.clientY - cy) / cy) * 3.5;
+  }, { passive: true });
+
+  function calculateScroll() {
+    const scrollY = window.scrollY;
+    const vh = window.innerHeight;
+    topNav.classList.toggle("scrolled", scrollY > 50);
+
+    const trackTop = scrollyTrack.offsetTop;
+    const trackHeight = scrollyTrack.offsetHeight - vh;
+    
+    // Normalized 0.0 to 1.0 progress through 3D track
+    targetProgress = Math.min(1, Math.max(0, (scrollY - trackTop) / Math.max(1, trackHeight)));
+  }
+
+  function render3DCamera() {
+    // Silky LERP damping
+    smoothProgress += (targetProgress - smoothProgress) * 0.12;
+    smoothTiltX += (mouseTiltX - smoothTiltX) * 0.08;
+    smoothTiltY += (mouseTiltY - smoothTiltY) * 0.08;
+
+    const p = smoothProgress;
+    scrubProgressFill.style.width = (p * 100).toFixed(1) + "%";
+    telemetryPercent.textContent = Math.round(p * 100).toString().padStart(2, "0") + "% SCROLL";
+
+    // Scrub generated video playhead continuously matching scroll progress
+    if (bgVideo && bgVideo.duration) {
+      scrubVideo(p * bgVideo.duration);
+    }
+
+    // Camera Transformations
+    let cameraScale = 1.0;
+    let cameraZ = 0;
+    let cameraX = 0;
+    let cameraY = 0;
+    let cameraRotZ = 0;
+
+    if (p < 0.28) {
+      // BEAT 01: Hero Can Push-In (0.0 to 0.28)
+      const sub = p / 0.28;
+      cameraScale = 1.0 + (sub * 0.45); // 1.0 -> 1.45
+      cameraZ = sub * 120;
+      cameraX = sub * 40; // slight lateral shift
+      cameraY = -sub * 30;
+
+      planeHeroCan.style.opacity = "1";
+      planeExplodedCan.style.opacity = (sub * 0.2).toFixed(3);
+      planePowderTub.style.opacity = "0";
+      planeFlavorTrio.style.opacity = "0";
+
+      // Callouts
+      pinCitrulline.classList.remove("active");
+      pinBetaAlanine.classList.remove("active");
+      pinPurCaf.classList.remove("active");
+
+      // HUD & Cards
+      beatCard1.classList.add("active");
+      beatCard2.classList.remove("active");
+      beatCard3.classList.remove("active");
+
+      telemetryStatus.textContent = "Assembled Vessel";
+      hudRightTag.textContent = "3D CAMERA WAYPOINT · 01";
+      hudRightTitle.textContent = "16oz Ultra-Matte Can";
+      hudRightDesc.textContent = "Tactile powder-coat finish with cold condensation beads and embossed lightning bolt spine.";
+      hudMetricPump.textContent = "6,000 mg";
+      hudMetricBuff.textContent = "3,200 mg";
+
+    } else if (p >= 0.28 && p < 0.65) {
+      // BEAT 02: 3D Exploded / Deconstructed Core (0.28 to 0.65)
+      const sub = (p - 0.28) / (0.65 - 0.28);
+      cameraScale = 1.15 + (sub * 0.35); // 1.15 -> 1.50
+      cameraZ = 120 + (sub * 160);
+      cameraX = 40 - (sub * 80);
+      cameraY = -30 + (sub * 20);
+      cameraRotZ = sub * -2.5;
+
+      planeHeroCan.style.opacity = (1 - sub * 1.5).toFixed(3);
+      planeExplodedCan.style.opacity = (sub * 1.8).toFixed(3);
+      planePowderTub.style.opacity = "0";
+      planeFlavorTrio.style.opacity = "0";
+
+      // 3D Callout pins pop out
+      pinCitrulline.classList.toggle("active", sub > 0.15);
+      pinBetaAlanine.classList.toggle("active", sub > 0.35);
+      pinPurCaf.classList.toggle("active", sub > 0.55);
+
+      beatCard1.classList.remove("active");
+      beatCard2.classList.add("active");
+      beatCard3.classList.remove("active");
+
+      telemetryStatus.textContent = "3D Exploded Core";
+      hudRightTag.textContent = "3D CAMERA WAYPOINT · 02";
+      hudRightTitle.textContent = "Zero-Gravity Core";
+      hudRightDesc.textContent = "Can shell separates in mid-air to expose micro-ionized amino acid explosion.";
+      hudMetricPump.textContent = "MAX DILATION";
+      hudMetricBuff.textContent = "ZERO CRASH";
+
+    } else {
+      // BEAT 03: 40-Serving Tub & Wide Lineup Transition (0.65 to 1.0)
+      const sub = (p - 0.65) / (1.0 - 0.65);
+      cameraScale = 1.50 - (sub * 0.50); // 1.50 -> 1.0
+      cameraZ = 280 - (sub * 280);
+      cameraX = -40 + (sub * 40);
+      cameraY = -10 + (sub * 10);
+      cameraRotZ = -2.5 + (sub * 2.5);
+
+      planeHeroCan.style.opacity = "0";
+      planeExplodedCan.style.opacity = (1 - sub * 2).toFixed(3);
+      planePowderTub.style.opacity = (sub < 0.6 ? sub * 2 : (1 - (sub - 0.6) * 2.5)).toFixed(3);
+      planeFlavorTrio.style.opacity = (sub > 0.4 ? (sub - 0.4) * 2 : 0).toFixed(3);
+
+      pinCitrulline.classList.remove("active");
+      pinBetaAlanine.classList.remove("active");
+      pinPurCaf.classList.remove("active");
+
+      beatCard1.classList.remove("active");
+      beatCard2.classList.remove("active");
+      beatCard3.classList.add("active");
+
+      telemetryStatus.textContent = "Showcase Lineup";
+      hudRightTag.textContent = "3D CAMERA WAYPOINT · 03";
+      hudRightTitle.textContent = "Hardcore Lineup";
+      hudRightDesc.textContent = "Both ready-to-drink 16oz cans and 40-serving wide-mouth powder tubs available.";
+      hudMetricPump.textContent = "40 DOSES";
+      hudMetricBuff.textContent = "FULL SCOOP";
+    }
+
+    // Apply combined virtual camera transform with mouse micro-tilt
+    cameraRig.style.transform = `
+      translate3d(${cameraX.toFixed(1)}px, ${cameraY.toFixed(1)}px, ${cameraZ.toFixed(1)}px)
+      scale(${cameraScale.toFixed(3)})
+      rotateX(${smoothTiltY.toFixed(2)}deg)
+      rotateY(${smoothTiltX.toFixed(2)}deg)
+      rotateZ(${cameraRotZ.toFixed(2)}deg)
+    `;
+
+    // Parallax background marquee tracking horizontally behind the 3D can
+    const marqueeTrack = document.getElementById("bgMarqueeTrack");
+    if (marqueeTrack) {
+      marqueeTrack.style.transform = `translate3d(${-(p * 400).toFixed(1)}px, -50%, 0)`;
+    }
+
+    // Fade viewport stage smoothly as user enters the shop shelf row
+    const stageEl = document.querySelector(".camera-viewport-stage");
+    if (stageEl) {
+      stageEl.style.opacity = p > 0.94 ? Math.max(0, 1 - (p - 0.94) * 18).toFixed(2) : "1";
+    }
+
+    requestAnimationFrame(render3DCamera);
+  }
+
+  window.addEventListener("scroll", calculateScroll, { passive: true });
+  window.addEventListener("resize", calculateScroll, { passive: true });
+  calculateScroll();
+  requestAnimationFrame(render3DCamera);
+
+  /* ================= 3. POPULATE UNIQUE SHOP SELECTION ROW ================= */
+  const shopShelfRow = document.getElementById("shopShelfRow");
+  const navCartCount = document.getElementById("navCartCount");
+
+  FLAVORS.forEach((f, idx) => {
+    const node = document.createElement("div");
+    node.className = "shop-item-node" + (idx === 0 ? " selected" : "");
+    node.setAttribute("data-flavor-idx", idx);
+    node.innerHTML = `
+      <div class="shop-item-pedestal">
+        <div class="shop-item-spotlight" style="--c:${f.color}"></div>
+        <img class="shop-item-image" src="${f.img}" alt="${f.name}">
+      </div>
+      <div class="shop-item-info">
+        <div class="shop-item-category">${f.category}</div>
+        <h4 class="shop-item-name">${f.name}</h4>
+        <div class="shop-item-price num">$${f.price}.00 CAD / 12-Can Case</div>
+        <div class="shop-item-actions">
+          <button class="btn-quick-add" data-quick-add="${idx}">Add Case +</button>
+          <button class="btn-details" data-open-detail="${idx}">Lab Spec →</button>
+        </div>
+      </div>
+    `;
+
+    node.addEventListener("click", (e) => {
+      if (e.target.closest("[data-quick-add]") || e.target.closest("[data-open-detail]")) return;
+      selectShopItem(idx);
+    });
+
+    shopShelfRow.appendChild(node);
+  });
+
+  function selectShopItem(idx) {
+    activeFlavorIdx = idx;
+    const f = FLAVORS[idx];
+
+    document.querySelectorAll(".shop-item-node").forEach((n, i) => {
+      n.classList.toggle("selected", i === idx);
+    });
+
+    const activeNode = document.querySelectorAll(".shop-item-node")[idx];
+    if (activeNode) {
+      activeNode.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+
+    // Dynamic Reactor Aura Color Shift
+    cameraAura.style.background = `radial-gradient(circle at center, ${f.color}88 0%, transparent 65%)`;
+    document.documentElement.style.setProperty("--accent", f.color === "#F8FAFC" ? "#00F0FF" : f.color);
+    document.documentElement.style.setProperty("--accent-glow", f.color === "#F8FAFC" ? "rgba(0, 240, 255, 0.45)" : `${f.color}66`);
+
+    bgMarqueeText.textContent = `${f.name.toUpperCase()} · VÒLT HYBRID SYSTEM · `;
+    syncDrawerFlavor();
+  }
+
+  /* ================= 4. SIDE DETAIL MODAL (Berry Bloom Pattern) ================= */
+  const sideModal = document.getElementById("sideDetailModal");
+  const modalScrim = document.getElementById("modalScrim");
+  const modalCloseBtn = document.getElementById("modalCloseBtn");
+  const modalImg = document.getElementById("modalImg");
+  const modalCategory = document.getElementById("modalCategory");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalPrice = document.getElementById("modalPrice");
+  const modalDesc = document.getElementById("modalDesc");
+  const modalBarPump = document.getElementById("modalBarPump");
+  const modalValPump = document.getElementById("modalValPump");
+  const modalBarEndurance = document.getElementById("modalBarEndurance");
+  const modalValEndurance = document.getElementById("modalValEndurance");
+  const modalBarFocus = document.getElementById("modalBarFocus");
+  const modalValFocus = document.getElementById("modalValFocus");
+  const modalBtnAdd = document.getElementById("modalBtnAdd");
+
+  function openDetailModal(idx) {
+    const f = FLAVORS[idx];
+    modalImg.src = f.img;
+    modalCategory.textContent = f.category;
+    modalTitle.textContent = f.name;
+    modalPrice.textContent = `$${f.price}.00`;
+    modalDesc.textContent = f.desc;
+    modalBarPump.style.width = (f.pump * 10) + "%";
+    modalValPump.textContent = f.pump;
+    modalBarEndurance.style.width = (f.endurance * 10) + "%";
+    modalValEndurance.textContent = f.endurance;
+    modalBarFocus.style.width = (f.focus * 10) + "%";
+    modalValFocus.textContent = f.focus;
+
+    modalBtnAdd.onclick = () => {
+      closeDetailModal();
+      orderFlavorIdx = idx;
+      openDrawer();
+    };
+
+    sideModal.classList.add("open");
+    modalScrim.classList.add("open");
+  }
+
+  function closeDetailModal() {
+    sideModal.classList.remove("open");
+    modalScrim.classList.remove("open");
+  }
+
+  modalCloseBtn.addEventListener("click", closeDetailModal);
+  modalScrim.addEventListener("click", closeDetailModal);
+
+  document.addEventListener("click", (e) => {
+    const quickAddBtn = e.target.closest("[data-quick-add]");
+    if (quickAddBtn) {
+      const idx = parseInt(quickAddBtn.getAttribute("data-quick-add"), 10);
+      orderFlavorIdx = idx;
+      openDrawer();
+      return;
+    }
+    const detailBtn = e.target.closest("[data-open-detail]");
+    if (detailBtn) {
+      const idx = parseInt(detailBtn.getAttribute("data-open-detail"), 10);
+      openDetailModal(idx);
+      return;
+    }
+  });
+
+  /* ================= 5. QUICK CART & REVENUE ENGINE ================= */
+  const drawer = document.getElementById("modalPayPalCheckout");
+  const scrim = document.getElementById("drawerScrim");
+  const drawerClose = document.getElementById("drawerClose");
+  const drawerFlavorChips = document.getElementById("drawerFlavorChips");
+  const fulfillmentChips = document.getElementById("fulfillmentChips");
+  const qtyMinus = document.getElementById("qtyMinus");
+  const qtyPlus = document.getElementById("qtyPlus");
+  const qtyOutput = document.getElementById("qtyOutput");
+  const drawerTotal = document.getElementById("drawerTotal");
+  const btnPayInterac = document.getElementById("btnPayInterac");
+  const btnSmsOrder = document.getElementById("btnSmsOrder");
+  const interacBox = document.getElementById("interacBox");
+  const interacAmount = document.getElementById("interacAmount");
+
+  FLAVORS.forEach((f, idx) => {
+    const chip = document.createElement("button");
+    chip.className = "drawer-chip";
+    chip.setAttribute("aria-selected", idx === 0 ? "true" : "false");
+    chip.innerHTML = `<i style="--c:${f.color}"></i>${f.name}`;
+    chip.addEventListener("click", () => {
+      orderFlavorIdx = idx;
+      updateDrawerMath();
+    });
+    drawerFlavorChips.appendChild(chip);
+  });
+
+  function syncDrawerFlavor() {
+    orderFlavorIdx = activeFlavorIdx;
+    updateDrawerMath();
+  }
+
+  function updateDrawerMath() {
+    if (!drawerFlavorChips || !fulfillmentChips) return;
+    drawerFlavorChips.querySelectorAll(".drawer-chip").forEach((c, i) => {
+      c.setAttribute("aria-selected", i === orderFlavorIdx ? "true" : "false");
+    });
+
+    fulfillmentChips.querySelectorAll(".drawer-chip").forEach(c => {
+      c.setAttribute("aria-selected", c.dataset.mode === orderFulfillment ? "true" : "false");
+    });
+
+    qtyOutput.textContent = orderQty;
+    navCartCount.textContent = orderQty;
+    const caseSubtotal = FLAVORS[orderFlavorIdx].price * orderQty;
+    const freight = (orderFulfillment === "delivery" && orderQty < 2) ? 8 : 0;
+    const total = caseSubtotal + freight;
+
+    const formatted = "$" + total.toFixed(2) + " CAD";
+    drawerTotal.textContent = formatted;
+    interacAmount.textContent = formatted;
+
+    const brandName = document.querySelector("[data-brand-name]")?.textContent || "VÒLT";
+    let smsBody = `Hi ${brandName}! I would like to reserve ${orderQty} case(s) of ${FLAVORS[orderFlavorIdx].name} (${orderFulfillment === "pickup" ? "Ottawa Lab Pickup" : "Refrigerated Freight"}). Total: ${formatted}.`;
+    btnSmsOrder.href = `sms:+16134009691?&body=${encodeURIComponent(smsBody)}`;
+  }
+
+  qtyMinus.addEventListener("click", () => {
+    orderQty = Math.max(1, orderQty - 1);
+    updateDrawerMath();
+  });
+  qtyPlus.addEventListener("click", () => {
+    orderQty = Math.min(50, orderQty + 1);
+    updateDrawerMath();
+  });
+
+  fulfillmentChips.querySelectorAll(".drawer-chip").forEach(c => {
+    c.addEventListener("click", () => {
+      orderFulfillment = c.dataset.mode;
+      updateDrawerMath();
+    });
+  });
+
+  btnPayInterac.addEventListener("click", () => {
+    interacBox.classList.add("active");
+    navigator.clipboard?.writeText("9lmntstudio@gmail.com").catch(() => {});
+  });
+
+  function openDrawer(e) {
+    if (e) e.preventDefault();
+    syncDrawerFlavor();
+    drawer.classList.add("open");
+    scrim.classList.add("open");
+  }
+  function closeDrawer() {
+    drawer.classList.remove("open");
+    scrim.classList.remove("open");
+    interacBox.classList.remove("active");
+  }
+
+  document.querySelectorAll("[data-trigger-order]").forEach(btn => btn.addEventListener("click", openDrawer));
+  scrim.addEventListener("click", closeDrawer);
+  drawerClose.addEventListener("click", closeDrawer);
+  window.addEventListener("keydown", e => {
+    if (e.key === "Escape") {
+      closeDrawer();
+      closeDetailModal();
+    }
+  });
+
+  updateDrawerMath();
+
+  /* ================= 6. MOBILE MENU & FOUNDER DRAWER ================= */
+  const mobileToggle = document.getElementById("mobileMenuToggle");
+  const textMenu = document.getElementById("textMenu");
+  mobileToggle.addEventListener("click", () => {
+    const isOpen = textMenu.classList.toggle("mobile-open");
+    mobileToggle.setAttribute("aria-expanded", isOpen);
+    mobileToggle.textContent = isOpen ? "Close" : "Menu";
+  });
+  textMenu.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => {
+      textMenu.classList.remove("mobile-open");
+      mobileToggle.setAttribute("aria-expanded", "false");
+      mobileToggle.textContent = "Menu";
+    });
+  });
+
+  const urlParams = new URLSearchParams(window.location.search);
+  function applyBrandCustomization(name, city) {
+    if (name) {
+      document.querySelectorAll("[data-brand-logo]").forEach(el => el.innerHTML = `${name.toUpperCase()} <em>HYBRID</em>`);
+      document.querySelectorAll("[data-brand-name]").forEach(el => el.textContent = name);
+      document.title = `${name} — 3D Immersive Hybrid Energy & Pre-Workout`;
+    }
+    if (city) {
+      document.querySelectorAll("[data-brand-city]").forEach(el => el.textContent = city);
+    }
+  }
+  applyBrandCustomization(urlParams.get("brand"), urlParams.get("city"));
+
+  const founderDrawer = document.getElementById("founderDrawer");
+  const brandInput = document.getElementById("brandInput");
+  const cityInput = document.getElementById("cityInput");
+
+  window.addEventListener("keydown", e => {
+    if (e.shiftKey && e.key.toLowerCase() === "b" && !/input|textarea/i.test(e.target.tagName)) {
+      founderDrawer.classList.toggle("open");
+    }
+  });
+  brandInput.addEventListener("input", () => applyBrandCustomization(brandInput.value || null, cityInput.value || null));
+  cityInput.addEventListener("input", () => applyBrandCustomization(brandInput.value || null, cityInput.value || null));
+
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+})();
+</script>
+</body>
+</html>
